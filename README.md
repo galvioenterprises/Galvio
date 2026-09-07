@@ -17,10 +17,11 @@ GitHub ──► next build (output: "export") ──► out/ ──► Cloudfla
                                         bulk RFQ form ──► Cloudflare Worker + Turnstile
 ```
 
-Product data lives in `data/products/*.json`, validated at build time
+Product data is entered in a spreadsheet, exported to `data/products.csv`
+and compiled by `pnpm import:products` into per-product JSON, validated
 against the Zod schema in `src/lib/product-schema.ts`. The schema mirrors
 the Google Merchant Center product feed so the same records can drive a feed
-in Phase 2 without remodelling.
+in Phase 2 without remodelling. See [data/README.md](data/README.md).
 
 `tenantId` is present in the data model so a second distributor can be
 onboarded later. Multi-tenancy is **not** implemented and should not be.
@@ -46,6 +47,7 @@ pnpm build       # static export to out/
 pnpm typecheck   # tsc --noEmit
 pnpm lint        # eslint
 pnpm preview     # serve out/ the way Cloudflare will
+pnpm import:products   # data/products.csv -> data/products/*.json
 pnpm deploy      # build, then wrangler deploy
 ```
 

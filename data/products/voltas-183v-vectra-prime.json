@@ -1,0 +1,43 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-183v-vectra-prime",
+  "sku": "GAL-AC-001",
+  "brand": "Voltas",
+  "model": "183V Vectra Prime",
+  "gtin": "8901234567890",
+  "hsn": "84151010",
+  "title": "Voltas 1.5 Ton 3 Star Inverter Split AC",
+  "description": "Copper condenser inverter split air conditioner with turbo cooling and a self-diagnosis display. Suited to rooms up to 150 sq ft. Standard installation included within city limits.",
+  "category": "Air Conditioner",
+  "mrp": 52990,
+  "sellingPrice": 42990,
+  "gstRate": 28,
+  "availability": "in_stock",
+  "condition": "new",
+  "weightKg": 38.5,
+  "dimensions": {
+    "lengthMm": 998,
+    "widthMm": 325,
+    "heightMm": 225
+  },
+  "capacity": "1.5 Ton",
+  "starRating": 3,
+  "inverter": true,
+  "installationIncluded": true,
+  "warrantyMonths": 12,
+  "images": [
+    {
+      "src": "/images/products/voltas-183v-front.jpg",
+      "alt": "Voltas 183V Vectra Prime",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "/images/products/voltas-183v-side.jpg",
+      "alt": "Voltas 183V Vectra Prime",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}
