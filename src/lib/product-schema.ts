@@ -1,0 +1,90 @@
+import { z } from "zod";
+
+/**
+ * Product catalogue schema.
+ *
+ * The field set is deliberately shaped after the Google Merchant Center
+ * product feed so the same JSON can drive the site today and a feed
+ * later without remodelling. Fields Merchant Center treats as required
+ * (gtin, brand, price, availability, condition) are required here too,
+ * which forces the data to be collected correctly at source.
+ */
+
+export const availabilitySchema = z.enum([
+  "in_stock",
+  "out_of_stock",
+  "preorder",
+  "backorder",
+]);
+
+export const conditionSchema = z.enum(["new", "refurbished", "used"]);
+
+export const imageSchema = z.object({
+  /** Path under /public, relative to the site root. */
+  src: z.string().startsWith("/"),
+  alt: z.string().min(1),
+  width: z.number().int().positive(),
+  height: z.number().int().positive(),
+});
+
+export const dimensionsSchema = z.object({
+  lengthMm: z.number().positive(),
+  widthMm: z.number().positive(),
+  heightMm: z.number().positive(),
+});
+
+export const productSchema = z.object({
+  tenantId: z.string().min(1),
+
+  /** URL segment. Stable for the life of the product — changing it
+   *  costs the page its accumulated search ranking. */
+  slug: z
+    .string()
+    .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "slug must be lowercase kebab-case"),
+
+  sku: z.string().min(1),
+  brand: z.string().min(1),
+  model: z.string().min(1),
+
+  /** GTIN-8/12/13/14. Mandatory: without it the product cannot be
+   *  matched to Google's catalogue and loses free-listing eligibility. */
+  gtin: z.string().regex(/^\d{8}$|^\d{12,14}$/, "gtin must be 8, 12, 13 or 14 digits"),
+
+  /** Indian HSN code, used for GST-compliant invoicing. */
+  hsn: z.string().regex(/^\d{4,8}$/),
+
+  title: z.string().min(1).max(150),
+  description: z.string().min(1),
+  category: z.string().min(1),
+
+  /** Rupees, inclusive of GST, matching what is printed on the box. */
+  mrp: z.number().positive(),
+  sellingPrice: z.number().positive(),
+  gstRate: z.number().min(0).max(28),
+
+  availability: availabilitySchema,
+  condition: conditionSchema,
+
+  weightKg: z.number().positive().optional(),
+  dimensions: dimensionsSchema.optional(),
+
+  /** Free-form spec bucket, e.g. "1.5 Ton" for an air conditioner. */
+  capacity: z.string().optional(),
+  /** BEE star rating, 1-5. */
+  starRating: z.number().int().min(1).max(5).optional(),
+  inverter: z.boolean().optional(),
+
+  installationIncluded: z.boolean(),
+  warrantyMonths: z.number().int().nonnegative(),
+
+  images: z.array(imageSchema).min(1),
+
+  /** Arbitrary spec rows rendered on the product page. */
+  specs: z.record(z.string(), z.string()).default({}),
+})
+  .refine((p) => p.sellingPrice <= p.mrp, {
+    message: "sellingPrice cannot exceed mrp",
+    path: ["sellingPrice"],
+  });
+
+export type Product = z.infer<typeof productSchema>;

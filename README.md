@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Galvio Enterprises — galvioenterprises.com
 
-## Getting Started
+Static marketing and catalogue site for an electronics distributor selling
+direct to customers, plus a separate bulk/RFQ funnel.
 
-First, run the development server:
+## Architecture
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Phase 1 is deliberately a fully static site. `next build` produces an `out/`
+directory of plain HTML, CSS and JS which Cloudflare serves as static
+assets. There is no application server, no database and no auth in
+production, which removes runtime infrastructure as a class of failure
+ahead of the Diwali season.
+
+```
+GitHub ──► next build (output: "export") ──► out/ ──► Cloudflare static assets
+                                                            │
+                                        bulk RFQ form ──► Cloudflare Worker + Turnstile
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Product data lives in `data/products/*.json`, validated at build time
+against the Zod schema in `src/lib/product-schema.ts`. The schema mirrors
+the Google Merchant Center product feed so the same records can drive a feed
+in Phase 2 without remodelling.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`tenantId` is present in the data model so a second distributor can be
+onboarded later. Multi-tenancy is **not** implemented and should not be.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Deferred to Phase 2, after Diwali: online checkout, Merchant Center online
+feed, a database, and any server runtime (vinext/OpenNext) — the latter is
+still beta and has no place on a revenue-critical site under a seasonal
+deadline.
 
-## Learn More
+## Stack
 
-To learn more about Next.js, take a look at the following resources:
+- Next.js 16.3.4, App Router, TypeScript, `output: "export"`
+- Tailwind CSS v4
+- Zod for product data validation
+- sharp for the build-time image pipeline
+- Cloudflare for DNS, CDN and static asset hosting; Wrangler for deploys
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Commands
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+pnpm dev         # local dev server
+pnpm build       # static export to out/
+pnpm typecheck   # tsc --noEmit
+pnpm lint        # eslint
+pnpm preview     # serve out/ the way Cloudflare will
+pnpm deploy      # build, then wrangler deploy
+```
 
-## Deploy on Vercel
+## Before launch
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See [docs/launch-prerequisites.md](docs/launch-prerequisites.md) for the
+accounts, verifications and product data that have to be gathered by hand.
+Google Business Profile verification is the critical path — it is external,
+slow, and everything in the local commerce strategy depends on it.

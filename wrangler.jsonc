@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "galvio-web",
+  "compatibility_date": "2026-09-08",
+
+  // Static-only deployment: Cloudflare serves the exported `out/`
+  // directory directly. There is no Worker script, so page views do
+  // not consume the Workers request allowance.
+  "assets": {
+    "directory": "./out",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  }
+}
