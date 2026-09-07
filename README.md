@@ -33,11 +33,32 @@ deadline.
 
 ## Stack
 
+- Node 24.20.0 (Active LTS "Krypton"), pnpm 12
 - Next.js 16.3.4, App Router, TypeScript, `output: "export"`
 - Tailwind CSS v4
 - Zod for product data validation
 - sharp for the build-time image pipeline
 - Cloudflare for DNS, CDN and static asset hosting; Wrangler for deploys
+
+Use pnpm, never npm. Two lockfiles that disagree is how a build passes
+locally and fails in CI.
+
+### Version policy
+
+Everything sits on the newest release the whole toolchain agrees on, which
+is not always the newest release that exists. Three packages are pinned
+below their latest on purpose — leave them alone until the note stops being
+true, then upgrade and delete the note.
+
+| Pinned | Latest | Why |
+|---|---|---|
+| Node 24.20.0 | 26.8.1 | 26 is Node's "Current" line, not LTS until October 2026. 24 is the Active LTS. |
+| typescript 5.9.3 | 7.0.2 | typescript-eslint has no TS 7 support yet, so TS 7 turns `pnpm lint` into a hard crash. |
+| eslint 9.39.5 | 10.10.0 | eslint-config-next 16.3.4 bundles eslint-plugin-react 7.37.5, which breaks on ESLint 10 (`contextOrFilename.getFilename is not a function`). |
+
+`@types/node` tracks the Node **runtime** major (24), not its own latest
+(26). Typing against APIs the runtime does not have is how you get code
+that compiles and then throws.
 
 ## Commands
 
