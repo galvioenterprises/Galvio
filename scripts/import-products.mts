@@ -61,6 +61,15 @@ function required(row: Row, key: string): string {
   return raw;
 }
 
+/** Only emit a rating when both halves are present. A star with no
+ *  review count, or a count with no star, is worse than nothing. */
+function ratingOf(row: Row) {
+  const value = num(row, "rating_value");
+  const count = num(row, "rating_count");
+  if (value === undefined || count === undefined) return undefined;
+  return { value, count };
+}
+
 function toProduct(row: Row): Product {
   const brand = required(row, "brand");
   const model = required(row, "model");
@@ -93,16 +102,20 @@ function toProduct(row: Row): Product {
     title: required(row, "title"),
     description: required(row, "description"),
     category: required(row, "category"),
+    subCategory: row.sub_category?.trim() || undefined,
     mrp: num(row, "mrp"),
     sellingPrice: num(row, "selling_price"),
     gstRate: num(row, "gst_rate"),
     availability: required(row, "availability"),
+    stockCount: num(row, "stock_count"),
     condition: required(row, "condition"),
     installationIncluded: bool(row, "installation_included"),
     warrantyMonths: num(row, "warranty_months"),
     weightKg: num(row, "weight_kg"),
     dimensions: hasDims ? dims : undefined,
     capacity: row.capacity?.trim() || undefined,
+    color: row.color?.trim() || undefined,
+    rating: ratingOf(row),
     starRating: num(row, "star_rating"),
     inverter: bool(row, "inverter"),
     images,

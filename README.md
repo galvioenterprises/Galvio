@@ -60,6 +60,43 @@ true, then upgrade and delete the note.
 (26). Typing against APIs the runtime does not have is how you get code
 that compiles and then throws.
 
+## Pages
+
+| Route | What it is |
+|---|---|
+| `/` | Placeholder home page, pending the Figma landing frame |
+| `/products/` | Category index |
+| `/products/[category]/` | Listing page: filters, sort, grid and list views, pagination |
+| `/product/[slug]/` | Product detail: gallery, specs, WhatsApp enquiry |
+
+Filtering, sorting and pagination all run client-side over the products
+already embedded in the page. With a catalogue this size that is far
+cheaper than a round trip, and it keeps the site static.
+
+Every listing page carries `BreadcrumbList` and `ItemList` structured
+data; every product page carries `Product` with a full `Offer`, including
+GTIN and schema.org availability. That markup is what makes the pages
+eligible for free Google listings, so treat it as load-bearing.
+
+### Deliberate differences from the Figma frames
+
+The design was drawn for a full storefront. Phase 1 has no cart, no
+accounts and no checkout, so rather than render controls that do nothing:
+
+- **Add to cart** is an **Enquire** button that opens WhatsApp with the
+  product, SKU and price already in the message.
+- The header's **cart and account icons** are replaced by a single
+  WhatsApp action.
+- The card's **wishlist heart and compare toggle** are omitted; both need
+  persisted per-visitor state that does not exist yet.
+- The **"Only 2 left"** badge renders only when a product has a real
+  `stock_count`, and otherwise gives its slot to out-of-stock, pre-order
+  and backorder states.
+- **Star ratings** render only when a product has a real rating.
+- Navigation items whose pages are not built yet render as plain text
+  rather than links, so nothing in the header 404s. Flip `ready` in
+  `src/config/nav.ts` as each page lands.
+
 ## Commands
 
 ```bash
@@ -69,6 +106,7 @@ pnpm typecheck   # tsc --noEmit
 pnpm lint        # eslint
 pnpm preview     # serve out/ the way Cloudflare will
 pnpm import:products   # data/products.csv -> data/products/*.json
+pnpm build:preview     # static export, allowing the SAMPLE- placeholders
 pnpm deploy      # build, then wrangler deploy
 ```
 

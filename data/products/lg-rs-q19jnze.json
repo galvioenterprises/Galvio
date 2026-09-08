@@ -1,0 +1,43 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "lg-rs-q19jnze",
+  "sku": "SAMPLE-AC-002",
+  "brand": "LG",
+  "model": "RS-Q19JNZE",
+  "gtin": "8900000000161",
+  "hsn": "84151010",
+  "title": "LG 1.5 Ton 5 Star Dual Inverter Split Air Conditioner",
+  "description": "Dual inverter compressor with a four way swing and an anti-virus HD filter. Rated for rooms up to 160 sq ft.",
+  "category": "Air Conditioner",
+  "subCategory": "Split AC",
+  "mrp": 66990,
+  "sellingPrice": 49990,
+  "gstRate": 28,
+  "availability": "in_stock",
+  "condition": "new",
+  "weightKg": 41,
+  "dimensions": {
+    "lengthMm": 998,
+    "widthMm": 330,
+    "heightMm": 210
+  },
+  "capacity": "1.5 Ton",
+  "color": "White",
+  "rating": {
+    "value": 4.7,
+    "count": 508
+  },
+  "starRating": 5,
+  "inverter": true,
+  "installationIncluded": true,
+  "warrantyMonths": 12,
+  "images": [
+    {
+      "src": "/images/products/placeholder.svg",
+      "alt": "LG RS-Q19JNZE",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

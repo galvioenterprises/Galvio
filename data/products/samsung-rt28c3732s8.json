@@ -1,0 +1,43 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "samsung-rt28c3732s8",
+  "sku": "SAMPLE-RF-003",
+  "brand": "Samsung",
+  "model": "RT28C3732S8",
+  "gtin": "8900000000031",
+  "hsn": "84181010",
+  "title": "Samsung 236L Frost Free Double Door Refrigerator",
+  "description": "Digital inverter compressor with a stabiliser-free operation range and a convertible freezer compartment.",
+  "category": "Refrigerator",
+  "subCategory": "Double Door",
+  "mrp": 31900,
+  "sellingPrice": 25490,
+  "gstRate": 18,
+  "availability": "in_stock",
+  "condition": "new",
+  "weightKg": 52,
+  "dimensions": {
+    "lengthMm": 555,
+    "widthMm": 637,
+    "heightMm": 1545
+  },
+  "capacity": "236L",
+  "color": "Elegant Inox",
+  "rating": {
+    "value": 4.4,
+    "count": 211
+  },
+  "starRating": 3,
+  "inverter": true,
+  "installationIncluded": true,
+  "warrantyMonths": 12,
+  "images": [
+    {
+      "src": "/images/products/placeholder.svg",
+      "alt": "Samsung RT28C3732S8",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

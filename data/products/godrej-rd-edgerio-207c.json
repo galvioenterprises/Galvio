@@ -1,0 +1,43 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "godrej-rd-edgerio-207c",
+  "sku": "SAMPLE-RF-005",
+  "brand": "Godrej",
+  "model": "RD EDGERIO 207C",
+  "gtin": "8900000000055",
+  "hsn": "84181010",
+  "title": "Godrej 205L Direct Cool Single Door Refrigerator",
+  "description": "Direct cool single door refrigerator with an anti-bacterial vegetable tray and a large bottle space in the door.",
+  "category": "Refrigerator",
+  "subCategory": "Single Door",
+  "mrp": 22990,
+  "sellingPrice": 18490,
+  "gstRate": 18,
+  "availability": "in_stock",
+  "condition": "new",
+  "weightKg": 35,
+  "dimensions": {
+    "lengthMm": 540,
+    "widthMm": 555,
+    "heightMm": 1180
+  },
+  "capacity": "205L",
+  "color": "Aqua Blue",
+  "rating": {
+    "value": 4.3,
+    "count": 74
+  },
+  "starRating": 5,
+  "inverter": false,
+  "installationIncluded": false,
+  "warrantyMonths": 12,
+  "images": [
+    {
+      "src": "/images/products/placeholder.svg",
+      "alt": "Godrej RD EDGERIO 207C",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

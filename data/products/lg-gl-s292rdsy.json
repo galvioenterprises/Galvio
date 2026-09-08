@@ -1,0 +1,43 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "lg-gl-s292rdsy",
+  "sku": "SAMPLE-RF-002",
+  "brand": "LG",
+  "model": "GL-S292RDSY",
+  "gtin": "8900000000024",
+  "hsn": "84181010",
+  "title": "LG 260L Frost Free Double Door Refrigerator with Smart Inverter",
+  "description": "Smart inverter compressor with a ten year warranty and door cooling for faster chilling across every shelf.",
+  "category": "Refrigerator",
+  "subCategory": "Double Door",
+  "mrp": 36490,
+  "sellingPrice": 29990,
+  "gstRate": 18,
+  "availability": "in_stock",
+  "condition": "new",
+  "weightKg": 57,
+  "dimensions": {
+    "lengthMm": 595,
+    "widthMm": 668,
+    "heightMm": 1720
+  },
+  "capacity": "260L",
+  "color": "Dazzle Steel",
+  "rating": {
+    "value": 4.5,
+    "count": 342
+  },
+  "starRating": 4,
+  "inverter": true,
+  "installationIncluded": true,
+  "warrantyMonths": 12,
+  "images": [
+    {
+      "src": "/images/products/placeholder.svg",
+      "alt": "LG GL-S292RDSY",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

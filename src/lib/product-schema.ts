@@ -19,6 +19,19 @@ export const availabilitySchema = z.enum([
 
 export const conditionSchema = z.enum(["new", "refurbished", "used"]);
 
+/**
+ * Aggregate customer rating.
+ *
+ * Optional, and deliberately so: a rating rendered from invented numbers
+ * is a lie to the customer and, once it reaches structured data, a
+ * manual-action risk with Google. Leave it absent until real reviews
+ * exist — the card and the product page render fine without it.
+ */
+export const ratingSchema = z.object({
+  value: z.number().min(1).max(5),
+  count: z.number().int().positive(),
+});
+
 export const imageSchema = z.object({
   /** Path under /public, relative to the site root. */
   src: z.string().startsWith("/"),
@@ -56,6 +69,9 @@ export const productSchema = z.object({
   title: z.string().min(1).max(150),
   description: z.string().min(1),
   category: z.string().min(1),
+  /** Optional narrower type within the category, e.g. "Double Door".
+   *  Drives the first filter group on the listing page. */
+  subCategory: z.string().min(1).optional(),
 
   /** Rupees, inclusive of GST, matching what is printed on the box. */
   mrp: z.number().positive(),
@@ -63,6 +79,9 @@ export const productSchema = z.object({
   gstRate: z.number().min(0).max(28),
 
   availability: availabilitySchema,
+  /** Units on hand. Optional — supply it only if the number is real, and
+   *  the listing shows a "Only N left" badge when stock runs low. */
+  stockCount: z.number().int().nonnegative().optional(),
   condition: conditionSchema,
 
   weightKg: z.number().positive().optional(),
@@ -70,6 +89,8 @@ export const productSchema = z.object({
 
   /** Free-form spec bucket, e.g. "1.5 Ton" for an air conditioner. */
   capacity: z.string().optional(),
+  color: z.string().min(1).optional(),
+  rating: ratingSchema.optional(),
   /** BEE star rating, 1-5. */
   starRating: z.number().int().min(1).max(5).optional(),
   inverter: z.boolean().optional(),

@@ -1,0 +1,43 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "samsung-rs76cg8003s9",
+  "sku": "SAMPLE-RF-007",
+  "brand": "Samsung",
+  "model": "RS76CG8003S9",
+  "gtin": "8900000000079",
+  "hsn": "84181010",
+  "title": "Samsung 653L Side by Side Refrigerator with SpaceMax",
+  "description": "Side by side refrigerator with SpaceMax insulation for more interior volume in the same footprint, and a twin cooling system.",
+  "category": "Refrigerator",
+  "subCategory": "Side by Side",
+  "mrp": 105900,
+  "sellingPrice": 84990,
+  "gstRate": 18,
+  "availability": "in_stock",
+  "condition": "new",
+  "weightKg": 110,
+  "dimensions": {
+    "lengthMm": 912,
+    "widthMm": 716,
+    "heightMm": 1780
+  },
+  "capacity": "653L",
+  "color": "Refined Inox",
+  "rating": {
+    "value": 4.7,
+    "count": 412
+  },
+  "starRating": 3,
+  "inverter": true,
+  "installationIncluded": true,
+  "warrantyMonths": 24,
+  "images": [
+    {
+      "src": "/images/products/placeholder.svg",
+      "alt": "Samsung RS76CG8003S9",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

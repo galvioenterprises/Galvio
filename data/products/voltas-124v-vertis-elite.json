@@ -1,0 +1,43 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-124v-vertis-elite",
+  "sku": "SAMPLE-AC-004",
+  "brand": "Voltas",
+  "model": "124V Vertis Elite",
+  "gtin": "8900000000185",
+  "hsn": "84151010",
+  "title": "Voltas 1 Ton 4 Star Inverter Split Air Conditioner",
+  "description": "One ton inverter split for smaller bedrooms up to 110 sq ft, with a high ambient cooling range up to 52 degrees.",
+  "category": "Air Conditioner",
+  "subCategory": "Split AC",
+  "mrp": 42990,
+  "sellingPrice": 33990,
+  "gstRate": 28,
+  "availability": "in_stock",
+  "condition": "new",
+  "weightKg": 32,
+  "dimensions": {
+    "lengthMm": 890,
+    "widthMm": 300,
+    "heightMm": 205
+  },
+  "capacity": "1 Ton",
+  "color": "White",
+  "rating": {
+    "value": 4.2,
+    "count": 119
+  },
+  "starRating": 4,
+  "inverter": true,
+  "installationIncluded": true,
+  "warrantyMonths": 12,
+  "images": [
+    {
+      "src": "/images/products/placeholder.svg",
+      "alt": "Voltas 124V Vertis Elite",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

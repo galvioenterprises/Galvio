@@ -1,0 +1,47 @@
+import Link from "next/link";
+import { site } from "@/config/site";
+
+export type Crumb = { label: string; href?: string };
+
+/**
+ * Renders the visible trail and the matching BreadcrumbList structured
+ * data from one source, so the two can never drift apart — a mismatch
+ * between them is a structured-data error in Search Console.
+ */
+export function Breadcrumbs({ trail }: { trail: Crumb[] }) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: trail.map((crumb, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: crumb.label,
+      ...(crumb.href ? { item: `${site.url}${crumb.href}` } : {}),
+    })),
+  };
+
+  return (
+    <nav aria-label="Breadcrumb" className="border-b border-line bg-surface">
+      <div className="mx-auto max-w-[1200px] px-5 py-3">
+        <ol className="flex flex-wrap items-center gap-2 text-xs text-text-muted">
+          {trail.map((crumb, index) => (
+            <li key={crumb.label} className="flex items-center gap-2">
+              {index > 0 && <span aria-hidden className="text-text-faint">›</span>}
+              {crumb.href ? (
+                <Link href={crumb.href} className="hover:text-accent">
+                  {crumb.label}
+                </Link>
+              ) : (
+                <span className="text-text">{crumb.label}</span>
+              )}
+            </li>
+          ))}
+        </ol>
+      </div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+    </nav>
+  );
+}

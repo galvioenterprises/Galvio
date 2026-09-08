@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "ALLOW_SAMPLE_DATA=1 next dev",
     "build": "next build",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "preview": "wrangler dev",
     "deploy": "next build && wrangler deploy",
-    "import:products": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/import-products.mts"
+    "import:products": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/import-products.mts",
+    "build:preview": "ALLOW_SAMPLE_DATA=1 next build"
   },
   "dependencies": {
     "next": "16.3.4",

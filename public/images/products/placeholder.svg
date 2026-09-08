@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800" role="img" aria-label="Product photograph pending">
+  <rect width="800" height="800" fill="#f4f5f6"/>
+  <rect x="286" y="150" width="228" height="500" rx="14" fill="#d9dbe0"/>
+  <rect x="286" y="150" width="228" height="196" rx="14" fill="#cbced5"/>
+  <rect x="286" y="344" width="228" height="4" fill="#b9bdc6"/>
+  <rect x="470" y="230" width="8" height="72" rx="4" fill="#9ca2ad"/>
+  <rect x="470" y="392" width="8" height="96" rx="4" fill="#9ca2ad"/>
+  <text x="400" y="712" text-anchor="middle" font-family="system-ui, sans-serif" font-size="26" fill="#9ca3af">Photograph pending</text>
+</svg>

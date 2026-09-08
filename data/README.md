@@ -39,6 +39,18 @@ the next import overwrites it.
   are tolerated. Selling price may not exceed MRP.
 - **installation_included / inverter** — `true` or `false` (`yes`/`no` also
   accepted).
+- **sub_category** — the narrower type within the category, e.g. "Double
+  Door" or "Split AC". This becomes the first filter group on the listing
+  page, so keep the wording identical across rows.
+- **capacity** — include the unit: "260L", "1.5 Ton". Litre capacities are
+  grouped into 100L bands on the listing page automatically, so you do not
+  need to round them yourself.
+- **stock_count** — units on hand. Leave blank unless the number is real.
+  When it is 5 or fewer the card shows an "Only N left" badge.
+- **rating_value / rating_count** — leave both blank until you have real
+  reviews. A rating shown from invented numbers is a lie to the customer
+  and, once it reaches the structured data Google reads, a manual-action
+  risk. Both columns must be filled or neither is used.
 - **image_files** — filenames only, separated by `|`, in display order.
   The first one is the main image. The files themselves go in
   `public/images/products/`.
@@ -46,6 +58,23 @@ the next import overwrites it.
   spreadsheet export handles this automatically.
 
 Leave optional columns blank rather than writing "N/A" or "-".
+
+## Sample data
+
+`data/products.sample.csv` is a placeholder catalogue that exists so the
+pages can be built and reviewed before the real product data is collected.
+
+```bash
+pnpm import:products data/products.sample.csv   # load the placeholders
+pnpm dev                                        # or pnpm build:preview
+```
+
+Every sample SKU starts with `SAMPLE-`, and `pnpm build` refuses to run
+while any of them are still in `data/products/`. That guard is deliberate:
+a warning in a build log is a warning nobody reads until a customer asks
+why the fridge has no photograph. Use `pnpm build:preview` when you mean
+to build with placeholders, and delete the sample import by running
+`pnpm import:products` against the real spreadsheet.
 
 ## Why files and not a database
 

@@ -1,26 +1,93 @@
 @import "tailwindcss";
 
+/**
+ * Design tokens, taken from the Figma landing and product-list frames.
+ *
+ * The site is intentionally light-only. The design has a dark header and
+ * footer against a light canvas, and inverting that under a viewer's dark
+ * mode would break the contrast the design depends on.
+ */
+@theme {
+  /* Dark surfaces: header, footer, hero, promo banners. */
+  --color-ink: #0b0e14;
+  --color-ink-soft: #161b24;
+  --color-ink-line: #232a36;
+
+  /* Light surfaces. */
+  --color-canvas: #f4f5f6;
+  --color-surface: #ffffff;
+  --color-line: #e6e7ea;
+  --color-line-strong: #d3d5da;
+
+  /* Text. */
+  --color-text: #111318;
+  --color-text-muted: #6b7280;
+  --color-text-faint: #9ca3af;
+  --color-text-invert: #ffffff;
+  --color-text-invert-muted: #a3aab8;
+
+  /* Accent, used for primary actions and active filter state. */
+  --color-accent: #2563eb;
+  --color-accent-hover: #1d4ed8;
+
+  /* Ratings and scarcity. */
+  --color-star: #f0a500;
+
+  --radius-card: 0.75rem;
+  --radius-pill: 999px;
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  color-scheme: light;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-canvas);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+}
+
+/* The small uppercase labels above headings and on product cards. */
+@utility eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/**
+ * Dual-thumb price slider. Two stacked range inputs share one track, so
+ * the inputs themselves are transparent and only their thumbs are drawn.
+ */
+@utility range-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  pointer-events: none;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    pointer-events: auto;
+    height: 0.875rem;
+    width: 0.875rem;
+    border-radius: 999px;
+    background: var(--color-accent);
+    border: 2px solid var(--color-surface);
+    box-shadow: 0 0 0 1px var(--color-accent);
+    cursor: pointer;
+  }
+
+  &::-moz-range-thumb {
+    pointer-events: auto;
+    height: 0.875rem;
+    width: 0.875rem;
+    border-radius: 999px;
+    background: var(--color-accent);
+    border: 2px solid var(--color-surface);
+    box-shadow: 0 0 0 1px var(--color-accent);
+    cursor: pointer;
+  }
 }

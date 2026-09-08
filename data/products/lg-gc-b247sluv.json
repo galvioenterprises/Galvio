@@ -1,0 +1,43 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "lg-gc-b247sluv",
+  "sku": "SAMPLE-RF-008",
+  "brand": "LG",
+  "model": "GC-B247SLUV",
+  "gtin": "8900000000086",
+  "hsn": "84181010",
+  "title": "LG 655L Side by Side Refrigerator with Door Cooling",
+  "description": "Linear cooling holds temperature within one degree of the set point. Hygiene fresh filter and an in-door water dispenser.",
+  "category": "Refrigerator",
+  "subCategory": "Side by Side",
+  "mrp": 98990,
+  "sellingPrice": 79490,
+  "gstRate": 18,
+  "availability": "in_stock",
+  "condition": "new",
+  "weightKg": 113,
+  "dimensions": {
+    "lengthMm": 913,
+    "widthMm": 738,
+    "heightMm": 1790
+  },
+  "capacity": "655L",
+  "color": "Platinum Silver",
+  "rating": {
+    "value": 4.6,
+    "count": 289
+  },
+  "starRating": 3,
+  "inverter": true,
+  "installationIncluded": true,
+  "warrantyMonths": 24,
+  "images": [
+    {
+      "src": "/images/products/placeholder.svg",
+      "alt": "LG GC-B247SLUV",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}
