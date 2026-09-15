@@ -99,6 +99,7 @@ function ratingOf(row: Row) {
 function toProduct(row: Row): Product {
   const brand = required(row, "brand");
   const model = required(row, "model");
+  const title = required(row, "title");
 
   const dims = {
     lengthMm: num(row, "length_mm"),
@@ -113,7 +114,10 @@ function toProduct(row: Row): Product {
     .filter(Boolean)
     .map((file) => ({
       src: `${IMAGE_DIR}/${file}`,
-      alt: `${brand} ${model}`,
+      // The full title, not "Voltas RR21C2H25S8". Alt text is read aloud
+      // and is indexed; a model number is neither descriptive nor a
+      // phrase anybody searches.
+      alt: title,
       ...DEFAULT_IMAGE_SIZE,
     }));
 
@@ -125,7 +129,7 @@ function toProduct(row: Row): Product {
     model,
     gtin: required(row, "gtin"),
     hsn: required(row, "hsn"),
-    title: required(row, "title"),
+    title,
     description: required(row, "description"),
     category: required(row, "category"),
     subCategory: row.sub_category?.trim() || undefined,

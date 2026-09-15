@@ -24,10 +24,32 @@ const TRUST: { icon: FigmaIconName; title: string; subtitle: string }[] = [
 
 export function Hero() {
   return (
-    <section className="relative bg-ink text-text-invert">
+    <section className="relative overflow-hidden bg-ink text-text-invert">
+      {/*
+        On large screens the product image runs off the right edge of the
+        frame, as it does in the design, so it is positioned against the
+        section rather than placed in the content column. Below that
+        breakpoint it returns to the normal flow above the copy.
+      */}
+      <div
+        aria-hidden
+        // Stops short of the bottom so it cannot sit over the trust row.
+        className="pointer-events-none absolute right-0 top-0 hidden h-[68%] w-[54%] items-center lg:flex"
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_45%,rgba(80,110,190,0.20),transparent_62%)]" />
+        <Image
+          src="/images/hero-placeholder.svg"
+          alt=""
+          width={900}
+          height={560}
+          priority
+          className="relative w-full translate-x-[6%]"
+        />
+      </div>
+
       {/* The generous bottom padding is where the category strip overlaps
           the seam between the hero and the page below it. */}
-      <Container className="pb-44 pt-16 sm:pb-52 lg:pt-24">
+      <Container className="relative pb-44 pt-16 sm:pb-52 lg:pt-24">
         <div className="grid items-center gap-16 lg:grid-cols-2">
           <div>
             <p className="eyebrow flex items-center gap-2 text-accent">
@@ -68,7 +90,7 @@ export function Hero() {
 
           {/* Replace hero-placeholder.svg with the product render from the
               design once the photography lands. */}
-          <div className="relative">
+          <div className="relative lg:hidden">
             <div
               aria-hidden
               className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(80,110,190,0.20),transparent_65%)]"

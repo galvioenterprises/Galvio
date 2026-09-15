@@ -37,10 +37,28 @@ export function OrganizationSchema() {
       : {}),
   };
 
+  // A separate WebSite node is what Google reads to decide the site name
+  // shown above a result. Without it the name is guessed from the title
+  // tag, which is usually the page name rather than the business.
+  const website = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: site.name,
+    alternateName: site.shortName,
+    url: site.url,
+    publisher: { "@type": "Organization", name: site.legalName },
+  };
+
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(website) }}
+      />
+    </>
   );
 }

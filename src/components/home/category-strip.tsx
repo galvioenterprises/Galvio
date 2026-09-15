@@ -17,8 +17,11 @@ const CATEGORY_ICONS: Record<string, FigmaIconName> = {
 
 export function CategoryStrip({ categories }: { categories: Category[] }) {
   return (
-    <section aria-label="Shop by category" className="relative z-10 -mt-32">
+    <section aria-labelledby="shop-by-category" className="relative z-10 -mt-32">
       <Container wide>
+        <h2 id="shop-by-category" className="sr-only">
+          Shop by category
+        </h2>
         <ul
           // The desktop column count follows the number of categories so a
           // short list stays centred rather than stretched across six
@@ -41,9 +44,9 @@ export function CategoryStrip({ categories }: { categories: Category[] }) {
                 >
                   <span className="flex size-14 items-center justify-center rounded-full bg-canvas transition-colors group-hover:bg-white">
                     {icon ? (
-                      <FigmaIcon name={icon} size={28} />
+                      <FigmaIcon name={icon} size={32} />
                     ) : (
-                      <AirConditionerIcon className="size-7 text-text" />
+                      <AirConditionerIcon className="size-8 text-text" />
                     )}
                   </span>
                   <span className="text-[0.9375rem] font-medium leading-tight">

@@ -32,6 +32,8 @@
 
   /* Ratings and scarcity. */
   --color-star: #f0a500;
+  --color-scarcity: #fdf3e2;
+  --color-scarcity-text: #8a5a08;
 
   --radius-card: 0.75rem;
   --radius-pill: 999px;

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { site } from "@/config/site";
 import { footerNav } from "@/config/nav";
-import { getPopulatedCategories } from "@/lib/catalog";
+import { getAllCategories } from "@/lib/catalog";
 import { MailIcon, PhoneIcon, PinIcon } from "./icons";
 import { Container } from "./container";
 import { Logo } from "./logo";
@@ -16,7 +16,7 @@ export function SiteFooter() {
   // The contact column is omitted until the business details are filled in
   // — an empty heading reads as a broken page, not as pending content.
   const hasContact = Boolean(site.contact.phone || site.contact.email || address);
-  const categoryNav = getPopulatedCategories();
+  const categoryNav = getAllCategories();
 
   return (
     <footer className="bg-ink text-text-invert-muted">

@@ -31,7 +31,18 @@ export const metadata: Metadata = {
     title: `${site.name} — Electronics Distributor`,
     description: site.description,
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${site.name} — Electronics Distributor`,
+    description: site.description,
+  },
+  applicationName: site.name,
+  category: "shopping",
 };
 
 export default function RootLayout({

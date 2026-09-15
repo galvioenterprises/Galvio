@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { site } from "@/config/site";
 import { primaryNav } from "@/config/nav";
-import { getPopulatedCategories } from "@/lib/catalog";
+import { getAllCategories } from "@/lib/catalog";
 import { generalEnquiryLink } from "@/lib/whatsapp";
-import { ChevronDownIcon, WhatsAppIcon } from "./icons";
-import { SiteSearch } from "./site-search";
+import { WhatsAppIcon } from "./icons";
 import { Container } from "./container";
 import { Logo } from "./logo";
+import { PrimaryNav } from "./primary-nav";
+import { SiteSearch } from "./site-search";
 
 /**
  * The Figma header carries an account icon and a cart badge. Phase 1 has
@@ -15,10 +16,7 @@ import { Logo } from "./logo";
  * decoration that does nothing when tapped.
  */
 export function SiteHeader() {
-  // Built from categories that actually have products, never from config
-  // alone — a dropdown that links to an empty category is a 404 waiting
-  // for a customer to find it.
-  const categoryNav = getPopulatedCategories();
+  const categories = getAllCategories().map(({ slug, title }) => ({ slug, title }));
 
   return (
     <header className="bg-ink text-text-invert">
@@ -27,45 +25,7 @@ export function SiteHeader() {
           <Logo variant="light" className="h-6" />
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
-          {primaryNav.map((item) =>
-            item.ready ? (
-              <div key={item.label} className="group relative">
-                <Link
-                  href={item.href}
-                  className="flex items-center gap-1 rounded-md px-3.5 py-2.5 text-[0.9375rem] text-text-invert-muted transition-colors hover:text-white"
-                >
-                  {item.label}
-                  {item.label === "Products" && (
-                    <ChevronDownIcon className="size-3.5" />
-                  )}
-                </Link>
-
-                {item.label === "Products" && (
-                  <div className="invisible absolute left-0 top-full z-20 w-60 rounded-xl border border-line bg-surface p-2 opacity-0 shadow-lg transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                    {categoryNav.map((c) => (
-                      <Link
-                        key={c.slug}
-                        href={`/products/${c.slug}/`}
-                        className="block rounded-lg px-3 py-2.5 text-sm text-text hover:bg-canvas"
-                      >
-                        {c.title}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ) : (
-              <span
-                key={item.label}
-                title="Coming soon"
-                className="cursor-default px-3.5 py-2.5 text-[0.9375rem] text-text-invert-muted/40"
-              >
-                {item.label}
-              </span>
-            ),
-          )}
-        </nav>
+        <PrimaryNav items={primaryNav} categories={categories} />
 
         <div className="ml-auto flex items-center gap-3">
           <SiteSearch />

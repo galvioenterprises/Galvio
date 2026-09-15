@@ -103,11 +103,19 @@ export function ProductCard({ product }: { product: Product }) {
     <article className="group flex flex-col rounded-card border border-line bg-surface transition-shadow hover:shadow-[0_2px_16px_rgba(17,19,24,0.08)]">
       <div className="relative">
         {badge && (
-          <span className="absolute left-3 top-3 z-10 rounded bg-canvas px-2 py-1 text-[0.625rem] font-medium text-text-muted">
+          <span className="absolute left-3 top-3 z-10 rounded bg-scarcity px-2 py-1 text-[0.625rem] font-medium text-scarcity-text">
             {badge}
           </span>
         )}
-        <Link href={`/product/${product.slug}/`} className="block p-4">
+        {/* The title below is the labelled link to this product. This one
+            is decorative: giving it its own name makes every card two
+            identical tab stops. */}
+        <Link
+          href={`/product/${product.slug}/`}
+          tabIndex={-1}
+          aria-hidden
+          className="block p-4"
+        >
           <Image
             src={image.src}
             alt={image.alt}
@@ -147,7 +155,12 @@ export function ProductRow({ product }: { product: Product }) {
 
   return (
     <article className="flex gap-5 rounded-card border border-line bg-surface p-4">
-      <Link href={`/product/${product.slug}/`} className="shrink-0 self-center">
+      <Link
+        href={`/product/${product.slug}/`}
+        tabIndex={-1}
+        aria-hidden
+        className="shrink-0 self-center"
+      >
         <Image
           src={image.src}
           alt={image.alt}
@@ -162,7 +175,7 @@ export function ProductRow({ product }: { product: Product }) {
           <p className="eyebrow text-text-muted">{product.brand}</p>
           <Rating product={product} />
           {badge && (
-            <span className="rounded bg-canvas px-2 py-0.5 text-[0.625rem] font-medium text-text-muted">
+            <span className="rounded bg-scarcity px-2 py-0.5 text-[0.625rem] font-medium text-scarcity-text">
               {badge}
             </span>
           )}

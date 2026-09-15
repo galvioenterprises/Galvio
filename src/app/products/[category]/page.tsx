@@ -3,20 +3,22 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { site } from "@/config/site";
 import { categories, getCategoryBySlug } from "@/config/categories";
-import { getAllProducts, getProductsByCategory } from "@/lib/products";
+import { getProductsByCategory } from "@/lib/products";
+import { generalEnquiryLink } from "@/lib/whatsapp";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { ProductBrowser } from "@/components/product-browser";
 import { BuyingGuide } from "@/components/category/buying-guide";
-import { ArrowRightIcon } from "@/components/icons";
+import { ArrowRightIcon, WhatsAppIcon } from "@/components/icons";
 
 type Params = { category: string };
 
-/** Only categories with stock get a page. See lib/catalog.ts. */
+/**
+ * Every category gets a page, stocked or not. Each one carries its own
+ * buying guide, which is unique content people actively search for, and
+ * an unstocked page says so plainly rather than showing an empty grid.
+ */
 export function generateStaticParams(): Params[] {
-  const products = getAllProducts();
-  return categories
-    .filter((c) => products.some((p) => p.category === c.name))
-    .map((c) => ({ category: c.slug }));
+  return categories.map((c) => ({ category: c.slug }));
 }
 
 export async function generateMetadata({
@@ -28,14 +30,27 @@ export async function generateMetadata({
   const category = getCategoryBySlug(slug);
   if (!category) return {};
 
+  const stocked = getProductsByCategory(category.name).length > 0;
   const path = `/products/${category.slug}/`;
+
+  // Promising a price list on a page with no prices is a mismatch between
+  // the result and the page, and it is the kind of thing that costs a
+  // listing its click-through rate long before it costs it a ranking.
+  const title = stocked
+    ? `${category.title} — Price List & Offers`
+    : `${category.title} — Buying Guide & Availability`;
+
+  const description = stocked
+    ? category.description
+    : `${category.description} Not listed online yet — ask us and we will quote from current distributor stock.`;
+
   return {
-    title: `${category.title} — Price List & Offers`,
-    description: category.description,
+    title,
+    description,
     alternates: { canonical: path },
     openGraph: {
       title: `${category.title} | ${site.name}`,
-      description: category.description,
+      description,
       url: `${site.url}${path}`,
     },
   };
@@ -72,22 +87,26 @@ export default async function CategoryPage({ params }: { params: Promise<Params>
   if (!category) notFound();
 
   const products = getProductsByCategory(category.name);
-  if (products.length === 0) notFound();
 
   // ItemList tells Google the page is a listing and which products are on
   // it, which is what makes a category page eligible for rich results.
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: category.title,
-    numberOfItems: products.length,
-    itemListElement: products.map((product, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      url: `${site.url}/product/${product.slug}/`,
-      name: product.title,
-    })),
-  };
+  // Omitted entirely when there is nothing to list — an ItemList of zero
+  // items is a structured-data warning, not a neutral no-op.
+  const jsonLd =
+    products.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: category.title,
+          numberOfItems: products.length,
+          itemListElement: products.map((product, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            url: `${site.url}/product/${product.slug}/`,
+            name: product.title,
+          })),
+        }
+      : null;
 
   return (
     <>
@@ -122,16 +141,46 @@ export default async function CategoryPage({ params }: { params: Promise<Params>
         </div>
 
         <div className="mt-10">
-          <ProductBrowser products={products} />
+          {products.length > 0 ? (
+            <ProductBrowser products={products} />
+          ) : (
+            <div className="rounded-2xl border border-dashed border-line-strong bg-surface p-12 text-center">
+              <h2 className="text-lg font-semibold">
+                {category.title} are arriving shortly
+              </h2>
+              <p className="mx-auto mt-3 max-w-md text-[0.9375rem] leading-relaxed text-text-muted">
+                This range is not listed online yet, but we can quote from
+                current distributor stock today. Tell us the room and the
+                budget and we will come back with two or three options.
+              </p>
+              <div className="mt-7 flex flex-wrap justify-center gap-3">
+                <a
+                  href={generalEnquiryLink()}
+                  className="inline-flex h-11 items-center gap-2 rounded-xl bg-accent px-6 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
+                >
+                  <WhatsAppIcon className="size-4" />
+                  Ask about {category.title.toLowerCase()}
+                </a>
+                <Link
+                  href="/products/"
+                  className="inline-flex h-11 items-center gap-2 rounded-xl border border-line px-6 text-sm font-medium transition-colors hover:border-line-strong"
+                >
+                  See what is in stock
+                </Link>
+              </div>
+            </div>
+          )}
         </div>
 
         <BuyingGuide category={category} />
       </div>
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      {jsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      )}
     </>
   );
 }

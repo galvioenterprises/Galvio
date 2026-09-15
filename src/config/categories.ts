@@ -142,6 +142,23 @@ export const categories: Category[] = [
       title: "Cool Without the Bill",
       subtitle: "Low power. High airflow.",
     },
+    buyingGuide: {
+      title: "Desert, tower or personal?",
+      intro:
+        "An air cooler works by evaporating water, which means it cools best in dry heat and struggles once the monsoon humidity arrives. Where that trade-off suits you it costs a fraction of an air conditioner to buy and to run — and where it does not, no amount of tank capacity will fix it.",
+      columns: ["Room size", "Recommended"],
+      rows: [
+        ["Up to 100 sq ft", "Personal, 20 – 35 L"],
+        ["100 – 200 sq ft", "Tower, 35 – 50 L"],
+        ["200 – 350 sq ft", "Desert, 50 – 70 L"],
+        ["Above 350 sq ft, or outdoors", "Desert, 70 L and above"],
+      ],
+      notes: [
+        "A cooler needs a window or door open to work. Sealing the room the way you would for an air conditioner makes it worse, not better.",
+        "Tank capacity decides how long it runs unattended, not how cold it gets. Airflow, measured in cubic metres per hour, is the number that matters for cooling.",
+        "In coastal and high-humidity areas, be honest with yourself: an air conditioner is the right purchase. We will say so rather than sell you a cooler you will resent by July.",
+      ],
+    },
   },
   {
     slug: "water-dispensers",
@@ -154,6 +171,23 @@ export const categories: Category[] = [
       eyebrow: "Always ready",
       title: "Hot, Cold, Instant",
       subtitle: "For the home and the office.",
+    },
+    buyingGuide: {
+      title: "Which dispenser for your space?",
+      intro:
+        "The question is rarely the dispenser itself — it is how many people draw from it, and whether you want a bottle on top or a unit plumbed into the supply. Get that right and the rest is detail.",
+      columns: ["People served", "Recommended"],
+      rows: [
+        ["Up to 10, home use", "Table top, hot & cold"],
+        ["10 – 30, small office", "Floor standing, hot & cold"],
+        ["30 – 75", "Floor standing with storage"],
+        ["75+, or a clinic", "Plumbed-in, with filtration"],
+      ],
+      notes: [
+        "A cooling tank with a compressor chills faster and deeper than a thermoelectric one, and costs more. For a busy office the compressor is worth it; for a two-person home it usually is not.",
+        "Check your bottle size before ordering — 20 litre is standard in most cities, but the neck fitting varies by supplier.",
+        "For clinics and food premises, ask us about the models that meet the relevant hygiene requirements. Not every dispenser qualifies.",
+      ],
     },
   },
   {

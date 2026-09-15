@@ -85,12 +85,29 @@ never search and should not pay for the bytes. Matching is "every typed
 word appears somewhere in the product", so "voltas 1.5 ton" behaves the
 way people expect.
 
+Every category has a page whether or not stock has been imported. An
+empty one is not thin content: each carries its own buying guide, which
+is unique and is what people actually search, and the page says plainly
+that stock is arriving and routes the visitor to WhatsApp rather than
+showing an empty grid. Its title changes too — promising a "price list"
+on a page with no prices costs a listing its click-through long before
+it costs it a ranking.
+
 Each category page ends with a buying guide — the sizing advice a good
 salesperson gives across the counter, set in `buyingGuide` on the
 category config. It sits below the grid so someone who already knows what
 they want is not made to scroll past a lesson, and it exists because
 people search "which ton AC for 150 sq ft" far more often than they
 search a model number.
+
+### Brand assets
+
+`scripts/build-brand-assets.mts` generates `src/app/icon.png`,
+`apple-icon.png`, `opengraph-image.png` and `twitter-image.png` from the
+logo. Next picks those filenames up by convention and emits the tags.
+The outputs are committed rather than built on demand — a missing
+favicon is a visible defect, and nobody should have to remember a build
+step to get one. Re-run the script if the logo changes.
 
 ### Structured data
 
@@ -99,9 +116,13 @@ Google listings and rich results.
 
 | Page | Emits |
 |---|---|
-| Home | `Organization`, upgrading to `Store` once the address is filled in |
+| Home | `Organization` (upgrading to `Store` once the address is filled in), `WebSite` |
 | Listing | `BreadcrumbList`, `ItemList` |
 | Product | `BreadcrumbList`, `Product` with a full `Offer` (GTIN, schema.org availability and condition), `FAQPage` when the product has FAQs |
+
+`WebSite` is what Google reads to decide the site name shown above a
+result; without it the name is guessed from the title tag, which is
+usually the page name rather than the business.
 
 The name, address and phone in `src/config/site.ts` must match the Google
 Business Profile character for character. If they differ, Google treats

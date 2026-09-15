@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { site } from "@/config/site";
-import { getPopulatedCategories } from "@/lib/catalog";
+import { getAllCategories } from "@/lib/catalog";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { ArrowRightIcon } from "@/components/icons";
 
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default function ProductsPage() {
-  const categories = getPopulatedCategories();
+  const categories = getAllCategories();
 
   return (
     <>
@@ -43,8 +43,9 @@ export default function ProductsPage() {
                 </p>
               </div>
               <p className="mt-5 flex items-center gap-1.5 text-sm font-medium text-accent">
-                {category.productCount}{" "}
-                {category.productCount === 1 ? "product" : "products"}
+                {category.productCount > 0
+                  ? `${category.productCount} ${category.productCount === 1 ? "product" : "products"}`
+                  : "Stock arriving"}
                 <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
               </p>
             </Link>
