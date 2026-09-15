@@ -6,6 +6,7 @@ import { categories, getCategoryBySlug } from "@/config/categories";
 import { getAllProducts, getProductsByCategory } from "@/lib/products";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { ProductBrowser } from "@/components/product-browser";
+import { BuyingGuide } from "@/components/category/buying-guide";
 import { ArrowRightIcon } from "@/components/icons";
 
 type Params = { category: string };
@@ -123,6 +124,8 @@ export default async function CategoryPage({ params }: { params: Promise<Params>
         <div className="mt-10">
           <ProductBrowser products={products} />
         </div>
+
+        <BuyingGuide category={category} />
       </div>
 
       <script

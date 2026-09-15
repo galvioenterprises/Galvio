@@ -19,6 +19,7 @@ import { ProductGallery } from "@/components/product-gallery";
 import { ProductTabs, type TabSection } from "@/components/product/product-tabs";
 import { FaqAccordion } from "@/components/product/faq-accordion";
 import { PincodeCheck } from "@/components/product/pincode-check";
+import { StickyBuyBar } from "@/components/product/sticky-buy-bar";
 import {
   DeliveryAndInstallation,
   Overview,
@@ -33,7 +34,6 @@ import {
   StarIcon,
   TruckIcon,
   WhatsAppIcon,
-  WrenchIcon,
 } from "@/components/icons";
 
 type Params = { slug: string };
@@ -114,10 +114,16 @@ function specRows(product: Product): [string, string][] {
   return rows;
 }
 
+/**
+ * Trust signals sit between the price and the button rather than below
+ * them. That gap is where the hesitation actually happens — a customer
+ * who has just read the number is deciding whether to trust it, and
+ * answering that question after the button has scrolled past is too late.
+ */
 const BUY_ASSURANCES = [
-  { Icon: BadgeIcon, title: "Genuine product", subtitle: "Manufacturer warranty" },
-  { Icon: TruckIcon, title: "Delivery", subtitle: "From our own stock" },
-  { Icon: WrenchIcon, title: "Installation", subtitle: "Service coordinated" },
+  { Icon: BadgeIcon, title: "Genuine product", subtitle: "Full brand warranty" },
+  { Icon: ShieldCheckIcon, title: "Bought direct", subtitle: "Distributor stock" },
+  { Icon: TruckIcon, title: "We deliver & install", subtitle: "Our own team" },
 ];
 
 export default async function ProductPage({ params }: { params: Promise<Params> }) {
@@ -252,10 +258,26 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
               Inclusive of {product.gstRate}% GST. {AVAILABILITY_LABEL[product.availability]}.
             </p>
 
-            <div className="mt-6 flex flex-wrap gap-3">
+            <ul className="mt-5 grid gap-x-5 gap-y-2.5 border-y border-line py-4 sm:grid-cols-3">
+              {BUY_ASSURANCES.map(({ Icon, title, subtitle }) => (
+                <li key={title} className="flex items-center gap-2.5">
+                  <Icon className="size-4 shrink-0 text-accent" />
+                  <span className="min-w-0">
+                    <span className="block text-xs font-medium leading-snug">
+                      {title}
+                    </span>
+                    <span className="block text-[0.6875rem] text-text-muted">
+                      {subtitle}
+                    </span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+
+            <div id="product-cta" className="mt-5 flex flex-wrap gap-3">
               <a
                 href={productEnquiryLink(product)}
-                className="inline-flex h-11 items-center gap-2 rounded-lg bg-accent px-6 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
+                className="inline-flex h-12 items-center gap-2 rounded-xl bg-accent px-6 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
               >
                 <WhatsAppIcon className="size-4" />
                 Enquire on WhatsApp
@@ -263,7 +285,7 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
               {site.contact.phone && (
                 <a
                   href={`tel:${site.contact.phone}`}
-                  className="inline-flex h-11 items-center gap-2 rounded-lg bg-ink px-6 text-sm font-medium text-white transition-colors hover:bg-ink-soft"
+                  className="inline-flex h-12 items-center gap-2 rounded-xl bg-ink px-6 text-sm font-medium text-white transition-colors hover:bg-ink-soft"
                 >
                   <PhoneIcon className="size-4" />
                   Call the store
@@ -271,15 +293,13 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
               )}
             </div>
 
-            <ul className="mt-6 grid gap-2 sm:grid-cols-3">
-              {BUY_ASSURANCES.map(({ Icon, title, subtitle }) => (
-                <li key={title} className="rounded-lg bg-canvas p-3">
-                  <Icon className="size-4 text-text-muted" />
-                  <p className="mt-2 text-xs font-medium leading-snug">{title}</p>
-                  <p className="mt-0.5 text-[0.6875rem] text-text-muted">{subtitle}</p>
-                </li>
-              ))}
-            </ul>
+            <StickyBuyBar
+              anchorId="product-cta"
+              title={product.title}
+              price={formatPrice(product.sellingPrice)}
+              enquiryHref={productEnquiryLink(product)}
+              phone={site.contact.phone || undefined}
+            />
           </div>
 
           <aside className="rounded-card border border-line bg-surface p-5 lg:sticky lg:top-20 lg:self-start">

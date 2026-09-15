@@ -3,7 +3,8 @@ import { site } from "@/config/site";
 import { primaryNav } from "@/config/nav";
 import { getPopulatedCategories } from "@/lib/catalog";
 import { generalEnquiryLink } from "@/lib/whatsapp";
-import { ChevronDownIcon, SearchIcon, WhatsAppIcon } from "./icons";
+import { ChevronDownIcon, WhatsAppIcon } from "./icons";
+import { SiteSearch } from "./site-search";
 import { Container } from "./container";
 import { Logo } from "./logo";
 
@@ -67,15 +68,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="ml-auto flex items-center gap-3">
-          <div className="relative hidden md:block">
-            <SearchIcon className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-text-invert-muted" />
-            <input
-              type="search"
-              placeholder="Search products, categories…"
-              aria-label="Search products"
-              className="h-10 w-64 rounded-lg border border-ink-line bg-ink-soft pl-10 pr-3 text-sm text-white placeholder:text-text-invert-muted focus:border-accent focus:outline-none lg:w-80"
-            />
-          </div>
+          <SiteSearch />
 
           <a
             href={generalEnquiryLink()}

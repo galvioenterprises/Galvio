@@ -77,6 +77,21 @@ Filtering, sorting and pagination all run client-side over the products
 already embedded in the page. With a catalogue this size that is far
 cheaper than a round trip, and it keeps the site static.
 
+Header search works the same way. `scripts/build-search-index.mts` writes
+`public/search-index.json` (generated, git-ignored, rebuilt by every
+`pnpm build` and `pnpm dev`), and the browser fetches it the first time
+someone focuses the search box — not on page load, because most visitors
+never search and should not pay for the bytes. Matching is "every typed
+word appears somewhere in the product", so "voltas 1.5 ton" behaves the
+way people expect.
+
+Each category page ends with a buying guide — the sizing advice a good
+salesperson gives across the counter, set in `buyingGuide` on the
+category config. It sits below the grid so someone who already knows what
+they want is not made to scroll past a lesson, and it exists because
+people search "which ton AC for 150 sq ft" far more often than they
+search a model number.
+
 ### Structured data
 
 Treat it as load-bearing — it is what makes these pages eligible for free
@@ -118,6 +133,13 @@ accounts and no checkout, so rather than render controls that do nothing:
   `src/config/nav.ts` as each page lands. Category links everywhere are
   built from categories that actually have products, never from config.
 - **Buy now** is not rendered — there is nothing to buy through yet.
+- Trust signals sit **between the price and the button** rather than
+  below both. That gap is where the hesitation actually is.
+- On phones a **sticky bar** carries the price and the enquiry button
+  once the real button scrolls away. It measures that button on scroll
+  rather than observing a 1px sentinel: a box that small does not
+  reliably fire IntersectionObserver callbacks, and when it silently
+  never fires the bar stays pinned open.
 - The product page's **pincode check** answers from
   `site.serviceablePincodes`. Until that list is filled in it shows a
   plain message instead, because a box that approves every pincode is
