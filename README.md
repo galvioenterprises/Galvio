@@ -64,19 +64,35 @@ that compiles and then throws.
 
 | Route | What it is |
 |---|---|
-| `/` | Placeholder home page, pending the Figma landing frame |
+| `/` | Landing page: hero, category strip, top deals, value props, expert CTA |
 | `/products/` | Category index |
 | `/products/[category]/` | Listing page: filters, sort, grid and list views, pagination |
-| `/product/[slug]/` | Product detail: gallery, specs, WhatsApp enquiry |
+| `/product/[slug]/` | Product detail: gallery, sticky section nav, overview, specs, warranty, delivery, FAQs |
 
 Filtering, sorting and pagination all run client-side over the products
 already embedded in the page. With a catalogue this size that is far
 cheaper than a round trip, and it keeps the site static.
 
-Every listing page carries `BreadcrumbList` and `ItemList` structured
-data; every product page carries `Product` with a full `Offer`, including
-GTIN and schema.org availability. That markup is what makes the pages
-eligible for free Google listings, so treat it as load-bearing.
+### Structured data
+
+Treat it as load-bearing — it is what makes these pages eligible for free
+Google listings and rich results.
+
+| Page | Emits |
+|---|---|
+| Home | `Organization`, upgrading to `Store` once the address is filled in |
+| Listing | `BreadcrumbList`, `ItemList` |
+| Product | `BreadcrumbList`, `Product` with a full `Offer` (GTIN, schema.org availability and condition), `FAQPage` when the product has FAQs |
+
+The name, address and phone in `src/config/site.ts` must match the Google
+Business Profile character for character. If they differ, Google treats
+them as two different businesses and the local listing stops inheriting
+the website's authority.
+
+The product page renders every section into the HTML and uses the tab bar
+to scroll between them, rather than hiding sections behind a click.
+Content behind a click is content Google weighs less and a customer never
+scrolls past.
 
 ### Deliberate differences from the Figma frames
 
@@ -95,7 +111,23 @@ accounts and no checkout, so rather than render controls that do nothing:
 - **Star ratings** render only when a product has a real rating.
 - Navigation items whose pages are not built yet render as plain text
   rather than links, so nothing in the header 404s. Flip `ready` in
-  `src/config/nav.ts` as each page lands.
+  `src/config/nav.ts` as each page lands. Category links everywhere are
+  built from categories that actually have products, never from config.
+- **Buy now** is not rendered — there is nothing to buy through yet.
+- The product page's **pincode check** answers from
+  `site.serviceablePincodes`. Until that list is filled in it shows a
+  plain message instead, because a box that approves every pincode is
+  worse than no box: the customer plans around it.
+
+### Not built: the commerce flow
+
+The Figma `Final` page also contains **Add to cart, Checkout, Payment,
+Order Confirmation, Track Order** and **My Orders**. None of them are
+built. Each needs some combination of cart state, customer accounts, a
+payment gateway and an order database, and this site is a static export
+with no server. A checkout that renders but cannot take an order is worse
+than no checkout, and a payment form that cannot take a payment should
+never be deployed at all. These are Phase 2, after the season.
 
 ## Commands
 

@@ -1,49 +1,39 @@
-import Link from "next/link";
+import type { Metadata } from "next";
 import { site } from "@/config/site";
+import { getAllProducts } from "@/lib/products";
 import { getPopulatedCategories } from "@/lib/catalog";
-import { ArrowRightIcon } from "@/components/icons";
+import { discountPercent } from "@/lib/pricing";
+import { Hero } from "@/components/home/hero";
+import { CategoryStrip } from "@/components/home/category-strip";
+import { TopDeals } from "@/components/home/top-deals";
+import { ValueProps } from "@/components/home/value-props";
+import { ExpertCta } from "@/components/home/expert-cta";
+import { OrganizationSchema } from "@/components/organization-schema";
 
-/**
- * Placeholder home page. The Figma landing frame is built separately —
- * this exists so the domain has something real to serve, and so Search
- * Console verification and indexing can start before the catalogue is
- * finished.
- */
+export const metadata: Metadata = {
+  title: `${site.name} — Electronics & Home Appliances`,
+  description: site.description,
+  alternates: { canonical: "/" },
+};
+
 export default function Home() {
   const categories = getPopulatedCategories();
 
+  // The season's deals are simply the deepest discounts we actually have.
+  // Curating them by hand is a page nobody remembers to update.
+  const deals = [...getAllProducts()]
+    .filter((p) => p.availability === "in_stock" && discountPercent(p) > 0)
+    .sort((a, b) => discountPercent(b) - discountPercent(a))
+    .slice(0, 4);
+
   return (
-    <div className="mx-auto max-w-[1200px] px-5 py-20">
-      <p className="eyebrow text-text-muted">Premium electronics, trusted brands</p>
-      <h1 className="mt-3 max-w-2xl text-4xl font-semibold tracking-tight sm:text-5xl">
-        Upgrade to Better Living
-      </h1>
-      <p className="mt-4 max-w-xl text-sm leading-relaxed text-text-muted">
-        {site.description}
-      </p>
-
-      <Link
-        href="/products/"
-        className="mt-7 inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
-      >
-        Explore Products
-        <ArrowRightIcon className="size-4" />
-      </Link>
-
-      <div className="mt-14 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {categories.map((category) => (
-          <Link
-            key={category.slug}
-            href={`/products/${category.slug}/`}
-            className="rounded-card border border-line bg-surface px-5 py-4 text-sm font-medium transition-shadow hover:shadow-[0_2px_16px_rgba(17,19,24,0.08)]"
-          >
-            {category.title}
-            <span className="ml-2 text-xs font-normal text-text-muted">
-              {category.productCount}
-            </span>
-          </Link>
-        ))}
-      </div>
-    </div>
+    <>
+      <Hero />
+      <CategoryStrip categories={categories} />
+      <TopDeals products={deals} />
+      <ValueProps />
+      <ExpertCta />
+      <OrganizationSchema />
+    </>
   );
 }

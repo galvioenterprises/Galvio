@@ -57,6 +57,19 @@ the next import overwrites it.
 - **description** — must be quoted in the CSV if it contains a comma. A
   spreadsheet export handles this automatically.
 
+- **compressor_warranty_months** — separate from the appliance warranty
+  because it is usually far longer and is a real purchase driver. It gets
+  its own card on the product page.
+- **highlights** — the feature tiles under "Product Overview". Records are
+  separated by `|` and fields within a record by `::`, as
+  `Title :: Subtitle :: icon`. The icon is optional and must be one of
+  `snowflake`, `box`, `bolt`, `gauge`, `volume`, `leaf`, `shield`,
+  `wrench`. Leave the column blank and the page derives tiles from
+  capacity, star rating and compressor type instead.
+- **faqs** — same shape: `Question :: Answer`, records separated by `|`.
+  These render as an accordion and as FAQPage structured data, which is
+  its own search-result surface. Worth filling in for the top sellers.
+
 Leave optional columns blank rather than writing "N/A" or "-".
 
 ## Sample data

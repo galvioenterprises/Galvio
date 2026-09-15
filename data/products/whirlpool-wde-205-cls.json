@@ -14,6 +14,7 @@
   "sellingPrice": 17990,
   "gstRate": 18,
   "availability": "in_stock",
+  "stockCount": 3,
   "condition": "new",
   "weightKg": 36,
   "dimensions": {
@@ -31,6 +32,21 @@
   "inverter": false,
   "installationIncluded": false,
   "warrantyMonths": 12,
+  "highlights": [],
+  "faqs": [
+    {
+      "question": "Does the price include installation?",
+      "answer": "Yes — standard installation within city limits is included and handled by our own team."
+    },
+    {
+      "question": "What is the delivery time?",
+      "answer": "Two to four business days for most addresses. We confirm the date with you directly."
+    },
+    {
+      "question": "Is the warranty the manufacturer's?",
+      "answer": "Yes. Warranty is registered in your name and serviced through the brand's authorised network."
+    }
+  ],
   "images": [
     {
       "src": "/images/products/placeholder.svg",

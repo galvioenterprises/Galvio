@@ -9,13 +9,32 @@ import {
   getProductsByCategory,
 } from "@/lib/products";
 import { discountPercent } from "@/lib/pricing";
+import { formatMonths } from "@/lib/highlights";
 import { formatPrice } from "@/lib/format";
 import { productEnquiryLink } from "@/lib/whatsapp";
 import type { Product } from "@/lib/product-schema";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { ProductCard } from "@/components/product-card";
 import { ProductGallery } from "@/components/product-gallery";
-import { PhoneIcon, StarIcon, WhatsAppIcon } from "@/components/icons";
+import { ProductTabs, type TabSection } from "@/components/product/product-tabs";
+import { FaqAccordion } from "@/components/product/faq-accordion";
+import { PincodeCheck } from "@/components/product/pincode-check";
+import {
+  DeliveryAndInstallation,
+  Overview,
+  SectionHeading,
+  Specifications,
+  WarrantyAndSupport,
+} from "@/components/product/product-sections";
+import {
+  BadgeIcon,
+  PhoneIcon,
+  ShieldCheckIcon,
+  StarIcon,
+  TruckIcon,
+  WhatsAppIcon,
+  WrenchIcon,
+} from "@/components/icons";
 
 type Params = { slug: string };
 
@@ -88,17 +107,18 @@ function specRows(product: Product): [string, string][] {
   }
   rows.push([
     "Warranty",
-    product.warrantyMonths > 0
-      ? `${product.warrantyMonths} months manufacturer warranty`
-      : "No warranty",
+    product.warrantyMonths > 0 ? formatMonths(product.warrantyMonths) : "Not covered",
   ]);
-  rows.push([
-    "Installation",
-    product.installationIncluded ? "Included" : "Not included",
-  ]);
+  rows.push(["Installation", product.installationIncluded ? "Included" : "Not included"]);
   for (const [key, value] of Object.entries(product.specs)) rows.push([key, value]);
   return rows;
 }
+
+const BUY_ASSURANCES = [
+  { Icon: BadgeIcon, title: "Genuine product", subtitle: "Manufacturer warranty" },
+  { Icon: TruckIcon, title: "Delivery", subtitle: "From our own stock" },
+  { Icon: WrenchIcon, title: "Installation", subtitle: "Service coordinated" },
+];
 
 export default async function ProductPage({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
@@ -107,11 +127,21 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
 
   const category = categories.find((c) => c.name === product.category);
   const off = discountPercent(product);
+  const savings = product.mrp - product.sellingPrice;
+  const rows = specRows(product);
   const related = getProductsByCategory(product.category)
     .filter((p) => p.slug !== product.slug)
     .slice(0, 4);
 
-  const jsonLd = {
+  const sections: TabSection[] = [
+    { id: "overview", label: "Overview" },
+    { id: "specifications", label: "Specifications" },
+    { id: "warranty", label: "Warranty" },
+    { id: "delivery", label: "Delivery & Installation" },
+    ...(product.faqs.length > 0 ? [{ id: "faqs", label: "FAQs" }] : []),
+  ];
+
+  const productJsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.title,
@@ -142,6 +172,21 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
       : {}),
   };
 
+  // FAQPage is its own search result surface, so it is worth emitting
+  // separately rather than folding the questions into the product node.
+  const faqJsonLd =
+    product.faqs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: product.faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: { "@type": "Answer", text: faq.answer },
+          })),
+        }
+      : null;
+
   return (
     <>
       <Breadcrumbs
@@ -155,48 +200,59 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
         ]}
       />
 
-      <div className="mx-auto max-w-[1200px] px-5 py-10">
-        <div className="grid gap-10 lg:grid-cols-2">
+      <div className="mx-auto max-w-[1200px] px-5 pb-16 pt-8">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_280px]">
           <ProductGallery images={product.images} />
 
           <div>
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
               <p className="eyebrow text-text-muted">{product.brand}</p>
               {product.rating && (
                 <span className="flex items-center gap-1 text-xs text-text-muted">
                   <StarIcon className="size-3.5 text-star" />
-                  <span className="font-medium text-text">{product.rating.value}</span>
-                  ({product.rating.count})
+                  <span className="font-medium text-text">{product.rating.value}</span>(
+                  {product.rating.count} reviews)
                 </span>
               )}
             </div>
 
-            <h1 className="mt-2 text-2xl font-semibold leading-snug tracking-tight sm:text-3xl">
+            <h1 className="mt-2 text-2xl font-semibold leading-snug tracking-tight">
               {product.title}
             </h1>
+
+            <ul className="mt-3 flex flex-wrap gap-1.5">
+              {[
+                product.capacity,
+                product.starRating ? `${product.starRating} Star` : undefined,
+                product.inverter ? "Inverter" : undefined,
+              ]
+                .filter(Boolean)
+                .map((chip) => (
+                  <li
+                    key={chip}
+                    className="eyebrow rounded bg-canvas px-2 py-1 text-[0.625rem] text-text-muted"
+                  >
+                    {chip}
+                  </li>
+                ))}
+            </ul>
 
             <div className="mt-5 flex flex-wrap items-baseline gap-3">
               <p className="text-3xl font-semibold tracking-tight">
                 {formatPrice(product.sellingPrice)}
               </p>
-              {off > 0 && (
-                <>
-                  <s className="text-base text-text-muted">{formatPrice(product.mrp)}</s>
-                  <span className="rounded bg-accent/10 px-2 py-0.5 text-xs font-medium text-accent">
-                    {off}% off
-                  </span>
-                </>
-              )}
+              {off > 0 && <s className="text-base text-text-muted">{formatPrice(product.mrp)}</s>}
             </div>
+            {off > 0 && (
+              <p className="mt-1 text-xs font-medium text-emerald-700">
+                You save {formatPrice(savings)} ({off}% off)
+              </p>
+            )}
             <p className="mt-1 text-xs text-text-muted">
               Inclusive of {product.gstRate}% GST. {AVAILABILITY_LABEL[product.availability]}.
             </p>
 
-            <p className="mt-6 text-sm leading-relaxed text-text-muted">
-              {product.description}
-            </p>
-
-            <div className="mt-7 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-wrap gap-3">
               <a
                 href={productEnquiryLink(product)}
                 className="inline-flex h-11 items-center gap-2 rounded-lg bg-accent px-6 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
@@ -207,7 +263,7 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
               {site.contact.phone && (
                 <a
                   href={`tel:${site.contact.phone}`}
-                  className="inline-flex h-11 items-center gap-2 rounded-lg border border-line bg-surface px-6 text-sm font-medium transition-colors hover:border-line-strong"
+                  className="inline-flex h-11 items-center gap-2 rounded-lg bg-ink px-6 text-sm font-medium text-white transition-colors hover:bg-ink-soft"
                 >
                   <PhoneIcon className="size-4" />
                   Call the store
@@ -215,19 +271,84 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
               )}
             </div>
 
-            <dl className="mt-8 divide-y divide-line overflow-hidden rounded-card border border-line bg-surface text-sm">
-              {specRows(product).map(([label, value]) => (
-                <div key={label} className="flex gap-4 px-4 py-2.5">
-                  <dt className="w-44 shrink-0 text-text-muted">{label}</dt>
-                  <dd className="font-medium">{value}</dd>
-                </div>
+            <ul className="mt-6 grid gap-2 sm:grid-cols-3">
+              {BUY_ASSURANCES.map(({ Icon, title, subtitle }) => (
+                <li key={title} className="rounded-lg bg-canvas p-3">
+                  <Icon className="size-4 text-text-muted" />
+                  <p className="mt-2 text-xs font-medium leading-snug">{title}</p>
+                  <p className="mt-0.5 text-[0.6875rem] text-text-muted">{subtitle}</p>
+                </li>
               ))}
-            </dl>
+            </ul>
           </div>
+
+          <aside className="rounded-card border border-line bg-surface p-5 lg:sticky lg:top-20 lg:self-start">
+            <p className="text-sm font-semibold">Delivery &amp; Installation</p>
+            <p className="mb-3 mt-1 text-xs text-text-muted">
+              Check availability in your area
+            </p>
+
+            <div className="border-b border-line pb-4">
+              <PincodeCheck />
+            </div>
+
+            <ul className="mt-4 space-y-4 text-xs">
+              <li className="flex gap-2.5">
+                <ShieldCheckIcon className="mt-0.5 size-4 shrink-0 text-text-muted" />
+                <span>
+                  <span className="block font-medium">Easy returns</span>
+                  <span className="text-text-muted">
+                    Replacement per the manufacturer&apos;s policy
+                  </span>
+                </span>
+              </li>
+              <li className="flex gap-2.5">
+                <BadgeIcon className="mt-0.5 size-4 shrink-0 text-text-muted" />
+                <span>
+                  <span className="block font-medium">Bought direct</span>
+                  <span className="text-text-muted">
+                    Distributor stock, not a marketplace reseller
+                  </span>
+                </span>
+              </li>
+              {site.contact.phone && (
+                <li className="flex gap-2.5">
+                  <PhoneIcon className="mt-0.5 size-4 shrink-0 text-text-muted" />
+                  <span>
+                    <span className="block font-medium">Need help?</span>
+                    <a href={`tel:${site.contact.phone}`} className="text-accent">
+                      {site.contact.phone}
+                    </a>
+                  </span>
+                </li>
+              )}
+            </ul>
+          </aside>
+        </div>
+
+        {/* The tab bar and the sections it points at share one wrapper.
+            A sticky element only sticks while its parent is in view, so
+            wrapping the bar on its own would scroll it away immediately. */}
+        <div className="mt-12">
+          <ProductTabs sections={sections} />
+
+          <Overview product={product} />
+          <Specifications rows={rows} />
+          <WarrantyAndSupport product={product} />
+          <DeliveryAndInstallation product={product} />
+
+          {product.faqs.length > 0 && (
+            <section id="faqs" className="scroll-mt-20 pt-12">
+              <SectionHeading>Frequently Asked Questions</SectionHeading>
+              <div className="mt-5">
+                <FaqAccordion faqs={product.faqs} />
+              </div>
+            </section>
+          )}
         </div>
 
         {related.length > 0 && (
-          <section className="mt-16">
+          <section className="pt-16">
             <div className="flex items-end justify-between gap-4">
               <h2 className="text-xl font-semibold tracking-tight">
                 More {category?.title ?? product.category}
@@ -252,8 +373,14 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
 
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
       />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
     </>
   );
 }

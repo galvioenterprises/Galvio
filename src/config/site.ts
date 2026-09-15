@@ -44,6 +44,16 @@ export const site = {
   social: {
     googleBusinessProfile: "",
   },
+
+  /**
+   * Pincodes the showroom delivers and installs to.
+   *
+   * The Figma product page has a "check availability in your area" box.
+   * Phase 1 has no logistics API, so the check runs against this list in
+   * the browser — a real answer from real data, rather than a box that
+   * says yes to everything. Add pincodes as the delivery area grows.
+   */
+  serviceablePincodes: [] as string[],
 } as const;
 
 export type Site = typeof site;

@@ -61,6 +61,32 @@ function required(row: Row, key: string): string {
   return raw;
 }
 
+/**
+ * Repeating groups in a flat CSV: records separated by "|", fields within
+ * a record by "::". Clunky, but a spreadsheet can hold it and a person can
+ * read it, which beats asking for nested JSON in a cell.
+ */
+function records(raw: string | undefined, fields: number): string[][] {
+  return (raw ?? "")
+    .split("|")
+    .map((record) => record.trim())
+    .filter(Boolean)
+    .map((record) => record.split("::").map((field) => field.trim()))
+    .filter((parts) => parts.length >= fields);
+}
+
+function highlightsOf(row: Row) {
+  return records(row.highlights, 2).map(([title, subtitle, icon]) => ({
+    title,
+    subtitle,
+    ...(icon ? { icon } : {}),
+  }));
+}
+
+function faqsOf(row: Row) {
+  return records(row.faqs, 2).map(([question, answer]) => ({ question, answer }));
+}
+
 /** Only emit a rating when both halves are present. A star with no
  *  review count, or a count with no star, is worse than nothing. */
 function ratingOf(row: Row) {
@@ -111,6 +137,9 @@ function toProduct(row: Row): Product {
     condition: required(row, "condition"),
     installationIncluded: bool(row, "installation_included"),
     warrantyMonths: num(row, "warranty_months"),
+    compressorWarrantyMonths: num(row, "compressor_warranty_months"),
+    highlights: highlightsOf(row),
+    faqs: faqsOf(row),
     weightKg: num(row, "weight_kg"),
     dimensions: hasDims ? dims : undefined,
     capacity: row.capacity?.trim() || undefined,

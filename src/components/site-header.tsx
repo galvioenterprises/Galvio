@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { site } from "@/config/site";
-import { categoryNav, primaryNav } from "@/config/nav";
+import { primaryNav } from "@/config/nav";
+import { getPopulatedCategories } from "@/lib/catalog";
 import { generalEnquiryLink } from "@/lib/whatsapp";
 import { ChevronDownIcon, SearchIcon, WhatsAppIcon } from "./icons";
 
@@ -11,6 +12,11 @@ import { ChevronDownIcon, SearchIcon, WhatsAppIcon } from "./icons";
  * decoration that does nothing when tapped.
  */
 export function SiteHeader() {
+  // Built from categories that actually have products, never from config
+  // alone — a dropdown that links to an empty category is a 404 waiting
+  // for a customer to find it.
+  const categoryNav = getPopulatedCategories();
+
   return (
     <header className="bg-ink text-text-invert">
       <div className="mx-auto flex h-16 max-w-[1200px] items-center gap-6 px-5">
@@ -39,11 +45,11 @@ export function SiteHeader() {
                   <div className="invisible absolute left-0 top-full z-20 w-56 rounded-xl border border-line bg-surface p-2 opacity-0 shadow-lg transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
                     {categoryNav.map((c) => (
                       <Link
-                        key={c.href}
-                        href={c.href}
+                        key={c.slug}
+                        href={`/products/${c.slug}/`}
                         className="block rounded-lg px-3 py-2 text-sm text-text hover:bg-canvas"
                       >
-                        {c.label}
+                        {c.title}
                       </Link>
                     ))}
                   </div>

@@ -31,6 +31,9 @@
   "inverter": true,
   "installationIncluded": true,
   "warrantyMonths": 24,
+  "compressorWarrantyMonths": 120,
+  "highlights": [],
+  "faqs": [],
   "images": [
     {
       "src": "/images/products/placeholder.svg",

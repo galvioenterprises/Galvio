@@ -128,3 +128,194 @@ export function CheckIcon({ className }: IconProps) {
     </svg>
   );
 }
+
+/* Category icons, traced from the Figma icon set. */
+
+export function AirConditionerIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <rect x="3" y="5" width="18" height="7" rx="2" />
+      <path d="M6 9h12" />
+      <path d="M7 15c0 1.5.8 2.2 1.6 3M12 15c0 1.8.9 2.5 1.8 3.4M17 15c0 1.5.7 2.2 1.4 2.9" />
+    </svg>
+  );
+}
+
+export function RefrigeratorIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <rect x="6" y="2.5" width="12" height="19" rx="2.5" />
+      <path d="M6 10h12" />
+      <path d="M9 6.2v2M9 12.8v2.4" />
+    </svg>
+  );
+}
+
+export function WashingMachineIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <rect x="4" y="2.5" width="16" height="19" rx="2.5" />
+      <path d="M4 7.5h16" />
+      <circle cx="12" cy="14.5" r="4" />
+      <circle cx="16.8" cy="5" r=".6" fill="currentColor" />
+    </svg>
+  );
+}
+
+export function AirCoolerIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <rect x="5" y="2.5" width="14" height="19" rx="2.5" />
+      <circle cx="12" cy="9.5" r="3.6" />
+      <path d="M8 16.5h8M8 19h5" />
+    </svg>
+  );
+}
+
+export function WaterDispenserIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M9 2.5h6l1 4H8z" />
+      <rect x="6" y="6.5" width="12" height="15" rx="2" />
+      <path d="M10.5 11h3" />
+      <path d="M12 15.5c-.9 1-1.4 1.7-1.4 2.4a1.4 1.4 0 0 0 2.8 0c0-.7-.5-1.4-1.4-2.4Z" />
+    </svg>
+  );
+}
+
+export function TelevisionIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <rect x="2.5" y="4" width="19" height="12.5" rx="2" />
+      <path d="M8.5 20h7M12 16.5V20" />
+    </svg>
+  );
+}
+
+/* Trust, offer and support icons. */
+
+export function ShieldCheckIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M12 2.5 4.5 5.5v6c0 4.6 3.1 8.3 7.5 10 4.4-1.7 7.5-5.4 7.5-10v-6Z" />
+      <path d="m8.8 11.8 2.3 2.3 4.1-4.6" />
+    </svg>
+  );
+}
+
+export function BadgeIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <circle cx="12" cy="9" r="5.5" />
+      <path d="m8.5 13.8-1.3 7 4.8-2.5 4.8 2.5-1.3-7" />
+    </svg>
+  );
+}
+
+export function TruckIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M3 6.5h10.5v9H3z" />
+      <path d="M13.5 10h3.8l2.7 3v2.5h-6.5z" />
+      <circle cx="7" cy="17.5" r="1.8" />
+      <circle cx="16.5" cy="17.5" r="1.8" />
+    </svg>
+  );
+}
+
+export function TagIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M11.4 3H3v8.4l9.6 9.6 8.4-8.4z" />
+      <circle cx="7.3" cy="7.3" r="1.4" />
+    </svg>
+  );
+}
+
+export function ExchangeIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M4 9h13l-3-3M20 15H7l3 3" />
+    </svg>
+  );
+}
+
+export function CreditCardIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <rect x="2.5" y="5" width="19" height="14" rx="2.5" />
+      <path d="M2.5 9.5h19M6 15h3" />
+    </svg>
+  );
+}
+
+export function HeadsetIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M4 14v-2a8 8 0 0 1 16 0v2" />
+      <path d="M4 13.5h2.2a1 1 0 0 1 1 1V18a1 1 0 0 1-1 1H5.5A1.5 1.5 0 0 1 4 17.5ZM20 13.5h-2.2a1 1 0 0 0-1 1V18a1 1 0 0 0 1 1h.7a1.5 1.5 0 0 0 1.5-1.5Z" />
+    </svg>
+  );
+}
+
+export function LeafIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M20 4c0 9-5.5 13-11 13a5 5 0 0 1 0-10c3.5 0 5-3 11-3Z" />
+      <path d="M4 20c2.5-4.5 6-7 11-9" />
+    </svg>
+  );
+}
+
+export function SnowflakeIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M12 2.5v19M4 7l16 10M20 7 4 17" />
+      <path d="m9.5 4.5 2.5 2.5 2.5-2.5M9.5 19.5 12 17l2.5 2.5" />
+    </svg>
+  );
+}
+
+export function BoltIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M13.5 2.5 5 13.5h6l-.5 8 8.5-11h-6z" />
+    </svg>
+  );
+}
+
+export function GaugeIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M4 17a8 8 0 1 1 16 0" />
+      <path d="m12 13 3.5-3.5" />
+      <circle cx="12" cy="17" r="1.2" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+export function VolumeLowIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M4 9.5h3l4-3.5v12l-4-3.5H4z" />
+      <path d="M15 10a3 3 0 0 1 0 4" />
+    </svg>
+  );
+}
+
+export function BoxIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M12 2.8 20.5 7v10L12 21.2 3.5 17V7z" />
+      <path d="M3.5 7 12 11.3 20.5 7M12 11.3v9.9" />
+    </svg>
+  );
+}
+
+export function WrenchIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M15 3.5a5 5 0 0 0-4.6 7l-6.2 6.2a1.8 1.8 0 0 0 2.5 2.5l6.2-6.2A5 5 0 1 0 15 3.5Z" />
+    </svg>
+  );
+}

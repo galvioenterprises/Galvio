@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { site } from "@/config/site";
-import { categoryNav, footerNav } from "@/config/nav";
+import { footerNav } from "@/config/nav";
+import { getPopulatedCategories } from "@/lib/catalog";
 import { MailIcon, PhoneIcon, PinIcon } from "./icons";
 
 function formatAddress() {
@@ -13,6 +14,7 @@ export function SiteFooter() {
   // The contact column is omitted until the business details are filled in
   // — an empty heading reads as a broken page, not as pending content.
   const hasContact = Boolean(site.contact.phone || site.contact.email || address);
+  const categoryNav = getPopulatedCategories();
 
   return (
     <footer className="bg-ink text-text-invert-muted">
@@ -81,9 +83,12 @@ export function SiteFooter() {
         <nav aria-label="Categories" className="mt-10 border-t border-ink-line pt-6">
           <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
             {categoryNav.map((c) => (
-              <li key={c.href}>
-                <Link href={c.href} className="transition-colors hover:text-white">
-                  {c.label}
+              <li key={c.slug}>
+                <Link
+                  href={`/products/${c.slug}/`}
+                  className="transition-colors hover:text-white"
+                >
+                  {c.title}
                 </Link>
               </li>
             ))}

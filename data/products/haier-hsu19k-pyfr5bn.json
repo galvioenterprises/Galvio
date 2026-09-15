@@ -14,6 +14,7 @@
   "sellingPrice": 45990,
   "gstRate": 28,
   "availability": "in_stock",
+  "stockCount": 3,
   "condition": "new",
   "weightKg": 39,
   "dimensions": {
@@ -31,6 +32,9 @@
   "inverter": true,
   "installationIncluded": true,
   "warrantyMonths": 12,
+  "compressorWarrantyMonths": 120,
+  "highlights": [],
+  "faqs": [],
   "images": [
     {
       "src": "/images/products/placeholder.svg",

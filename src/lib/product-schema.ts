@@ -40,6 +40,29 @@ export const imageSchema = z.object({
   height: z.number().int().positive(),
 });
 
+/**
+ * The feature tiles under "Product Overview".
+ *
+ * Optional: when absent the page derives a sensible set from capacity,
+ * star rating and compressor type, so a thinly-filled row still produces
+ * a complete-looking page rather than a gap.
+ */
+export const highlightSchema = z.object({
+  title: z.string().min(1),
+  subtitle: z.string().min(1),
+  /** Icon key from components/icons.tsx; falls back to a generic mark. */
+  icon: z
+    .enum(["snowflake", "box", "bolt", "gauge", "volume", "leaf", "shield", "wrench"])
+    .optional(),
+});
+
+/** Renders as an accordion and as FAQPage structured data, which is its
+ *  own search result surface — worth filling in for the top sellers. */
+export const faqSchema = z.object({
+  question: z.string().min(1),
+  answer: z.string().min(1),
+});
+
 export const dimensionsSchema = z.object({
   lengthMm: z.number().positive(),
   widthMm: z.number().positive(),
@@ -97,6 +120,12 @@ export const productSchema = z.object({
 
   installationIncluded: z.boolean(),
   warrantyMonths: z.number().int().nonnegative(),
+  /** Compressors are warranted far longer than the appliance and are a
+   *  real purchase driver, so they get their own field and their own card. */
+  compressorWarrantyMonths: z.number().int().nonnegative().optional(),
+
+  highlights: z.array(highlightSchema).default([]),
+  faqs: z.array(faqSchema).default([]),
 
   images: z.array(imageSchema).min(1),
 

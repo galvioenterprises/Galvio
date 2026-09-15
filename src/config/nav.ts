@@ -1,5 +1,3 @@
-import { categories } from "./categories";
-
 export type NavItem = {
   label: string;
   href: string;
@@ -17,11 +15,6 @@ export const primaryNav: NavItem[] = [
   { label: "Bulk Orders", href: "/bulk-orders/", ready: false },
   { label: "Support", href: "/support/", ready: false },
 ];
-
-export const categoryNav = categories.map((c) => ({
-  label: c.title,
-  href: `/products/${c.slug}/`,
-}));
 
 export const footerNav = {
   "Quick Links": [
