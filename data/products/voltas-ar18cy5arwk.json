@@ -1,32 +1,31 @@
 {
   "tenantId": "galvio-001",
-  "slug": "haier-hsu19k-pyfr5bn",
-  "sku": "SAMPLE-AC-005",
-  "brand": "Haier",
-  "model": "HSU19K-PYFR5BN",
-  "gtin": "8900000000192",
+  "slug": "voltas-ar18cy5arwk",
+  "sku": "SAMPLE-AC-003",
+  "brand": "Voltas",
+  "model": "AR18CY5ARWK",
+  "gtin": "8900000000178",
   "hsn": "84151010",
-  "title": "Haier 1.5 Ton 5 Star Frost Self Clean Inverter Split AC",
-  "description": "Self cleaning cycle that freezes and flushes the evaporator coil, plus a 7-in-1 convertible mode.",
+  "title": "Voltas 1.5 Ton 5 Star Convertible Split Air Conditioner",
+  "description": "Convertible 5-in-1 cooling modes and a durable anti-corrosion coating on the outdoor unit.",
   "category": "Air Conditioner",
   "subCategory": "Split AC",
-  "mrp": 61990,
-  "sellingPrice": 45990,
+  "mrp": 64990,
+  "sellingPrice": 47490,
   "gstRate": 28,
   "availability": "in_stock",
-  "stockCount": 3,
   "condition": "new",
-  "weightKg": 39,
+  "weightKg": 40,
   "dimensions": {
-    "lengthMm": 1000,
-    "widthMm": 325,
-    "heightMm": 220
+    "lengthMm": 1055,
+    "widthMm": 299,
+    "heightMm": 215
   },
   "capacity": "1.5 Ton",
   "color": "White",
   "rating": {
-    "value": 4.4,
-    "count": 163
+    "value": 4.5,
+    "count": 276
   },
   "starRating": 5,
   "inverter": true,
@@ -38,7 +37,7 @@
   "images": [
     {
       "src": "/images/products/placeholder.svg",
-      "alt": "Haier HSU19K-PYFR5BN",
+      "alt": "Voltas AR18CY5ARWK",
       "width": 1600,
       "height": 1600
     }

@@ -4,6 +4,8 @@ import { primaryNav } from "@/config/nav";
 import { getPopulatedCategories } from "@/lib/catalog";
 import { generalEnquiryLink } from "@/lib/whatsapp";
 import { ChevronDownIcon, SearchIcon, WhatsAppIcon } from "./icons";
+import { Container } from "./container";
+import { Logo } from "./logo";
 
 /**
  * The Figma header carries an account icon and a cart badge. Phase 1 has
@@ -19,12 +21,9 @@ export function SiteHeader() {
 
   return (
     <header className="bg-ink text-text-invert">
-      <div className="mx-auto flex h-16 max-w-[1200px] items-center gap-6 px-5">
-        <Link
-          href="/"
-          className="eyebrow shrink-0 text-[0.95rem] tracking-[0.22em] text-white"
-        >
-          {site.shortName.toUpperCase()}
+      <Container className="flex h-20 items-center gap-8">
+        <Link href="/" className="shrink-0" aria-label={`${site.shortName} home`}>
+          <Logo variant="light" className="h-6" />
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
@@ -33,7 +32,7 @@ export function SiteHeader() {
               <div key={item.label} className="group relative">
                 <Link
                   href={item.href}
-                  className="flex items-center gap-1 rounded-md px-3 py-2 text-sm text-text-invert-muted transition-colors hover:text-white"
+                  className="flex items-center gap-1 rounded-md px-3.5 py-2.5 text-[0.9375rem] text-text-invert-muted transition-colors hover:text-white"
                 >
                   {item.label}
                   {item.label === "Products" && (
@@ -42,12 +41,12 @@ export function SiteHeader() {
                 </Link>
 
                 {item.label === "Products" && (
-                  <div className="invisible absolute left-0 top-full z-20 w-56 rounded-xl border border-line bg-surface p-2 opacity-0 shadow-lg transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                  <div className="invisible absolute left-0 top-full z-20 w-60 rounded-xl border border-line bg-surface p-2 opacity-0 shadow-lg transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
                     {categoryNav.map((c) => (
                       <Link
                         key={c.slug}
                         href={`/products/${c.slug}/`}
-                        className="block rounded-lg px-3 py-2 text-sm text-text hover:bg-canvas"
+                        className="block rounded-lg px-3 py-2.5 text-sm text-text hover:bg-canvas"
                       >
                         {c.title}
                       </Link>
@@ -59,7 +58,7 @@ export function SiteHeader() {
               <span
                 key={item.label}
                 title="Coming soon"
-                className="cursor-default px-3 py-2 text-sm text-text-invert-muted/45"
+                className="cursor-default px-3.5 py-2.5 text-[0.9375rem] text-text-invert-muted/40"
               >
                 {item.label}
               </span>
@@ -69,24 +68,24 @@ export function SiteHeader() {
 
         <div className="ml-auto flex items-center gap-3">
           <div className="relative hidden md:block">
-            <SearchIcon className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-text-invert-muted" />
+            <SearchIcon className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-text-invert-muted" />
             <input
               type="search"
-              placeholder="Search products…"
+              placeholder="Search products, categories…"
               aria-label="Search products"
-              className="h-9 w-56 rounded-lg border border-ink-line bg-ink-soft pl-9 pr-3 text-sm text-white placeholder:text-text-invert-muted focus:border-accent focus:outline-none"
+              className="h-10 w-64 rounded-lg border border-ink-line bg-ink-soft pl-10 pr-3 text-sm text-white placeholder:text-text-invert-muted focus:border-accent focus:outline-none lg:w-80"
             />
           </div>
 
           <a
             href={generalEnquiryLink()}
-            className="inline-flex h-9 items-center gap-2 rounded-lg bg-accent px-3.5 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
+            className="inline-flex h-10 items-center gap-2 rounded-lg bg-accent px-4 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
           >
             <WhatsAppIcon className="size-4" />
             <span className="hidden sm:inline">Talk to us</span>
           </a>
         </div>
-      </div>
+      </Container>
     </header>
   );
 }

@@ -1,31 +1,32 @@
 {
   "tenantId": "galvio-001",
-  "slug": "samsung-ar18cy5arwk",
-  "sku": "SAMPLE-AC-003",
-  "brand": "Samsung",
-  "model": "AR18CY5ARWK",
-  "gtin": "8900000000178",
+  "slug": "voltas-rs-q19jnze",
+  "sku": "SAMPLE-AC-002",
+  "brand": "Voltas",
+  "model": "RS-Q19JNZE",
+  "gtin": "8900000000161",
   "hsn": "84151010",
-  "title": "Samsung 1.5 Ton 5 Star Convertible Split Air Conditioner",
-  "description": "Convertible 5-in-1 cooling modes and a durable anti-corrosion coating on the outdoor unit.",
+  "title": "Voltas 1.5 Ton 5 Star Dual Inverter Split Air Conditioner",
+  "description": "Dual inverter compressor with a four way swing and an anti-virus HD filter. Rated for rooms up to 160 sq ft.",
   "category": "Air Conditioner",
   "subCategory": "Split AC",
-  "mrp": 64990,
-  "sellingPrice": 47490,
+  "mrp": 66990,
+  "sellingPrice": 49990,
   "gstRate": 28,
   "availability": "in_stock",
+  "stockCount": 3,
   "condition": "new",
-  "weightKg": 40,
+  "weightKg": 41,
   "dimensions": {
-    "lengthMm": 1055,
-    "widthMm": 299,
-    "heightMm": 215
+    "lengthMm": 998,
+    "widthMm": 330,
+    "heightMm": 210
   },
   "capacity": "1.5 Ton",
   "color": "White",
   "rating": {
-    "value": 4.5,
-    "count": 276
+    "value": 4.7,
+    "count": 508
   },
   "starRating": 5,
   "inverter": true,
@@ -37,7 +38,7 @@
   "images": [
     {
       "src": "/images/products/placeholder.svg",
-      "alt": "Samsung AR18CY5ARWK",
+      "alt": "Voltas RS-Q19JNZE",
       "width": 1600,
       "height": 1600
     }

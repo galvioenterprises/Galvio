@@ -1,12 +1,12 @@
 {
   "tenantId": "galvio-001",
-  "slug": "lg-gl-s292rdsy",
+  "slug": "voltas-gl-s292rdsy",
   "sku": "SAMPLE-RF-002",
-  "brand": "LG",
+  "brand": "Voltas",
   "model": "GL-S292RDSY",
   "gtin": "8900000000024",
   "hsn": "84181010",
-  "title": "LG 260L Frost Free Double Door Refrigerator with Smart Inverter",
+  "title": "Voltas 260L Frost Free Double Door Refrigerator with Smart Inverter",
   "description": "Smart inverter compressor with a ten year warranty and door cooling for faster chilling across every shelf.",
   "category": "Refrigerator",
   "subCategory": "Double Door",
@@ -50,7 +50,7 @@
   "images": [
     {
       "src": "/images/products/placeholder.svg",
-      "alt": "LG GL-S292RDSY",
+      "alt": "Voltas GL-S292RDSY",
       "width": 1600,
       "height": 1600
     }

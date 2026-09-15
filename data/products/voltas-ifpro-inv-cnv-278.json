@@ -1,12 +1,12 @@
 {
   "tenantId": "galvio-001",
-  "slug": "whirlpool-ifpro-inv-cnv-278",
+  "slug": "voltas-ifpro-inv-cnv-278",
   "sku": "SAMPLE-RF-011",
-  "brand": "Whirlpool",
+  "brand": "Voltas",
   "model": "IFPRO INV CNV 278",
   "gtin": "8900000000116",
   "hsn": "84181010",
-  "title": "Whirlpool 235L Frost Free Double Door Refrigerator",
+  "title": "Voltas 235L Frost Free Double Door Refrigerator",
   "description": "Intellisense inverter with an adaptive cooling algorithm and a convertible freezer offering five usage modes.",
   "category": "Refrigerator",
   "subCategory": "Double Door",
@@ -37,7 +37,7 @@
   "images": [
     {
       "src": "/images/products/placeholder.svg",
-      "alt": "Whirlpool IFPRO INV CNV 278",
+      "alt": "Voltas IFPRO INV CNV 278",
       "width": 1600,
       "height": 1600
     }

@@ -1,37 +1,37 @@
 {
   "tenantId": "galvio-001",
-  "slug": "whirlpool-wde-205-cls",
-  "sku": "SAMPLE-RF-004",
-  "brand": "Whirlpool",
-  "model": "WDE 205 CLS",
-  "gtin": "8900000000048",
+  "slug": "voltas-rt28c3732s8",
+  "sku": "SAMPLE-RF-003",
+  "brand": "Voltas",
+  "model": "RT28C3732S8",
+  "gtin": "8900000000031",
   "hsn": "84181010",
-  "title": "Whirlpool 190L Direct Cool Single Door Refrigerator",
-  "description": "Direct cool single door refrigerator with insulated capillary technology that holds cooling for hours during a power cut.",
+  "title": "Voltas 236L Frost Free Double Door Refrigerator",
+  "description": "Digital inverter compressor with a stabiliser-free operation range and a convertible freezer compartment.",
   "category": "Refrigerator",
-  "subCategory": "Single Door",
-  "mrp": 21500,
-  "sellingPrice": 17990,
+  "subCategory": "Double Door",
+  "mrp": 31900,
+  "sellingPrice": 25490,
   "gstRate": 18,
   "availability": "in_stock",
-  "stockCount": 3,
   "condition": "new",
-  "weightKg": 36,
+  "weightKg": 52,
   "dimensions": {
-    "lengthMm": 530,
-    "widthMm": 540,
-    "heightMm": 1170
+    "lengthMm": 555,
+    "widthMm": 637,
+    "heightMm": 1545
   },
-  "capacity": "190L",
-  "color": "Wine Chromatic",
+  "capacity": "236L",
+  "color": "Elegant Inox",
   "rating": {
-    "value": 4.2,
-    "count": 96
+    "value": 4.4,
+    "count": 211
   },
-  "starRating": 4,
-  "inverter": false,
-  "installationIncluded": false,
+  "starRating": 3,
+  "inverter": true,
+  "installationIncluded": true,
   "warrantyMonths": 12,
+  "compressorWarrantyMonths": 120,
   "highlights": [],
   "faqs": [
     {
@@ -50,7 +50,7 @@
   "images": [
     {
       "src": "/images/products/placeholder.svg",
-      "alt": "Whirlpool WDE 205 CLS",
+      "alt": "Voltas RT28C3732S8",
       "width": 1600,
       "height": 1600
     }

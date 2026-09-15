@@ -22,7 +22,7 @@ export function Breadcrumbs({ trail }: { trail: Crumb[] }) {
 
   return (
     <nav aria-label="Breadcrumb" className="border-b border-line bg-surface">
-      <div className="mx-auto max-w-[1200px] px-5 py-3">
+      <div className="mx-auto max-w-[1304px] px-5 py-3.5 sm:px-8">
         <ol className="flex flex-wrap items-center gap-2 text-xs text-text-muted">
           {trail.map((crumb, index) => (
             <li key={crumb.label} className="flex items-center gap-2">

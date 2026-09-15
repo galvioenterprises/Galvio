@@ -200,7 +200,7 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
         ]}
       />
 
-      <div className="mx-auto max-w-[1200px] px-5 pb-16 pt-8">
+      <div className="mx-auto max-w-[1304px] px-5 pb-24 pt-10 sm:px-8">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_280px]">
           <ProductGallery images={product.images} />
 

@@ -18,7 +18,7 @@ export default function ProductsPage() {
     <>
       <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Products" }]} />
 
-      <div className="mx-auto max-w-[1200px] px-5 py-10">
+      <div className="mx-auto max-w-[1304px] px-5 py-14 sm:px-8">
         <p className="eyebrow text-text-muted">Catalogue</p>
         <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
           All Products

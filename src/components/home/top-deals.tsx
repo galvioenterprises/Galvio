@@ -2,14 +2,16 @@ import Link from "next/link";
 import type { Product } from "@/lib/product-schema";
 import { ProductCard } from "../product-card";
 import { ArrowRightIcon } from "../icons";
+import { Container } from "../container";
 
 export function TopDeals({ products }: { products: Product[] }) {
   if (products.length === 0) return null;
 
   return (
-    <section id="top-deals" className="mx-auto max-w-[1200px] scroll-mt-20 px-5 pt-14">
+    <section id="top-deals" className="scroll-mt-24 pt-24">
+      <Container>
       <div className="flex items-end justify-between gap-4">
-        <h2 className="text-2xl font-semibold tracking-tight">
+        <h2 className="text-[2rem] font-semibold tracking-[-0.02em]">
           Top Deals of the Season
         </h2>
         <Link
@@ -21,11 +23,12 @@ export function TopDeals({ products }: { products: Product[] }) {
         </Link>
       </div>
 
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {products.map((product) => (
           <ProductCard key={product.slug} product={product} />
         ))}
       </div>
+      </Container>
     </section>
   );
 }

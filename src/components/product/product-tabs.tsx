@@ -45,9 +45,9 @@ export function ProductTabs({ sections }: { sections: TabSection[] }) {
   return (
     <nav
       aria-label="Product sections"
-      className="sticky top-0 z-20 -mx-5 border-y border-line bg-surface/95 px-5 backdrop-blur"
+      className="sticky top-0 z-20 border-y border-line bg-surface/95 backdrop-blur"
     >
-      <ul className="mx-auto flex max-w-[1200px] gap-1 overflow-x-auto">
+      <ul className="mx-auto flex max-w-[1304px] gap-1 px-5 sm:px-8 overflow-x-auto">
         {sections.map((section) => (
           <li key={section.id}>
             <a

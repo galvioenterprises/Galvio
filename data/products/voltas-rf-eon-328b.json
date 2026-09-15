@@ -1,12 +1,12 @@
 {
   "tenantId": "galvio-001",
-  "slug": "godrej-rf-eon-328b",
+  "slug": "voltas-rf-eon-328b",
   "sku": "SAMPLE-RF-012",
-  "brand": "Godrej",
+  "brand": "Voltas",
   "model": "RF EON 328B",
   "gtin": "8900000000123",
   "hsn": "84181010",
-  "title": "Godrej 328L Frost Free Double Door Refrigerator",
+  "title": "Voltas 328L Frost Free Double Door Refrigerator",
   "description": "Nano shield technology and a jumbo vegetable tray. Runs on a home inverter during outages.",
   "category": "Refrigerator",
   "subCategory": "Double Door",
@@ -37,7 +37,7 @@
   "images": [
     {
       "src": "/images/products/placeholder.svg",
-      "alt": "Godrej RF EON 328B",
+      "alt": "Voltas RF EON 328B",
       "width": 1600,
       "height": 1600
     }

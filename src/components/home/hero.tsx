@@ -1,50 +1,67 @@
 import Image from "next/image";
 import Link from "next/link";
-import { site } from "@/config/site";
-import { ArrowRightIcon, BadgeIcon, ShieldCheckIcon, TruckIcon, TagIcon } from "../icons";
+import { ArrowRightIcon, TagIcon } from "../icons";
+import { FigmaIcon, type FigmaIconName } from "../figma-icon";
+import { Container } from "../container";
 
-const TRUST = [
-  { Icon: ShieldCheckIcon, title: "Official Warranty", subtitle: "Brand warranty assured" },
-  { Icon: BadgeIcon, title: "100% Genuine Products", subtitle: "Authorised & trusted" },
-  { Icon: TruckIcon, title: "Fast Delivery", subtitle: "Quick & safe shipping" },
+const TRUST: { icon: FigmaIconName; title: string; subtitle: string }[] = [
+  {
+    icon: "trust-warranty-light",
+    title: "Official Warranty",
+    subtitle: "Brand warranty assured",
+  },
+  {
+    icon: "trust-genuine-light",
+    title: "100% Genuine Products",
+    subtitle: "Authorised & trusted",
+  },
+  {
+    icon: "trust-delivery-light",
+    title: "Fast Delivery",
+    subtitle: "Quick & safe shipping",
+  },
 ];
 
 export function Hero() {
   return (
     <section className="relative bg-ink text-text-invert">
-      {/* Bottom padding leaves room for the category strip, which overlaps
+      {/* The generous bottom padding is where the category strip overlaps
           the seam between the hero and the page below it. */}
-      <div className="mx-auto max-w-[1200px] px-5 pb-32 pt-16 sm:pb-36 lg:pt-20">
-        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+      <Container className="pb-44 pt-16 sm:pb-52 lg:pt-24">
+        <div className="grid items-center gap-16 lg:grid-cols-2">
           <div>
             <p className="eyebrow flex items-center gap-2 text-accent">
               <span aria-hidden className="size-1.5 rounded-full bg-accent" />
               Premium electronics. Trusted brands.
             </p>
 
-            <h1 className="mt-4 text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]">
+            {/* The design breaks this after "Better"; the size is set so it
+                does that on its own rather than with a hard line break,
+                which would strand "Living" on narrow screens. */}
+            <h1 className="mt-5 text-[2.75rem] font-semibold leading-[1.06] tracking-[-0.02em] sm:text-[3.25rem] lg:text-[3.75rem]">
               Upgrade to Better Living
             </h1>
 
-            <p className="mt-5 max-w-md text-sm leading-relaxed text-text-invert-muted">
-              Explore ACs, refrigerators, washing machines, air coolers and more
-              — unbeatable prices, reliable service, complete peace of mind.
+            <p className="mt-6 max-w-[44ch] text-[0.9375rem] leading-[1.8] text-text-invert-muted">
+              Explore Voltas ACs, refrigerators, washing machines, air coolers
+              and more — unbeatable prices, reliable service, complete peace of
+              mind.
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-9 flex flex-wrap gap-4">
               <Link
                 href="/products/"
-                className="inline-flex h-11 items-center gap-2 rounded-lg bg-accent px-6 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
+                className="inline-flex h-14 items-center gap-2.5 rounded-xl bg-accent px-7 text-[0.9375rem] font-medium text-white transition-colors hover:bg-accent-hover"
               >
                 Explore Products
-                <ArrowRightIcon className="size-4" />
+                <ArrowRightIcon className="size-[18px]" />
               </Link>
               <Link
                 href="#top-deals"
-                className="inline-flex h-11 items-center gap-2 rounded-lg border border-ink-line bg-ink-soft px-6 text-sm font-medium text-white transition-colors hover:border-white/25"
+                className="inline-flex h-14 items-center gap-2.5 rounded-xl border border-ink-line bg-ink-soft px-7 text-[0.9375rem] font-medium text-white transition-colors hover:border-white/25"
               >
                 View Offers
-                <TagIcon className="size-4" />
+                <TagIcon className="size-[18px]" />
               </Link>
             </div>
           </div>
@@ -54,7 +71,7 @@ export function Hero() {
           <div className="relative">
             <div
               aria-hidden
-              className="absolute inset-0 -z-0 bg-[radial-gradient(ellipse_at_center,rgba(80,110,190,0.22),transparent_65%)]"
+              className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(80,110,190,0.20),transparent_65%)]"
             />
             <Image
               src="/images/hero-placeholder.svg"
@@ -67,22 +84,24 @@ export function Hero() {
           </div>
         </div>
 
-        <ul className="mt-12 grid gap-6 border-t border-ink-line pt-8 sm:grid-cols-3">
-          {TRUST.map(({ Icon, title, subtitle }) => (
-            <li key={title} className="flex items-center gap-3">
-              <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-ink-soft text-text-invert-muted">
-                <Icon className="size-[18px]" />
+        <ul className="mt-20 grid gap-8 sm:grid-cols-3 lg:mt-28">
+          {TRUST.map(({ icon, title, subtitle }) => (
+            <li key={title} className="flex items-center gap-4">
+              <span className="flex size-12 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04]">
+                <FigmaIcon name={icon} size={22} priority />
               </span>
               <span>
-                <span className="block text-sm font-medium text-white">{title}</span>
-                <span className="block text-xs text-text-invert-muted">{subtitle}</span>
+                <span className="block text-[0.9375rem] font-medium text-white">
+                  {title}
+                </span>
+                <span className="mt-0.5 block text-[0.8125rem] text-text-invert-muted">
+                  {subtitle}
+                </span>
               </span>
             </li>
           ))}
         </ul>
-      </div>
-
-      <span className="sr-only">{site.name}</span>
+      </Container>
     </section>
   );
 }

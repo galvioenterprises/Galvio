@@ -10,23 +10,24 @@ export type NavItem = {
 export const primaryNav: NavItem[] = [
   { label: "Home", href: "/", ready: true },
   { label: "Products", href: "/products/", ready: true },
-  { label: "Brands", href: "/brands/", ready: false },
   { label: "Offers", href: "/offers/", ready: false },
   { label: "Bulk Orders", href: "/bulk-orders/", ready: false },
-  { label: "Support", href: "/support/", ready: false },
+  { label: "About Us", href: "/about/", ready: true },
+  { label: "Support", href: "/contact/", ready: true },
 ];
 
 export const footerNav = {
   "Quick Links": [
-    { label: "About Us", href: "/about/", ready: false },
-    { label: "Our Stores", href: "/stores/", ready: false },
+    { label: "About Us", href: "/about/", ready: true },
+    { label: "Our Store", href: "/stores/", ready: true },
     { label: "Bulk Orders", href: "/bulk-orders/", ready: false },
-    { label: "Contact Us", href: "/contact/", ready: false },
+    { label: "Contact Us", href: "/contact/", ready: true },
   ],
   "Customer Service": [
-    { label: "Shipping Policy", href: "/policies/shipping/", ready: false },
-    { label: "Return & Refund", href: "/policies/returns/", ready: false },
-    { label: "Warranty", href: "/policies/warranty/", ready: false },
-    { label: "FAQs", href: "/faqs/", ready: false },
+    { label: "Delivery & Installation", href: "/policies/delivery/", ready: true },
+    { label: "Returns & Refunds", href: "/policies/returns/", ready: true },
+    { label: "Warranty", href: "/policies/warranty/", ready: true },
+    { label: "Privacy Policy", href: "/policies/privacy/", ready: true },
+    { label: "Terms & Conditions", href: "/policies/terms/", ready: true },
   ],
 } satisfies Record<string, NavItem[]>;

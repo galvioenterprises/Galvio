@@ -3,6 +3,8 @@ import { site } from "@/config/site";
 import { footerNav } from "@/config/nav";
 import { getPopulatedCategories } from "@/lib/catalog";
 import { MailIcon, PhoneIcon, PinIcon } from "./icons";
+import { Container } from "./container";
+import { Logo } from "./logo";
 
 function formatAddress() {
   const { street, locality, region, postalCode } = site.address;
@@ -18,13 +20,11 @@ export function SiteFooter() {
 
   return (
     <footer className="bg-ink text-text-invert-muted">
-      <div className="mx-auto max-w-[1200px] px-5 py-14">
+      <Container className="py-20">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:pr-8">
-            <p className="eyebrow text-[0.8rem] tracking-[0.2em] text-white">
-              {site.name.toUpperCase()}
-            </p>
-            <p className="mt-3 max-w-xs text-sm leading-relaxed">
+            <Logo variant="light" className="h-6" />
+            <p className="mt-5 max-w-xs text-sm leading-relaxed">
               Your trusted destination for premium electronics and home
               appliances.
             </p>
@@ -80,7 +80,7 @@ export function SiteFooter() {
           )}
         </div>
 
-        <nav aria-label="Categories" className="mt-10 border-t border-ink-line pt-6">
+        <nav aria-label="Categories" className="mt-14 border-t border-ink-line pt-7">
           <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
             {categoryNav.map((c) => (
               <li key={c.slug}>
@@ -94,17 +94,22 @@ export function SiteFooter() {
             ))}
           </ul>
         </nav>
-      </div>
+      </Container>
 
       <div className="border-t border-ink-line">
-        <div className="mx-auto flex max-w-[1200px] flex-col gap-2 px-5 py-5 text-xs sm:flex-row sm:items-center sm:justify-between">
+        <Container className="flex flex-col gap-3 py-6 text-xs sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>
-          <p className="text-text-invert-muted/60">
-            Privacy Policy · Terms &amp; Conditions
+          <p className="flex gap-4">
+            <Link href="/policies/privacy/" className="transition-colors hover:text-white">
+              Privacy Policy
+            </Link>
+            <Link href="/policies/terms/" className="transition-colors hover:text-white">
+              Terms &amp; Conditions
+            </Link>
           </p>
-        </div>
+        </Container>
       </div>
     </footer>
   );

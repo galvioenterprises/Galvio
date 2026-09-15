@@ -1,32 +1,32 @@
 {
   "tenantId": "galvio-001",
-  "slug": "lg-rs-q19jnze",
-  "sku": "SAMPLE-AC-002",
-  "brand": "LG",
-  "model": "RS-Q19JNZE",
-  "gtin": "8900000000161",
+  "slug": "voltas-hsu19k-pyfr5bn",
+  "sku": "SAMPLE-AC-005",
+  "brand": "Voltas",
+  "model": "HSU19K-PYFR5BN",
+  "gtin": "8900000000192",
   "hsn": "84151010",
-  "title": "LG 1.5 Ton 5 Star Dual Inverter Split Air Conditioner",
-  "description": "Dual inverter compressor with a four way swing and an anti-virus HD filter. Rated for rooms up to 160 sq ft.",
+  "title": "Voltas 1.5 Ton 5 Star Frost Self Clean Inverter Split AC",
+  "description": "Self cleaning cycle that freezes and flushes the evaporator coil, plus a 7-in-1 convertible mode.",
   "category": "Air Conditioner",
   "subCategory": "Split AC",
-  "mrp": 66990,
-  "sellingPrice": 49990,
+  "mrp": 61990,
+  "sellingPrice": 45990,
   "gstRate": 28,
   "availability": "in_stock",
   "stockCount": 3,
   "condition": "new",
-  "weightKg": 41,
+  "weightKg": 39,
   "dimensions": {
-    "lengthMm": 998,
-    "widthMm": 330,
-    "heightMm": 210
+    "lengthMm": 1000,
+    "widthMm": 325,
+    "heightMm": 220
   },
   "capacity": "1.5 Ton",
   "color": "White",
   "rating": {
-    "value": 4.7,
-    "count": 508
+    "value": 4.4,
+    "count": 163
   },
   "starRating": 5,
   "inverter": true,
@@ -38,7 +38,7 @@
   "images": [
     {
       "src": "/images/products/placeholder.svg",
-      "alt": "LG RS-Q19JNZE",
+      "alt": "Voltas HSU19K-PYFR5BN",
       "width": 1600,
       "height": 1600
     }

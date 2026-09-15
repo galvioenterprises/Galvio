@@ -68,6 +68,10 @@ that compiles and then throws.
 | `/products/` | Category index |
 | `/products/[category]/` | Listing page: filters, sort, grid and list views, pagination |
 | `/product/[slug]/` | Product detail: gallery, sticky section nav, overview, specs, warranty, delivery, FAQs |
+| `/about/` | Who we are, and why a single-brand distributorship |
+| `/contact/` | WhatsApp, phone, email, showroom, and what to say in the first message |
+| `/stores/` | Showroom details and hours, carrying the `Store` markup Google cross-checks |
+| `/policies/[policy]/` | Delivery, Returns, Warranty, Privacy, Terms |
 
 Filtering, sorting and pagination all run client-side over the products
 already embedded in the page. With a catalogue this size that is far
@@ -128,6 +132,44 @@ payment gateway and an order database, and this site is a static export
 with no server. A checkout that renders but cannot take an order is worse
 than no checkout, and a payment form that cannot take a payment should
 never be deployed at all. These are Phase 2, after the season.
+
+### Layout and spacing
+
+The Figma frames are 1920 wide with a 1240px content column. `Container`
+sets that width from the design rather than from the browser window —
+sizing the column to a 1440px laptop is what made the first pass read as
+cramped. Everything shares that one component, so the page cannot drift
+into three slightly different gutters.
+
+### Images: which format, and why
+
+| Asset | Format | Reason |
+|---|---|---|
+| Wordmark | WebP | See below — the supplied "SVG" is not a vector |
+| Interface icons (chevrons, search, arrows, checks) | Inline SVG | Change colour with their surroundings via `currentColor`, cost no request |
+| Figma icon set (categories, trust, value props) | WebP | Half that set is raster in the source file; see below |
+| Product photographs | AVIF + WebP | Photographs are raster by nature; SVG cannot represent them |
+
+**SVG is not automatically the right answer.** It is right for artwork
+that is genuinely vector — shapes and paths — because it scales to any
+size and takes its colour from CSS. It is the *wrong* answer for a
+photograph, and it is actively worse than WebP when a raster image has
+merely been wrapped in an SVG tag, because base64 inflates the bytes by
+about a third and nothing can compress it.
+
+Both supplied logo files were exactly that: a 2172x724 PNG base64-encoded
+inside an SVG wrapper, 330KB each. `public/images/brand/logo-*.webp` is
+the same artwork trimmed and re-encoded at 3x its rendered size — 9KB, a
+97% saving. **Ask the designer for a real vector export** (paths, not a
+placed image); when it arrives, inline it and delete both files.
+
+The Figma icon set has the same problem in part: of its 30 icons, 12 are
+true vectors and 18 are 512px PNGs pasted into the file. Because the
+raster ones cannot inherit `currentColor`, the set ships separate light
+and dark artwork for the placements that need each, and
+`scripts/extract-figma-icons.mts` splits the exported frame into
+`public/images/icons/*.webp` (18 files, 112KB total). Interface chrome
+stays as inline SVG, where colour has to follow the theme.
 
 ## Commands
 

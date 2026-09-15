@@ -1,12 +1,12 @@
 {
   "tenantId": "galvio-001",
-  "slug": "godrej-rd-edgerio-207c",
+  "slug": "voltas-rd-edgerio-207c",
   "sku": "SAMPLE-RF-005",
-  "brand": "Godrej",
+  "brand": "Voltas",
   "model": "RD EDGERIO 207C",
   "gtin": "8900000000055",
   "hsn": "84181010",
-  "title": "Godrej 205L Direct Cool Single Door Refrigerator",
+  "title": "Voltas 205L Direct Cool Single Door Refrigerator",
   "description": "Direct cool single door refrigerator with an anti-bacterial vegetable tray and a large bottle space in the door.",
   "category": "Refrigerator",
   "subCategory": "Single Door",
@@ -36,7 +36,7 @@
   "images": [
     {
       "src": "/images/products/placeholder.svg",
-      "alt": "Godrej RD EDGERIO 207C",
+      "alt": "Voltas RD EDGERIO 207C",
       "width": 1600,
       "height": 1600
     }

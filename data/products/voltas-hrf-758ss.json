@@ -1,12 +1,12 @@
 {
   "tenantId": "galvio-001",
-  "slug": "haier-hrf-758ss",
+  "slug": "voltas-hrf-758ss",
   "sku": "SAMPLE-RF-009",
-  "brand": "Haier",
+  "brand": "Voltas",
   "model": "HRF-758SS",
   "gtin": "8900000000093",
   "hsn": "84181010",
-  "title": "Haier 630L French Door Refrigerator",
+  "title": "Voltas 630L French Door Refrigerator",
   "description": "Four door French design with a convertible zone that switches between fridge and freezer, and a deodoriser filter.",
   "category": "Refrigerator",
   "subCategory": "French Door",
@@ -33,7 +33,7 @@
   "images": [
     {
       "src": "/images/products/placeholder.svg",
-      "alt": "Haier HRF-758SS",
+      "alt": "Voltas HRF-758SS",
       "width": 1600,
       "height": 1600
     }

@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { site } from "@/config/site";
 import { getAllProducts } from "@/lib/products";
 import { getPopulatedCategories } from "@/lib/catalog";
+import { policies } from "@/config/policies";
 
 export const dynamic = "force-static";
 
@@ -21,6 +22,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: "weekly" as const,
       priority: 0.8,
+    })),
+    ...["about", "contact", "stores"].map((path) => ({
+      url: `${site.url}/${path}/`,
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
+    ...policies.map((policy) => ({
+      url: `${site.url}/policies/${policy.slug}/`,
+      lastModified,
+      changeFrequency: "yearly" as const,
+      priority: 0.3,
     })),
     ...getAllProducts().map((product) => ({
       url: `${site.url}/product/${product.slug}/`,

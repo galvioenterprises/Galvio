@@ -98,7 +98,7 @@ export default async function CategoryPage({ params }: { params: Promise<Params>
         ]}
       />
 
-      <div className="mx-auto max-w-[1200px] px-5 py-10">
+      <div className="mx-auto max-w-[1304px] px-5 py-14 sm:px-8">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:items-center">
           <div>
             <p className="eyebrow text-text-muted">{category.eyebrow}</p>
