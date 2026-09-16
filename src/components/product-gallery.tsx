@@ -21,7 +21,7 @@ export function ProductGallery({ images }: { images: Product["images"] }) {
               onClick={() => setActive(index)}
               aria-label={`View image ${index + 1} of ${images.length}`}
               aria-pressed={index === active}
-              className={`flex size-16 items-center justify-center rounded-lg border bg-surface p-1.5 transition-colors ${
+              className={`flex size-[68px] items-center justify-center rounded-xl border bg-canvas p-2 transition-colors ${
                 index === active
                   ? "border-accent ring-1 ring-accent"
                   : "border-line hover:border-line-strong"
@@ -38,7 +38,7 @@ export function ProductGallery({ images }: { images: Product["images"] }) {
         </div>
       )}
 
-      <div className="flex flex-1 items-center justify-center rounded-card border border-line bg-surface p-8">
+      <div className="flex flex-1 items-center justify-center rounded-xl bg-canvas p-6">
         <ProductImage
           src={image.src}
           alt={image.alt}

@@ -10,7 +10,6 @@ export type NavItem = {
 export const primaryNav: NavItem[] = [
   { label: "Home", href: "/", ready: true },
   { label: "Products", href: "/products/", ready: true },
-  { label: "Offers", href: "/offers/", ready: false },
   { label: "Bulk Orders", href: "/bulk-orders/", ready: false },
   { label: "About Us", href: "/about/", ready: true },
   { label: "Support", href: "/contact/", ready: true },

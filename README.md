@@ -248,7 +248,26 @@ beside a four-column grid, and the design widens for it:
 | Filter rail top / width | 390 / 266 | 390 / 266 |
 | Grid left / card width / gap | 509 / 281 / 35 | 503 / 281 / 36 |
 
-The consistent 5-6px shortfall on left-edge numbers is the scrollbar:
+**Product page** (frame 174:3056). Content column 1192 — a specification
+page reads better narrow. The gallery and the details share one 852-wide
+card; the delivery panel is a separate 319 card beside it:
+
+| Landmark | Figma | Built |
+|---|---|---|
+| Card top | 113 | 118 |
+| Card left / width | 364 / 852 | 357 / 849 |
+| Brand eyebrow top | 149 | 149 |
+| H1 top / font size | 182 / 28 | 182 / 28 |
+| Sidebar left / width | 1237 / 319 | 1230 / 319 |
+| Content width | 1192 | 1192 |
+
+The card runs ~50px taller than the frame, and that is content rather
+than spacing: the mock's title fits one line where a real product name
+("Voltas 260L Frost Free Double Door Refrigerator") takes two. Pinning
+the card to the frame's height would clip the longer names every real
+product has.
+
+The consistent 5-7px shortfall on left-edge numbers is the scrollbar:
 the viewport is 1905 wide, not 1920.
 
 Comparing screenshots does not work for this: the capture is rescaled

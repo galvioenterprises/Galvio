@@ -13,7 +13,7 @@ export function Breadcrumbs({
   size = "default",
 }: {
   trail: Crumb[];
-  size?: "default" | "listing";
+  size?: "default" | "listing" | "product";
 }) {
   const jsonLd = {
     "@context": "https://schema.org",
@@ -30,7 +30,11 @@ export function Breadcrumbs({
     <nav aria-label="Breadcrumb" className="border-b border-line bg-[#f7f6f4]">
       <div
         className={`mx-auto flex h-[45px] items-center px-5 sm:px-8 ${
-          size === "listing" ? "max-w-[1624px]" : "max-w-[1304px]"
+          size === "listing"
+            ? "max-w-[1624px]"
+            : size === "product"
+              ? "max-w-[1256px]"
+              : "max-w-[1304px]"
         }`}
       >
         <ol className="flex flex-wrap items-center gap-2 text-[0.8125rem] text-text-muted">

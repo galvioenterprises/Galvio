@@ -14,6 +14,7 @@ import { formatPrice } from "@/lib/format";
 import { productEnquiryLink } from "@/lib/whatsapp";
 import type { Product } from "@/lib/product-schema";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { Container } from "@/components/container";
 import { ProductCard } from "@/components/product-card";
 import { ProductGallery } from "@/components/product-gallery";
 import { ProductTabs, type TabSection } from "@/components/product/product-tabs";
@@ -30,11 +31,27 @@ import {
 import {
   BadgeIcon,
   PhoneIcon,
+  PinIcon,
   ShieldCheckIcon,
   StarIcon,
   TruckIcon,
   WhatsAppIcon,
 } from "@/components/icons";
+import { business } from "@/config/business";
+
+/** Five stars with the rating filled in, as the frame draws it. */
+function Stars({ value }: { value: number }) {
+  return (
+    <span aria-hidden className="flex gap-0.5">
+      {[1, 2, 3, 4, 5].map((i) => (
+        <StarIcon
+          key={i}
+          className={`size-3.5 ${i <= Math.round(value) ? "text-star" : "text-line-strong"}`}
+        />
+      ))}
+    </span>
+  );
+}
 
 type Params = { slug: string };
 
@@ -121,9 +138,9 @@ function specRows(product: Product): [string, string][] {
  * answering that question after the button has scrolled past is too late.
  */
 const BUY_ASSURANCES = [
-  { Icon: BadgeIcon, title: "Genuine product", subtitle: "Full brand warranty" },
-  { Icon: ShieldCheckIcon, title: "Bought direct", subtitle: "Distributor stock" },
-  { Icon: TruckIcon, title: "We deliver & install", subtitle: "Our own team" },
+  { Icon: BadgeIcon, title: "Genuine Product", subtitle: "Manufacturer warranty" },
+  { Icon: TruckIcon, title: "Delivery", subtitle: "From our own stock" },
+  { Icon: ShieldCheckIcon, title: "Installation", subtitle: "Service coordination" },
 ];
 
 export default async function ProductPage({ params }: { params: Promise<Params> }) {
@@ -196,6 +213,7 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
   return (
     <>
       <Breadcrumbs
+        size="product"
         trail={[
           { label: "Home", href: "/" },
           { label: "Products", href: "/products/" },
@@ -206,123 +224,131 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
         ]}
       />
 
-      <div className="mx-auto max-w-[1304px] px-5 pb-24 pt-10 sm:px-8">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_280px]">
-          <ProductGallery images={product.images} />
+      <Container size="product" className="pb-24 pt-2">
+        {/* Frame 174:3056: the gallery and the details share one card,
+            852 wide; the delivery panel is a separate 319 card beside it. */}
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_319px] lg:items-start">
+          <div className="rounded-2xl border border-line bg-surface p-5">
+            <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_400px]">
+              <ProductGallery images={product.images} />
 
-          <div>
-            <div className="flex flex-wrap items-center gap-3">
-              <p className="eyebrow text-text-muted">{product.brand}</p>
-              {product.rating && (
-                <span className="flex items-center gap-1 text-xs text-text-muted">
-                  <StarIcon className="size-3.5 text-star" />
-                  <span className="font-medium text-text">{product.rating.value}</span>(
-                  {product.rating.count} reviews)
-                </span>
-              )}
-            </div>
+              <div className="relative lg:pt-2.5">
+                <p className="eyebrow text-text-muted">{product.brand}</p>
 
-            <h1 className="mt-2 text-2xl font-semibold leading-snug tracking-tight">
-              {product.title}
-            </h1>
+                <h1 className="mt-4 text-[1.75rem] font-semibold leading-[1.2] tracking-[-0.01em]">
+                  {product.title}
+                </h1>
 
-            <ul className="mt-3 flex flex-wrap gap-1.5">
-              {[
-                product.capacity,
-                product.starRating ? `${product.starRating} Star` : undefined,
-                product.inverter ? "Inverter" : undefined,
-              ]
-                .filter(Boolean)
-                .map((chip) => (
-                  <li
-                    key={chip}
-                    className="eyebrow rounded bg-canvas px-2 py-1 text-[0.625rem] text-text-muted"
+                {product.rating && (
+                  <p className="mt-3 flex items-center gap-1.5 text-[0.8125rem] text-text-muted">
+                    <Stars value={product.rating.value} />
+                    <span className="font-medium text-text">{product.rating.value}</span>
+                    <span>({product.rating.count} reviews)</span>
+                  </p>
+                )}
+
+                <ul className="mt-3 flex flex-wrap gap-2">
+                  {[
+                    product.capacity,
+                    product.starRating ? `${product.starRating} Star` : undefined,
+                    product.inverter ? "Inverter" : undefined,
+                  ]
+                    .filter(Boolean)
+                    .map((chip) => (
+                      <li
+                        key={chip}
+                        className="eyebrow rounded bg-canvas px-2.5 py-1.5 text-[0.625rem] text-text-muted"
+                      >
+                        {chip}
+                      </li>
+                    ))}
+                </ul>
+
+                <div className="mt-4 flex flex-wrap items-baseline gap-2.5">
+                  <p className="text-[1.875rem] font-semibold tracking-tight">
+                    {formatPrice(product.sellingPrice)}
+                  </p>
+                  {off > 0 && (
+                    <s className="text-[0.9375rem] text-text-muted">
+                      {formatPrice(product.mrp)}
+                    </s>
+                  )}
+                </div>
+
+                {off > 0 && (
+                  <p className="mt-1.5 text-[0.8125rem] font-medium text-scarcity-text">
+                    Save {formatPrice(savings)} ({off}% off)
+                  </p>
+                )}
+                <p className="mt-1 text-[0.8125rem] text-text-muted">
+                  Inclusive of {product.gstRate}% GST.{" "}
+                  {AVAILABILITY_LABEL[product.availability]}.
+                </p>
+
+                <div id="product-cta" className="mt-4 flex flex-wrap gap-3">
+                  <a
+                    href={productEnquiryLink(product)}
+                    className="inline-flex h-11 items-center gap-2 rounded-lg bg-accent px-5 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
                   >
-                    {chip}
-                  </li>
-                ))}
-            </ul>
+                    <WhatsAppIcon className="size-4" />
+                    Enquire on WhatsApp
+                  </a>
+                  {site.contact.phone && (
+                    <a
+                      href={`tel:${site.contact.phone}`}
+                      className="inline-flex h-11 items-center gap-2 rounded-lg bg-ink px-5 text-sm font-medium text-white transition-colors hover:bg-ink-soft"
+                    >
+                      <PhoneIcon className="size-4" />
+                      Call the store
+                    </a>
+                  )}
+                </div>
 
-            <div className="mt-5 flex flex-wrap items-baseline gap-3">
-              <p className="text-3xl font-semibold tracking-tight">
-                {formatPrice(product.sellingPrice)}
-              </p>
-              {off > 0 && <s className="text-base text-text-muted">{formatPrice(product.mrp)}</s>}
+                <ul className="mt-4 grid gap-2.5 sm:grid-cols-3">
+                  {BUY_ASSURANCES.map(({ Icon, title, subtitle }) => (
+                    <li key={title} className="rounded-lg bg-canvas p-3.5">
+                      <Icon className="size-4 text-text-muted" />
+                      <p className="mt-2 text-xs font-medium leading-snug">{title}</p>
+                      <p className="mt-1 text-[0.6875rem] leading-snug text-text-muted">
+                        {subtitle}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+
+                <StickyBuyBar
+                  anchorId="product-cta"
+                  title={product.title}
+                  price={formatPrice(product.sellingPrice)}
+                  enquiryHref={productEnquiryLink(product)}
+                  phone={site.contact.phone || undefined}
+                />
+              </div>
             </div>
-            {off > 0 && (
-              <p className="mt-1 text-xs font-medium text-emerald-700">
-                You save {formatPrice(savings)} ({off}% off)
-              </p>
-            )}
-            <p className="mt-1 text-xs text-text-muted">
-              Inclusive of {product.gstRate}% GST. {AVAILABILITY_LABEL[product.availability]}.
-            </p>
-
-            <ul className="mt-5 grid gap-x-5 gap-y-2.5 border-y border-line py-4 sm:grid-cols-3">
-              {BUY_ASSURANCES.map(({ Icon, title, subtitle }) => (
-                <li key={title} className="flex items-center gap-2.5">
-                  <Icon className="size-4 shrink-0 text-accent" />
-                  <span className="min-w-0">
-                    <span className="block text-xs font-medium leading-snug">
-                      {title}
-                    </span>
-                    <span className="block text-[0.6875rem] text-text-muted">
-                      {subtitle}
-                    </span>
-                  </span>
-                </li>
-              ))}
-            </ul>
-
-            <div id="product-cta" className="mt-5 flex flex-wrap gap-3">
-              <a
-                href={productEnquiryLink(product)}
-                className="inline-flex h-12 items-center gap-2 rounded-xl bg-accent px-6 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
-              >
-                <WhatsAppIcon className="size-4" />
-                Enquire on WhatsApp
-              </a>
-              {site.contact.phone && (
-                <a
-                  href={`tel:${site.contact.phone}`}
-                  className="inline-flex h-12 items-center gap-2 rounded-xl bg-ink px-6 text-sm font-medium text-white transition-colors hover:bg-ink-soft"
-                >
-                  <PhoneIcon className="size-4" />
-                  Call the store
-                </a>
-              )}
-            </div>
-
-            <StickyBuyBar
-              anchorId="product-cta"
-              title={product.title}
-              price={formatPrice(product.sellingPrice)}
-              enquiryHref={productEnquiryLink(product)}
-              phone={site.contact.phone || undefined}
-            />
           </div>
 
-          <aside className="rounded-card border border-line bg-surface p-5 lg:sticky lg:top-20 lg:self-start">
-            <p className="text-sm font-semibold">Delivery &amp; Installation</p>
-            <p className="mb-3 mt-1 text-xs text-text-muted">
+          <aside className="rounded-2xl border border-line bg-surface p-5 lg:sticky lg:top-6">
+            <p className="flex items-center gap-2 text-[0.9375rem] font-semibold">
+              <PinIcon className="size-4 text-text-muted" />
+              Delivery &amp; Installation
+            </p>
+            <p className="mb-4 mt-1.5 text-[0.8125rem] text-text-muted">
               Check availability in your area
             </p>
 
-            <div className="border-b border-line pb-4">
-              <PincodeCheck />
-            </div>
+            <PincodeCheck />
 
-            <ul className="mt-4 space-y-4 text-xs">
-              <li className="flex gap-2.5">
+            <ul className="mt-5 space-y-4 border-t border-line pt-5 text-[0.8125rem]">
+              <li className="flex gap-3">
                 <ShieldCheckIcon className="mt-0.5 size-4 shrink-0 text-text-muted" />
                 <span>
                   <span className="block font-medium">Easy returns</span>
                   <span className="text-text-muted">
-                    Replacement per the manufacturer&apos;s policy
+                    {business.returnWindowDays} days replacement
                   </span>
                 </span>
               </li>
-              <li className="flex gap-2.5">
+              <li className="flex gap-3">
                 <BadgeIcon className="mt-0.5 size-4 shrink-0 text-text-muted" />
                 <span>
                   <span className="block font-medium">Bought direct</span>
@@ -332,12 +358,12 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
                 </span>
               </li>
               {site.contact.phone && (
-                <li className="flex gap-2.5">
+                <li className="flex gap-3">
                   <PhoneIcon className="mt-0.5 size-4 shrink-0 text-text-muted" />
                   <span>
                     <span className="block font-medium">Need help?</span>
                     <a href={`tel:${site.contact.phone}`} className="text-accent">
-                      {site.contact.phone}
+                      Call {site.contact.phone}
                     </a>
                   </span>
                 </li>
@@ -349,7 +375,7 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
         {/* The tab bar and the sections it points at share one wrapper.
             A sticky element only sticks while its parent is in view, so
             wrapping the bar on its own would scroll it away immediately. */}
-        <div className="mt-12">
+        <div className="mt-6">
           <ProductTabs sections={sections} />
 
           <Overview product={product} />
@@ -389,7 +415,7 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
             </div>
           </section>
         )}
-      </div>
+      </Container>
 
       <script
         type="application/ld+json"
