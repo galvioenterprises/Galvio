@@ -3,15 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "pnpm build:index && ALLOW_SAMPLE_DATA=1 next dev",
-    "build": "pnpm build:index && next build",
+    "dev": "pnpm build:images && pnpm build:index && ALLOW_SAMPLE_DATA=1 next dev",
+    "build": "pnpm build:images && pnpm build:index && next build",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "preview": "wrangler dev",
     "deploy": "pnpm build && wrangler deploy",
     "import:products": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/import-products.mts",
-    "build:preview": "pnpm build:index && ALLOW_SAMPLE_DATA=1 next build",
-    "build:index": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/build-search-index.mts"
+    "build:preview": "pnpm build:images && pnpm build:index && ALLOW_SAMPLE_DATA=1 next build",
+    "build:index": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/build-search-index.mts",
+    "build:images": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/build-images.mts"
   },
   "dependencies": {
     "next": "16.3.4",

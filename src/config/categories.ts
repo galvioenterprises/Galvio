@@ -22,6 +22,9 @@ export type Category = {
     title: string;
     subtitle: string;
   };
+  /** Base name of a photograph from scripts/build-images.mts, shown
+   *  behind the promo card. Omit until the category has one. */
+  bannerImage?: string;
   /**
    * The sizing advice a good salesperson gives across the counter.
    *
@@ -82,6 +85,7 @@ export const categories: Category[] = [
       title: "Cooling That Cares",
       subtitle: "Smart. Spacious. Reliable.",
     },
+    bannerImage: "voltas-side-by-side",
     buyingGuide: {
       title: "Which capacity for your household?",
       intro:

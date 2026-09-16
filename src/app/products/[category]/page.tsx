@@ -7,6 +7,8 @@ import { getProductsByCategory } from "@/lib/products";
 import { generalEnquiryLink } from "@/lib/whatsapp";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { ProductBrowser } from "@/components/product-browser";
+import { ProductImage } from "@/components/product-image";
+import { Container } from "@/components/container";
 import { BuyingGuide } from "@/components/category/buying-guide";
 import { ArrowRightIcon, WhatsAppIcon } from "@/components/icons";
 
@@ -56,27 +58,61 @@ export async function generateMetadata({
   };
 }
 
+/**
+ * The dark promo card beside the heading. 196px tall in the frame, with
+ * the category photograph bleeding off its right edge behind a soft
+ * highlight.
+ */
 function PromoBanner({
   eyebrow,
   title,
   subtitle,
+  image,
 }: {
   eyebrow: string;
   title: string;
   subtitle: string;
+  image?: string;
 }) {
   return (
-    <div className="relative flex min-h-[168px] flex-col justify-center overflow-hidden rounded-card bg-ink p-7 text-text-invert">
-      {/* Soft highlight standing in for the product photograph in the design. */}
+    <div className="relative flex h-[196px] flex-col justify-center overflow-hidden rounded-2xl bg-ink px-8 py-5 text-text-invert">
+      {image && (
+        <div
+          aria-hidden
+          className="absolute inset-y-0 right-8 flex w-[40%] items-center justify-center"
+        >
+          <ProductImage
+            src={`${image}-cutout`}
+            alt=""
+            sizes="320px"
+            className="h-[116%] w-auto max-w-none object-contain"
+          />
+        </div>
+      )}
+      {/* Light spill behind the product, and a left-to-right wash so the
+          copy stays legible over whatever the photograph is doing. */}
       <div
         aria-hidden
-        className="absolute -right-16 top-1/2 size-64 -translate-y-1/2 rounded-full bg-white/[0.06] blur-2xl"
+        className="absolute right-8 top-1/2 size-64 -translate-y-1/2 rounded-full bg-white/[0.10] blur-3xl"
       />
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-transparent"
+      />
+
       <p className="eyebrow relative text-text-invert-muted">{eyebrow}</p>
-      <p className="relative mt-2 max-w-[15ch] text-2xl font-semibold leading-tight text-white">
+      <p className="relative mt-2 max-w-[14ch] text-[1.625rem] font-semibold leading-[1.12] text-white">
         {title}
       </p>
-      <p className="relative mt-1.5 text-sm text-text-invert-muted">{subtitle}</p>
+      <p className="relative mt-1.5 text-[0.8125rem] text-text-invert-muted">{subtitle}</p>
+
+      <a
+        href="#products"
+        className="relative mt-4 inline-flex h-9 w-fit items-center gap-2 rounded-full border border-white/25 px-4 text-xs font-medium text-white transition-colors hover:border-white/50"
+      >
+        Explore products
+        <ArrowRightIcon className="size-3.5" />
+      </a>
     </div>
   );
 }
@@ -110,37 +146,28 @@ export default async function CategoryPage({ params }: { params: Promise<Params>
 
   return (
     <>
+      {/* Two levels, as the frame has it. */}
       <Breadcrumbs
-        trail={[
-          { label: "Home", href: "/" },
-          { label: "Products", href: "/products/" },
-          { label: category.title },
-        ]}
+        size="listing"
+        trail={[{ label: "Home", href: "/" }, { label: category.title }]}
       />
 
-      <div className="mx-auto max-w-[1304px] px-5 py-14 sm:px-8">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:items-center">
-          <div>
+      <Container size="listing" className="pb-20 pt-8">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_832px] lg:items-start">
+          <div className="lg:pt-1">
             <p className="eyebrow text-text-muted">{category.eyebrow}</p>
-            <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
+            <h1 className="mt-1.5 text-[2.25rem] font-semibold leading-[1.1] tracking-[-0.02em] sm:text-[2.5rem]">
               {category.title}
             </h1>
-            <p className="mt-3 max-w-lg text-sm leading-relaxed text-text-muted">
+            <p className="mt-5 max-w-[46ch] text-[0.9375rem] leading-[1.65] text-text-muted">
               {category.description}
             </p>
-            <Link
-              href="/products/"
-              className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:underline"
-            >
-              Browse all categories
-              <ArrowRightIcon className="size-4" />
-            </Link>
           </div>
 
-          <PromoBanner {...category.banner} />
+          <PromoBanner {...category.banner} image={category.bannerImage} />
         </div>
 
-        <div className="mt-10">
+        <div id="products" className="mt-[52px] scroll-mt-8">
           {products.length > 0 ? (
             <ProductBrowser products={products} />
           ) : (
@@ -173,7 +200,7 @@ export default async function CategoryPage({ params }: { params: Promise<Params>
         </div>
 
         <BuyingGuide category={category} />
-      </div>
+      </Container>
 
       {jsonLd && (
         <script

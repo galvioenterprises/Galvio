@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import type { Product } from "@/lib/product-schema";
+import { ProductImage } from "./product-image";
 
 /** Thumbnail rail on the left, main image to its right, per the design.
  *  The rail becomes a horizontal strip below the image on narrow screens. */
@@ -27,11 +27,10 @@ export function ProductGallery({ images }: { images: Product["images"] }) {
                   : "border-line hover:border-line-strong"
               }`}
             >
-              <Image
+              <ProductImage
                 src={thumb.src}
                 alt=""
-                width={thumb.width}
-                height={thumb.height}
+                sizes="64px"
                 className="max-h-full w-auto object-contain"
               />
             </button>
@@ -40,11 +39,10 @@ export function ProductGallery({ images }: { images: Product["images"] }) {
       )}
 
       <div className="flex flex-1 items-center justify-center rounded-card border border-line bg-surface p-8">
-        <Image
+        <ProductImage
           src={image.src}
           alt={image.alt}
-          width={image.width}
-          height={image.height}
+          sizes="(min-width: 640px) 380px, 300px"
           priority
           className="h-[300px] w-auto object-contain sm:h-[380px]"
         />

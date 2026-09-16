@@ -113,7 +113,9 @@ function toProduct(row: Row): Product {
     .map((f) => f.trim())
     .filter(Boolean)
     .map((file) => ({
-      src: `${IMAGE_DIR}/${file}`,
+      // No extension means the image pipeline owns it and will emit the
+      // AVIF/WebP set; anything else is used as a literal path.
+      src: file.includes(".") ? `${IMAGE_DIR}/${file}` : file,
       // The full title, not "Voltas RR21C2H25S8". Alt text is read aloud
       // and is indexed; a model number is neither descriptive nor a
       // phrase anybody searches.

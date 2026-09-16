@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 import type { Facet, FacetId, Selection } from "@/lib/facets";
 import { formatPriceShort } from "@/lib/format";
 import { CheckIcon, ChevronDownIcon, SearchIcon } from "./icons";
@@ -223,26 +223,34 @@ export function ProductFilters({
           type="button"
           onClick={onClear}
           disabled={activeCount === 0}
-          className="text-xs text-text-muted transition-colors enabled:hover:text-accent disabled:opacity-40"
+          className="text-xs font-medium text-accent transition-colors disabled:opacity-40"
         >
           Clear All
         </button>
       </div>
 
-      {facets.map((facet) => (
-        <FacetSection
-          key={facet.id}
-          facet={facet}
-          selection={selection}
-          onToggle={onToggle}
-        />
+      {/* The design puts Price Range second, directly under the first
+          facet group, because price is the filter most people reach for. */}
+      {facets.map((facet, index) => (
+        <Fragment key={facet.id}>
+          <FacetSection facet={facet} selection={selection} onToggle={onToggle} />
+          {index === 0 && (
+            <PriceSection
+              price={price}
+              priceLimits={priceLimits}
+              onPriceChange={onPriceChange}
+            />
+          )}
+        </Fragment>
       ))}
 
-      <PriceSection
-        price={price}
-        priceLimits={priceLimits}
-        onPriceChange={onPriceChange}
-      />
+      {facets.length === 0 && (
+        <PriceSection
+          price={price}
+          priceLimits={priceLimits}
+          onPriceChange={onPriceChange}
+        />
+      )}
     </div>
   );
 }

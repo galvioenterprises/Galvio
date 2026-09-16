@@ -8,7 +8,13 @@ export type Crumb = { label: string; href?: string };
  * data from one source, so the two can never drift apart — a mismatch
  * between them is a structured-data error in Search Console.
  */
-export function Breadcrumbs({ trail }: { trail: Crumb[] }) {
+export function Breadcrumbs({
+  trail,
+  size = "default",
+}: {
+  trail: Crumb[];
+  size?: "default" | "listing";
+}) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -21,9 +27,13 @@ export function Breadcrumbs({ trail }: { trail: Crumb[] }) {
   };
 
   return (
-    <nav aria-label="Breadcrumb" className="border-b border-line bg-surface">
-      <div className="mx-auto max-w-[1304px] px-5 py-3.5 sm:px-8">
-        <ol className="flex flex-wrap items-center gap-2 text-xs text-text-muted">
+    <nav aria-label="Breadcrumb" className="border-b border-line bg-[#f7f6f4]">
+      <div
+        className={`mx-auto flex h-[45px] items-center px-5 sm:px-8 ${
+          size === "listing" ? "max-w-[1624px]" : "max-w-[1304px]"
+        }`}
+      >
+        <ol className="flex flex-wrap items-center gap-2 text-[0.8125rem] text-text-muted">
           {trail.map((crumb, index) => (
             <li key={crumb.label} className="flex items-center gap-2">
               {index > 0 && <span aria-hidden className="text-text-faint">›</span>}

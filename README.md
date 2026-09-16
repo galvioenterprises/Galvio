@@ -100,6 +100,26 @@ they want is not made to scroll past a lesson, and it exists because
 people search "which ton AC for 150 sq ft" far more often than they
 search a model number.
 
+### Product photography
+
+Source photographs are committed to `assets/products/` exactly as
+supplied. `scripts/build-images.mts` generates what the site serves:
+AVIF with a WebP fallback at 400/800/1600 (never upscaling past the
+source), plus a manifest of intrinsic dimensions so pages reserve the
+right box and nothing shifts as images load.
+
+`ProductImage` renders a `<picture>` rather than `next/image`. Under
+`output: "export"` there is no server to negotiate formats, so the
+choice has to live in the markup — that is the whole reason both formats
+are generated. Always pass `sizes`; without it the browser assumes the
+image spans the viewport and downloads the largest file in the set.
+
+The pipeline also emits a `-cutout` variant with the studio white knocked
+out, for placing a product on a dark surface such as the category banner.
+Compositing a white-background photo onto a dark panel otherwise shows
+the white box, and dropping the opacity to hide it washes the product out
+along with it.
+
 ### Brand assets
 
 `scripts/build-brand-assets.mts` generates `src/app/icon.png`,
@@ -193,6 +213,8 @@ from a screenshot. Load the site at a 1920 viewport and read the values
 off the DOM (`getBoundingClientRect`) — at that width CSS pixels and
 design pixels are the same thing, so the numbers compare directly:
 
+**Landing page** (frame 118:3):
+
 | Landmark | Figma | Built |
 |---|---|---|
 | Header height | 64 | 64 |
@@ -202,6 +224,24 @@ design pixels are the same thing, so the numbers compare directly:
 | Strip height | 155 | 155 |
 | Strip overlap into hero | 36 | 36 |
 | Strip side gutter | 41 | 40 |
+
+**Product listing** (frame 132:2405). Note the content column is 1560
+here, not the landing page's 1240 — the listing carries a filter rail
+beside a four-column grid, and the design widens for it:
+
+| Landmark | Figma | Built |
+|---|---|---|
+| Breadcrumb band height | 45 | 46 |
+| Eyebrow top | 146 | 146 |
+| H1 top / font size | 173 / 40 | 173 / 40 |
+| Paragraph top | 231 | 233 |
+| Banner top / height | 143 / 196 | 142 / 196 |
+| Banner left / width | 906 / 832 | 901 / 832 |
+| Filter rail top / width | 390 / 266 | 390 / 266 |
+| Grid left / card width / gap | 509 / 281 / 35 | 503 / 281 / 36 |
+
+The consistent 5-6px shortfall on left-edge numbers is the scrollbar:
+the viewport is 1905 wide, not 1920.
 
 Comparing screenshots does not work for this: the capture is rescaled
 between runs, so every measurement carries a different conversion error.

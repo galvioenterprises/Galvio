@@ -15,11 +15,14 @@ export type Facet = { id: FacetId; label: string; options: FacetOption[] };
 
 export type Selection = Record<FacetId, string[]>;
 
+/** Key order is the order the filter groups render in, and it follows the
+ *  design: type first, then capacity, then rating. Price sits between the
+ *  first and the rest and is rendered separately. */
 export const emptySelection: Selection = {
   subCategory: [],
-  brand: [],
   capacity: [],
   starRating: [],
+  brand: [],
   color: [],
 };
 

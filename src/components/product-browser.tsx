@@ -146,8 +146,8 @@ export function ProductBrowser({ products }: { products: Product[] }) {
   );
 
   return (
-    <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
-      <aside className="hidden w-[232px] shrink-0 lg:block">{filterPanel}</aside>
+    <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-16">
+      <aside className="hidden w-[266px] shrink-0 lg:block">{filterPanel}</aside>
 
       <div className="min-w-0 flex-1">
         <div className="mb-5 flex flex-wrap items-center gap-3">
@@ -222,7 +222,7 @@ export function ProductBrowser({ products }: { products: Product[] }) {
             </button>
           </div>
         ) : view === "grid" ? (
-          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+          <div className="grid gap-9 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {visible.map((product) => (
               <ProductCard key={product.slug} product={product} />
             ))}

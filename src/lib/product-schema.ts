@@ -33,8 +33,9 @@ export const ratingSchema = z.object({
 });
 
 export const imageSchema = z.object({
-  /** Path under /public, relative to the site root. */
-  src: z.string().startsWith("/"),
+  /** Either a literal path under /public (starting with "/"), or the base
+   *  name of a photograph processed by scripts/build-images.mts. */
+  src: z.string().min(1),
   alt: z.string().min(1),
   width: z.number().int().positive(),
   height: z.number().int().positive(),

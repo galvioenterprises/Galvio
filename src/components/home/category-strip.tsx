@@ -18,7 +18,7 @@ const CATEGORY_ICONS: Record<string, FigmaIconName> = {
 export function CategoryStrip({ categories }: { categories: Category[] }) {
   return (
     <section aria-labelledby="shop-by-category" className="relative z-10 -mt-9">
-      <Container wide>
+      <Container size="wide">
         <h2 id="shop-by-category" className="sr-only">
           Shop by category
         </h2>

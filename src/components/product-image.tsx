@@ -1,0 +1,77 @@
+/*
+ * next/image is deliberately not used here. Under `output: "export"` it
+ * cannot negotiate formats — there is no server to do it — so it would
+ * ship one format to everyone. A <picture> lets the browser pick AVIF
+ * and fall back to WebP on its own, which is the whole reason the
+ * pipeline generates both.
+ */
+/* eslint-disable @next/next/no-img-element */
+import manifest from "../../public/images/products/manifest.json";
+
+type Manifest = Record<string, { width: number; height: number; widths: number[] }>;
+const images = manifest as Manifest;
+
+/**
+ * A product photograph.
+ *
+ * `src` is either a literal path (the placeholder SVG, anything starting
+ * with "/") or the base name of an image produced by
+ * `scripts/build-images.mts`. In the second case this renders a <picture>
+ * offering AVIF first and WebP as the fallback — the site is a static
+ * export with no image server, so the formats have to be negotiated in
+ * the markup rather than by the CDN.
+ *
+ * `sizes` is required for anything responsive. Without it the browser
+ * assumes the image spans the viewport and downloads the largest file in
+ * the set, which defeats the whole point of having a set.
+ */
+export function ProductImage({
+  src,
+  alt,
+  sizes,
+  className = "",
+  priority = false,
+}: {
+  src: string;
+  alt: string;
+  sizes: string;
+  className?: string;
+  priority?: boolean;
+}) {
+  const loading = priority ? undefined : "lazy";
+  const entry = src.startsWith("/") ? undefined : images[src];
+
+  if (!entry) {
+    // Placeholder art, or a base name with no generated variants yet.
+    return (
+      <img
+        src={src.startsWith("/") ? src : `/images/products/${src}.webp`}
+        alt={alt}
+        loading={loading}
+        decoding="async"
+        className={className}
+      />
+    );
+  }
+
+  const srcSet = (ext: "avif" | "webp") =>
+    entry.widths.map((w) => `/images/products/${src}-${w}.${ext} ${w}w`).join(", ");
+
+  const fallbackWidth = entry.widths[entry.widths.length - 1];
+
+  return (
+    <picture>
+      <source type="image/avif" srcSet={srcSet("avif")} sizes={sizes} />
+      <source type="image/webp" srcSet={srcSet("webp")} sizes={sizes} />
+      <img
+        src={`/images/products/${src}-${fallbackWidth}.webp`}
+        alt={alt}
+        width={entry.width}
+        height={entry.height}
+        loading={loading}
+        decoding="async"
+        className={className}
+      />
+    </picture>
+  );
+}

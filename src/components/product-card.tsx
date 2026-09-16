@@ -1,10 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { Product } from "@/lib/product-schema";
 import { discountPercent } from "@/lib/pricing";
 import { formatPrice } from "@/lib/format";
 import { productEnquiryLink } from "@/lib/whatsapp";
 import { StarIcon } from "./icons";
+import { ProductImage } from "./product-image";
 
 /**
  * The Figma card has a wishlist heart and a compare toggle. Both need
@@ -131,11 +131,10 @@ export function ProductCard({ product }: { product: Product }) {
           aria-hidden
           className="block overflow-hidden rounded-xl bg-canvas"
         >
-          <Image
+          <ProductImage
             src={image.src}
             alt={image.alt}
-            width={image.width}
-            height={image.height}
+            sizes="(min-width: 1280px) 280px, (min-width: 640px) 45vw, 90vw"
             className={`mx-auto h-40 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03] ${
               soldOut ? "opacity-45" : ""
             }`}
@@ -183,11 +182,10 @@ export function ProductRow({ product }: { product: Product }) {
         aria-hidden
         className="shrink-0 self-center overflow-hidden rounded-xl bg-canvas"
       >
-        <Image
+        <ProductImage
           src={image.src}
           alt={image.alt}
-          width={image.width}
-          height={image.height}
+          sizes="112px"
           className={`h-28 w-28 object-contain ${soldOut ? "opacity-45" : ""}`}
         />
       </Link>
