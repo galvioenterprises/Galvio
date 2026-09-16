@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { NavItem } from "@/config/nav";
-import { ChevronDownIcon } from "./icons";
+import { ArrowRightIcon, ChevronDownIcon } from "./icons";
 
-type CategoryLink = { slug: string; title: string };
+type CategoryLink = { slug: string; title: string; productCount: number };
 
 /**
  * Main navigation.
@@ -65,16 +65,37 @@ export function PrimaryNav({
             </Link>
 
             {hasMenu && (
-              <div className="invisible absolute left-0 top-full z-30 w-60 rounded-xl border border-line bg-surface p-2 opacity-0 shadow-lg transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                {categories.map((category) => (
-                  <Link
-                    key={category.slug}
-                    href={`/products/${category.slug}/`}
-                    className="block rounded-lg px-3 py-2.5 text-sm text-text hover:bg-canvas"
-                  >
-                    {category.title}
-                  </Link>
-                ))}
+              <div className="invisible absolute left-0 top-full z-30 w-72 rounded-xl border border-line bg-surface p-2 opacity-0 shadow-lg transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                {/* The dropdown is the shortcut to one category; this is
+                    the way to the whole catalogue, and it is the same
+                    place clicking "Products" goes. */}
+                <Link
+                  href="/products/"
+                  className="mb-1 flex items-center justify-between gap-3 rounded-lg border-b border-line px-3 py-2.5 text-sm font-medium text-text hover:bg-canvas"
+                >
+                  All products
+                  <ArrowRightIcon className="size-3.5 text-accent" />
+                </Link>
+
+                {categories.map((category) => {
+                  const stocked = category.productCount > 0;
+                  return (
+                    <Link
+                      key={category.slug}
+                      href={`/products/${category.slug}/`}
+                      className={`flex items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-sm hover:bg-canvas ${
+                        stocked ? "text-text" : "text-text-muted"
+                      }`}
+                    >
+                      {category.title}
+                      {/* Says where the stock is, so nobody spends a click
+                          discovering an empty shelf. */}
+                      <span className="shrink-0 text-xs text-text-faint">
+                        {stocked ? category.productCount : "Soon"}
+                      </span>
+                    </Link>
+                  );
+                })}
               </div>
             )}
           </div>

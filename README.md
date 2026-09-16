@@ -65,7 +65,7 @@ that compiles and then throws.
 | Route | What it is |
 |---|---|
 | `/` | Landing page: hero, category strip, top deals, value props, expert CTA |
-| `/products/` | Category index |
+| `/products/` | Every product in one grid, category demoted to a filter |
 | `/products/[category]/` | Listing page: filters, sort, grid and list views, pagination |
 | `/product/[slug]/` | Product detail: gallery, sticky section nav, overview, specs, warranty, delivery, FAQs |
 | `/about/` | Who we are, and why a single-brand distributorship |
@@ -76,6 +76,14 @@ that compiles and then throws.
 Filtering, sorting and pagination all run client-side over the products
 already embedded in the page. With a catalogue this size that is far
 cheaper than a round trip, and it keeps the site static.
+
+`/products/` is a listing, not an index of category cards. It used to be
+the latter, which made "Products" in the navigation cost a page load to
+show what the dropdown already showed — and half those cards led to
+categories with no stock. The dropdown is the shortcut to one category;
+the page is the whole catalogue. The dropdown carries per-category
+counts, and "Soon" where there is no stock, so nobody spends a click
+discovering an empty shelf.
 
 Header search works the same way. `scripts/build-search-index.mts` writes
 `public/search-index.json` (generated, git-ignored, rebuilt by every

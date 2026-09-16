@@ -16,7 +16,11 @@ import { SiteSearch } from "./site-search";
  * decoration that does nothing when tapped.
  */
 export function SiteHeader() {
-  const categories = getAllCategories().map(({ slug, title }) => ({ slug, title }));
+  const categories = getAllCategories().map(({ slug, title, productCount }) => ({
+    slug,
+    title,
+    productCount,
+  }));
 
   return (
     <header className="bg-ink text-text-invert">

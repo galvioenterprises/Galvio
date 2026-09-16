@@ -8,17 +8,31 @@ import type { Product } from "./product-schema";
  * a round trip, and it keeps the site static.
  */
 
-export type FacetId = "subCategory" | "brand" | "capacity" | "starRating" | "color";
+export type FacetId =
+  | "category"
+  | "subCategory"
+  | "brand"
+  | "capacity"
+  | "starRating"
+  | "color";
 
 export type FacetOption = { value: string; count: number };
 export type Facet = { id: FacetId; label: string; options: FacetOption[] };
 
 export type Selection = Record<FacetId, string[]>;
 
-/** Key order is the order the filter groups render in, and it follows the
- *  design: type first, then capacity, then rating. Price sits between the
- *  first and the rest and is rendered separately. */
+/**
+ * Key order is the order the filter groups render in, following the
+ * design: type first, then capacity, then rating. Price sits between the
+ * first group and the rest and is rendered separately.
+ *
+ * `category` leads, but only surfaces on a page whose products span more
+ * than one — the "a facet needs two options to be a choice" rule drops it
+ * automatically on a single-category listing, so the same component
+ * serves both /products/ and /products/refrigerators/.
+ */
 export const emptySelection: Selection = {
+  category: [],
   subCategory: [],
   capacity: [],
   starRating: [],
@@ -27,7 +41,8 @@ export const emptySelection: Selection = {
 };
 
 const FACET_LABELS: Record<FacetId, string> = {
-  subCategory: "Category",
+  category: "Category",
+  subCategory: "Type",
   brand: "Brand",
   capacity: "Capacity",
   starRating: "Energy Rating",
@@ -56,6 +71,8 @@ function capacityBand(capacity: string): string {
 /** The single value a product contributes to a facet, if any. */
 function valueOf(product: Product, id: FacetId): string | undefined {
   switch (id) {
+    case "category":
+      return product.category;
     case "subCategory":
       return product.subCategory;
     case "brand":
@@ -126,12 +143,13 @@ export function buildFacets(products: Product[], selection: Selection): Facet[] 
       return { id, label: FACET_LABELS[id], options };
     })
     .filter((facet) => {
-      // A facet needs at least two options to be a choice, and at least one
-      // option shared by two products to be a filter. A list where every
-      // value matches exactly one product cannot narrow anything usefully —
-      // that is a product list, not a filter.
+      // A facet earns its place only if it can actually partition the set:
+      // at least two options that each match more than one product. One
+      // shared value is not enough — a colour list where nearly every
+      // entry matches a single product is a product list wearing a
+      // filter's clothes, and it grows worse as the catalogue grows.
       if (facet.options.length < 2) return false;
-      return facet.options.some((option) => option.count > 1);
+      return facet.options.filter((option) => option.count > 1).length >= 2;
     });
 }
 
