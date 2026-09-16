@@ -154,6 +154,10 @@ accounts and no checkout, so rather than render controls that do nothing:
   `src/config/nav.ts` as each page lands. Category links everywhere are
   built from categories that actually have products, never from config.
 - **Buy now** is not rendered — there is nothing to buy through yet.
+- Product cards reserve height for the title, the chip row and the
+  strikethrough price whether or not each is present. Titles run to one
+  or two lines and discounts come and go, and without reserved height the
+  price and the button land at a different height on every card.
 - Trust signals sit **between the price and the button** rather than
   below both. That gap is where the hesitation actually is.
 - On phones a **sticky bar** carries the price and the enquiry button
@@ -183,6 +187,25 @@ sets that width from the design rather than from the browser window —
 sizing the column to a 1440px laptop is what made the first pass read as
 cramped. Everything shares that one component, so the page cannot drift
 into three slightly different gutters.
+
+Landing page spacing is measured against the frame rather than eyeballed
+from a screenshot. Load the site at a 1920 viewport and read the values
+off the DOM (`getBoundingClientRect`) — at that width CSS pixels and
+design pixels are the same thing, so the numbers compare directly:
+
+| Landmark | Figma | Built |
+|---|---|---|
+| Header height | 64 | 64 |
+| H1 top / font size | 182 / 50 | 177 / 50 |
+| Hero dark ends | 698 | 698 |
+| Category strip top | 661 | 662 |
+| Strip height | 155 | 155 |
+| Strip overlap into hero | 36 | 36 |
+| Strip side gutter | 41 | 40 |
+
+Comparing screenshots does not work for this: the capture is rescaled
+between runs, so every measurement carries a different conversion error.
+Read the DOM.
 
 ### Images: which format, and why
 

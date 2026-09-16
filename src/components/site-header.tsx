@@ -20,7 +20,7 @@ export function SiteHeader() {
 
   return (
     <header className="bg-ink text-text-invert">
-      <Container className="flex h-20 items-center gap-8">
+      <Container className="flex h-16 items-center gap-8">
         <Link href="/" className="shrink-0" aria-label={`${site.shortName} home`}>
           <Logo variant="light" className="h-6" />
         </Link>

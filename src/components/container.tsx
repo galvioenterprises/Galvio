@@ -17,7 +17,11 @@ export function Container({
   }) {
   return (
     <div
-      className={`mx-auto w-full px-5 sm:px-8 ${wide ? "max-w-[1840px]" : "max-w-[1304px]"} ${className}`}
+      className={`mx-auto w-full ${
+        wide
+          ? "max-w-none px-5 sm:px-8 lg:px-10"
+          : "max-w-[1304px] px-5 sm:px-8"
+      } ${className}`}
     >
       {children}
     </div>

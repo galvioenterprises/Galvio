@@ -49,7 +49,7 @@ export function Hero() {
 
       {/* The generous bottom padding is where the category strip overlaps
           the seam between the hero and the page below it. */}
-      <Container className="relative pb-44 pt-16 sm:pb-52 lg:pt-24">
+      <Container className="relative pb-24 pt-14 sm:pb-[4.75rem] lg:pt-20">
         <div className="grid items-center gap-16 lg:grid-cols-2">
           <div>
             <p className="eyebrow flex items-center gap-2 text-accent">
@@ -60,17 +60,17 @@ export function Hero() {
             {/* The design breaks this after "Better"; the size is set so it
                 does that on its own rather than with a hard line break,
                 which would strand "Living" on narrow screens. */}
-            <h1 className="mt-5 text-[2.75rem] font-semibold leading-[1.06] tracking-[-0.02em] sm:text-[3.25rem] lg:text-[3.75rem]">
+            <h1 className="mt-4 text-[2.25rem] font-semibold leading-[1.08] tracking-[-0.02em] sm:text-[2.75rem] lg:text-[3.125rem]">
               Upgrade to Better Living
             </h1>
 
-            <p className="mt-6 max-w-[44ch] text-[0.9375rem] leading-[1.8] text-text-invert-muted">
+            <p className="mt-6 max-w-[44ch] text-base leading-[1.7] text-text-invert-muted">
               Explore Voltas ACs, refrigerators, washing machines, air coolers
               and more — unbeatable prices, reliable service, complete peace of
               mind.
             </p>
 
-            <div className="mt-9 flex flex-wrap gap-4">
+            <div className="mt-8 flex flex-wrap gap-4">
               <Link
                 href="/products/"
                 className="inline-flex h-14 items-center gap-2.5 rounded-xl bg-accent px-7 text-[0.9375rem] font-medium text-white transition-colors hover:bg-accent-hover"
@@ -106,7 +106,7 @@ export function Hero() {
           </div>
         </div>
 
-        <ul className="mt-20 grid gap-8 sm:grid-cols-3 lg:mt-28">
+        <ul className="mt-16 grid gap-8 sm:grid-cols-3 lg:mt-24">
           {TRUST.map(({ icon, title, subtitle }) => (
             <li key={title} className="flex items-center gap-4">
               <span className="flex size-12 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04]">

@@ -38,10 +38,14 @@ export default function Home() {
 
   // The season's deals are simply the deepest discounts we actually have.
   // Curating them by hand is a page nobody remembers to update.
+  //
+  // Two full rows: one row of four reads as the whole catalogue and gives
+  // a visitor no reason to scroll. Eight reads as a selection out of
+  // something larger, which is what it is.
   const deals = [...getAllProducts()]
     .filter((p) => p.availability === "in_stock" && discountPercent(p) > 0)
     .sort((a, b) => discountPercent(b) - discountPercent(a))
-    .slice(0, 4);
+    .slice(0, 8);
 
   return (
     <>
