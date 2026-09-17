@@ -28,7 +28,7 @@ export const site = {
     phone: "",
     /** E.164 without the leading "+", e.g. 919876543210. */
     whatsapp: "",
-    email: "",
+    email: "galvioenterprises@gmail.com",
   },
 
   /** TODO: replace with the showroom address used on Google Business Profile.

@@ -25,6 +25,17 @@ export function productEnquiryLink(product: Product): string {
   );
 }
 
+/** "Buy now" goes here. There is no online checkout, so buying happens
+ *  the way it already does at the counter — through a person. The message
+ *  says so plainly rather than pretending a payment page is coming. */
+export function buyNowLink(product: Product): string {
+  return link(
+    `Hi ${site.shortName}, I'd like to buy the ${product.title} ` +
+      `(${product.sku}) at ${formatPrice(product.sellingPrice)}. ` +
+      `Could you confirm availability and the delivery date?`,
+  );
+}
+
 export function generalEnquiryLink(): string {
   return link(`Hi ${site.shortName}, I'd like some help choosing a product.`);
 }

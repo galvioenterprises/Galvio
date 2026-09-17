@@ -8,6 +8,7 @@ import { Container } from "./container";
 import { Logo } from "./logo";
 import { PrimaryNav } from "./primary-nav";
 import { SiteSearch } from "./site-search";
+import { CartButton } from "./cart-button";
 
 /**
  * The Figma header carries an account icon and a cart badge. Phase 1 has
@@ -33,6 +34,7 @@ export function SiteHeader() {
 
         <div className="ml-auto flex items-center gap-3">
           <SiteSearch />
+          <CartButton />
 
           <a
             href={generalEnquiryLink()}

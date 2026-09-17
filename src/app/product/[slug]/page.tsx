@@ -11,7 +11,8 @@ import {
 import { discountPercent } from "@/lib/pricing";
 import { formatMonths } from "@/lib/highlights";
 import { formatPrice } from "@/lib/format";
-import { productEnquiryLink } from "@/lib/whatsapp";
+import { buyNowLink } from "@/lib/whatsapp";
+import { AddToCartButton } from "@/components/add-to-cart-button";
 import type { Product } from "@/lib/product-schema";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Container } from "@/components/container";
@@ -35,7 +36,6 @@ import {
   ShieldCheckIcon,
   StarIcon,
   TruckIcon,
-  WhatsAppIcon,
 } from "@/components/icons";
 import { business } from "@/config/business";
 
@@ -285,25 +285,9 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
                   {AVAILABILITY_LABEL[product.availability]}.
                 </p>
 
-                <div id="product-cta" className="mt-4 flex flex-wrap gap-3">
-                  <a
-                    href={productEnquiryLink(product)}
-                    className="inline-flex h-11 items-center gap-2 rounded-lg bg-accent px-5 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
-                  >
-                    <WhatsAppIcon className="size-4" />
-                    Enquire on WhatsApp
-                  </a>
-                  {site.contact.phone && (
-                    <a
-                      href={`tel:${site.contact.phone}`}
-                      className="inline-flex h-11 items-center gap-2 rounded-lg bg-ink px-5 text-sm font-medium text-white transition-colors hover:bg-ink-soft"
-                    >
-                      <PhoneIcon className="size-4" />
-                      Call the store
-                    </a>
-                  )}
-                </div>
-
+                {/* Trust sits between the price and the button: that gap
+                    is where the hesitation is, and answering it after the
+                    button has scrolled past is too late to matter. */}
                 <ul className="mt-4 grid gap-2.5 sm:grid-cols-3">
                   {BUY_ASSURANCES.map(({ Icon, title, subtitle }) => (
                     <li key={title} className="rounded-lg bg-canvas p-3.5">
@@ -316,11 +300,25 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
                   ))}
                 </ul>
 
+                <div id="product-cta" className="mt-4 flex flex-wrap gap-3">
+                  <a
+                    href={buyNowLink(product)}
+                    className="inline-flex h-11 items-center gap-2 rounded-lg bg-accent px-6 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
+                  >
+                    Buy now
+                  </a>
+                  <AddToCartButton
+                    slug={product.slug}
+                    title={product.title}
+                    className="inline-flex h-11 items-center gap-2 rounded-lg bg-ink px-6 text-sm font-medium text-white transition-colors hover:bg-ink-soft"
+                  />
+                </div>
+
                 <StickyBuyBar
                   anchorId="product-cta"
                   title={product.title}
                   price={formatPrice(product.sellingPrice)}
-                  enquiryHref={productEnquiryLink(product)}
+                  enquiryHref={buyNowLink(product)}
                   phone={site.contact.phone || undefined}
                 />
               </div>

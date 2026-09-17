@@ -319,3 +319,21 @@ export function WrenchIcon({ className }: IconProps) {
     </svg>
   );
 }
+
+export function CartIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M3 4h2.2l2.2 10.5h9.6L19 7H6.3" />
+      <circle cx="9" cy="19" r="1.4" />
+      <circle cx="17" cy="19" r="1.4" />
+    </svg>
+  );
+}
+
+export function TrashIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M4 6.5h16M9.5 6.5V4.5h5v2M6.5 6.5l1 13h9l1-13" />
+    </svg>
+  );
+}

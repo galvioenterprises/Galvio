@@ -2,8 +2,8 @@ import Link from "next/link";
 import type { Product } from "@/lib/product-schema";
 import { discountPercent } from "@/lib/pricing";
 import { formatPrice } from "@/lib/format";
-import { productEnquiryLink } from "@/lib/whatsapp";
 import { StarIcon } from "./icons";
+import { AddToCartButton } from "./add-to-cart-button";
 import { ProductImage } from "./product-image";
 
 /**
@@ -96,13 +96,11 @@ function Price({ product }: { product: Product }) {
 
 function EnquireButton({ product }: { product: Product }) {
   return (
-    <a
-      href={productEnquiryLink(product)}
-      className="inline-flex h-9 shrink-0 items-center rounded-lg bg-ink px-4 text-xs font-medium text-white transition-colors hover:bg-ink-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-    >
-      Enquire
-      <span className="sr-only"> about {product.title}</span>
-    </a>
+    <AddToCartButton
+      slug={product.slug}
+      title={product.title}
+      className="inline-flex h-9 shrink-0 items-center gap-1.5 rounded-lg bg-ink px-4 text-xs font-medium text-white transition-colors hover:bg-ink-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+    />
   );
 }
 
