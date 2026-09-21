@@ -145,7 +145,24 @@ Move to a database when stock and price need to change more than once a
 day, or when someone non-technical needs to edit prices without a deploy.
 Neither is true before Diwali, and neither is worth solving now.
 
-## 6. What to do, in order
+## 6. Extracting from a supplier PDF
+
+`docs/gpt-extraction-prompt.md` is a prompt to paste into ChatGPT with
+the PDF attached. It produces CSV rows in exactly the shape the importer
+expects.
+
+Two things in it are load-bearing. It instructs the model never to invent
+a value, because an empty cell costs nothing and a confidently wrong
+specification costs a return. And it forbids filling in `rating_value`
+and `rating_count`, which a language model will otherwise cheerfully
+fabricate. Work in batches of 20–30; a long PDF in one pass is where
+invention creeps in.
+
+Whatever comes back still needs a human read before import. The importer
+will catch structural errors — a bad GTIN, a selling price above MRP, a
+missing category — but it cannot tell you the capacity is wrong.
+
+## 7. What to do, in order
 
 1. **Email both channel managers today** — Voltas and Voltas Beko — for
    the asset kit and product master. Everything else is faster than this.

@@ -195,6 +195,156 @@ export const categories: Category[] = [
     },
   },
   {
+    slug: "water-heaters",
+    name: "Water Heater",
+    title: "Water Heaters",
+    eyebrow: "Home appliances",
+    description:
+      "Storage and instant water heaters for bathrooms and kitchens, with installation and the wall fixings handled on delivery.",
+    banner: {
+      eyebrow: "Warmer mornings",
+      title: "Hot Water, On Time",
+      subtitle: "Safe. Efficient. Installed right.",
+    },
+    buyingGuide: {
+      title: "Storage or instant, and what size?",
+      intro:
+        "The choice is really about how much hot water you need at once. A storage heater fills a tank and holds it; an instant heats only what passes through. Buy a tank too small and you finish a shower cold — buy one too large and you pay to keep water hot that nobody uses.",
+      columns: ["Use", "Recommended"],
+      rows: [
+        ["Kitchen sink, hand wash", "Instant, 3 L"],
+        ["One bathroom, bucket bath", "Storage, 10 – 15 L"],
+        ["One bathroom, shower", "Storage, 15 – 25 L"],
+        ["Two bathrooms, or a bathtub", "Storage, 25 L and above"],
+      ],
+      notes: [
+        "Check the pressure rating against your building. A high-rise with an overhead tank needs a heater rated for that head; a standard unit will leak within a season.",
+        "A 5 star heater costs more and saves on standing loss, which only matters if the heater is on for hours a day. For a bathroom used twice a day, it rarely pays back.",
+        "Ask us about the fixings before delivery. A heater on a plasterboard or hollow-block wall needs different anchors, and that is not something to discover on the day.",
+      ],
+    },
+  },
+  {
+    slug: "stabilisers",
+    name: "Stabiliser",
+    title: "Stabilisers",
+    eyebrow: "Protection",
+    description:
+      "Voltage stabilisers sized for air conditioners, refrigerators and televisions, matched to the appliance rather than sold by the box.",
+    banner: {
+      eyebrow: "Protect what you bought",
+      title: "Steady Power",
+      subtitle: "Sized to the appliance.",
+    },
+    buyingGuide: {
+      title: "Which stabiliser for which appliance?",
+      intro:
+        "A stabiliser is sized two ways at once: the load it has to carry, and the voltage range it has to correct. Getting the first right and the second wrong is the common mistake — a 4 KVA unit is no use if your supply drops below the range it can lift from.",
+      columns: ["Appliance", "Recommended"],
+      rows: [
+        ["Refrigerator, television", "1 KVA"],
+        ["1 – 1.5 ton air conditioner", "4 KVA"],
+        ["2 ton air conditioner", "5 KVA"],
+        ["Whole-room, multiple loads", "5 KVA and above"],
+      ],
+      notes: [
+        "Measure your actual supply before choosing the range. A 170V–270V unit is cheaper than a 90V–300V one and useless if your area drops to 140V in summer.",
+        "Many newer inverter air conditioners have wide-range operation built in and need no stabiliser at all. Ask us before buying one you do not need — we will tell you.",
+        "Mount it on the wall, not the floor. Floor-level units are the first thing to go in a flood and the first thing to collect dust.",
+      ],
+    },
+  },
+  {
+    slug: "freezers",
+    name: "Freezer",
+    title: "Freezers",
+    eyebrow: "Commercial refrigeration",
+    description:
+      "Chest and deep freezers for shops, restaurants and clinics, in hard-top and glass-top formats across the usual capacities.",
+    banner: {
+      eyebrow: "Built for trade",
+      title: "Cold That Holds",
+      subtitle: "Day in, day out.",
+    },
+    buyingGuide: {
+      title: "Chest, convertible or glass top?",
+      intro:
+        "Commercial freezers are chosen by what the cabinet has to do, not by litres alone. A glass top sells the product; a hard top holds temperature better and costs less to run. Convertible units switch between freezer and cooler, which is worth paying for only if you will actually switch them.",
+      columns: ["Use", "Recommended"],
+      rows: [
+        ["Small shop, packaged goods", "100 – 200 L"],
+        ["Restaurant back-of-house", "300 – 400 L"],
+        ["Ice cream, visible display", "Glass top, 300 L+"],
+        ["Bulk storage, cold chain", "500 L and above"],
+      ],
+      notes: [
+        "Hard top holds temperature better and costs less to run. Glass top sells more. If the cabinet faces customers, that trade is usually worth making.",
+        "Check the refrigerant. R290 units are more efficient and increasingly the standard, but need a service network that is set up for them — ours is.",
+        "Leave clearance at the back and sides. A freezer pushed into an alcove runs hot, costs more, and fails earlier — the same rule as a domestic fridge, and more expensive to get wrong.",
+      ],
+    },
+  },
+  {
+    slug: "visi-coolers",
+    name: "Visi Cooler",
+    title: "Visi Coolers",
+    eyebrow: "Commercial refrigeration",
+    description:
+      "Glass-door visi coolers for shops and counters, in the capacities that suit bottled drinks, dairy and packaged chilled goods.",
+    banner: {
+      eyebrow: "Sell what they can see",
+      title: "Chilled on Display",
+      subtitle: "For the shop floor.",
+    },
+    buyingGuide: {
+      title: "Which size for your counter?",
+      intro:
+        "A visi cooler is a display case that happens to refrigerate, so size it by shelf frontage and by what you actually restock daily — not by the litre figure on the spec sheet.",
+      columns: ["Shop", "Recommended"],
+      rows: [
+        ["Counter-top, small kiosk", "Under 200 L"],
+        ["General store", "300 – 350 L"],
+        ["Busy store, bottled drinks", "450 L and above"],
+        ["Multiple categories", "Two units, not one larger"],
+      ],
+      notes: [
+        "Two smaller units beat one large one where you sell different categories: you can set them to different temperatures and one failure does not take the whole display down.",
+        "Ambient rating matters more than in a home. A cooler rated for 32°C will struggle in an un-airconditioned shop in May; ask us for the tropical-rated models.",
+        "Count the door openings. A high-traffic counter needs a unit specified for it, or it will run continuously and never reach temperature.",
+      ],
+    },
+  },
+  {
+    slug: "air-purifiers",
+    name: "Air Purifier",
+    title: "Air Purifiers",
+    eyebrow: "Home appliances",
+    description:
+      "Room air purifiers with HEPA filtration, sized by room and honest about what the filters cost to replace.",
+    banner: {
+      eyebrow: "Breathe easier",
+      title: "Cleaner Indoors",
+      subtitle: "Filtered, not perfumed.",
+    },
+    buyingGuide: {
+      title: "Which purifier for your room?",
+      intro:
+        "The number that matters is clean air delivery rate, not the room size printed on the box — that figure usually assumes the unit runs at maximum, which is loud enough that nobody does. Size up one step if you want to run it quietly at night.",
+      columns: ["Room size", "Recommended"],
+      rows: [
+        ["Up to 150 sq ft", "Up to 200 m³/h"],
+        ["150 – 300 sq ft", "200 – 350 m³/h"],
+        ["300 – 500 sq ft", "350 – 500 m³/h"],
+        ["Open plan, above 500 sq ft", "Two units"],
+      ],
+      notes: [
+        "Ask about the filter cost before you buy. A cheap purifier with an expensive annual filter costs more over three years than the reverse, and nobody mentions it at the counter.",
+        "A HEPA filter handles particulates. Odours and gases need activated carbon, which is a separate layer — check it is actually there rather than assumed.",
+        "It only works with the doors and windows shut, which makes it the opposite of an air cooler. If you need both, they belong in different rooms.",
+      ],
+    },
+  },
+  {
     slug: "televisions",
     name: "Television",
     title: "Televisions",

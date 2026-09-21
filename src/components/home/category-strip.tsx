@@ -2,7 +2,25 @@ import Link from "next/link";
 import type { Category } from "@/config/categories";
 import { Container } from "../container";
 import { FigmaIcon, type FigmaIconName } from "../figma-icon";
-import { AirConditionerIcon } from "../icons";
+import {
+  AirConditionerIcon,
+  AirPurifierIcon,
+  FreezerIcon,
+  StabiliserIcon,
+  VisiCoolerIcon,
+  WaterHeaterIcon,
+} from "../icons";
+
+type IconComponent = (props: { className?: string }) => React.ReactElement;
+
+/** Categories the Figma icon set does not cover, drawn inline. */
+const FALLBACK_ICONS: Record<string, IconComponent> = {
+  "water-heaters": WaterHeaterIcon,
+  stabilisers: StabiliserIcon,
+  freezers: FreezerIcon,
+  "visi-coolers": VisiCoolerIcon,
+  "air-purifiers": AirPurifierIcon,
+};
 
 /** Keyed by category slug so a new category picks up its icon by config
  *  alone. A category with no artwork yet falls back to the inline mark. */
@@ -36,6 +54,7 @@ export function CategoryStrip({ categories }: { categories: Category[] }) {
         >
           {categories.map((category) => {
             const icon = CATEGORY_ICONS[category.slug];
+            const Fallback = FALLBACK_ICONS[category.slug] ?? AirConditionerIcon;
             return (
               <li key={category.slug}>
                 <Link
@@ -46,7 +65,7 @@ export function CategoryStrip({ categories }: { categories: Category[] }) {
                     {icon ? (
                       <FigmaIcon name={icon} size={32} />
                     ) : (
-                      <AirConditionerIcon className="size-8 text-text" />
+                      <Fallback className="size-8 text-text" />
                     )}
                   </span>
                   <span className="text-[0.9375rem] font-medium leading-tight">

@@ -43,7 +43,11 @@ function load(): Product[] {
     );
   }
 
-  return products.sort((a, b) => a.title.localeCompare(b.title));
+  // Everything else in the export — spares, motors, discontinued lines —
+  // stays in the data and out of the storefront.
+  return products
+    .filter((p) => p.status === "active")
+    .sort((a, b) => a.title.localeCompare(b.title));
 }
 
 let cache: Product[] | undefined;

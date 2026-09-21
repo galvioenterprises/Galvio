@@ -20,6 +20,22 @@ export const availabilitySchema = z.enum([
 export const conditionSchema = z.enum(["new", "refurbished", "used"]);
 
 /**
+ * Whether a row belongs on the storefront at all.
+ *
+ * The stock export contains motors, spare parts and an installation kit
+ * alongside the appliances. Marking them here means the whole export can
+ * be imported as it comes and the site builds only what is `active` —
+ * the alternative is a second, hand-maintained list, which goes stale
+ * within a month.
+ */
+export const statusSchema = z.enum([
+  "active",
+  "discontinued",
+  "spare",
+  "not-listed",
+]);
+
+/**
  * Aggregate customer rating.
  *
  * Optional, and deliberately so: a rating rendered from invented numbers
@@ -82,6 +98,21 @@ export const productSchema = z.object({
   sku: z.string().min(1),
   brand: z.string().min(1),
   model: z.string().min(1),
+
+  status: statusSchema.default("active"),
+
+  /** The ERP string, e.g. "RDC 220B / 3S0BTE0M0000GD (3STAR)". Kept so
+   *  a listing can be matched back to stock; never shown to a customer. */
+  internalCode: z.string().optional(),
+
+  /** Vertis, Vectra, Magna, Aqua, Crysta. Voltas organises its range by
+   *  series and customers search by it, so it is worth filtering on. */
+  series: z.string().optional(),
+
+  /** Slug of the canonical product this is a finish or batch variant of.
+   *  Grouping them stops six near-identical pages competing with each
+   *  other for the same search. */
+  variantOf: z.string().optional(),
 
   /** GTIN-8/12/13/14. Mandatory: without it the product cannot be
    *  matched to Google's catalogue and loses free-listing eligibility. */

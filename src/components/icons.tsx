@@ -337,3 +337,58 @@ export function TrashIcon({ className }: IconProps) {
     </svg>
   );
 }
+
+/* Categories with no artwork in the Figma set yet. */
+
+export function WaterHeaterIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <rect x="6" y="2.5" width="12" height="16" rx="6" />
+      <path d="M9.5 21.5h5" />
+      <path d="M12 12v-1.5" />
+      <path d="M9.5 7.5h5" />
+      <circle cx="12" cy="15" r="1.2" />
+    </svg>
+  );
+}
+
+export function StabiliserIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <rect x="3" y="5.5" width="18" height="13" rx="2" />
+      <path d="m12.6 8.5-3.1 4.4h3l-.5 3.1 3.1-4.4h-3z" />
+      <path d="M6 5.5V4M18 5.5V4" />
+    </svg>
+  );
+}
+
+export function FreezerIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <rect x="2.5" y="6" width="19" height="12" rx="2" />
+      <path d="M2.5 9.5h19" />
+      <path d="M11 12.5h7" />
+      <path d="M6 4.5h12" />
+    </svg>
+  );
+}
+
+export function VisiCoolerIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <rect x="5" y="2.5" width="14" height="19" rx="2" />
+      <path d="M9 2.5v19" />
+      <path d="M7 11h.01M11.5 11h5M11.5 14.5h5" />
+    </svg>
+  );
+}
+
+export function AirPurifierIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <rect x="6" y="2.5" width="12" height="19" rx="3" />
+      <path d="M9 7h6M9 10h6M9 13h6" />
+      <circle cx="12" cy="17.5" r="1.4" />
+    </svg>
+  );
+}
