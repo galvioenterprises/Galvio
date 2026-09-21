@@ -3,6 +3,7 @@ import { site } from "@/config/site";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Container } from "@/components/container";
 import { CartLines } from "@/components/cart-lines";
+import { getAllProducts } from "@/lib/products";
 
 export const metadata: Metadata = {
   title: "Your Cart",
@@ -13,6 +14,12 @@ export const metadata: Metadata = {
 };
 
 export default function CartPage() {
+  // Availability travels with this static page instead of being copied
+  // into localStorage, so a stock change takes effect on the next deploy.
+  const availabilityBySlug = Object.fromEntries(
+    getAllProducts().map((product) => [product.slug, product.availability]),
+  );
+
   return (
     <>
       <Breadcrumbs
@@ -31,7 +38,7 @@ export default function CartPage() {
         </p>
 
         <div className="mt-10">
-          <CartLines />
+          <CartLines availabilityBySlug={availabilityBySlug} />
         </div>
       </Container>
     </>

@@ -1,6 +1,10 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
-import { productSchema, type Product } from "./product-schema";
+import {
+  productSchema,
+  storedProductSchema,
+  type Product,
+} from "./product-schema";
 
 /**
  * Loads the catalogue at build time.
@@ -19,9 +23,9 @@ const SAMPLE_SKU_PREFIX = "SAMPLE-";
 function load(): Product[] {
   const files = readdirSync(PRODUCTS_DIR).filter((f) => f.endsWith(".json"));
 
-  const products = files.map((file) => {
+  const stored = files.map((file) => {
     const raw: unknown = JSON.parse(readFileSync(join(PRODUCTS_DIR, file), "utf8"));
-    const parsed = productSchema.safeParse(raw);
+    const parsed = storedProductSchema.safeParse(raw);
     if (!parsed.success) {
       const issues = parsed.error.issues
         .map((i) => `    ${i.path.join(".") || "root"}: ${i.message}`)
@@ -34,7 +38,7 @@ function load(): Product[] {
   // Placeholder products must never reach a real deployment. Failing the
   // build is the only reliable guard: a warning in a build log is a
   // warning nobody reads until a customer asks why the fridge has no photo.
-  const samples = products.filter((p) => p.sku.startsWith(SAMPLE_SKU_PREFIX));
+  const samples = stored.filter((p) => p.sku.startsWith(SAMPLE_SKU_PREFIX));
   if (samples.length > 0 && !process.env.ALLOW_SAMPLE_DATA) {
     throw new Error(
       `${samples.length} placeholder product(s) are still in data/products/.\n` +
@@ -45,8 +49,20 @@ function load(): Product[] {
 
   // Everything else in the export — spares, motors, discontinued lines —
   // stays in the data and out of the storefront.
-  return products
+  return stored
     .filter((p) => p.status === "active")
+    .map((product) => {
+      // Status is checked before the strict parse so source-faithful drafts
+      // can coexist with publishable products without reaching the UI.
+      const parsed = productSchema.safeParse(product);
+      if (!parsed.success) {
+        const issues = parsed.error.issues
+          .map((i) => `    ${i.path.join(".") || "root"}: ${i.message}`)
+          .join("\n");
+        throw new Error(`active product ${product.sku} is invalid:\n${issues}`);
+      }
+      return parsed.data;
+    })
     .sort((a, b) => a.title.localeCompare(b.title));
 }
 

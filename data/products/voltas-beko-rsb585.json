@@ -1,0 +1,44 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-beko-rsb585",
+  "sku": "GAL-RF-001",
+  "brand": "Voltas Beko",
+  "model": "RSB585",
+  "status": "draft",
+  "internalCode": "RSB585 / FPV300RXID",
+  "title": "Voltas Beko 521L Side by Side Refrigerator",
+  "description": "This side-by-side refrigerator has a net capacity of 521L and a gross capacity of 563L. It includes 6-in-1 adjustable modes, a ProSmart inverter compressor and Harvest Fresh.",
+  "category": "Refrigerator",
+  "subCategory": "Side by Side",
+  "condition": "new",
+  "capacity": "521L",
+  "color": "Hairline Silver",
+  "inverter": true,
+  "highlights": [
+    {
+      "title": "6-in-1 Adjustable",
+      "subtitle": "Adjust between modes effortlessly to suit your needs"
+    },
+    {
+      "title": "Harvest Fresh",
+      "subtitle": "Keeps fruits and veggies fresh and nutritious longer"
+    },
+    {
+      "title": "ProSmart Inverter Compressor",
+      "subtitle": "Energy efficient, quiet, and built to last"
+    }
+  ],
+  "faqs": [],
+  "specs": {},
+  "missing": [
+    "gtin",
+    "hsn",
+    "mrp",
+    "selling_price",
+    "gst_rate",
+    "availability",
+    "installation_included",
+    "warranty_months",
+    "images"
+  ]
+}

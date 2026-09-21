@@ -312,7 +312,7 @@ pnpm build       # static export to out/
 pnpm typecheck   # tsc --noEmit
 pnpm lint        # eslint
 pnpm preview     # serve out/ the way Cloudflare will
-pnpm import:products   # data/products.csv -> data/products/*.json
+pnpm import:products   # merge data/products.csv into data/products/*.json
 pnpm build:preview     # static export, allowing the SAMPLE- placeholders
 pnpm deploy      # build, then wrangler deploy
 ```

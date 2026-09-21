@@ -1,4 +1,5 @@
 import { site } from "@/config/site";
+import { serializeJsonLd } from "@/lib/json-ld";
 
 /**
  * Organization and LocalBusiness markup.
@@ -53,11 +54,11 @@ export function OrganizationSchema() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(website) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(website) }}
       />
     </>
   );

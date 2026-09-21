@@ -1,0 +1,44 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-beko-r4d472",
+  "sku": "GAL-RF-004",
+  "brand": "Voltas Beko",
+  "model": "R4D472",
+  "status": "draft",
+  "internalCode": "R4D472 / FPV3N0RXID",
+  "title": "Voltas Beko 421L French Door Refrigerator",
+  "description": "This French door refrigerator has a net capacity of 421L and a gross capacity of 472L. It includes 4-in-1 modes, surround air cooling and a ProSmart inverter compressor.",
+  "category": "Refrigerator",
+  "subCategory": "French Door",
+  "condition": "new",
+  "capacity": "421L",
+  "color": "Hairline Silver",
+  "inverter": true,
+  "highlights": [
+    {
+      "title": "Surround Air Cooling System",
+      "subtitle": "Circulates cold air evenly from corner to corner"
+    },
+    {
+      "title": "Harvest Fresh",
+      "subtitle": "Keeps fruits and veggies fresh and nutritious longer"
+    },
+    {
+      "title": "ProSmart Inverter Compressor",
+      "subtitle": "Energy efficient, quiet, and built to last"
+    }
+  ],
+  "faqs": [],
+  "specs": {},
+  "missing": [
+    "gtin",
+    "hsn",
+    "mrp",
+    "selling_price",
+    "gst_rate",
+    "availability",
+    "installation_included",
+    "warranty_months",
+    "images"
+  ]
+}

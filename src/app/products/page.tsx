@@ -4,6 +4,7 @@ import { site } from "@/config/site";
 import { business } from "@/config/business";
 import { getAllProducts } from "@/lib/products";
 import { getAllCategories } from "@/lib/catalog";
+import { serializeJsonLd } from "@/lib/json-ld";
 import { generalEnquiryLink } from "@/lib/whatsapp";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Container } from "@/components/container";
@@ -106,7 +107,7 @@ export default function ProductsPage() {
 
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
     </>
   );

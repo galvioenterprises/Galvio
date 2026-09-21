@@ -15,10 +15,24 @@ Fill the spreadsheet. Export it as CSV over `data/products.csv`. Run:
 pnpm import:products
 ```
 
-The importer validates every row against `src/lib/product-schema.ts` and
-writes one JSON file per product. If anything is wrong it prints the
-spreadsheet row number and the specific field, and writes nothing at all —
-a half-imported catalogue is worse than none.
+Imports merge by SKU by default, so separately extracted batches accumulate.
+Use `--check` to validate and print the readiness report without writing, or
+`--replace` only when the CSV is a complete catalogue snapshot:
+
+```bash
+pnpm import:products --check data/products.csv
+pnpm import:products --replace complete-catalogue.csv
+```
+
+The importer keeps identity-complete rows as invisible drafts when commercial
+fields are still missing. Complete rows must satisfy the strict schema in
+`src/lib/product-schema.ts`; malformed supplied values, unknown categories and
+missing variant parents fail with the spreadsheet row number. Nothing is
+written unless the whole batch validates, and the finished catalogue is
+staged before it replaces the previous directory.
+
+Rows carrying `variant_of` are stored inside that canonical SKU's `variants`
+array rather than becoming duplicate product pages.
 
 `data/products.template.csv` is the blank header row plus one filled
 example. Copy it into a Google Sheet and share the sheet with whoever is
@@ -78,7 +92,7 @@ Leave optional columns blank rather than writing "N/A" or "-".
 pages can be built and reviewed before the real product data is collected.
 
 ```bash
-pnpm import:products data/products.sample.csv   # load the placeholders
+pnpm import:products --replace data/products.sample.csv   # load only placeholders
 pnpm dev                                        # or pnpm build:preview
 ```
 
@@ -86,8 +100,9 @@ Every sample SKU starts with `SAMPLE-`, and `pnpm build` refuses to run
 while any of them are still in `data/products/`. That guard is deliberate:
 a warning in a build log is a warning nobody reads until a customer asks
 why the fridge has no photograph. Use `pnpm build:preview` when you mean
-to build with placeholders, and delete the sample import by running
-`pnpm import:products` against the real spreadsheet.
+to build with placeholders. Once the real CSV is a complete catalogue,
+replace the samples with `pnpm import:products --replace data/products.csv`;
+while extraction is still arriving in batches, keep using the default merge.
 
 ## Why files and not a database
 

@@ -30,6 +30,7 @@ export const conditionSchema = z.enum(["new", "refurbished", "used"]);
  */
 export const statusSchema = z.enum([
   "active",
+  "draft",
   "discontinued",
   "spare",
   "not-listed",
@@ -86,7 +87,15 @@ export const dimensionsSchema = z.object({
   heightMm: z.number().positive(),
 });
 
-export const productSchema = z.object({
+/** A folded variant keeps the ERP identifiers needed to quote the exact
+ *  finish without creating another indexable product page. */
+export const productVariantSchema = z.object({
+  sku: z.string().min(1),
+  internalCode: z.string().min(1).optional(),
+  color: z.string().min(1).optional(),
+});
+
+const productObjectSchema = z.object({
   tenantId: z.string().min(1),
 
   /** URL segment. Stable for the life of the product — changing it
@@ -109,10 +118,11 @@ export const productSchema = z.object({
    *  series and customers search by it, so it is worth filtering on. */
   series: z.string().optional(),
 
-  /** Slug of the canonical product this is a finish or batch variant of.
-   *  Grouping them stops six near-identical pages competing with each
-   *  other for the same search. */
+  /** Parent SKU consumed by the importer; canonical records omit it. */
   variantOf: z.string().optional(),
+
+  /** The parent is included too, so every selectable finish has a SKU. */
+  variants: z.array(productVariantSchema).optional(),
 
   /** GTIN-8/12/13/14. Mandatory: without it the product cannot be
    *  matched to Google's catalogue and loses free-listing eligibility. */
@@ -163,10 +173,46 @@ export const productSchema = z.object({
 
   /** Arbitrary spec rows rendered on the product page. */
   specs: z.record(z.string(), z.string()).default({}),
-})
+});
+
+export const productSchema = productObjectSchema
   .refine((p) => p.sellingPrice <= p.mrp, {
     message: "sellingPrice cannot exceed mrp",
     path: ["sellingPrice"],
   });
 
+/** Supplier material often establishes identity before price, tax, stock and
+ *  warranty arrive. Retaining that work is safe only while it stays draft. */
+export const draftProductSchema = productObjectSchema
+  .partial()
+  .required({
+    sku: true,
+    brand: true,
+    model: true,
+    title: true,
+    category: true,
+  })
+  .extend({
+    status: z.literal("draft").default("draft"),
+    missing: z.array(z.string()).default([]),
+  })
+  .refine(
+    (p) =>
+      p.sellingPrice === undefined ||
+      p.mrp === undefined ||
+      p.sellingPrice <= p.mrp,
+    {
+      message: "sellingPrice cannot exceed mrp",
+      path: ["sellingPrice"],
+    },
+  );
+
+export const storedProductSchema = z.union([
+  draftProductSchema,
+  productSchema,
+]);
+
 export type Product = z.infer<typeof productSchema>;
+export type DraftProduct = z.infer<typeof draftProductSchema>;
+export type StoredProduct = z.infer<typeof storedProductSchema>;
+export type ProductVariant = z.infer<typeof productVariantSchema>;

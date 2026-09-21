@@ -1,0 +1,42 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-beko-rff295d",
+  "sku": "GAL-RF-018",
+  "brand": "Voltas Beko",
+  "model": "RFF295D",
+  "status": "draft",
+  "internalCode": "RFF295D / 1W0V100RXID",
+  "title": "Voltas Beko 250L Frost Free Double Door Refrigerator",
+  "description": "This 250L frost-free double-door refrigerator has 6-in-1 adjustable modes, NeoFrost dual cooling and hybrid cooling. It includes an internal digital display, a 32L vegetable crisper and toughened glass shelves.",
+  "category": "Refrigerator",
+  "subCategory": "Double Door",
+  "condition": "new",
+  "capacity": "250L",
+  "highlights": [
+    {
+      "title": "6-in-1 Adjustable",
+      "subtitle": "Adjust between modes effortlessly to suit your needs"
+    },
+    {
+      "title": "NeoFrost Dual Cooling",
+      "subtitle": "Two separate cooling circuits for faster and more even cooling"
+    },
+    {
+      "title": "32L Vegetable Crisper",
+      "subtitle": "Storage capacity of up to 32 L"
+    }
+  ],
+  "faqs": [],
+  "specs": {},
+  "missing": [
+    "gtin",
+    "hsn",
+    "mrp",
+    "selling_price",
+    "gst_rate",
+    "availability",
+    "installation_included",
+    "warranty_months",
+    "images"
+  ]
+}

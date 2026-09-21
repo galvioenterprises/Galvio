@@ -1,0 +1,60 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-beko-rff270c",
+  "sku": "GAL-RF-007",
+  "brand": "Voltas Beko",
+  "model": "RFF270C",
+  "status": "draft",
+  "internalCode": "RFF270C / 2WPV100RBBD",
+  "variants": [
+    {
+      "sku": "GAL-RF-007",
+      "internalCode": "RFF270C / 2WPV100RBBD"
+    },
+    {
+      "sku": "GAL-RF-008",
+      "internalCode": "RFF270C / 2WPV100RBWD"
+    },
+    {
+      "sku": "GAL-RF-009",
+      "internalCode": "RFF270C / 2WPV100RXID"
+    },
+    {
+      "sku": "GAL-RF-010",
+      "internalCode": "RFF270C / 2WPV100RXBD"
+    }
+  ],
+  "title": "Voltas Beko 230L Frost Free Double Door Refrigerator",
+  "description": "This 230L frost-free double-door refrigerator has 6-in-1 adjustable modes, NeoFrost dual cooling and hybrid cooling. It includes an internal digital display, a 32L vegetable crisper and toughened glass shelves.",
+  "category": "Refrigerator",
+  "subCategory": "Double Door",
+  "condition": "new",
+  "capacity": "230L",
+  "highlights": [
+    {
+      "title": "6-in-1 Adjustable",
+      "subtitle": "Adjust between modes effortlessly to suit your needs"
+    },
+    {
+      "title": "NeoFrost Dual Cooling",
+      "subtitle": "Two separate cooling circuits for faster and more even cooling"
+    },
+    {
+      "title": "32L Vegetable Crisper",
+      "subtitle": "Storage capacity of up to 32 L"
+    }
+  ],
+  "faqs": [],
+  "specs": {},
+  "missing": [
+    "gtin",
+    "hsn",
+    "mrp",
+    "selling_price",
+    "gst_rate",
+    "availability",
+    "installation_included",
+    "warranty_months",
+    "images"
+  ]
+}

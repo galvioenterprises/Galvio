@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useCart } from "@/lib/cart";
 import { formatPrice } from "@/lib/format";
+import type { Product } from "@/lib/product-schema";
 import { site } from "@/config/site";
 import { ProductImage } from "./product-image";
 import { ArrowRightIcon, TrashIcon, WhatsAppIcon } from "./icons";
@@ -15,6 +16,14 @@ type Entry = {
   category: string;
   price: number;
   image: string;
+  availability: Product["availability"];
+};
+
+const AVAILABILITY_LABEL: Record<Product["availability"], string> = {
+  in_stock: "In stock",
+  out_of_stock: "Out of stock",
+  preorder: "Available to pre-order",
+  backorder: "On backorder",
 };
 
 /**
@@ -25,7 +34,11 @@ type Entry = {
  * slugs would mean a cart showing last month's price after a price
  * revision — the slug is the only thing worth persisting.
  */
-export function CartLines() {
+export function CartLines({
+  availabilityBySlug,
+}: {
+  availabilityBySlug: Record<string, Product["availability"]>;
+}) {
   const { lines, setQty, remove, clear } = useCart();
   const [index, setIndex] = useState<Record<string, Entry> | null>(null);
 
@@ -34,9 +47,19 @@ export function CartLines() {
     (async () => {
       try {
         const response = await fetch("/search-index.json");
-        const entries = (await response.json()) as Entry[];
+        const entries = (await response.json()) as Omit<Entry, "availability">[];
         if (cancelled) return;
-        setIndex(Object.fromEntries(entries.map((e) => [e.slug, e])));
+        setIndex(
+          Object.fromEntries(
+            entries.map((entry) => [
+              entry.slug,
+              {
+                ...entry,
+                availability: availabilityBySlug[entry.slug] ?? "out_of_stock",
+              },
+            ]),
+          ),
+        );
       } catch {
         if (!cancelled) setIndex({});
       }
@@ -44,7 +67,7 @@ export function CartLines() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [availabilityBySlug]);
 
   if (index === null) {
     return <p className="text-sm text-text-muted">Loading your cart…</p>;
@@ -73,12 +96,18 @@ export function CartLines() {
 
   const total = items.reduce((sum, { line, product }) => sum + product.price * line.qty, 0);
 
+  const hasUnavailableItems = items.some(
+    ({ product }) => product.availability !== "in_stock",
+  );
   const message = [
-    `Hi ${site.shortName}, I would like to buy:`,
+    `Hi ${site.shortName}, I would like to ${hasUnavailableItems ? "enquire about" : "buy"}:`,
     "",
     ...items.map(
       ({ line, product }) =>
-        `• ${product.title} × ${line.qty} — ${formatPrice(product.price * line.qty)}`,
+        `• ${product.title} × ${line.qty} — ${formatPrice(product.price * line.qty)}` +
+        (product.availability === "in_stock"
+          ? ""
+          : ` (${AVAILABILITY_LABEL[product.availability]})`),
     ),
     "",
     `Total at listed prices: ${formatPrice(total)}`,
@@ -115,7 +144,15 @@ export function CartLines() {
                   {product.title}
                 </Link>
               </h2>
-              <p className="mt-1 text-xs text-text-muted">{product.category}</p>
+              <p className="mt-1 truncate text-xs text-text-muted">
+                {product.category}
+                {product.availability !== "in_stock" && (
+                  <span className="text-scarcity-text">
+                    {" · "}
+                    {AVAILABILITY_LABEL[product.availability]}
+                  </span>
+                )}
+              </p>
 
               <div className="mt-3 flex items-center gap-3">
                 <label className="sr-only" htmlFor={`qty-${product.slug}`}>
@@ -124,8 +161,9 @@ export function CartLines() {
                 <div className="flex items-center rounded-lg border border-line">
                   <button
                     type="button"
+                    disabled={product.availability !== "in_stock"}
                     onClick={() => setQty(product.slug, line.qty - 1)}
-                    className="flex size-8 items-center justify-center text-text-muted hover:text-text"
+                    className="flex size-8 items-center justify-center text-text-muted hover:text-text disabled:cursor-not-allowed disabled:opacity-40"
                     aria-label="Decrease quantity"
                   >
                     −
@@ -138,8 +176,9 @@ export function CartLines() {
                   </span>
                   <button
                     type="button"
+                    disabled={product.availability !== "in_stock"}
                     onClick={() => setQty(product.slug, line.qty + 1)}
-                    className="flex size-8 items-center justify-center text-text-muted hover:text-text"
+                    className="flex size-8 items-center justify-center text-text-muted hover:text-text disabled:cursor-not-allowed disabled:opacity-40"
                     aria-label="Increase quantity"
                   >
                     +

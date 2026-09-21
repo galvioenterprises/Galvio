@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { site } from "@/config/site";
+import { serializeJsonLd } from "@/lib/json-ld";
 
 export type Crumb = { label: string; href?: string };
 
@@ -54,7 +55,7 @@ export function Breadcrumbs({
       </div>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
     </nav>
   );

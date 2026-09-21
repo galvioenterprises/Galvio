@@ -11,7 +11,9 @@ import {
 import { discountPercent } from "@/lib/pricing";
 import { formatMonths } from "@/lib/highlights";
 import { formatPrice } from "@/lib/format";
-import { buyNowLink } from "@/lib/whatsapp";
+import { serializeJsonLd } from "@/lib/json-ld";
+import { resolveProductImageUrl } from "@/lib/product-images";
+import { buyNowLink, productEnquiryLink } from "@/lib/whatsapp";
 import { AddToCartButton } from "@/components/add-to-cart-button";
 import type { Product } from "@/lib/product-schema";
 import { Breadcrumbs } from "@/components/breadcrumbs";
@@ -78,7 +80,7 @@ export async function generateMetadata({
       title: product.title,
       description: product.description,
       url: `${site.url}${path}`,
-      images: [{ url: product.images[0].src }],
+      images: [{ url: resolveProductImageUrl(product.images[0].src, site.url) }],
     },
   };
 }
@@ -152,6 +154,10 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
   const off = discountPercent(product);
   const savings = product.mrp - product.sellingPrice;
   const rows = specRows(product);
+  const inStock = product.availability === "in_stock";
+  const primaryActionHref = inStock
+    ? buyNowLink(product)
+    : productEnquiryLink(product);
   const related = getProductsByCategory(product.category)
     .filter((p) => p.slug !== product.slug)
     .slice(0, 4);
@@ -174,7 +180,9 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
     mpn: product.model,
     brand: { "@type": "Brand", name: product.brand },
     category: product.category,
-    image: product.images.map((i) => `${site.url}${i.src}`),
+    image: product.images.map((image) =>
+      resolveProductImageUrl(image.src, site.url),
+    ),
     offers: {
       "@type": "Offer",
       url: `${site.url}/product/${product.slug}/`,
@@ -302,14 +310,15 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
 
                 <div id="product-cta" className="mt-4 flex flex-wrap gap-3">
                   <a
-                    href={buyNowLink(product)}
+                    href={primaryActionHref}
                     className="inline-flex h-11 items-center gap-2 rounded-lg bg-accent px-6 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
                   >
-                    Buy now
+                    {inStock ? "Buy now" : "Enquire"}
                   </a>
                   <AddToCartButton
                     slug={product.slug}
                     title={product.title}
+                    availability={product.availability}
                     className="inline-flex h-11 items-center gap-2 rounded-lg bg-ink px-6 text-sm font-medium text-white transition-colors hover:bg-ink-soft"
                   />
                 </div>
@@ -318,7 +327,7 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
                   anchorId="product-cta"
                   title={product.title}
                   price={formatPrice(product.sellingPrice)}
-                  enquiryHref={buyNowLink(product)}
+                  enquiryHref={primaryActionHref}
                   phone={site.contact.phone || undefined}
                 />
               </div>
@@ -417,12 +426,12 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
 
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(productJsonLd) }}
       />
       {faqJsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(faqJsonLd) }}
         />
       )}
     </>

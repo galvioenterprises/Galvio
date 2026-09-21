@@ -9,7 +9,10 @@
 
 import { readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
-import { productSchema } from "../src/lib/product-schema.ts";
+import {
+  productSchema,
+  storedProductSchema,
+} from "../src/lib/product-schema.ts";
 import { categories } from "../src/config/categories.ts";
 
 const PRODUCTS_DIR = resolve("data/products");
@@ -31,36 +34,46 @@ type Entry = {
 function main() {
   const files = readdirSync(PRODUCTS_DIR).filter((f) => f.endsWith(".json"));
 
-  const entries: Entry[] = files.map((file) => {
-    const product = productSchema.parse(
-      JSON.parse(readFileSync(join(PRODUCTS_DIR, file), "utf8")),
+  const entries: Entry[] = files.flatMap((file) => {
+    const raw: unknown = JSON.parse(
+      readFileSync(join(PRODUCTS_DIR, file), "utf8"),
     );
+
+    // Parse the complete on-disk union first: drafts intentionally cannot
+    // satisfy the storefront schema, but still need to be valid stored data.
+    const stored = storedProductSchema.parse(raw);
+    if (stored.status !== "active") return [];
+
+    const product = productSchema.parse(stored);
+
     const category = categories.find((c) => c.name === product.category);
 
-    return {
-      slug: product.slug,
-      title: product.title,
-      brand: product.brand,
-      category: category?.title ?? product.category,
-      categorySlug: category?.slug ?? "",
-      price: product.sellingPrice,
-      image: product.images[0].src,
-      haystack: [
-        product.title,
-        product.brand,
-        product.model,
-        product.sku,
-        product.category,
-        product.subCategory,
-        product.capacity,
-        product.color,
-        product.starRating ? `${product.starRating} star` : "",
-        product.inverter ? "inverter" : "",
-      ]
-        .filter(Boolean)
-        .join(" ")
-        .toLowerCase(),
-    };
+    return [
+      {
+        slug: product.slug,
+        title: product.title,
+        brand: product.brand,
+        category: category?.title ?? product.category,
+        categorySlug: category?.slug ?? "",
+        price: product.sellingPrice,
+        image: product.images[0].src,
+        haystack: [
+          product.title,
+          product.brand,
+          product.model,
+          product.sku,
+          product.category,
+          product.subCategory,
+          product.capacity,
+          product.color,
+          product.starRating ? `${product.starRating} star` : "",
+          product.inverter ? "inverter" : "",
+        ]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase(),
+      },
+    ];
   });
 
   entries.sort((a, b) => a.title.localeCompare(b.title));

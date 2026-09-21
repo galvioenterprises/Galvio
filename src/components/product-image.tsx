@@ -6,10 +6,10 @@
  * pipeline generates both.
  */
 /* eslint-disable @next/next/no-img-element */
-import manifest from "../../public/images/products/manifest.json";
-
-type Manifest = Record<string, { width: number; height: number; widths: number[] }>;
-const images = manifest as Manifest;
+import {
+  getProductImageManifestEntry,
+  resolveProductImagePath,
+} from "@/lib/product-images";
 
 /**
  * A product photograph.
@@ -39,13 +39,13 @@ export function ProductImage({
   priority?: boolean;
 }) {
   const loading = priority ? undefined : "lazy";
-  const entry = src.startsWith("/") ? undefined : images[src];
+  const entry = getProductImageManifestEntry(src);
 
   if (!entry) {
     // Placeholder art, or a base name with no generated variants yet.
     return (
       <img
-        src={src.startsWith("/") ? src : `/images/products/${src}.webp`}
+        src={resolveProductImagePath(src)}
         alt={alt}
         loading={loading}
         decoding="async"

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { site } from "@/config/site";
 import { categories, getCategoryBySlug } from "@/config/categories";
 import { getProductsByCategory } from "@/lib/products";
+import { serializeJsonLd } from "@/lib/json-ld";
 import { generalEnquiryLink } from "@/lib/whatsapp";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { ProductBrowser } from "@/components/product-browser";
@@ -205,7 +206,7 @@ export default async function CategoryPage({ params }: { params: Promise<Params>
       {jsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
         />
       )}
     </>
