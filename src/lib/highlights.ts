@@ -58,7 +58,7 @@ export function highlightsFor(product: Product): Highlight[] {
       icon: "wrench",
     });
   }
-  if (product.warrantyMonths > 0) {
+  if (product.warrantyMonths && product.warrantyMonths > 0) {
     derived.push({
       title: `${years(product.warrantyMonths)} Warranty`,
       subtitle: "Manufacturer backed",

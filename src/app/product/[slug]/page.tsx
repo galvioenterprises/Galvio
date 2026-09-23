@@ -124,11 +124,15 @@ function specRows(product: Product): [string, string][] {
     const { lengthMm, widthMm, heightMm } = product.dimensions;
     rows.push(["Dimensions (W×D×H)", `${lengthMm} × ${widthMm} × ${heightMm} mm`]);
   }
-  rows.push([
-    "Warranty",
-    product.warrantyMonths > 0 ? formatMonths(product.warrantyMonths) : "Not covered",
-  ]);
-  rows.push(["Installation", product.installationIncluded ? "Included" : "Not included"]);
+  if (product.warrantyMonths) {
+    rows.push(["Warranty", formatMonths(product.warrantyMonths)]);
+  }
+  if (product.installationIncluded !== undefined) {
+    rows.push([
+      "Installation",
+      product.installationIncluded ? "Included" : "Not included",
+    ]);
+  }
   for (const [key, value] of Object.entries(product.specs)) rows.push([key, value]);
   return rows;
 }
@@ -289,7 +293,7 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
                   </p>
                 )}
                 <p className="mt-1 text-[0.8125rem] text-text-muted">
-                  Inclusive of {product.gstRate}% GST.{" "}
+                  {product.gstRate ? `Inclusive of ${product.gstRate}% GST. ` : ""}
                   {AVAILABILITY_LABEL[product.availability]}.
                 </p>
 

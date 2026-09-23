@@ -26,7 +26,7 @@ export function resolveProductImagePath(src: string): string {
     ? `/images/products/${src}-${fallbackWidth}.webp`
     : `/images/products/${src}.webp`;
 }
-
+  
 export function resolveProductImageUrl(src: string, origin: string): string {
   return new URL(resolveProductImagePath(src), origin).toString();
 }

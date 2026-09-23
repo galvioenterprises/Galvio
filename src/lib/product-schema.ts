@@ -126,10 +126,18 @@ const productObjectSchema = z.object({
 
   /** GTIN-8/12/13/14. Mandatory: without it the product cannot be
    *  matched to Google's catalogue and loses free-listing eligibility. */
-  gtin: z.string().regex(/^\d{8}$|^\d{12,14}$/, "gtin must be 8, 12, 13 or 14 digits"),
+  /** From the carton barcode. Optional: it is needed for a Google
+   *  Merchant feed, not for a page to be worth publishing, and holding
+   *  the whole catalogue back for it helps nobody. */
+  gtin: z
+    .string()
+    .regex(/^\d{8}$|^\d{12,14}$/, "gtin must be 8, 12, 13 or 14 digits")
+    .optional(),
 
   /** Indian HSN code, used for GST-compliant invoicing. */
-  hsn: z.string().regex(/^\d{4,8}$/),
+  /** Indian HSN code, for GST-compliant invoicing. Optional here for the
+   *  same reason as the GTIN — invoicing does not run off this site. */
+  hsn: z.string().regex(/^\d{4,8}$/).optional(),
 
   title: z.string().min(1).max(150),
   description: z.string().min(1),
@@ -141,7 +149,7 @@ const productObjectSchema = z.object({
   /** Rupees, inclusive of GST, matching what is printed on the box. */
   mrp: z.number().positive(),
   sellingPrice: z.number().positive(),
-  gstRate: z.number().min(0).max(28),
+  gstRate: z.number().min(0).max(28).optional(),
 
   availability: availabilitySchema,
   /** Units on hand. Optional — supply it only if the number is real, and
@@ -160,8 +168,8 @@ const productObjectSchema = z.object({
   starRating: z.number().int().min(1).max(5).optional(),
   inverter: z.boolean().optional(),
 
-  installationIncluded: z.boolean(),
-  warrantyMonths: z.number().int().nonnegative(),
+  installationIncluded: z.boolean().optional(),
+  warrantyMonths: z.number().int().nonnegative().optional(),
   /** Compressors are warranted far longer than the appliance and are a
    *  real purchase driver, so they get their own field and their own card. */
   compressorWarrantyMonths: z.number().int().nonnegative().optional(),

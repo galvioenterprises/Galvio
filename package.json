@@ -14,7 +14,10 @@
     "build:index": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/build-search-index.mts",
     "build:images": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/build-images.mts",
     "sync:voltas": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/fetch-voltas.mts",
-    "match:voltas": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/match-voltas.mts"
+    "match:voltas": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/match-voltas.mts",
+    "bridge:voltas": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/bridge-voltas.mts",
+    "sync:images": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/sync-images.mts",
+    "admin": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/admin-server.mts"
   },
   "dependencies": {
     "next": "16.3.4",

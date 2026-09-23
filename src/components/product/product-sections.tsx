@@ -116,7 +116,7 @@ export function Specifications({ rows }: { rows: [string, string][] }) {
 
 export function WarrantyAndSupport({ product }: { product: Product }) {
   const cards = [
-    product.warrantyMonths > 0 && {
+    product.warrantyMonths && product.warrantyMonths > 0 && {
       headline: formatMonths(product.warrantyMonths),
       title: "Product Warranty",
       body: "Covers manufacturing defects on the appliance from the date of purchase.",
