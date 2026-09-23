@@ -12,7 +12,9 @@
     "import:products": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/import-products.mts",
     "build:preview": "pnpm build:images && pnpm build:index && ALLOW_SAMPLE_DATA=1 next build",
     "build:index": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/build-search-index.mts",
-    "build:images": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/build-images.mts"
+    "build:images": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/build-images.mts",
+    "sync:voltas": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/fetch-voltas.mts",
+    "match:voltas": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/match-voltas.mts"
   },
   "dependencies": {
     "next": "16.3.4",

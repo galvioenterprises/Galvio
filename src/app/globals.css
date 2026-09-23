@@ -10,6 +10,11 @@
 @theme {
   /* Dark surfaces: header, footer, hero, promo banners. */
   --color-ink: #0b0e14;
+  /* The revised hero sits on a near-black navy with a blue glow behind
+     the product, rather than the flat dark panel it used to be. */
+  --color-hero: #000712;
+  --color-hero-glow: #0a3a7a;
+  --color-hero-band: #070d1c;
   --color-ink-soft: #161b24;
   --color-ink-line: #232a36;
 
@@ -29,6 +34,9 @@
   /* Accent, used for primary actions and active filter state. */
   --color-accent: #2563eb;
   --color-accent-hover: #1d4ed8;
+
+  /* The highlighted "Offers" navigation item. */
+  --color-offer: #ff7a2f;
 
   /* Ratings and scarcity. */
   --color-star: #f0a500;

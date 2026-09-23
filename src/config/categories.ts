@@ -345,6 +345,36 @@ export const categories: Category[] = [
     },
   },
   {
+    slug: "microwaves",
+    name: "Microwave",
+    title: "Microwaves",
+    eyebrow: "Kitchen",
+    description:
+      "Solo, grill and convection microwaves, sized by what you actually cook rather than by the litre figure on the box.",
+    banner: {
+      eyebrow: "Dinner, sooner",
+      title: "Cook, Grill, Bake",
+      subtitle: "One appliance, three jobs.",
+    },
+    buyingGuide: {
+      title: "Solo, grill or convection?",
+      intro:
+        "The type matters far more than the capacity. Solo reheats and defrosts. Grill adds a heating element for browning. Convection adds a fan and bakes properly — it is the only one that replaces an oven, and it is the only one worth paying extra for if you will actually bake.",
+      columns: ["Household", "Recommended"],
+      rows: [
+        ["1 – 2 people, reheating", "Solo, 17 – 20 L"],
+        ["3 – 4 people", "Grill or convection, 20 – 25 L"],
+        ["4 – 6 people, baking", "Convection, 25 – 30 L"],
+        ["Large family, frequent baking", "Convection, 30 L and above"],
+      ],
+      notes: [
+        "Measure the turntable, not the litres. A 25 L cavity with a small turntable will not take the dish you already own.",
+        "Convection needs clearance above and behind for the vents. A microwave built into a tight shelf runs hot and fails early.",
+        "If you only ever reheat, solo is the honest answer and costs a third as much. We will tell you that rather than sell you a convection you will use as a solo.",
+      ],
+    },
+  },
+  {
     slug: "televisions",
     name: "Television",
     title: "Televisions",

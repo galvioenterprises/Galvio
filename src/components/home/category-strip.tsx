@@ -6,6 +6,7 @@ import {
   AirConditionerIcon,
   AirPurifierIcon,
   FreezerIcon,
+  MicrowaveIcon,
   StabiliserIcon,
   VisiCoolerIcon,
   WaterHeaterIcon,
@@ -20,6 +21,7 @@ const FALLBACK_ICONS: Record<string, IconComponent> = {
   freezers: FreezerIcon,
   "visi-coolers": VisiCoolerIcon,
   "air-purifiers": AirPurifierIcon,
+  microwaves: MicrowaveIcon,
 };
 
 /** Keyed by category slug so a new category picks up its icon by config
@@ -35,28 +37,23 @@ const CATEGORY_ICONS: Record<string, FigmaIconName> = {
 
 export function CategoryStrip({ categories }: { categories: Category[] }) {
   return (
-    <section aria-labelledby="shop-by-category" className="relative z-10 -mt-9">
-      <Container size="wide">
+    <section aria-labelledby="shop-by-category" className="relative z-10">
+      <Container size="wide" className="!px-0">
         <h2 id="shop-by-category" className="sr-only">
           Shop by category
         </h2>
-        <ul
-          // The desktop column count follows the number of categories so a
-          // short list stays centred rather than stretched across six
-          // slots. It is applied through a custom property rather than an
-          // inline grid-template so it cannot override the mobile columns.
-          className="grid grid-cols-2 gap-1 rounded-[1.75rem] border border-line bg-surface px-4 py-2 shadow-[0_12px_50px_rgba(17,19,24,0.10)] sm:grid-cols-3 lg:[grid-template-columns:repeat(var(--category-columns),minmax(0,1fr))]"
-          style={
-            {
-              "--category-columns": Math.min(categories.length, 6),
-            } as React.CSSProperties
-          }
-        >
+        {/*
+          One row that scrolls, as the frame has it — six visible at 1920
+          and the rest a swipe away. A second row would be taller than the
+          frame's 156px band and would push the hero up the page, which is
+          the thing the band is meant to sit under.
+        */}
+        <ul className="flex gap-1 overflow-x-auto rounded-t-[2rem] bg-surface px-4 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {categories.map((category) => {
             const icon = CATEGORY_ICONS[category.slug];
             const Fallback = FALLBACK_ICONS[category.slug] ?? AirConditionerIcon;
             return (
-              <li key={category.slug}>
+              <li key={category.slug} className="w-[168px] shrink-0 lg:w-[320px]">
                 <Link
                   href={`/products/${category.slug}/`}
                   className="group flex flex-col items-center gap-3.5 rounded-2xl px-3 py-6 text-center transition-colors hover:bg-canvas"

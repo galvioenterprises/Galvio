@@ -5,6 +5,8 @@ export type NavItem = {
    *  plain text rather than links, so the navigation shows the full site
    *  without shipping links that 404. */
   ready: boolean;
+  /** Drawn in the offer colour, as the frame has it. */
+  highlight?: boolean;
 };
 
 export const primaryNav: NavItem[] = [
@@ -13,6 +15,7 @@ export const primaryNav: NavItem[] = [
   { label: "Bulk Orders", href: "/bulk-orders/", ready: false },
   { label: "About Us", href: "/about/", ready: true },
   { label: "Support", href: "/contact/", ready: true },
+  { label: "Offers", href: "/offers/", ready: true, highlight: true },
 ];
 
 export const footerNav = {

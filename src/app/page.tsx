@@ -5,6 +5,7 @@ import { getAllProducts } from "@/lib/products";
 import { getAllCategories } from "@/lib/catalog";
 import { discountPercent } from "@/lib/pricing";
 import { Hero } from "@/components/home/hero";
+import { TrustBand } from "@/components/home/trust-band";
 import { CategoryStrip } from "@/components/home/category-strip";
 import { TopDeals } from "@/components/home/top-deals";
 import { ValueProps } from "@/components/home/value-props";
@@ -50,6 +51,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <TrustBand />
       <CategoryStrip categories={categories} />
       <TopDeals products={deals} />
       <ValueProps />

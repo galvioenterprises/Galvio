@@ -392,3 +392,13 @@ export function AirPurifierIcon({ className }: IconProps) {
     </svg>
   );
 }
+
+export function MicrowaveIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <rect x="2.5" y="5" width="19" height="14" rx="2" />
+      <rect x="5" y="7.5" width="10" height="9" rx="1" />
+      <path d="M18 8.5v2M18 13v2.5" />
+    </svg>
+  );
+}

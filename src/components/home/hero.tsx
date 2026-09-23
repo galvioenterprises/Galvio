@@ -1,129 +1,161 @@
-import Image from "next/image";
+"use client";
+
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRightIcon, TagIcon } from "../icons";
-import { FigmaIcon, type FigmaIconName } from "../figma-icon";
+import { heroSlides } from "@/config/hero";
 import { Container } from "../container";
+import { ProductImage } from "../product-image";
+import { ArrowRightIcon, ChevronLeftIcon, ChevronRightIcon, TagIcon } from "../icons";
 
-const TRUST: { icon: FigmaIconName; title: string; subtitle: string }[] = [
-  {
-    icon: "trust-warranty-light",
-    title: "Official Warranty",
-    subtitle: "Brand warranty assured",
-  },
-  {
-    icon: "trust-genuine-light",
-    title: "100% Genuine Products",
-    subtitle: "Authorised & trusted",
-  },
-  {
-    icon: "trust-delivery-light",
-    title: "Fast Delivery",
-    subtitle: "Quick & safe shipping",
-  },
-];
+const AUTOPLAY_MS = 7000;
 
+/**
+ * Hero carousel.
+ *
+ * Measured against frame 278:7354 at a 1920 viewport: the hero runs from
+ * the header at 64 to the trust band at 621, the eyebrow sits at 189 and
+ * the headline at 228 on a 54px line.
+ *
+ * Autoplay stops on hover, on focus, and for anyone who has asked for
+ * reduced motion — a carousel that keeps moving while you are reading it
+ * is worse than one that does not move at all.
+ */
 export function Hero() {
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const region = useRef<HTMLDivElement>(null);
+
+  const count = heroSlides.length;
+  const go = useCallback((next: number) => setIndex((next + count) % count), [count]);
+
+  useEffect(() => {
+    if (paused || count < 2) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const timer = window.setInterval(() => setIndex((i) => (i + 1) % count), AUTOPLAY_MS);
+    return () => window.clearInterval(timer);
+  }, [paused, count]);
+
+  const slide = heroSlides[index];
+
   return (
-    <section className="relative overflow-hidden bg-ink text-text-invert">
-      {/*
-        On large screens the product image runs off the right edge of the
-        frame, as it does in the design, so it is positioned against the
-        section rather than placed in the content column. Below that
-        breakpoint it returns to the normal flow above the copy.
-      */}
+    <section
+      ref={region}
+      aria-roledescription="carousel"
+      aria-label="Featured"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocusCapture={() => setPaused(true)}
+      onBlurCapture={() => setPaused(false)}
+      className="relative overflow-hidden bg-hero text-text-invert"
+    >
+      {/* Blue spill behind the product, which is what lifts the frame's
+          background off black on the right-hand side. */}
       <div
         aria-hidden
-        // Stops short of the bottom so it cannot sit over the trust row.
-        className="pointer-events-none absolute right-0 top-0 hidden h-[68%] w-[54%] items-center lg:flex"
+        className="pointer-events-none absolute inset-y-0 right-0 w-[62%] bg-[radial-gradient(ellipse_at_58%_45%,var(--color-hero-glow)_0%,transparent_62%)] opacity-70"
+      />
+
+      <div
+        aria-hidden
+        className="pointer-events-none absolute right-0 top-0 hidden h-[86%] w-[52%] items-center justify-center lg:flex"
       >
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_45%,rgba(80,110,190,0.20),transparent_62%)]" />
-        <Image
-          src="/images/hero-placeholder.svg"
+        <ProductImage
+          src={slide.image}
           alt=""
-          width={900}
-          height={560}
+          sizes="720px"
           priority
-          className="relative w-full translate-x-[6%]"
+          className="max-h-full w-auto max-w-none object-contain"
         />
       </div>
 
-      {/* The generous bottom padding is where the category strip overlaps
-          the seam between the hero and the page below it. */}
-      <Container className="relative pb-24 pt-14 sm:pb-[4.75rem] lg:pt-20">
-        <div className="grid items-center gap-16 lg:grid-cols-2">
+      <Container className="relative pb-[4.5rem] pt-16 lg:pb-36 lg:pt-[7.8rem]">
+        <div
+          aria-live="polite"
+          aria-atomic="true"
+          className="grid items-center gap-12 lg:grid-cols-2"
+        >
           <div>
             <p className="eyebrow flex items-center gap-2 text-accent">
               <span aria-hidden className="size-1.5 rounded-full bg-accent" />
-              Premium electronics. Trusted brands.
+              {slide.eyebrow}
             </p>
 
-            {/* The design breaks this after "Better"; the size is set so it
-                does that on its own rather than with a hard line break,
-                which would strand "Living" on narrow screens. */}
-            <h1 className="mt-4 text-[2.25rem] font-semibold leading-[1.08] tracking-[-0.02em] sm:text-[2.75rem] lg:text-[3.125rem]">
-              Upgrade to Better Living
+            <h1 className="mt-6 text-[2.25rem] font-semibold leading-[1.08] tracking-[-0.02em] sm:text-[2.75rem] lg:text-[3.125rem]">
+              {slide.title}
             </h1>
 
             <p className="mt-6 max-w-[44ch] text-base leading-[1.7] text-text-invert-muted">
-              Explore Voltas ACs, refrigerators, washing machines, air coolers
-              and more — unbeatable prices, reliable service, complete peace of
-              mind.
+              {slide.body}
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
-                href="/products/"
+                href={slide.primary.href}
                 className="inline-flex h-14 items-center gap-2.5 rounded-xl bg-accent px-7 text-[0.9375rem] font-medium text-white transition-colors hover:bg-accent-hover"
               >
-                Explore Products
+                {slide.primary.label}
                 <ArrowRightIcon className="size-[18px]" />
               </Link>
               <Link
-                href="#top-deals"
-                className="inline-flex h-14 items-center gap-2.5 rounded-xl border border-ink-line bg-ink-soft px-7 text-[0.9375rem] font-medium text-white transition-colors hover:border-white/25"
+                href={slide.secondary.href}
+                className="inline-flex h-14 items-center gap-2.5 rounded-xl border border-white/15 bg-white/[0.04] px-7 text-[0.9375rem] font-medium text-white transition-colors hover:border-white/30"
               >
-                View Offers
+                {slide.secondary.label}
                 <TagIcon className="size-[18px]" />
               </Link>
             </div>
           </div>
 
-          {/* Replace hero-placeholder.svg with the product render from the
-              design once the photography lands. */}
+          {/* The product sits behind the copy on large screens; on small
+              ones it returns to the flow so it is not simply lost. */}
           <div className="relative lg:hidden">
-            <div
-              aria-hidden
-              className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(80,110,190,0.20),transparent_65%)]"
-            />
-            <Image
-              src="/images/hero-placeholder.svg"
+            <ProductImage
+              src={slide.image}
               alt=""
-              width={900}
-              height={560}
+              sizes="100vw"
               priority
-              className="relative w-full"
+              className="mx-auto w-full max-w-sm"
             />
           </div>
         </div>
-
-        <ul className="mt-16 grid gap-8 sm:grid-cols-3 lg:mt-24">
-          {TRUST.map(({ icon, title, subtitle }) => (
-            <li key={title} className="flex items-center gap-4">
-              <span className="flex size-12 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04]">
-                <FigmaIcon name={icon} size={22} priority />
-              </span>
-              <span>
-                <span className="block text-[0.9375rem] font-medium text-white">
-                  {title}
-                </span>
-                <span className="mt-0.5 block text-[0.8125rem] text-text-invert-muted">
-                  {subtitle}
-                </span>
-              </span>
-            </li>
-          ))}
-        </ul>
       </Container>
+
+      {count > 1 && (
+        <>
+          <button
+            type="button"
+            onClick={() => go(index - 1)}
+            aria-label="Previous slide"
+            className="absolute left-4 top-1/2 z-10 hidden size-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-white/[0.06] text-white backdrop-blur transition-colors hover:bg-white/15 lg:flex"
+          >
+            <ChevronLeftIcon className="size-5" />
+          </button>
+          <button
+            type="button"
+            onClick={() => go(index + 1)}
+            aria-label="Next slide"
+            className="absolute right-4 top-1/2 z-10 hidden size-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-white/[0.06] text-white backdrop-blur transition-colors hover:bg-white/15 lg:flex"
+          >
+            <ChevronRightIcon className="size-5" />
+          </button>
+
+          <div className="absolute inset-x-0 bottom-6 z-10 flex justify-center gap-2">
+            {heroSlides.map((s, i) => (
+              <button
+                key={s.title}
+                type="button"
+                onClick={() => go(i)}
+                aria-label={`Go to slide ${i + 1}: ${s.title}`}
+                aria-current={i === index}
+                className={`h-2 rounded-full transition-all ${
+                  i === index ? "w-6 bg-accent" : "w-2 bg-white/30 hover:bg-white/50"
+                }`}
+              />
+            ))}
+          </div>
+        </>
+      )}
     </section>
   );
 }
