@@ -141,10 +141,10 @@ salesperson and retail needs speed, and mixing them makes both worse.
 
 ### 2.6 Cloudflare Turnstile
 
-Create a Turnstile widget for the domain. It protects the bulk-order form
-without a CAPTCHA the user has to solve. The site key is public and goes in
-the repo; the secret key goes into the Worker's secrets and must never be
-pasted into chat or committed.
+Create a Turnstile widget when the direct RFQ Worker is built. The current
+bulk-order page prepares a message in the visitor's email/WhatsApp client and
+has no submission endpoint to protect. The future site key is public; the
+Worker secret must never be pasted into chat or committed.
 
 ### 2.7 Sentry
 
@@ -165,38 +165,33 @@ in the repo.
 
 ### 3.2 Figma
 
-I cannot open the Figma link directly. Either:
-
-- invite the build account to the file with view access and share a
-  personal access token, or
-- export the landing page frames as PNG at 2x plus the design tokens
-  (colours, type scale, spacing), or
-- share screenshots of each frame.
-
-Screenshots are enough to build from; tokens make the result match.
+The Figma file is accessible through the approved integration. Keep that
+connection scoped to view access. Do not share browser cookies, session tokens
+or copied authenticated curl commands. PNG exports at 2x remain useful for
+visual regression review.
 
 ### 3.3 Product data — the packet
 
-For each of the first 20 SKUs. Fields marked required are enforced by the
-schema in `src/lib/product-schema.ts` and the build fails without them.
+For each of the first 20 SKUs. Blank source fields stay blank; the importer
+keeps identity-complete but commercially incomplete rows as invisible drafts.
 
 | Field | Required | Notes |
 |---|---|---|
 | SKU | yes | Your internal code |
 | Brand | yes | |
 | Model | yes | Exact manufacturer model number |
-| GTIN / EAN | yes | 8, 12, 13 or 14 digits, off the barcode on the box |
-| HSN | yes | For GST invoicing |
+| GTIN / EAN | no | 8, 12, 13 or 14 digits, only off the barcode on the box |
+| HSN | no | Only when supplied by an invoice/product master |
 | Title | yes | ≤150 chars, "Brand Model — key spec" |
 | Description | yes | 2–4 sentences, no ALL CAPS, no phone numbers |
 | Category | yes | e.g. Air Conditioner, Refrigerator |
 | MRP | yes | Rupees, GST inclusive |
 | Selling price | yes | Rupees, GST inclusive, ≤ MRP |
-| GST rate | yes | Percent |
-| Availability | yes | in stock / out of stock / preorder / backorder |
+| GST rate | no | Percent, only from a verified commercial source |
+| Availability | yes | unknown / in stock / out of stock / preorder / backorder |
 | Condition | yes | new / refurbished / used |
-| Installation included | yes | true or false |
-| Warranty | yes | Months |
+| Installation included | no | true or false, only when stated |
+| Warranty | no | Months, only when stated |
 | Images | yes | See below |
 | Weight | no | kg |
 | Dimensions | no | mm, L×W×H |
@@ -204,10 +199,9 @@ schema in `src/lib/product-schema.ts` and the build fails without them.
 | BEE star rating | no | 1–5 |
 | Inverter | no | true or false |
 
-GTIN is the field people skip and it is the one that matters most: without
-it Google cannot match the product to its own catalogue, and the listing
-loses free-listing eligibility. Photograph the barcode on each box if it is
-faster than typing.
+GTIN improves Merchant matching when the manufacturer assigned one, but it is
+not required to render a truthful product page. Photograph the barcode on each
+box; never reconstruct a missing value from a pattern.
 
 ### 3.4 Product photography
 
@@ -241,7 +235,8 @@ key, GBP place ID, the WhatsApp number.
 
 Secret, and only ever entered in the provider's own dashboard or as a
 Cloudflare secret: Turnstile secret key, Cloudflare API tokens, Google
-service-account JSON, Razorpay keys, any bank or GST portal credentials.
+service-account JSON, Razorpay keys, Figma personal/session tokens, browser
+cookies, and any bank or GST portal credentials.
 
 ---
 

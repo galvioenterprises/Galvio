@@ -1,0 +1,64 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-5211776",
+  "sku": "GAL-FZ-5211776",
+  "brand": "Voltas",
+  "model": "5211776",
+  "status": "active",
+  "internalCode": "VOLTAS CVF250SA3-P-GW",
+  "title": "Voltas Hard Top Convertible Freezers - (CVF250)",
+  "description": "These Energy efficient double door Chest Freezer comes with dual temperature convertible technology. It uses Eco Friendly Refrigerant for cooling / freezing & are ideal for storing Frozen Food, Beverages & Dairy Products.",
+  "category": "Freezer",
+  "subCategory": "Chest",
+  "mrp": 43500,
+  "sellingPrice": 29150,
+  "availability": "unknown",
+  "condition": "new",
+  "highlights": [],
+  "faqs": [],
+  "images": [
+    {
+      "src": "voltas-5211776",
+      "alt": "Voltas Hard Top Convertible Freezers - (CVF250)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-5211776-2",
+      "alt": "Voltas Hard Top Convertible Freezers - (CVF250)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-5211776-3",
+      "alt": "Voltas Hard Top Convertible Freezers - (CVF250)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-5211776-4",
+      "alt": "Voltas Hard Top Convertible Freezers - (CVF250)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-5211776-5",
+      "alt": "Voltas Hard Top Convertible Freezers - (CVF250)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-5211776-6",
+      "alt": "Voltas Hard Top Convertible Freezers - (CVF250)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-5211776-7",
+      "alt": "Voltas Hard Top Convertible Freezers - (CVF250)",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

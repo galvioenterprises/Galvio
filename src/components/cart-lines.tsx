@@ -7,7 +7,7 @@ import { formatPrice } from "@/lib/format";
 import type { Product } from "@/lib/product-schema";
 import { site } from "@/config/site";
 import { ProductImage } from "./product-image";
-import { ArrowRightIcon, TrashIcon, WhatsAppIcon } from "./icons";
+import { ArrowRightIcon, MailIcon, TrashIcon, WhatsAppIcon } from "./icons";
 
 type Entry = {
   slug: string;
@@ -20,6 +20,7 @@ type Entry = {
 };
 
 const AVAILABILITY_LABEL: Record<Product["availability"], string> = {
+  unknown: "Confirm availability",
   in_stock: "In stock",
   out_of_stock: "Out of stock",
   preorder: "Available to pre-order",
@@ -116,7 +117,7 @@ export function CartLines({
 
   const href = site.contact.whatsapp
     ? `https://wa.me/${site.contact.whatsapp}?text=${encodeURIComponent(message)}`
-    : "/contact/";
+    : `mailto:${site.contact.email}?subject=${encodeURIComponent("Product list enquiry")}&body=${encodeURIComponent(message)}`;
 
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-start">
@@ -218,15 +219,19 @@ export function CartLines({
         </dl>
 
         <p className="mt-3 text-xs leading-relaxed text-text-muted">
-          Listed prices include GST. Ask us — on an order this size we can
-          usually do better than the listed total.
+          These are the current manufacturer-listed prices. The showroom will
+          confirm the final price, tax invoice and availability before an order.
         </p>
 
         <a
           href={href}
           className="mt-5 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-accent px-5 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
         >
-          <WhatsAppIcon className="size-4" />
+          {site.contact.whatsapp ? (
+            <WhatsAppIcon className="size-4" />
+          ) : (
+            <MailIcon className="size-4" />
+          )}
           Send this list to us
         </a>
 

@@ -222,7 +222,7 @@ export function ProductBrowser({ products }: { products: Product[] }) {
             </button>
           </div>
         ) : view === "grid" ? (
-          <div className="grid gap-9 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3 xl:gap-8">
             {visible.map((product) => (
               <ProductCard key={product.slug} product={product} />
             ))}

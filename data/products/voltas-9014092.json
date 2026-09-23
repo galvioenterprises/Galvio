@@ -1,0 +1,45 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-9014092",
+  "sku": "GAL-ST-9014092",
+  "brand": "Voltas",
+  "model": "9014092",
+  "status": "active",
+  "internalCode": "Voltas Stablizer VA 4090-90V-300V (4KVA)",
+  "title": "Stabilizer VA4090 - 4KVA - 90V-300V",
+  "description": "Model No.: 9014092 / VA4090 - 4KVA - 90V-300V Transformer Type: Torodial Core Applicable For: 1.5 TR",
+  "category": "Stabiliser",
+  "mrp": 9790,
+  "sellingPrice": 7424,
+  "availability": "unknown",
+  "condition": "new",
+  "highlights": [],
+  "faqs": [],
+  "images": [
+    {
+      "src": "voltas-9014092",
+      "alt": "Stabilizer VA4090 - 4KVA - 90V-300V",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-9014092-2",
+      "alt": "Stabilizer VA4090 - 4KVA - 90V-300V",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-9014092-3",
+      "alt": "Stabilizer VA4090 - 4KVA - 90V-300V",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-9014092-4",
+      "alt": "Stabilizer VA4090 - 4KVA - 90V-300V",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

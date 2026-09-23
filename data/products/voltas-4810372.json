@@ -1,0 +1,47 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-4810372",
+  "sku": "GAL-CO-4810372",
+  "brand": "Voltas",
+  "model": "4810372",
+  "status": "active",
+  "internalCode": "Voltas Air Cooler Epicool 70",
+  "title": "Voltas Desert Air Cooler Epicool 70",
+  "description": "70 Litre Desert Cooler with Honeycomb cooling pads for long-lasting cooling",
+  "category": "Air Cooler",
+  "subCategory": "Desert",
+  "mrp": 18690,
+  "sellingPrice": 12590,
+  "availability": "unknown",
+  "condition": "new",
+  "capacity": "70L",
+  "highlights": [],
+  "faqs": [],
+  "images": [
+    {
+      "src": "voltas-4810372",
+      "alt": "Voltas Desert Air Cooler Epicool 70",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-4810372-2",
+      "alt": "Voltas Desert Air Cooler Epicool 70",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-4810372-3",
+      "alt": "Voltas Desert Air Cooler Epicool 70",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-4810372-4",
+      "alt": "Voltas Desert Air Cooler Epicool 70",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

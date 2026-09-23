@@ -36,9 +36,8 @@ export function PincodeCheck() {
     // question to a human rather than render a control that cannot work.
     return (
       <p className="text-xs leading-relaxed text-text-muted">
-        Delivery and installation are available across the city and surrounding
-        areas. Message us with your pincode and we will confirm the timeline for
-        your address.
+        Delivery coverage has not been published yet. Share your pincode with
+        the showroom and we will confirm whether delivery is available.
       </p>
     );
   }
@@ -87,8 +86,7 @@ export function PincodeCheck() {
                 Delivery available in {result.pincode}
               </span>
               <span className="mt-1 block">
-                Installation support available. We will confirm the exact date
-                when you enquire.
+                We will confirm the exact delivery date when you enquire.
               </span>
             </>
           ) : (

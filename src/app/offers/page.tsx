@@ -10,12 +10,13 @@ import { ArrowRightIcon } from "@/components/icons";
 
 export const metadata: Metadata = {
   title: "Offers",
-  description: `Everything currently discounted at ${site.name} — deepest reductions first, prices inclusive of GST.`,
+  description: `Compare published catalogue prices with MRP at ${site.name}. Final price, tax treatment and availability are confirmed by the showroom.`,
   alternates: { canonical: "/offers/" },
 };
 
 /**
- * Everything currently discounted, deepest first.
+ * Products whose published catalogue price is below MRP, largest difference
+ * first. The page never represents that source price as a Galvio promotion.
  *
  * Derived rather than curated. An offers page maintained by hand is one
  * that is wrong within a fortnight, and a wrong price is worse than no
@@ -38,12 +39,13 @@ export default function OffersPage() {
       <Container size="listing" className="pb-20 pt-8">
         <p className="eyebrow text-offer">Offers</p>
         <h1 className="mt-1.5 text-[2.25rem] font-semibold leading-[1.1] tracking-[-0.02em] sm:text-[2.5rem]">
-          {best > 0 ? `Up to ${best}% off` : "Current offers"}
+          {best > 0 ? `Listed up to ${best}% below MRP` : "Published prices"}
         </h1>
         <p className="mt-5 max-w-[60ch] text-[0.9375rem] leading-[1.65] text-text-muted">
-          Everything currently reduced, deepest discount first. Prices include
-          GST. On a larger order we can usually do better than the listed
-          figure — ask us.
+          These comparisons use the published catalogue price and MRP supplied
+          for each model. They are not proof of current showroom stock or a
+          final Galvio quote; confirm price, tax treatment and availability
+          before purchase.
         </p>
 
         {deals.length === 0 ? (
@@ -60,9 +62,9 @@ export default function OffersPage() {
         ) : (
           <>
             <p className="mt-10 text-sm font-medium">
-              {deals.length} {deals.length === 1 ? "product" : "products"} on offer
+              {deals.length} {deals.length === 1 ? "product" : "products"} listed below MRP
             </p>
-            <div className="mt-6 grid gap-9 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 2xl:gap-8">
               {deals.map((product) => (
                 <ProductCard key={product.slug} product={product} />
               ))}

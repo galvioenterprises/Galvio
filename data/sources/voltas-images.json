@@ -1,238 +1,17 @@
 [
   {
-    "sku": "GAL-ST-001",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/9014132_2.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/9014132_3.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/9014132_4.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-AC-001",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/183INVVertisZephyrGold.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_4276a999-441a-49bf-891c-2df0c1625660.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_abf7137f-c3c0-4d2e-8d39-195499a48ba7.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-AC-002",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/4504074-1.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_f7b89036-795c-49e8-b7fc-29c713c918d3.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_36b10e8f-57aa-49aa-ae76-9df43f83b099.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-XX-001",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/I1000VD-BGWH_1.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/I1000VD-BGWH_2.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/I1000VD-BGWH_3.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-AC-003",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/EliteGoldrevised.png",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_1a35e90e-6bc2-4d91-a34d-87839c3f2bac.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_b64f3ec4-8e2a-4738-94ce-657293074f87.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-ST-002",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/Product-Banner1_1_aba1760b-bbd9-4cec-8a41-bb0ce5d6f81f.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/Product-Banner2_1_67bfd845-5bec-4c02-abd6-505e30ded2a8.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/Product-Banner3_1_d66934b2-d210-4695-b52b-2cd312fc706c.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-AC-004",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_8d057341-2b7c-4d05-9ae6-e3d6cded86d1.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_7f9d6b22-f3d8-423d-80f1-d0dace0c869e.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/4_1726274a-94cc-4a6d-b59d-f516cc149fc1.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-AC-005",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/B0GSZSLW6N-4504075.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_6ae2d0f6-ef73-4303-a314-2bebd38938d0.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_b162dedb-6064-4a99-89bd-d4c3e39ae47b.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-AC-006",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_8d057341-2b7c-4d05-9ae6-e3d6cded86d1.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_7f9d6b22-f3d8-423d-80f1-d0dace0c869e.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/4_1726274a-94cc-4a6d-b59d-f516cc149fc1.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-AC-007",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/4504054.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_8f6a85d3-a80d-4f4a-8eec-ab10000c600a.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_cfe289ce-8908-477a-a091-ea7791aa5574.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-AC-008",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/4504053.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_8901ace9-7af3-4659-9bad-348760182e9d.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_92b668f1-d3bb-4ba0-9d25-9d216c0afb17.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-CO-001",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/4810225.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/Victor55.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/air-coolers-warr-image_d3bb32de-9abe-47c1-bbb8-609671ddcfa6.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-AC-009",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/4504077.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_a2795b83-d12e-4e77-8997-3ef7530de021.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_7171dbcd-3997-405b-a21d-3c39ef397e89.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-CO-002",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Jetmax-90-1.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Jetmax-90-2.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Jetmax-90-3.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-AC-010",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/B0GYWTQPBY-4504052.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_350e8ea5-8124-4735-b185-407a9e31e0b0.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_a4b7380c-2965-4205-804f-e3bdd52f19c2.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-AC-011",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/B0GXWCJ7JQ-4504051.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_23c535e2-34f9-45e4-a847-25d78a29c3d2.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_08286f27-9b3d-4382-8b92-a196bf373fb0.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-ST-003",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/9015132_1.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/9015132_2.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/9015132_3.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-ST-004",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/9014171_1.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/9014171_2.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/9014171_3.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-CO-003",
+    "assetKey": "voltas-4810331",
     "urls": [
       "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/4810220_4810222_53f8a95c-fbc4-4b9c-9ecf-51addd7b6ee6.jpg",
       "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/1_eba40472-84f7-47e6-adcf-013405acaeda.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/2_ae081551-b7de-49fd-b9a9-58afc96c2635.jpg"
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/2_ae081551-b7de-49fd-b9a9-58afc96c2635.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/3_d39218e4-c7cc-4a3f-8d46-31246e79b842.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/4_ee600429-72f5-4b56-9b77-26f43eb911ac.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/air-coolers-warr-image_f165dae6-2f6c-4a68-802f-0e8b57e5b032.jpg"
     ]
   },
   {
-    "sku": "GAL-XX-002",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/MRCG6F5ZTYYQGD8U_0.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/MRCG6F5ZTYYQGD8U_1.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/MRCG6F5ZTYYQGD8U_2.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-XX-003",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Wind-54ww-1.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Wind-54ww-2.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Wind-54ww-3.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-CO-004",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/4810232.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/1_b27b7368-a860-4d67-a5a6-bbd8d596e5b6.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/2_9176fa32-0d26-4655-9ef6-560db2bd4976.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-CO-005",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Ugly00802_3d2c74e8-9d88-4358-92be-831b03293e2c.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Ugly00803_97854b4e-7df6-48d1-935e-ab88dcb0e156.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Ugly00804-2_ca70002e-da55-4cf6-a478-70e7506b2742.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-XX-004",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/G5003HP-WH_1.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/G5003HP-WH_2.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/G5003HP-WH_3.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-CO-006",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Ugly00748-2_69ad4479-8359-4d8c-942a-32e074783520.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Ugly00751-2_91885dac-7bea-44f5-9d3d-022af8d4d149.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Ugly00752-2_0060a047-7039-4c5f-a05d-913ec6b5fd92.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-AC-012",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/4504054.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_8f6a85d3-a80d-4f4a-8eec-ab10000c600a.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_cfe289ce-8908-477a-a091-ea7791aa5574.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-AC-013",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1_1980d8f9-cd79-45b8-9758-2a2609229f86.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_26e02a24-649a-4aa0-b686-7abbff4f5a57.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_9b1baa8b-a140-40aa-bbe1-6e5eae299bb0.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-CO-007",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Grand-92-1.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Grand-92-2.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Grand-92-3.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-AC-014",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/B0GSZSLW6N-4504075.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_6ae2d0f6-ef73-4303-a314-2bebd38938d0.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_b162dedb-6064-4a99-89bd-d4c3e39ae47b.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-CO-008",
+    "assetKey": "voltas-4810335",
     "urls": [
       "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/4810193.jpg",
       "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/Windsor65_995d7728-c781-4343-b025-071db9471e50.jpg",
@@ -240,123 +19,492 @@
     ]
   },
   {
-    "sku": "GAL-CO-009",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Epicool-90-1_ef153a8f-4bcb-4288-ab66-778cfd94ab76.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Epicool-90-2_6310439e-d6c0-4bba-a46a-df2bf39c5c45.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Epicool-90-3_3dfdc475-57ee-40f2-8f7f-725ba0d3605c.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-AC-015",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/B0GXYG3V41-4504069.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_9b265b82-eb5a-4f49-ba02-d575bf4230ac.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_117e8ecb-6094-4b86-ae40-413a9b9e6992.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-AC-016",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/B0GSZPT421-4504068_02ecee40-3d87-4ac4-958c-9dbe4c0e240e.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_dbf3e638-2a76-40bb-8f0d-bbdd746ba0a4.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_a9b689fa-8f78-4326-aaeb-28d1bb9bd2d2.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-AC-017",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/B0GS9J11JV-4504076.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_d41afaae-30b4-4e79-b4fb-7f7252a6d0e7.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_dd665dd8-94f3-44ca-8404-d43c9cdc916e.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-CO-010",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Epicool-90-1.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Epicool-90-2.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Epicool-90-3.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-CO-011",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Jetmax-70T-1.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Jetmax-70T-2.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Jetmax-70T-3.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-AC-018",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/183INVVertisZephyrGold.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_4276a999-441a-49bf-891c-2df0c1625660.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_abf7137f-c3c0-4d2e-8d39-195499a48ba7.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-CO-012",
+    "assetKey": "voltas-4810347",
     "urls": [
       "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/4810231.jpg",
       "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/1_ed93e526-7317-48d4-8900-8712f83945df.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/2_c9fc0582-056b-4525-a770-9e71d0eb7d94.jpg"
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/2_c9fc0582-056b-4525-a770-9e71d0eb7d94.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/3_29ffb884-d358-4923-a18f-cef11b88edf6.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/4_2e6e3aea-c199-4c25-aff8-55cd9018c310.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/air-coolers-warr-image_97eb4522-9459-4ef8-840d-1a449d44368b.jpg"
     ]
   },
   {
-    "sku": "GAL-CO-013",
+    "assetKey": "voltas-4810348",
     "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/4810225.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/Victor55.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/air-coolers-warr-image_d3bb32de-9abe-47c1-bbb8-609671ddcfa6.jpg"
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/4810232.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/1_b27b7368-a860-4d67-a5a6-bbd8d596e5b6.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/2_9176fa32-0d26-4655-9ef6-560db2bd4976.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/3_941d565e-b5f2-4406-b9a9-48ffec9f51a2.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/4_76958a1d-07a6-40c5-bdfe-e504c4446385.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/air-coolers-warr-image_98770da5-d675-4c71-adfb-6dfdd16dcd33.jpg"
     ]
   },
   {
-    "sku": "GAL-CO-014",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Epicool-54-1.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Epicool-54-2.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Epicool-54-3.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-AC-019",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/4504054.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_8f6a85d3-a80d-4f4a-8eec-ab10000c600a.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_cfe289ce-8908-477a-a091-ea7791aa5574.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-CO-015",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Ugly00802.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Ugly00803.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Ugly00804-2.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-AC-020",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/B0GSZSLW6N-4504075.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_6ae2d0f6-ef73-4303-a314-2bebd38938d0.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_b162dedb-6064-4a99-89bd-d4c3e39ae47b.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-AC-021",
-    "urls": [
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/4504077.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_a2795b83-d12e-4e77-8997-3ef7530de021.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_7171dbcd-3997-405b-a21d-3c39ef397e89.jpg"
-    ]
-  },
-  {
-    "sku": "GAL-ST-005",
+    "assetKey": "voltas-9014092",
     "urls": [
       "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/Product-Banner1_1_aba1760b-bbd9-4cec-8a41-bb0ce5d6f81f.jpg",
       "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/Product-Banner2_1_67bfd845-5bec-4c02-abd6-505e30ded2a8.jpg",
-      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/Product-Banner3_1_d66934b2-d210-4695-b52b-2cd312fc706c.jpg"
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/Product-Banner3_1_d66934b2-d210-4695-b52b-2cd312fc706c.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/Product-Banner4_1_16706e2f-7a84-45bd-9d24-8f73801138e7.jpg"
+    ]
+  },
+  {
+    "assetKey": "voltas-9014132",
+    "urls": [
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/9014132_2.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/9014132_3.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/9014132_4.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/9014132_1.jpg"
+    ]
+  },
+  {
+    "assetKey": "voltas-9014171",
+    "urls": [
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/9014171_1.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/9014171_2.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/9014171_3.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/9014171_4.jpg"
+    ]
+  },
+  {
+    "assetKey": "voltas-9015132",
+    "urls": [
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/9015132_1.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/9015132_2.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/9015132_3.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/products/9015132_4.jpg"
+    ]
+  },
+  {
+    "assetKey": "voltas-4810371",
+    "urls": [
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Epicool-54-1.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Epicool-54-2.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Epicool-54-3.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Epicool-54-4.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Epicool-54-5.jpg"
+    ]
+  },
+  {
+    "assetKey": "voltas-4810372",
+    "urls": [
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Epicool-90-1.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Epicool-90-2.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Epicool-90-3.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Epicool-90-4.jpg"
+    ]
+  },
+  {
+    "assetKey": "voltas-4810373",
+    "urls": [
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Epicool-90-1_ef153a8f-4bcb-4288-ab66-778cfd94ab76.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Epicool-90-2_6310439e-d6c0-4bba-a46a-df2bf39c5c45.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Epicool-90-3_3dfdc475-57ee-40f2-8f7f-725ba0d3605c.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Epicool-90-4_611d94c1-dd42-42d6-84af-d781041c67c0.jpg"
+    ]
+  },
+  {
+    "assetKey": "voltas-4810333",
+    "urls": [
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Grand-92-1.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Grand-92-2.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Grand-92-3.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Grand-92-4.jpg"
+    ]
+  },
+  {
+    "assetKey": "voltas-4810352",
+    "urls": [
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Jetmax-70T-1.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Jetmax-70T-2.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Jetmax-70T-3.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Jetmax-70T-4.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Jetmax-70T-5.jpg"
+    ]
+  },
+  {
+    "assetKey": "voltas-4810349",
+    "urls": [
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Jetmax-90-1.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Jetmax-90-2.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Jetmax-90-3.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Jetmax-90-4.jpg"
+    ]
+  },
+  {
+    "assetKey": "voltas-4810441",
+    "urls": [
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1_f7b42976-7f34-4942-8500-d9f755b96185.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Ugly00802_3d2c74e8-9d88-4358-92be-831b03293e2c.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Ugly00803_97854b4e-7df6-48d1-935e-ab88dcb0e156.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Ugly00804-2_ca70002e-da55-4cf6-a478-70e7506b2742.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Ugly00805-2_e6afc76b-b63c-450b-9cff-a15f16250e16.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Ugly00807-2_6ee5e8c7-c2ec-417d-b36f-51f9894f2eae.jpg"
+    ]
+  },
+  {
+    "assetKey": "voltas-4810439",
+    "urls": [
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1_cb6e257a-7b28-410b-91d2-1ee415f3842a.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Ugly00802.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Ugly00803.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Ugly00804-2.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Ugly00805-2.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Ugly00807-2.jpg"
+    ]
+  },
+  {
+    "assetKey": "voltas-5211776",
+    "urls": [
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/VoltasRudrapur0639.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/VoltasRudrapur0640.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/VoltasRudrapur0643.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/VoltasRudrapur0644.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/VoltasRudrapur0645.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/VoltasRudrapur0647.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/VoltasRudrapur0649.jpg"
+    ]
+  },
+  {
+    "assetKey": "voltas-4504076",
+    "urls": [
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/B0GS9J11JV-4504076.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_d41afaae-30b4-4e79-b4fb-7f7252a6d0e7.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_dd665dd8-94f3-44ca-8404-d43c9cdc916e.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/4_c0fddb24-7169-481f-8bd4-59d1238968ec.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/5_4c32ddee-3bef-49d6-b345-e227e4d35ace.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/6_95f475ee-790d-4349-8078-bb0ecd183583.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/7_ed8f4062-d619-482d-a6b3-a8654b523dec.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/8_4c790784-6cde-4b84-a13f-7b2a1e8363a6.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/9_d723716e-798f-4028-ac61-ab8a33bf4c7f.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/10_9c86f253-a3b0-43f3-bc02-915e9618b4d4.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/11_73686788-e88a-4224-ac97-9253afa0a8c7.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/12_96b20774-60de-4aff-b3a2-f451f0d725a3.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/13_a5fde2e0-cd6d-4bb9-8b47-13061eb78076.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/14_317dee06-b8ee-4c51-85a0-3dc94995c1b1.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/15_4ef52c04-aeb9-4474-8ce0-12592c046235.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/16_bddf359a-3899-4534-8064-abebc2990eab.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/17_58f3d396-1003-4aa7-a087-ac74b2f7f8f9.jpg"
+    ]
+  },
+  {
+    "assetKey": "voltas-4504075",
+    "urls": [
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/B0GSZSLW6N-4504075.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_6ae2d0f6-ef73-4303-a314-2bebd38938d0.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_b162dedb-6064-4a99-89bd-d4c3e39ae47b.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/4_a3e85e11-7aa4-4ba4-af9d-46260eb21621.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/5_f36fd604-72f3-40e4-90d1-d3db06988bc2.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/6_04580e46-a240-4caa-b261-2e5d1000f2da.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/7_5ae5225c-1cec-4d6a-b358-a7b22858ae64.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/8_47a863bb-dfda-4e11-bde6-9c8b6e46b9c1.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/9_1b0d254d-1f36-4251-b302-395361a31617.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/11_287cb3b9-8734-4279-b1c2-e4750c4bdfbe.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/12_74782fe7-8600-4c8b-8dfc-39aadf0f7608.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/13_09d7ba49-8f85-4dc8-be4f-36a12fff1d6b.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/14_53013c4d-f66c-4dd0-b5e5-c7573295e9e2.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/15_990133b0-0fe8-4f2b-88bf-e30b0306a07b.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/16_534669e2-8863-4329-a6b3-701dcf0d3d11.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/17_28f4fcc8-f489-4e0b-b684-f78acc1a182b.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/18_4288890a-d951-4b21-9052-c8883a480a3c.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/19_da5cf2fc-d0ec-4a0f-bb7b-51f18accb642.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/20_7e1cc95c-8941-4788-8114-04486cd23519.jpg"
+    ]
+  },
+  {
+    "assetKey": "voltas-4504074",
+    "urls": [
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/4504074-1.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_f7b89036-795c-49e8-b7fc-29c713c918d3.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_36b10e8f-57aa-49aa-ae76-9df43f83b099.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/4_f74e0ba5-db9f-4c8a-a1fd-e259d50a24d7.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/5_36f79b5f-ed56-4265-9d2b-c4172829d78b.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/6_3c18a83e-126e-4539-835b-067a74e1820c.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/7_d58cf6aa-34d8-47ad-b331-d14390321674.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/8_b26ba468-b9a0-4679-a5c7-9fc43a117746.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/9_178930ac-e38b-4e68-90d7-f2dd061ece13.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/10_634d2f4a-9afc-41d3-a47b-a7ddb6dca643.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/11_fbbc8488-d7bb-48e2-9584-a0ae3391ccd3.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/12_04546b59-26d7-48c0-bf7d-7d37ae4c7386.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/13_dcbe67ca-fc40-4c63-a914-5ddda14ad21a.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/14_e56b325a-f40b-4d34-b8d4-e16da2d8aa09.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/15_4f9fdad8-9c1a-4b0f-bb74-096580724597.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/16_5134b282-3518-4259-ac21-e4cdca90970c.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/17_9f285dc6-ecc5-423b-ab64-6c724a0d218d.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/18_bd18b3ad-a13d-40ff-88db-7341a47405c5.jpg"
+    ]
+  },
+  {
+    "assetKey": "voltas-4504085",
+    "urls": [
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1000433565-removebg-preview.png",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_4276a999-441a-49bf-891c-2df0c1625660.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/183INVVertisZephyrGold.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_abf7137f-c3c0-4d2e-8d39-195499a48ba7.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/5_5686f296-079d-4f16-81d7-e7ec3ea6da6c.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/6_c8394914-3f22-4423-939e-b663bf90784e.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/7_f3540f0f-4ed6-4056-be15-76c01bd1f9dc.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/8_956d38ad-864e-4e66-a3a1-d476c80c4ed9.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/9_25c7dcd0-1154-4c71-8b90-fb4749242ccf.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/10_7d1e0ad6-f5db-441c-b845-cc7f57e084c0.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/11_9075487c-32ec-4965-aa92-acb9b556c926.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/12_568f668e-bd5b-4548-9ad3-efd44f4d9f42.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/13_17b80564-923f-453c-84a1-f294346b84a8.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/14_c5ffc80d-d7dd-4bce-90fc-6e1cb883851c.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/15_0e9d8b27-c4c7-4b30-98d0-e0f5dc46588c.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/16_ad245720-6dd0-4879-b855-0eaaaebed36a.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/17_e795e2e2-e6e6-40db-a012-14360a8c5c4e.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/18_0a393597-7a8c-43da-81e1-035cf1879727.jpg"
+    ]
+  },
+  {
+    "assetKey": "voltas-4504073",
+    "urls": [
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/B0GS945GKD-4504073.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_f2952f59-fd99-47de-a52c-6a53ea873cea.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_645c2f18-8add-4a54-9d09-229384d8b2dc.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/4_1671a68a-bfd7-45b8-9b63-d7e376d9584f.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/5_fbf72378-0051-40e0-b321-d2dabcf71ca4.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/6_25979b9b-9e2a-4e6c-a103-eb8bfb4a6c88.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/7_2670e79f-dd39-47a5-9bdf-4d52832b448b.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/8_ea467638-f617-4d77-8610-1194a3573133.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/9_b696c83a-26e2-4903-a0cf-708a87be3d72.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/10_97c2850f-57e0-45fc-82f5-1384213039ae.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/11_5cad8e3d-a238-4283-b060-29ad8ee58b98.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/12_5848ea29-07c3-41c5-a9b7-5d980aee0e88.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/13_2b350a1d-7865-451d-a873-3b50338f9a16.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/14_056fb18e-e0d3-45ee-a228-3f3cb7d21b0e.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/15_303312f8-c726-436c-9117-2e6ba9328767.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/16_0bc18927-b0e4-4291-bbf7-18a15e825554.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/17_905417bd-84a8-422f-b7bc-494f59138680.jpg"
+    ]
+  },
+  {
+    "assetKey": "voltas-4504083",
+    "urls": [
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1_1980d8f9-cd79-45b8-9758-2a2609229f86.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_26e02a24-649a-4aa0-b686-7abbff4f5a57.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_9b1baa8b-a140-40aa-bbe1-6e5eae299bb0.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/4_57edeaca-8ffb-4b63-bea3-71fef0962cf1.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/5_e32828ea-f2fb-4cf2-8e88-c7ae33ac0db9.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/6_06a3122c-0c70-46f3-8621-9d8fed975287.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/7_0a3c85f8-8f4e-41cd-84a5-c1af32d074cd.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/8_e3511901-f49d-4506-9453-26436beafacd.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/9_17a5d662-b798-4c4d-b796-379b036cc4bc.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/10_0cf06fbf-952e-4cb6-8b66-c91f68b51aff.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/11_7a26c68f-0e3c-4923-b24a-45fef490ea6a.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/12_75b47bf6-1b85-42eb-8e10-696eb7b4fb30.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/13_d9fa5dc6-adad-446c-85c2-372f8d324d6c.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/14_33338016-5ee9-4146-97c0-8799e5140040.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/15_0e4c94fb-c70f-4087-9542-dfe635d4f310.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/16_df46c4d8-0aa2-436f-9c32-7c7e7d002bd0.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/17_6a9ecd89-e582-4e45-b2c6-dd8337bca619.jpg"
+    ]
+  },
+  {
+    "assetKey": "voltas-4504068",
+    "urls": [
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/B0GSZPT421-4504068_02ecee40-3d87-4ac4-958c-9dbe4c0e240e.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_dbf3e638-2a76-40bb-8f0d-bbdd746ba0a4.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_a9b689fa-8f78-4326-aaeb-28d1bb9bd2d2.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/4_cef9da1c-0df0-40a2-9df8-0a8834cbbd20.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/5_4df1ff41-e839-4d28-9aa7-79e8197a9309.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/6_c146a7c3-21da-4816-adc7-0f845b5740a1.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/7_864eb7d0-285a-4aa3-8484-143fdc818e55.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/8_59f647e6-a2df-4728-93cf-1256bec9b15c.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/9_6ead810d-2afa-4819-9936-aafbc864004b.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/10_f31425ab-7a1c-4b97-8bc6-6470f7c9ff9f.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/11_91f02905-e170-40fe-a157-f2d71cd47e19.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/12_31079c6b-b1c7-4743-ba80-a6629e2aff19.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/13_baeb1e99-89ae-41cb-bb37-3c004f368793.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/14_9c19aee5-e649-4585-9630-dd95ecfa3c33.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/15_3bd0d3b4-1adb-427a-ba91-e8f36cd1434a.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/16_54d14b8b-9a61-4070-a407-ed3cf536b2a9.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/17_f8ddc455-464e-46b8-8b00-1a1669bee175.jpg"
+    ]
+  },
+  {
+    "assetKey": "voltas-4504052",
+    "urls": [
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/B0GYWTQPBY-4504052.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_350e8ea5-8124-4735-b185-407a9e31e0b0.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_a4b7380c-2965-4205-804f-e3bdd52f19c2.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/4_c6a7a07f-c096-4531-8b47-8dc00412d34a.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/5_8c9f4038-2d07-4165-856f-efb50e330935.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/6_c9ad67b3-6bbf-4f2c-9371-b85a0ac9b5f6.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/7_0c2151ea-ea7b-438c-8eb5-8ce69cd5d061.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/8_191e2498-8968-4df0-ad3c-638544e5d003.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/9_ce75232b-2bb3-4b0e-a888-81b161be675f.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/10_0193fbed-ca69-48e5-b1f0-c67b7af0864d.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/11_c01b3fa0-79eb-4856-b722-73712234f5fe.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/12_56342bda-085e-4bc2-a769-1b81a6c856a6.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/13_6b227af7-b585-48b3-80ed-b3c129345b75.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/14_6d35d58b-7663-44df-bd6f-a987e0843bd3.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/15_68446c14-d529-4502-bb90-675dcb9ccb94.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/16_526e691b-37b9-4c84-bdd7-f8243bc6c32e.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/17_fdf8a719-d012-434f-b4a0-830c5ee2817b.jpg"
+    ]
+  },
+  {
+    "assetKey": "voltas-4504051",
+    "urls": [
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/B0GXWCJ7JQ-4504051.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_23c535e2-34f9-45e4-a847-25d78a29c3d2.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_08286f27-9b3d-4382-8b92-a196bf373fb0.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/4_d8fb4c82-b2f1-4add-bc9e-758609a25114.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/5_0e3699a9-2c58-4721-9ccb-d66766587eea.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/6_e0ef306a-6f8f-4bdc-9d70-fb9f22f6ee60.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/7_f4888c32-c4f3-41b9-978f-3abcb6dc7d72.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/8_021c224f-1d52-420b-bb3c-2ef81b14081e.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/9_32fbf697-6db6-4bbd-9af3-77b54935e18a.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/10_d44ee9bc-1221-4793-9110-533538406cd8.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/11_c2a8d73b-ba58-4e68-aa2e-d30fe83c7538.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/12_eca50e7e-2190-4780-b959-d64f4640440b.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/13_1b54ea21-525a-4dc2-bde8-7af49432b6bc.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/14_909b84fb-71d3-4337-8399-079dfa7f3f04.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/15_a4b35b7a-ec18-42ea-8c71-63f4a397bb77.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/16_d3fe7f90-6687-416e-9cb2-f31d94a72e52.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/17_a4d7f55a-ebfe-4899-976f-1856e5c43dfc.jpg"
+    ]
+  },
+  {
+    "assetKey": "voltas-4504077",
+    "urls": [
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/4504077.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_a2795b83-d12e-4e77-8997-3ef7530de021.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_7171dbcd-3997-405b-a21d-3c39ef397e89.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/4_dd61efcd-431f-4133-96da-f8c9f408e14e.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/5_68583eac-370f-4fd2-bd4f-7c378c043135.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/6_8a97f2a0-47bf-4b71-ace2-e19f685f2570.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/7_d81ff80b-38c8-4bdb-8eae-ed294b545b24.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/8_a6fa67c9-120c-4d9e-ac7b-fe1e4d6cd1da.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/9_f39521f9-7fc3-4c57-9e80-da3d6fbba4cf.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/10_087ecc46-4c30-4140-b8ae-7e4ab742e725.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/11_88328338-cf15-4565-a085-e7a33814c7f2.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/12_c3c9047b-a67d-4401-88eb-71e5ff7d05ac.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/13_afc3a992-5f69-4de9-bca3-cd224d5eb443.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/14_d7be278f-cd34-4916-8ba0-9cb39324ff5c.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/15_46e1b421-27c3-4891-8a5e-b4ea10b8c838.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/16_2c772cf0-ba36-4513-8b5d-f90ec08fafa8.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/17_85cf5905-c018-47c9-b786-30656a7a0901.jpg"
+    ]
+  },
+  {
+    "assetKey": "voltas-4504069",
+    "urls": [
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/B0GXYG3V41-4504069.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_9b265b82-eb5a-4f49-ba02-d575bf4230ac.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_117e8ecb-6094-4b86-ae40-413a9b9e6992.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/4_fcc951e0-bce2-41a7-a43f-ed466a231702.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/5_e8c47fd1-787c-40fe-bb40-595ff1ea7671.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/6_19eb6c0f-2c7a-43a4-9763-4997114f1c3f.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/7_36e4f53d-bdaa-48a3-849c-ef743ddc719c.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/8_7bbaf700-0712-4db0-8e17-2ea8c06c53cf.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/9_0051254c-d053-475a-a6a4-f87916746d36.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/10_804c7d78-f4cb-4459-a7b2-2178a635f756.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/11_c3c71dfd-686b-4d1a-9f80-63264f590e82.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/12_ef775f77-a36b-440f-905a-a2eba157124d.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/13_6c11b305-51c1-4505-b4e5-6e05d783c263.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/14_22c9be59-6209-4268-95b1-d89b90a83be8.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/15_ac97e58b-8a19-436d-8c9f-10b67dc9ef34.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/16_b174d5dd-afe7-463d-81bc-6b2fe3cc5860.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/17_f9e65d3e-6ba7-45e2-a40a-43500c50a886.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/18_b615a879-e062-4728-a665-76a556ae6fcc.jpg"
+    ]
+  },
+  {
+    "assetKey": "voltas-5410921",
+    "urls": [
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Voltas3032.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Voltas3033.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Voltas3034.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Voltas3038.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Voltas3040.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Voltas3049.jpg"
+    ]
+  },
+  {
+    "assetKey": "voltas-4011572",
+    "urls": [
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1_5122a885-2dfc-43fe-b15d-860a4aa79d3c.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_e496c6c3-952a-4f2d-9baa-ea8ef7357f4e.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_d2cc4feb-ce82-480c-8b20-661b4405e8b1.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/4_a34c8296-aeec-40ca-b7c6-7cb3e7571278.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/5_825bf96e-4ad4-4f8f-8f0c-5453b53bc69b.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/6_8108a87c-995f-4670-841e-bc1ad49fb0ce.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/7_15ec32db-5ee0-47f5-bf81-535479f45fb3.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/8_1da6a402-9302-4c75-93b8-44589b0af788.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/9_72d78376-06d1-4d56-af5a-22be6f8ec7c8.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/10_e03006f6-e4db-4500-a506-6a110eb3f547.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/11_7fb46b27-cff0-4084-8d19-ed1be67151f3.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/12_496c0e90-f7fe-4539-a625-fe8f58d1691b.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/13_773a3d65-d2a1-4593-84a0-0041d684939b.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/14_ab30a102-5aa6-4cbe-99fd-645c5a35ddd1.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/15_0b38cb92-1c9f-4bb0-a26d-f4b06262a56f.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/16_84a698b6-0866-4a6d-9847-b1a7c23d5657.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/17_31a328a5-32b4-43e8-b756-a711ecf0d91d.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/18_6bc21d92-7388-4141-814c-da4db093c720.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/19_ada17b48-2529-423c-a2fe-0e0a2cc94c13.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/20_9544b8f4-a265-48c6-8f82-49d8f86822ba.jpg"
+    ]
+  },
+  {
+    "assetKey": "voltas-4011566",
+    "urls": [
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/B0GSZWGHM3-4011566.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_b635ee98-2373-4f0a-b51c-d0f77ff91f7e.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_c4f51f88-17ea-4830-a44b-d5976b47c6ed.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/4_efbc14bd-d48d-44e5-a999-e4485e95daf4.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/5_a7986c56-ca6d-487c-ac34-a56eba929919.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/6_10bac08b-011e-48b0-9280-ccf436203a9f.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/7_0ac90fd0-6a8c-44d5-acd9-1e811bfde12b.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/8_0f70ac53-ddda-4368-b7a0-0c17037f4506.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/9_11e9efba-0198-4318-b646-906de3fe64aa.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/10_f8a7b8b9-f7d1-4159-83ff-0aa33deafcc6.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/11_77a612c2-84af-4216-beb3-11b1901e5256.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/12_3939cec9-5906-4d2e-bf44-7ec16d65a44a.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/13_5f03799c-db0c-43a5-a2ab-9a5a9a915675.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/14_c848b47f-dd07-4fd5-a72a-b900c0d5d8c5.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/15_74f721d9-f4c7-4d0c-b329-db096807e591.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/16_cf7206c5-9d83-4ee1-9a4a-27bb5fd23011.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/17_00fa3c96-b803-4412-9261-e38d0623f011.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/18_faa2c2b8-9c72-4e25-acb7-75f9eedfe4d9.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/19_8794d0f6-9008-4068-a50b-c6f893bb3506.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/20_01b88744-38d5-49bc-bad0-dca718fa1202.jpg"
+    ]
+  },
+  {
+    "assetKey": "voltas-4011571",
+    "urls": [
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1_4e251206-1d55-4d8e-b323-2ed55edc6067.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_8d01a2ff-ccb5-476a-bd76-5c36c078b191.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_33b3585e-e402-469e-b5d4-0f82c366e18a.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/4_ae669cd7-09ca-4752-92c3-30b4afa40a54.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/5_4ad34dbe-e9a2-489e-ab5b-fc119566055c.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/6_b50a8f20-87fe-4c4d-a206-27f5d5e15230.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/7_8fc3aed4-f426-4bb5-9dc4-7ace46e3e10c.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/8_e1e87216-d70c-4906-9b08-77cf78b01f1d.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/9_78f56a9b-bec7-4101-9012-a289c929e40c.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/10_dba908f1-e07f-4add-9e8a-7a3ca923378c.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/11_ef9fbcbf-7da2-43c5-8caf-dfcca961a771.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/12_eb085826-87f3-45ea-ba05-41403e830139.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/13_5be7ed0f-2daa-4de5-9a4f-cc3d09f42efd.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/14_69d920cb-2935-44f3-bcac-42f5f2304b5a.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/15_69f96762-9150-493d-adfb-2007430c0373.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/16_a4344636-0c23-4aaa-91ca-c81a30f8d65a.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/17_1a61fa34-4eee-4ccd-89c9-dc640b263977.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/18_2dc49e5a-c25d-440f-94a6-5c449bbe6716.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/19_b392b266-47ec-4659-9e07-a6de5b5fff62.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/20_5b69741b-b0a4-4313-b082-bf7904c5b2cd.jpg"
+    ]
+  },
+  {
+    "assetKey": "voltas-4810390",
+    "urls": [
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Wind-54ww-1.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Wind-54ww-2.jpg",
+      "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Wind-54ww-3.jpg"
     ]
   }
 ]

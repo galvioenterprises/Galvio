@@ -112,7 +112,11 @@ and leave `selling_price` blank.
 **gst_rate** — the percentage number only. 28 for air conditioners, 18
 for most other appliances. Leave blank if unsure.
 
-**availability** — `in_stock` unless the PDF says otherwise.
+**availability** — one of `in_stock`, `out_of_stock`, `preorder`,
+`backorder`, or `unknown`, but only when the source explicitly establishes
+that state for Galvio's own inventory. A manufacturer catalogue is not a stock
+record. Leave this blank when the PDF does not state it; never default to
+`in_stock`.
 
 **stock_count** — blank unless the PDF gives a real quantity.
 

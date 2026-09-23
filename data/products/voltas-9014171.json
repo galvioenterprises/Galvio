@@ -1,0 +1,45 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-9014171",
+  "sku": "GAL-ST-9014171",
+  "brand": "Voltas",
+  "model": "9014171",
+  "status": "active",
+  "internalCode": "Voltas Stablizer VA 4170-170V-270V",
+  "title": "Stabilizer VA4170 L - 170V-270V 4 KVA",
+  "description": "Model No.: 9014171 / VA4170 L - 170V-270V 4 KVA Transformer Type: EI Core Applicable For: 1.5 TR",
+  "category": "Stabiliser",
+  "mrp": 3290,
+  "sellingPrice": 2300,
+  "availability": "unknown",
+  "condition": "new",
+  "highlights": [],
+  "faqs": [],
+  "images": [
+    {
+      "src": "voltas-9014171",
+      "alt": "Stabilizer VA4170 L - 170V-270V 4 KVA",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-9014171-2",
+      "alt": "Stabilizer VA4170 L - 170V-270V 4 KVA",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-9014171-3",
+      "alt": "Stabilizer VA4170 L - 170V-270V 4 KVA",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-9014171-4",
+      "alt": "Stabilizer VA4170 L - 170V-270V 4 KVA",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

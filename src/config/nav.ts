@@ -12,7 +12,7 @@ export type NavItem = {
 export const primaryNav: NavItem[] = [
   { label: "Home", href: "/", ready: true },
   { label: "Products", href: "/products/", ready: true },
-  { label: "Bulk Orders", href: "/bulk-orders/", ready: false },
+  { label: "Bulk Orders", href: "/bulk-orders/", ready: true },
   { label: "About Us", href: "/about/", ready: true },
   { label: "Support", href: "/contact/", ready: true },
   { label: "Offers", href: "/offers/", ready: true, highlight: true },
@@ -22,7 +22,7 @@ export const footerNav = {
   "Quick Links": [
     { label: "About Us", href: "/about/", ready: true },
     { label: "Our Store", href: "/stores/", ready: true },
-    { label: "Bulk Orders", href: "/bulk-orders/", ready: false },
+    { label: "Bulk Orders", href: "/bulk-orders/", ready: true },
     { label: "Contact Us", href: "/contact/", ready: true },
   ],
   "Customer Service": [

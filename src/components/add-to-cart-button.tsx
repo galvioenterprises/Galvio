@@ -24,9 +24,16 @@ export function AddToCartButton({
   const [added, setAdded] = useState(false);
 
   if (availability !== "in_stock") {
+    const unavailableLabel = availability === "unknown"
+      ? "Confirm availability"
+      : availability === "preorder"
+        ? "Pre-order enquiry"
+        : availability === "backorder"
+          ? "Backorder enquiry"
+          : "Out of stock";
     const content = (
       <>
-        {enquiryHref ? "Enquire" : "Not in stock"}
+        {enquiryHref ? "Enquire" : unavailableLabel}
         <span className="sr-only"> — {title}</span>
       </>
     );

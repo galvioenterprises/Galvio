@@ -133,12 +133,13 @@ function PriceSection({
   const [limitMin, limitMax] = priceLimits;
   const span = Math.max(limitMax - limitMin, 1);
 
-  const quickRanges: [number, number][] = [
-    [limitMin, 20000],
-    [20000, 40000],
-    [40000, 60000],
-    [60000, limitMax],
-  ];
+  const boundaries = [...new Set([limitMin, 20000, 40000, 60000, limitMax])]
+    .filter((value) => value >= limitMin && value <= limitMax)
+    .sort((left, right) => left - right);
+  const quickRanges: [number, number][] = boundaries
+    .slice(0, -1)
+    .map((from, index) => [from, boundaries[index + 1]] as [number, number])
+    .filter(([from, to]) => from < to);
 
   const left = ((min - limitMin) / span) * 100;
   const right = ((max - limitMin) / span) * 100;

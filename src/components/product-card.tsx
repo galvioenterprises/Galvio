@@ -32,6 +32,8 @@ function chipsFor(product: Product): string[] {
 /** Scarcity and availability share one slot; only one can be true. */
 function badgeFor(product: Product): string | null {
   switch (product.availability) {
+    case "unknown":
+      return "Confirm availability";
     case "out_of_stock":
       return "Out of stock";
     case "preorder":
@@ -39,7 +41,7 @@ function badgeFor(product: Product): string | null {
     case "backorder":
       return "Backorder";
     case "in_stock":
-      return product.stockCount !== undefined && product.stockCount <= 5
+      return product.stockCount !== undefined && product.stockCount > 0 && product.stockCount <= 5
         ? `Only ${product.stockCount} left`
         : null;
   }
@@ -87,7 +89,7 @@ function Price({ product }: { product: Product }) {
         {off > 0 && (
           <>
             <s>{formatPrice(product.mrp)}</s>{" "}
-            <span className="font-medium text-accent">{off}% off</span>
+            <span className="font-medium text-accent">{off}% below MRP</span>
           </>
         )}
       </p>
@@ -121,22 +123,22 @@ export function ProductCard({ product }: { product: Product }) {
   const soldOut = product.availability === "out_of_stock";
 
   return (
-    <article className="group flex flex-col rounded-card border border-line bg-surface p-3 transition-shadow hover:shadow-[0_2px_16px_rgba(17,19,24,0.08)]">
+    <article className="group flex flex-col rounded-card border border-line bg-surface p-4 transition-shadow hover:shadow-[0_2px_16px_rgba(17,19,24,0.08)]">
       <div className="relative">
         {badge && <Badge label={badge} />}
-        {/* The design sets the product on a light panel rather than on the
-            card itself, which stops a white appliance disappearing. */}
+        {/* A fixed, generous stage keeps every card aligned while letting
+            wide and tall appliances use the largest real size available. */}
         <Link
           href={`/product/${product.slug}/`}
           tabIndex={-1}
           aria-hidden
-          className="block overflow-hidden rounded-xl bg-canvas"
+          className="flex h-56 items-center justify-center overflow-hidden rounded-xl bg-surface sm:h-60 lg:h-64 2xl:h-[17rem]"
         >
           <ProductImage
             src={image.src}
             alt={image.alt}
-            sizes="(min-width: 1280px) 280px, (min-width: 640px) 45vw, 90vw"
-            className={`mx-auto h-40 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03] ${
+            sizes="(min-width: 1536px) 380px, (min-width: 1024px) 420px, (min-width: 640px) 45vw, 92vw"
+            className={`max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-[1.03] ${
               soldOut ? "opacity-45" : ""
             }`}
           />
@@ -150,7 +152,7 @@ export function ProductCard({ product }: { product: Product }) {
         </div>
 
         {/* Two lines reserved so single-line titles do not shorten the card. */}
-        <h3 className="min-h-[2.6rem] text-sm font-medium leading-snug">
+        <h3 className="min-h-[2.8rem] text-[0.9375rem] font-medium leading-snug">
           <Link
             href={`/product/${product.slug}/`}
             className="line-clamp-2 rounded-sm hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"

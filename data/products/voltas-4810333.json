@@ -1,0 +1,47 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-4810333",
+  "sku": "GAL-CO-4810333",
+  "brand": "Voltas",
+  "model": "4810333",
+  "status": "active",
+  "internalCode": "VOLTAS AIR COOLER GRAND 92",
+  "title": "Voltas Desert Air Cooler Grand 92",
+  "description": "92 Litre Desert Cooler with Honeycomb cooling pads for long-lasting cooling",
+  "category": "Air Cooler",
+  "subCategory": "Desert",
+  "mrp": 19890,
+  "sellingPrice": 13490,
+  "availability": "unknown",
+  "condition": "new",
+  "capacity": "92L",
+  "highlights": [],
+  "faqs": [],
+  "images": [
+    {
+      "src": "voltas-4810333",
+      "alt": "Voltas Desert Air Cooler Grand 92",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-4810333-2",
+      "alt": "Voltas Desert Air Cooler Grand 92",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-4810333-3",
+      "alt": "Voltas Desert Air Cooler Grand 92",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-4810333-4",
+      "alt": "Voltas Desert Air Cooler Grand 92",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

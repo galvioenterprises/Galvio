@@ -1,0 +1,59 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-4810348",
+  "sku": "GAL-CO-4810348",
+  "brand": "Voltas",
+  "model": "4810348",
+  "status": "active",
+  "internalCode": "Voltas Air Cooler JetMax 70",
+  "title": "Voltas Desert Air Cooler JetMax 70",
+  "description": "70 Litre Desert Cooler with Honeycomb cooling pads for long-lasting cooling",
+  "category": "Air Cooler",
+  "subCategory": "Desert",
+  "mrp": 18190,
+  "sellingPrice": 12090,
+  "availability": "unknown",
+  "condition": "new",
+  "capacity": "70L",
+  "highlights": [],
+  "faqs": [],
+  "images": [
+    {
+      "src": "voltas-4810348",
+      "alt": "Voltas Desert Air Cooler JetMax 70",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-4810348-2",
+      "alt": "Voltas Desert Air Cooler JetMax 70",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-4810348-3",
+      "alt": "Voltas Desert Air Cooler JetMax 70",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-4810348-4",
+      "alt": "Voltas Desert Air Cooler JetMax 70",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-4810348-5",
+      "alt": "Voltas Desert Air Cooler JetMax 70",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-4810348-6",
+      "alt": "Voltas Desert Air Cooler JetMax 70",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

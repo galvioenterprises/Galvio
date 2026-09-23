@@ -12,7 +12,7 @@ const AUTOPLAY_MS = 7000;
 /**
  * Hero carousel.
  *
- * Measured against frame 278:7354 at a 1920 viewport: the hero runs from
+ * Measured against frame 347:146 at a 1920 viewport: the hero runs from
  * the header at 64 to the trust band at 621, the eyebrow sits at 189 and
  * the headline at 228 on a 54px line.
  *
@@ -65,7 +65,7 @@ export function Hero() {
           alt=""
           sizes="720px"
           priority
-          className="max-h-full w-auto max-w-none object-contain"
+          className="max-h-full w-auto max-w-none scale-125 object-contain"
         />
       </div>
 
@@ -109,13 +109,13 @@ export function Hero() {
 
           {/* The product sits behind the copy on large screens; on small
               ones it returns to the flow so it is not simply lost. */}
-          <div className="relative lg:hidden">
+          <div className="relative h-72 overflow-hidden lg:hidden">
             <ProductImage
               src={slide.image}
               alt=""
               sizes="100vw"
               priority
-              className="mx-auto w-full max-w-sm"
+              className="absolute left-1/2 top-1/2 w-full max-w-sm -translate-x-1/2 -translate-y-1/2 scale-125 object-contain"
             />
           </div>
         </div>

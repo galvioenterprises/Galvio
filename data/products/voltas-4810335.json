@@ -1,0 +1,42 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-4810335",
+  "sku": "GAL-CO-4810335",
+  "brand": "Voltas",
+  "model": "4810335",
+  "status": "active",
+  "internalCode": "Voltas Air Cooler Windsor 65",
+  "title": "Room Air Cooler Windsor 65",
+  "description": "Model No.: 4810335 / Windsor 65 Gross Volume: 65 Litre Product Color: White & Grey Honeycomb + Woodwool Pad for Long Lasting Cooling Motor with Thermal Overload Protection Mosquito Repellent Works on Inverter 65 litre Desert Cooler with Honeycomb cooling pads",
+  "category": "Air Cooler",
+  "subCategory": "Personal",
+  "mrp": 16990,
+  "sellingPrice": 13405,
+  "availability": "unknown",
+  "condition": "new",
+  "weightKg": 29.5,
+  "capacity": "65L",
+  "highlights": [],
+  "faqs": [],
+  "images": [
+    {
+      "src": "voltas-4810335",
+      "alt": "Room Air Cooler Windsor 65",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-4810335-2",
+      "alt": "Room Air Cooler Windsor 65",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-4810335-3",
+      "alt": "Room Air Cooler Windsor 65",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

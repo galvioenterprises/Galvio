@@ -39,7 +39,6 @@ import {
   StarIcon,
   TruckIcon,
 } from "@/components/icons";
-import { business } from "@/config/business";
 
 /** Five stars with the rating filled in, as the frame draws it. */
 function Stars({ value }: { value: number }) {
@@ -86,6 +85,7 @@ export async function generateMetadata({
 }
 
 const AVAILABILITY_LABEL: Record<Product["availability"], string> = {
+  unknown: "Confirm availability",
   in_stock: "In stock",
   out_of_stock: "Out of stock",
   preorder: "Available to pre-order",
@@ -94,7 +94,7 @@ const AVAILABILITY_LABEL: Record<Product["availability"], string> = {
 
 /** schema.org availability URLs, which is what Google reads — not our
  *  internal snake_case values. */
-const AVAILABILITY_SCHEMA: Record<Product["availability"], string> = {
+const AVAILABILITY_SCHEMA: Partial<Record<Product["availability"], string>> = {
   in_stock: "https://schema.org/InStock",
   out_of_stock: "https://schema.org/OutOfStock",
   preorder: "https://schema.org/PreOrder",
@@ -143,12 +143,6 @@ function specRows(product: Product): [string, string][] {
  * who has just read the number is deciding whether to trust it, and
  * answering that question after the button has scrolled past is too late.
  */
-const BUY_ASSURANCES = [
-  { Icon: BadgeIcon, title: "Genuine Product", subtitle: "Manufacturer warranty" },
-  { Icon: TruckIcon, title: "Delivery", subtitle: "From our own stock" },
-  { Icon: ShieldCheckIcon, title: "Installation", subtitle: "Service coordination" },
-];
-
 export default async function ProductPage({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
   const product = getProductBySlug(slug);
@@ -169,8 +163,15 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
   const sections: TabSection[] = [
     { id: "overview", label: "Overview" },
     { id: "specifications", label: "Specifications" },
-    { id: "warranty", label: "Warranty" },
-    { id: "delivery", label: "Delivery & Installation" },
+    ...(product.warrantyMonths || product.compressorWarrantyMonths
+      ? [{ id: "warranty", label: "Warranty" }]
+      : []),
+    {
+      id: "delivery",
+      label: product.installationIncluded !== undefined
+        ? "Delivery & Installation"
+        : "Delivery",
+    },
     ...(product.faqs.length > 0 ? [{ id: "faqs", label: "FAQs" }] : []),
   ];
 
@@ -192,7 +193,9 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
       url: `${site.url}/product/${product.slug}/`,
       priceCurrency: site.currency,
       price: product.sellingPrice,
-      availability: AVAILABILITY_SCHEMA[product.availability],
+      ...(AVAILABILITY_SCHEMA[product.availability]
+        ? { availability: AVAILABILITY_SCHEMA[product.availability] }
+        : {}),
       itemCondition: CONDITION_SCHEMA[product.condition],
       seller: { "@type": "Organization", name: site.legalName },
     },
@@ -225,7 +228,7 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
   return (
     <>
       <Breadcrumbs
-        size="product"
+        size="listing"
         trail={[
           { label: "Home", href: "/" },
           { label: "Products", href: "/products/" },
@@ -236,10 +239,12 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
         ]}
       />
 
-      <Container size="product" className="pb-24 pt-2">
-        {/* Frame 174:3056: the gallery and the details share one card,
-            852 wide; the delivery panel is a separate 319 card beside it. */}
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_319px] lg:items-start">
+      <Container size="listing" className="pb-24 pt-2">
+        {/* The product needs enough width for a true-to-scale appliance image.
+            Keep the delivery panel beside it only on wide desktops; forcing all
+            three columns onto a laptop made the gallery collapse around the
+            fixed-width details and thumbnail rail. */}
+        <div className="grid gap-6 2xl:grid-cols-[minmax(0,1fr)_319px] 2xl:items-start">
           <div className="rounded-2xl border border-line bg-surface p-5">
             <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_400px]">
               <ProductGallery images={product.images} />
@@ -289,19 +294,40 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
 
                 {off > 0 && (
                   <p className="mt-1.5 text-[0.8125rem] font-medium text-scarcity-text">
-                    Save {formatPrice(savings)} ({off}% off)
+                    Published price is {formatPrice(savings)} ({off}%) below MRP
                   </p>
                 )}
                 <p className="mt-1 text-[0.8125rem] text-text-muted">
                   {product.gstRate ? `Inclusive of ${product.gstRate}% GST. ` : ""}
-                  {AVAILABILITY_LABEL[product.availability]}.
+                  {AVAILABILITY_LABEL[product.availability]}. Confirm the final
+                  quote with the showroom.
                 </p>
 
                 {/* Trust sits between the price and the button: that gap
                     is where the hesitation is, and answering it after the
                     button has scrolled past is too late to matter. */}
                 <ul className="mt-4 grid gap-2.5 sm:grid-cols-3">
-                  {BUY_ASSURANCES.map(({ Icon, title, subtitle }) => (
+                  {[
+                    {
+                      Icon: BadgeIcon,
+                      title: "Genuine Product",
+                      subtitle: "From an authorised Voltas distributor",
+                    },
+                    {
+                      Icon: TruckIcon,
+                      title: "Delivery",
+                      subtitle: "Confirmed with the showroom before purchase",
+                    },
+                    ...(product.installationIncluded !== undefined
+                      ? [{
+                          Icon: ShieldCheckIcon,
+                          title: "Installation",
+                          subtitle: product.installationIncluded
+                            ? "Included for this product"
+                            : "Not included in the listed price",
+                        }]
+                      : []),
+                  ].map(({ Icon, title, subtitle }) => (
                     <li key={title} className="rounded-lg bg-canvas p-3.5">
                       <Icon className="size-4 text-text-muted" />
                       <p className="mt-2 text-xs font-medium leading-snug">{title}</p>
@@ -319,12 +345,14 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
                   >
                     {inStock ? "Buy now" : "Enquire"}
                   </a>
-                  <AddToCartButton
-                    slug={product.slug}
-                    title={product.title}
-                    availability={product.availability}
-                    className="inline-flex h-11 items-center gap-2 rounded-lg bg-ink px-6 text-sm font-medium text-white transition-colors hover:bg-ink-soft"
-                  />
+                  {inStock && (
+                    <AddToCartButton
+                      slug={product.slug}
+                      title={product.title}
+                      availability={product.availability}
+                      className="inline-flex h-11 items-center gap-2 rounded-lg bg-ink px-6 text-sm font-medium text-white transition-colors hover:bg-ink-soft"
+                    />
+                  )}
                 </div>
 
                 <StickyBuyBar
@@ -338,10 +366,10 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
             </div>
           </div>
 
-          <aside className="rounded-2xl border border-line bg-surface p-5 lg:sticky lg:top-6">
+          <aside className="rounded-2xl border border-line bg-surface p-5 2xl:sticky 2xl:top-6">
             <p className="flex items-center gap-2 text-[0.9375rem] font-semibold">
               <PinIcon className="size-4 text-text-muted" />
-              Delivery &amp; Installation
+              Delivery{product.installationIncluded !== undefined ? " & Installation" : ""}
             </p>
             <p className="mb-4 mt-1.5 text-[0.8125rem] text-text-muted">
               Check availability in your area
@@ -351,20 +379,11 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
 
             <ul className="mt-5 space-y-4 border-t border-line pt-5 text-[0.8125rem]">
               <li className="flex gap-3">
-                <ShieldCheckIcon className="mt-0.5 size-4 shrink-0 text-text-muted" />
-                <span>
-                  <span className="block font-medium">Easy returns</span>
-                  <span className="text-text-muted">
-                    {business.returnWindowDays} days replacement
-                  </span>
-                </span>
-              </li>
-              <li className="flex gap-3">
                 <BadgeIcon className="mt-0.5 size-4 shrink-0 text-text-muted" />
                 <span>
                   <span className="block font-medium">Bought direct</span>
                   <span className="text-text-muted">
-                    Distributor stock, not a marketplace reseller
+                    Authorised distributor, not a marketplace listing
                   </span>
                 </span>
               </li>
@@ -391,7 +410,9 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
 
           <Overview product={product} />
           <Specifications rows={rows} />
-          <WarrantyAndSupport product={product} />
+          {(product.warrantyMonths || product.compressorWarrantyMonths) && (
+            <WarrantyAndSupport product={product} />
+          )}
           <DeliveryAndInstallation product={product} />
 
           {product.faqs.length > 0 && (
@@ -419,7 +440,7 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
                 </Link>
               )}
             </div>
-            <div className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="mt-5 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
               {related.map((item) => (
                 <ProductCard key={item.slug} product={item} />
               ))}

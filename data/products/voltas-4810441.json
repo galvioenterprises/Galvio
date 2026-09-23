@@ -1,0 +1,59 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-4810441",
+  "sku": "GAL-CO-4810441",
+  "brand": "Voltas",
+  "model": "4810441",
+  "status": "active",
+  "internalCode": "VOLTAS AIR COOLER TEJAS 110",
+  "title": "Voltas Desert Air Cooler TEJAS 110",
+  "description": "110 Litre Desert Cooler with Honeycomb cooling pads for long-lasting cooling",
+  "category": "Air Cooler",
+  "subCategory": "Desert",
+  "mrp": 21990,
+  "sellingPrice": 14790,
+  "availability": "unknown",
+  "condition": "new",
+  "capacity": "110L",
+  "highlights": [],
+  "faqs": [],
+  "images": [
+    {
+      "src": "voltas-4810441",
+      "alt": "Voltas Desert Air Cooler TEJAS 110",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-4810441-2",
+      "alt": "Voltas Desert Air Cooler TEJAS 110",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-4810441-3",
+      "alt": "Voltas Desert Air Cooler TEJAS 110",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-4810441-4",
+      "alt": "Voltas Desert Air Cooler TEJAS 110",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-4810441-5",
+      "alt": "Voltas Desert Air Cooler TEJAS 110",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-4810441-6",
+      "alt": "Voltas Desert Air Cooler TEJAS 110",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

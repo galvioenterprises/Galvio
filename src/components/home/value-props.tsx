@@ -4,29 +4,29 @@ import { Container } from "../container";
 const PROPS: { icon: FigmaIconName; title: string; subtitle: string }[] = [
   {
     icon: "offers-discount",
-    title: "Best Prices Guaranteed",
-    subtitle: "Get the most competitive prices on all products.",
+    title: "Source-backed Listings",
+    subtitle: "Only supplied product details are shown.",
   },
   {
     icon: "exchange",
-    title: "Easy Exchange Offers",
-    subtitle: "Exchange your old appliance for a better one.",
+    title: "Clear Catalogue Prices",
+    subtitle: "MRP and listed price shown where supplied.",
   },
   {
     icon: "payment-cards",
-    title: "No Cost EMI Available",
-    subtitle: "Flexible EMI options on leading banks and cards.",
+    title: "Useful Comparisons",
+    subtitle: "Compare categories and supplied specifications.",
   },
   {
     icon: "support-headset",
-    title: "Expert Support",
-    subtitle: "We're here to help you choose and to help after you buy.",
+    title: "Showroom Enquiries",
+    subtitle: "Confirm current stock and next steps directly.",
   },
 ];
 
 export function ValueProps() {
   return (
-    <section className="py-20">
+    <section className="pb-14 sm:pb-16">
       <Container>
       <ul className="grid gap-8 rounded-2xl border border-line bg-surface p-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
         {PROPS.map(({ icon, title, subtitle }) => (

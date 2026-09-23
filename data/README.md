@@ -3,26 +3,31 @@
 ## The workflow
 
 ```
-Google Sheet  ──export CSV──►  data/products.csv  ──pnpm import:products──►  data/products/*.json  ──►  site build
-   (you)                          (source of truth,          (generated,               (static pages)
-                                   committed)                 committed, never
-                                                              hand-edited)
+PDF / supplier batches ──► data/sources/*.csv ──┐
+                                                ├─ pnpm compose:products ─► data/products.csv
+Dealer price/stock edits ─► inventory-overrides.json ─┘                           │
+                                                                 pnpm import:products
+                                                                                 │
+                                                                 data/products/*.json
+                                                                      (generated)
 ```
 
-Fill the spreadsheet. Export it as CSV over `data/products.csv`. Run:
+Keep each reviewed supplier batch under `data/sources/`. Compose the complete
+catalogue, validate it without writes, and only then replace generated JSON:
 
 ```bash
-pnpm import:products
-```
-
-Imports merge by SKU by default, so separately extracted batches accumulate.
-Use `--check` to validate and print the readiness report without writing, or
-`--replace` only when the CSV is a complete catalogue snapshot:
-
-```bash
+pnpm compose:products
 pnpm import:products --check data/products.csv
-pnpm import:products --replace complete-catalogue.csv
+pnpm import:products --replace data/products.csv
 ```
+
+Direct imports still merge by SKU by default and remain useful for checking an
+isolated batch. `--replace` is reserved for the composed complete catalogue.
+
+`pnpm sync:voltas -- --images-only` refreshes only the official image arrays in
+the cached manufacturer snapshot. Use it when gallery ordering or hero photos
+changed but prices and copy are not part of the review; the normal
+`pnpm sync:voltas` command refreshes the complete staged snapshot.
 
 The importer keeps identity-complete rows as invisible drafts when commercial
 fields are still missing. Complete rows must satisfy the strict schema in
@@ -37,17 +42,21 @@ array rather than becoming duplicate product pages.
 `data/products.template.csv` is the blank header row plus one filled
 example. Copy it into a Google Sheet and share the sheet with whoever is
 collecting the data; a spreadsheet is the right tool for a person entering
-20 products, and JSON is the right tool for a build. The importer is the
-only bridge, which is why the generated JSON must never be hand-edited —
-the next import overwrites it.
+20 products, and JSON is the right tool for a build. The importer is the only
+bridge to generated JSON, which is why `data/products/*.json` must never be
+hand-edited. The local inventory console writes dealer-owned fields to
+`data/sources/inventory-overrides.json`; composition applies them after
+supplier facts, so a Voltas refresh cannot overwrite local stock, price,
+availability or publication decisions.
 
 ## Column notes
 
 - **gtin** — the barcode number on the box. 8, 12, 13 or 14 digits, no
   spaces or hyphens. Photographing each box is usually faster than typing.
   Without it the product is not eligible for free Google listings.
-- **availability** — one of `in_stock`, `out_of_stock`, `preorder`,
-  `backorder`.
+- **availability** — one of `unknown`, `in_stock`, `out_of_stock`,
+  `preorder`, `backorder`. Manufacturer catalogue availability is not Galvio
+  showroom stock; use `unknown` until a person confirms inventory.
 - **condition** — one of `new`, `refurbished`, `used`.
 - **mrp / selling_price** — rupees, GST inclusive. `₹` and thousands commas
   are tolerated. Selling price may not exceed MRP.
@@ -61,13 +70,15 @@ the next import overwrites it.
   need to round them yourself.
 - **stock_count** — units on hand. Leave blank unless the number is real.
   When it is 5 or fewer the card shows an "Only N left" badge.
-- **rating_value / rating_count** — leave both blank until you have real
-  reviews. A rating shown from invented numbers is a lie to the customer
-  and, once it reaches the structured data Google reads, a manual-action
-  risk. Both columns must be filled or neither is used.
-- **image_files** — filenames only, separated by `|`, in display order.
-  The first one is the main image. The files themselves go in
-  `public/images/products/`.
+- **rating_value / rating_count** — always leave both blank. The importer
+  rejects either field when supplied, so supplier data cannot create review
+  markup. Real customer reviews need a separate verified system later.
+- **image_files** — processed asset keys, separated by `|`, in display order.
+  The first one is the main image. Source photographs live under
+  `assets/products/<asset-key>/`; `pnpm build:images` generates the public
+  AVIF/WebP files and manifest. The Voltas bridge keeps every unique official
+  image in the manufacturer's order, naming later shots `<asset-key>-2`,
+  `<asset-key>-3`, and so on.
 - **description** — must be quoted in the CSV if it contains a comma. A
   spreadsheet export handles this automatically.
 

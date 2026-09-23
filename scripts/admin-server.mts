@@ -1,29 +1,36 @@
 /**
- * Local inventory console.
+ * Authenticated, loopback-only catalogue console.
  *
- *   pnpm admin      ->  http://127.0.0.1:4100
- *
- * This is a local tool, not part of the site. It binds to the loopback
- * address only, so it is reachable from this machine and nowhere else —
- * which is the only honest way to "protect" an admin surface on a project
- * that deploys as static files with no server behind them.
- *
- * It reads and writes the repository directly: edits land in
- * data/products/*.json and data/sources/voltas-decisions.json, which are
- * version-controlled, so every price change is a reviewable diff with an
- * author and a date. A deployed version of this would need a Cloudflare
- * Worker for the writes and Cloudflare Access for the login.
+ * This is a repository tool, not the hosted /admin application. A hosted
+ * editor needs Cloudflare Access plus a write-capable Worker/workflow.
  */
 
-import { createServer } from "node:http";
+import { createHash, randomBytes } from "node:crypto";
+import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
 import { spawn } from "node:child_process";
-import { readFileSync, writeFileSync, readdirSync, existsSync } from "node:fs";
+import {
+  existsSync,
+  readFileSync,
+  readdirSync,
+  renameSync,
+  writeFileSync,
+} from "node:fs";
 import { join, resolve } from "node:path";
+import { z } from "zod";
+import { availabilitySchema, statusSchema } from "../src/lib/product-schema.ts";
 
 const PORT = 4100;
+const ORIGINS = new Set([`http://127.0.0.1:${PORT}`, `http://localhost:${PORT}`]);
 const PRODUCTS = resolve("data/products");
+const OVERRIDES = resolve("data/sources/inventory-overrides.json");
 const DECISIONS = resolve("data/sources/voltas-decisions.json");
 const REPORT = resolve("data/sources/voltas-match-report.tsv");
+const CATALOGUE = resolve("data/sources/voltas-catalogue.json");
+const IMAGE_MANIFEST = resolve("public/images/products/manifest.json");
+const PUBLIC_IMAGES = resolve("public/images/products");
+const TOKEN = process.env.GALVIO_ADMIN_TOKEN || randomBytes(24).toString("base64url");
+const ACTOR = process.env.GALVIO_ADMIN_USER?.trim() || "local-admin";
+const BODY_LIMIT = 64 * 1024;
 
 type Product = Record<string, unknown> & {
   slug: string;
@@ -38,266 +45,322 @@ type Product = Record<string, unknown> & {
   images?: { src: string }[];
   missing?: string[];
 };
+type Override = {
+  values: Record<string, string | number>;
+  updatedAt: string;
+  updatedBy: string;
+};
+type StoredDecision = {
+  handle: string | null;
+  fingerprint: string;
+};
 
-const readProducts = (): Product[] =>
-  readdirSync(PRODUCTS)
-    .filter((f) => f.endsWith(".json"))
-    .map((f) => JSON.parse(readFileSync(join(PRODUCTS, f), "utf8")) as Product)
-    .sort((a, b) => a.title.localeCompare(b.title));
+const patchSchema = z.object({
+  mrp: z.number().positive().nullable().optional(),
+  sellingPrice: z.number().positive().nullable().optional(),
+  stockCount: z.number().int().nonnegative().nullable().optional(),
+  availability: availabilitySchema.optional(),
+  status: statusSchema.optional(),
+}).strict();
+const productRequestSchema = z.object({ sku: z.string().min(1).max(100), patch: patchSchema }).strict();
+const reviewRequestSchema = z.object({
+  line: z.string().min(1).max(500),
+  handle: z.string().min(1).max(300).nullable(),
+}).strict();
 
-function writeProduct(slug: string, patch: Partial<Product>) {
-  const file = join(PRODUCTS, `${slug}.json`);
-  const product = JSON.parse(readFileSync(file, "utf8")) as Product;
+function readJson<T>(file: string, fallback: T): T {
+  return existsSync(file) ? JSON.parse(readFileSync(file, "utf8")) as T : fallback;
+}
 
-  for (const [k, v] of Object.entries(patch)) {
-    if (v === "" || v === null) delete product[k];
-    else product[k] = v;
+function atomicJson(file: string, value: unknown): void {
+  const temporary = `${file}.${process.pid}.tmp`;
+  writeFileSync(temporary, `${JSON.stringify(value, null, 2)}\n`, { mode: 0o600 });
+  renameSync(temporary, file);
+}
+
+function baseProducts(): Product[] {
+  return readdirSync(PRODUCTS)
+    .filter((file) => file.endsWith(".json"))
+    .map((file) => JSON.parse(readFileSync(join(PRODUCTS, file), "utf8")) as Product);
+}
+
+function readProducts(): (Product & { imageUrl?: string; override?: Omit<Override, "values"> })[] {
+  const overrides = readJson<Record<string, Override>>(OVERRIDES, {});
+  return baseProducts()
+    .map((product) => {
+      const override = overrides[product.sku];
+      const values = override?.values ?? {};
+      const merged = {
+        ...product,
+        ...(values.status !== undefined ? { status: values.status } : {}),
+        ...(values.mrp !== undefined ? { mrp: values.mrp } : {}),
+        ...(values.selling_price !== undefined ? { sellingPrice: values.selling_price } : {}),
+        ...(values.availability !== undefined ? { availability: values.availability } : {}),
+        ...(values.stock_count !== undefined ? { stockCount: values.stock_count } : {}),
+      } as Product;
+      return {
+        ...merged,
+        ...(merged.images?.[0]?.src
+          ? { imageUrl: `/image?src=${encodeURIComponent(merged.images[0].src)}` }
+          : {}),
+        ...(override ? { override: { updatedAt: override.updatedAt, updatedBy: override.updatedBy } } : {}),
+      };
+    })
+    .sort((left, right) => left.title.localeCompare(right.title));
+}
+
+function writeOverride(sku: string, patch: z.infer<typeof patchSchema>): Product {
+  const product = baseProducts().find((candidate) => candidate.sku === sku);
+  if (!product) throw new Error(`unknown SKU ${sku}`);
+  const current = readJson<Record<string, Override>>(OVERRIDES, {});
+  const values = { ...(current[sku]?.values ?? {}) };
+  const key: Record<keyof z.infer<typeof patchSchema>, string> = {
+    mrp: "mrp",
+    sellingPrice: "selling_price",
+    stockCount: "stock_count",
+    availability: "availability",
+    status: "status",
+  };
+  for (const [field, value] of Object.entries(patch) as [keyof typeof key, unknown][]) {
+    if (value === null) delete values[key[field]];
+    else if (value !== undefined) values[key[field]] = value as string | number;
   }
-  writeFileSync(file, JSON.stringify(product, null, 2) + "\n");
-  return product;
+  const mrp = Number(values.mrp ?? product.mrp);
+  const selling = Number(values.selling_price ?? product.sellingPrice);
+  if (Number.isFinite(mrp) && Number.isFinite(selling) && selling > mrp) {
+    throw new Error("selling price cannot exceed MRP");
+  }
+  const availability = String(values.availability ?? product.availability);
+  const rawStock = values.stock_count ?? product.stockCount;
+  const stock = rawStock === undefined ? undefined : Number(rawStock);
+  if (availability === "in_stock" && stock === 0) {
+    throw new Error("in_stock products cannot have stock count 0");
+  }
+  if (availability === "out_of_stock" && stock !== undefined && stock > 0) {
+    throw new Error("out_of_stock products cannot have a positive stock count");
+  }
+  current[sku] = {
+    values,
+    updatedAt: new Date().toISOString(),
+    updatedBy: ACTOR,
+  };
+  atomicJson(OVERRIDES, current);
+  return readProducts().find((candidate) => candidate.sku === sku)!;
 }
 
 function readReview() {
   if (!existsSync(REPORT)) return [];
-  const decisions: Record<string, string | null> = existsSync(DECISIONS)
-    ? JSON.parse(readFileSync(DECISIONS, "utf8"))
-    : {};
-
+  const decisions = readJson<Record<string, StoredDecision | string | null>>(DECISIONS, {});
   return readFileSync(REPORT, "utf8")
     .trim()
     .split("\n")
-    .map((l) => l.split("\t"))
-    .filter(([verdict]) => verdict === "WEAK")
-    .map(([, score, line, title, price, sku, image, handle]) => ({
-      line,
-      score,
-      title,
-      price,
-      sku,
-      image,
-      handle,
-      decision: line in decisions ? (decisions[line] === null ? "rejected" : "accepted") : "pending",
-    }));
+    .map((raw) => ({ raw, columns: raw.split("\t") }))
+    .filter(({ columns: [verdict] }) => verdict === "WEAK")
+    .map(({ raw, columns: [, score, line, title, price, sku, image, handle, reason, margin, candidates] }) => {
+      const fingerprint = createHash("sha256").update(raw).digest("hex");
+      const stored = decisions[line];
+      const current = stored !== null && typeof stored === "object" &&
+        stored.fingerprint === fingerprint
+        ? stored
+        : undefined;
+      return {
+        line,
+        score,
+        title,
+        price,
+        sku,
+        image,
+        handle,
+        reason,
+        margin,
+        fingerprint,
+        candidates: candidates ? JSON.parse(candidates) : [],
+        decision: current ? (current.handle === null ? "rejected" : current.handle) : "pending",
+      };
+    });
 }
 
-/** Runs the sync scripts in order, streaming progress as newline JSON so
- *  the page can show what is happening rather than a spinner. */
-function runSync(write: (line: string) => void, done: () => void) {
-  const steps: [string, string[]][] = [
-    ["Fetching the Voltas catalogue", ["scripts/fetch-voltas.mts"]],
-    ["Matching against the stock list", ["scripts/match-voltas.mts", "--csv", "data/sources/voltas-match-report.tsv"]],
-    ["Building product rows", ["scripts/bridge-voltas.mts"]],
-    ["Downloading new photography", ["scripts/sync-images.mts"]],
-    ["Processing images", ["scripts/build-images.mts"]],
-    ["Importing", ["scripts/import-products.mts", "data/products.csv"]],
-  ];
+function writeDecision(line: string, handle: string | null): void {
+  const review = readReview().find((row) => row.line === line);
+  if (!review) throw new Error("stock line is not in the current review queue");
+  if (handle !== null) {
+    const validHandles = new Set(
+      (readJson<{ handle: string }[]>(CATALOGUE, [])).map((product) => product.handle),
+    );
+    if (!validHandles.has(handle)) throw new Error("selected Voltas handle does not exist");
+  }
+  const decisions = readJson<Record<string, StoredDecision | string | null>>(DECISIONS, {});
+  decisions[line] = { handle, fingerprint: review.fingerprint };
+  atomicJson(DECISIONS, decisions);
+}
 
-  let i = 0;
+let taskRunning = false;
+function runSteps(
+  steps: [string, string[]][],
+  write: (message: object) => void,
+  done: () => void,
+): void {
+  if (taskRunning) throw new Error("another catalogue task is already running");
+  taskRunning = true;
+  let index = 0;
+  const finish = (ok: boolean) => {
+    taskRunning = false;
+    write({ done: true, ok });
+    done();
+  };
   const next = () => {
-    if (i >= steps.length) {
-      write(JSON.stringify({ done: true }));
-      done();
-      return;
-    }
-    const [label, args] = steps[i++];
-    write(JSON.stringify({ step: label }));
-
+    if (index >= steps.length) return finish(true);
+    const [label, args] = steps[index++];
+    write({ step: label });
     const child = spawn("node", ["--disable-warning=MODULE_TYPELESS_PACKAGE_JSON", ...args], {
       cwd: process.cwd(),
+      env: process.env,
     });
-    child.stdout.on("data", (d: Buffer) =>
-      String(d)
-        .split("\n")
-        .filter(Boolean)
-        .forEach((l) => write(JSON.stringify({ log: l }))),
-    );
-    child.stderr.on("data", (d: Buffer) => write(JSON.stringify({ log: String(d).trim() })));
+    child.stdout.on("data", (chunk: Buffer) => String(chunk).split("\n").filter(Boolean).forEach((log) => write({ log })));
+    child.stderr.on("data", (chunk: Buffer) => String(chunk).split("\n").filter(Boolean).forEach((log) => write({ log })));
     child.on("close", (code) => {
       if (code !== 0) {
-        write(JSON.stringify({ error: `${label} failed (exit ${code})` }));
-        write(JSON.stringify({ done: true }));
-        done();
-        return;
-      }
-      next();
+        write({ error: `${label} failed (exit ${code})` });
+        finish(false);
+      } else next();
+    });
+    child.on("error", (error) => {
+      write({ error: `${label} failed: ${error.message}` });
+      finish(false);
     });
   };
   next();
 }
 
+async function body(req: IncomingMessage): Promise<unknown> {
+  if (!req.headers["content-type"]?.startsWith("application/json")) {
+    throw new Error("content-type must be application/json");
+  }
+  const chunks: Buffer[] = [];
+  let size = 0;
+  for await (const chunk of req) {
+    const buffer = chunk as Buffer;
+    size += buffer.length;
+    if (size > BODY_LIMIT) throw new Error("request body is too large");
+    chunks.push(buffer);
+  }
+  return chunks.length ? JSON.parse(Buffer.concat(chunks).toString("utf8")) : {};
+}
+
+function authorised(req: IncomingMessage): boolean {
+  return req.headers["x-galvio-admin"] === TOKEN;
+}
+
+function safePost(req: IncomingMessage): boolean {
+  return req.method !== "POST" || ORIGINS.has(String(req.headers.origin ?? ""));
+}
+
+function sendJson(res: ServerResponse, payload: unknown, status = 200): void {
+  res.writeHead(status, {
+    "content-type": "application/json; charset=utf-8",
+    "cache-control": "no-store",
+    "x-content-type-options": "nosniff",
+  });
+  res.end(JSON.stringify(payload));
+}
+
+function sendImage(src: string, res: ServerResponse): void {
+  if (!/^[a-z0-9][a-z0-9-]*$/.test(src)) throw new Error("invalid image key");
+  const manifest = readJson<Record<string, { widths: number[] }>>(IMAGE_MANIFEST, {});
+  const width = manifest[src]?.widths.at(-1);
+  if (!width) throw new Error("image is not in the generated manifest");
+  const file = join(PUBLIC_IMAGES, `${src}-${width}.webp`);
+  if (!file.startsWith(`${PUBLIC_IMAGES}/`) || !existsSync(file)) throw new Error("image file is missing");
+  res.writeHead(200, { "content-type": "image/webp", "cache-control": "private, max-age=300" });
+  res.end(readFileSync(file));
+}
+
 const server = createServer(async (req, res) => {
   const url = new URL(req.url ?? "/", `http://127.0.0.1:${PORT}`);
-  const json = (body: unknown, status = 200) => {
-    res.writeHead(status, { "content-type": "application/json" });
-    res.end(JSON.stringify(body));
-  };
-
-  const body = async (): Promise<Record<string, unknown>> => {
-    const chunks: Buffer[] = [];
-    for await (const c of req) chunks.push(c as Buffer);
-    return chunks.length ? JSON.parse(Buffer.concat(chunks).toString()) : {};
-  };
-
   try {
     if (url.pathname === "/") {
-      res.writeHead(200, { "content-type": "text/html; charset=utf-8" });
-      res.end(PAGE);
+      const nonce = randomBytes(18).toString("base64");
+      res.writeHead(200, {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "no-store",
+        "content-security-policy": `default-src 'none'; script-src 'nonce-${nonce}'; style-src 'unsafe-inline'; img-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'`,
+        "x-frame-options": "DENY",
+        "x-content-type-options": "nosniff",
+      });
+      res.end(PAGE.replace("__NONCE__", nonce));
       return;
     }
-    if (url.pathname === "/api/products") return json(readProducts());
-    if (url.pathname === "/api/review") return json(readReview());
-
+    // These are already public catalogue images; keeping this read-only route
+    // outside token auth lets <img> load without putting the token in a URL.
+    if (url.pathname === "/image" && req.method === "GET") return sendImage(url.searchParams.get("src") ?? "", res);
+    if (!authorised(req)) return sendJson(res, { error: "unauthorised" }, 401);
+    if (!safePost(req)) return sendJson(res, { error: "origin not allowed" }, 403);
+    if (url.pathname === "/api/products" && req.method === "GET") return sendJson(res, readProducts());
+    if (url.pathname === "/api/review" && req.method === "GET") return sendJson(res, readReview());
     if (url.pathname === "/api/product" && req.method === "POST") {
-      const { slug, patch } = (await body()) as { slug: string; patch: Partial<Product> };
-      return json(writeProduct(slug, patch));
+      const input = productRequestSchema.parse(await body(req));
+      return sendJson(res, writeOverride(input.sku, input.patch));
     }
-
     if (url.pathname === "/api/review" && req.method === "POST") {
-      const { line, handle } = (await body()) as { line: string; handle: string | null };
-      const decisions: Record<string, string | null> = existsSync(DECISIONS)
-        ? JSON.parse(readFileSync(DECISIONS, "utf8"))
-        : {};
-      decisions[line] = handle;
-      writeFileSync(DECISIONS, JSON.stringify(decisions, null, 2) + "\n");
-      return json({ ok: true });
+      const input = reviewRequestSchema.parse(await body(req));
+      writeDecision(input.line, input.handle);
+      return sendJson(res, { ok: true });
     }
-
-    if (url.pathname === "/api/sync" && req.method === "POST") {
-      res.writeHead(200, { "content-type": "application/x-ndjson", "cache-control": "no-cache" });
-      runSync((l) => res.write(l + "\n"), () => res.end());
+    if ((url.pathname === "/api/sync" || url.pathname === "/api/apply") && req.method === "POST") {
+      res.writeHead(200, {
+        "content-type": "application/x-ndjson; charset=utf-8",
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+      });
+      const emit = (message: object) => res.write(`${JSON.stringify(message)}\n`);
+      const steps: [string, string[]][] = url.pathname === "/api/sync"
+        ? [
+            ["Fetch manufacturer snapshot", ["scripts/fetch-voltas.mts"]],
+            ["Rebuild safe match report", ["scripts/match-voltas.mts", "--csv", "data/sources/voltas-match-report.tsv"]],
+            ["Stage reviewed supplier batch", ["scripts/bridge-voltas.mts"]],
+            ["Validate staged batch", ["scripts/import-products.mts", "--check", "data/sources/voltas-products.csv"]],
+          ]
+        : [
+            ["Download changed official images", ["scripts/sync-images.mts"]],
+            ["Compose validation preview", ["scripts/compose-products.mts", "--out", `/tmp/galvio-admin-products-${process.pid}.csv`]],
+            ["Validate catalogue", ["scripts/import-products.mts", "--check", `/tmp/galvio-admin-products-${process.pid}.csv`]],
+            ["Compose approved catalogue", ["scripts/compose-products.mts"]],
+            ["Apply validated catalogue", ["scripts/import-products.mts", "--replace", "data/products.csv"]],
+            ["Build responsive images", ["scripts/build-images.mts"]],
+            ["Rebuild search index", ["scripts/build-search-index.mts"]],
+          ];
+      runSteps(steps, emit, () => res.end());
       return;
     }
-
-    json({ error: "not found" }, 404);
+    sendJson(res, { error: "not found" }, 404);
   } catch (error) {
-    json({ error: error instanceof Error ? error.message : String(error) }, 500);
+    const message = error instanceof z.ZodError
+      ? error.issues.map((issue) => `${issue.path.join(".")}: ${issue.message}`).join("; ")
+      : error instanceof Error ? error.message : String(error);
+    if (!res.headersSent) sendJson(res, { error: message }, 400);
+    else res.end(`${JSON.stringify({ error: message, done: true, ok: false })}\n`);
   }
 });
 
-// Loopback only. This is the protection.
 server.listen(PORT, "127.0.0.1", () => {
-  console.log(`Galvio inventory console  ->  http://127.0.0.1:${PORT}`);
-  console.log("Local only. Stop with Ctrl-C.");
+  console.log(`Galvio inventory console -> http://127.0.0.1:${PORT}/#${TOKEN}`);
+  console.log(`Signed actions as ${ACTOR}. Loopback only; stop with Ctrl-C.`);
 });
 
-const PAGE = String.raw`<!doctype html>
-<html lang="en-IN"><head><meta charset="utf-8"><title>Galvio — Inventory</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<style>
-:root{--ink:#0b0e14;--line:#e6e7ea;--muted:#6b7280;--accent:#2563eb;--canvas:#f4f5f6}
-*{box-sizing:border-box}
-body{margin:0;font:15px/1.5 system-ui,sans-serif;color:#111318;background:var(--canvas)}
-header{background:var(--ink);color:#fff;padding:14px 24px;display:flex;align-items:center;gap:16px}
-header b{letter-spacing:.18em;font-size:14px}
-main{max-width:1500px;margin:0 auto;padding:24px}
-button{font:inherit;cursor:pointer;border-radius:8px;border:1px solid var(--line);background:#fff;padding:7px 12px}
-button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
-button.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.25)}
-.tabs{display:flex;gap:6px;margin-bottom:18px}
-.tabs button[aria-selected=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
-th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line);font-size:13px;vertical-align:middle}
-th{background:#fafafa;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-tr:last-child td{border-bottom:0}
-img{width:40px;height:40px;object-fit:contain;background:var(--canvas);border-radius:6px}
-input,select{font:inherit;padding:5px 7px;border:1px solid var(--line);border-radius:6px;width:100%;max-width:120px}
-.pill{display:inline-block;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:600}
-.active{background:#dcfce7;color:#166534}.draft{background:#fef3c7;color:#92400e}
-.notlisted{background:#f1f5f9;color:#475569}
-#log{background:var(--ink);color:#d1d5db;padding:14px;border-radius:10px;font:12px/1.6 ui-monospace,monospace;max-height:280px;overflow:auto;white-space:pre-wrap;margin-top:14px}
-.muted{color:var(--muted)}
-.bar{display:flex;gap:10px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
-</style></head><body>
-<header>
-  <b>GALVIO</b><span class="muted" style="color:#a3aab8">Inventory console · local only</span>
-  <span style="flex:1"></span>
-  <button class="ghost" onclick="sync()">Sync from Voltas</button>
-</header>
-<main>
-  <div class="tabs">
-    <button id="t-inv" aria-selected="true" onclick="show('inv')">Inventory</button>
-    <button id="t-rev" aria-selected="false" onclick="show('rev')">Review queue</button>
-  </div>
-  <div class="bar" id="bar"></div>
-  <div id="inv"></div>
-  <div id="rev" hidden></div>
-  <div id="log" hidden></div>
-</main>
-<script>
-let products=[],review=[];
-const money=n=>n==null?'':'₹'+Number(n).toLocaleString('en-IN');
-
-async function load(){
-  products=await (await fetch('/api/products')).json();
-  review=await (await fetch('/api/review')).json();
-  render();
-}
-function show(which){
-  inv.hidden=which!=='inv'; rev.hidden=which!=='rev';
-  document.getElementById('t-inv').ariaSelected=String(which==='inv');
-  document.getElementById('t-rev').ariaSelected=String(which==='rev');
-}
-function render(){
-  const a=products.filter(p=>p.status==='active').length;
-  const d=products.filter(p=>p.status==='draft').length;
-  bar.innerHTML='<span class="muted">'+products.length+' products · '+a+' live · '+d+' draft · '+
-    review.filter(r=>r.decision==='pending').length+' awaiting review</span>';
-
-  inv.innerHTML='<table><thead><tr><th></th><th>Product</th><th>Category</th><th>MRP</th><th>Selling</th><th>Stock</th><th>Availability</th><th>Status</th></tr></thead><tbody>'+
-    products.map(p=>{
-      const img=p.images&&p.images[0]?p.images[0].src:'';
-      const src=img.startsWith('/')?img:'/images/products/'+img+'-400.webp';
-      return '<tr>'+
-      '<td>'+(img?'<img src="http://localhost:4321'+src+'" alt="">':'')+'</td>'+
-      '<td><b>'+p.title+'</b><br><span class="muted">'+p.sku+(p.missing&&p.missing.length?' · missing: '+p.missing.join(', '):'')+'</span></td>'+
-      '<td>'+(p.category||'')+'</td>'+
-      '<td><input type="number" value="'+(p.mrp??'')+'" onchange="save(\''+p.slug+'\',{mrp:this.value?+this.value:null})"></td>'+
-      '<td><input type="number" value="'+(p.sellingPrice??'')+'" onchange="save(\''+p.slug+'\',{sellingPrice:this.value?+this.value:null})"></td>'+
-      '<td><input type="number" value="'+(p.stockCount??'')+'" onchange="save(\''+p.slug+'\',{stockCount:this.value?+this.value:null})"></td>'+
-      '<td><select onchange="save(\''+p.slug+'\',{availability:this.value})">'+
-        ['in_stock','out_of_stock','preorder','backorder'].map(v=>'<option '+(p.availability===v?'selected':'')+'>'+v+'</option>').join('')+
-      '</select></td>'+
-      '<td><span class="pill '+(p.status==='active'?'active':p.status==='draft'?'draft':'notlisted')+'">'+p.status+'</span></td>'+
-      '</tr>';}).join('')+'</tbody></table>';
-
-  rev.innerHTML= review.length===0 ? '<p class="muted">Nothing to review.</p>' :
-    '<table><thead><tr><th>Our stock line</th><th>Suggested Voltas product</th><th>Price</th><th>Score</th><th></th></tr></thead><tbody>'+
-    review.map((r,i)=>'<tr>'+
-      '<td><b>'+r.line+'</b></td><td>'+(r.title||'<span class="muted">none</span>')+'</td>'+
-      '<td>'+(r.price||'')+'</td><td class="muted">'+r.score+'</td>'+
-      '<td style="white-space:nowrap">'+(r.decision==='pending'
-        ? '<button class="primary" onclick="decide('+i+',true)">Same product</button> <button onclick="decide('+i+',false)">Not a match</button>'
-        : '<span class="pill '+(r.decision==='accepted'?'active':'notlisted')+'">'+r.decision+'</span>')+
-      '</td></tr>').join('')+'</tbody></table>';
-}
-async function save(slug,patch){
-  await fetch('/api/product',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({slug,patch})});
-  products=await (await fetch('/api/products')).json(); render();
-}
-async function decide(i,accept){
-  const r=review[i];
-  await fetch('/api/review',{method:'POST',headers:{'content-type':'application/json'},
-    body:JSON.stringify({line:r.line,handle:accept?r.handle:null})});
-  r.decision=accept?'accepted':'rejected'; render();
-}
-async function sync(){
-  log.hidden=false; log.textContent='';
-  const res=await fetch('/api/sync',{method:'POST'});
-  const reader=res.body.getReader(); const dec=new TextDecoder(); let buf='';
-  for(;;){
-    const {value,done}=await reader.read(); if(done) break;
-    buf+=dec.decode(value,{stream:true});
-    const lines=buf.split('\n'); buf=lines.pop();
-    for(const l of lines){ if(!l) continue;
-      const m=JSON.parse(l);
-      if(m.step) log.textContent+='\n▸ '+m.step+'\n';
-      if(m.log) log.textContent+='  '+m.log+'\n';
-      if(m.error) log.textContent+='  ✗ '+m.error+'\n';
-      if(m.done) log.textContent+='\nDone. Reloading…\n';
-      log.scrollTop=log.scrollHeight;
-    }
-  }
-  load();
-}
-load();
+const PAGE = String.raw`<!doctype html><html lang="en-IN"><head><meta charset="utf-8"><title>Galvio Inventory</title><meta name="viewport" content="width=device-width,initial-scale=1"><style>
+:root{--ink:#0b0e14;--line:#e3e5e8;--muted:#667085;--blue:#1859e6;--bg:#f5f6f8}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#101318;font:14px/1.45 system-ui,sans-serif}header{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:14px 22px;background:var(--ink);color:white}header b{letter-spacing:.16em}header span{color:#aab0bd}header .grow{flex:1}button,input,select{font:inherit}button{cursor:pointer;border:1px solid var(--line);border-radius:8px;background:white;padding:7px 11px}button.primary{background:var(--blue);border-color:var(--blue);color:white}button.dark{background:#222733;border-color:#454c5b;color:white}button:disabled{cursor:not-allowed;opacity:.5}main{max-width:1500px;margin:auto;padding:22px}.tabs,.bar,.inventory-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:16px}.tabs button[aria-selected=true]{background:var(--ink);color:white;border-color:var(--ink)}.muted{color:var(--muted)}.table-wrap{max-height:calc(100dvh - 180px);overflow:auto}table{width:100%;border-collapse:collapse;background:white;border:1px solid var(--line)}th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}th{position:sticky;top:0;z-index:2;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);background:#fafafa}td{font-size:13px}img{width:42px;height:42px;object-fit:contain;background:var(--bg);border-radius:6px}input,select{max-width:125px;width:100%;padding:5px 7px;border:1px solid var(--line);border-radius:6px}.inventory-tools{position:sticky;top:0;z-index:4;margin:0;padding:0 0 12px;background:var(--bg)}.inventory-tools input{max-width:320px}.inventory-tools select{max-width:180px}.inventory-tools .grow{flex:1}.pill{display:inline-block;padding:2px 7px;border-radius:20px;background:#eef1f5;font-size:11px}.ok{background:#dcfce7;color:#166534}.warn{background:#fff3cd;color:#7a5100}#log{margin-top:14px;max-height:300px;overflow:auto;white-space:pre-wrap;border-radius:10px;background:var(--ink);color:#d6d9df;padding:14px;font:12px/1.6 ui-monospace,monospace}#auth{max-width:520px;margin:80px auto;padding:28px;background:white;border:1px solid var(--line);border-radius:14px}dialog{border:0;border-radius:12px;padding:0;box-shadow:0 20px 70px #0005}dialog form{padding:22px}dialog input{max-width:none;margin-top:8px}@media(max-width:850px){main{padding:12px}.table-wrap{max-height:calc(100dvh - 220px)}header{flex-wrap:wrap}}
+</style></head><body><header><b>GALVIO</b><span>Inventory console · protected local tool</span><span class="grow"></span><button id="sync" class="dark">Stage Voltas refresh</button><button id="apply" class="primary">Apply reviewed changes</button></header><div id="auth" hidden><h1>Admin token required</h1><p class="muted">Open the complete URL printed by <code>pnpm admin</code>, or paste its token below.</p><input id="tokenInput" autocomplete="off"><button id="unlock" class="primary">Unlock</button></div><main id="app" hidden><div class="tabs"><button data-tab="inventory" aria-selected="true">Inventory</button><button data-tab="review" aria-selected="false">Review queue</button></div><div id="summary" class="bar muted"></div><section id="inventory" class="table-wrap"></section><section id="review" class="table-wrap" hidden></section><pre id="log" hidden></pre></main><script nonce="__NONCE__">
+const state={products:[],review:[],token:"",tab:"inventory",inventoryQuery:"",inventoryCategory:"All categories",inventoryStatus:"All statuses"};const $=id=>document.getElementById(id);const text=(tag,value,cls)=>{const node=document.createElement(tag);node.textContent=value;if(cls)node.className=cls;return node};
+function setToken(value){state.token=value;sessionStorage.setItem("galvio-admin",value);history.replaceState(null,"",location.pathname);showAuth()}
+function showAuth(){const ready=Boolean(state.token);$("auth").hidden=ready;$("app").hidden=!ready;if(ready)load()}
+async function api(path,options={}){const response=await fetch(path,{...options,headers:{...(options.headers||{}),"x-galvio-admin":state.token}});if(!response.ok){const payload=await response.json().catch(()=>({error:response.statusText}));throw new Error(payload.error||response.statusText)}return response}
+function cell(row,node){const td=document.createElement("td");if(node)td.append(node);row.append(td);return td}function input(value,type,onchange){const node=document.createElement("input");node.type=type;node.value=value??"";node.addEventListener("change",()=>onchange(node.value));return node}function select(value,values,onchange){const node=document.createElement("select");for(const item of values){const option=text("option",item);option.value=item;option.selected=item===value;node.append(option)}node.addEventListener("change",()=>onchange(node.value));return node}
+async function save(product,patch){try{await api("/api/product",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({sku:product.sku,patch})});await load()}catch(error){alert(error.message)}}
+function renderInventory(){const wrap=$("inventory");wrap.replaceChildren();const tools=document.createElement("div");tools.className="inventory-tools";const query=document.createElement("input");query.type="search";query.placeholder="Search title, model or SKU";query.setAttribute("aria-label","Search inventory");query.value=state.inventoryQuery;const categories=["All categories",...new Set(state.products.map(p=>p.category).filter(Boolean))].sort((a,b)=>a==="All categories"?-1:b==="All categories"?1:a.localeCompare(b));const category=select(state.inventoryCategory,categories,value=>{state.inventoryCategory=value;applyFilters()});category.setAttribute("aria-label","Filter by category");const statuses=["All statuses","active","draft","discontinued","spare","not-listed"];const status=select(state.inventoryStatus,statuses,value=>{state.inventoryStatus=value;applyFilters()});status.setAttribute("aria-label","Filter by status");const count=text("span","","muted grow");tools.append(query,category,status,count);wrap.append(tools);const table=document.createElement("table");const head=document.createElement("thead"),hr=document.createElement("tr");["","Product","Category","MRP","Selling","Stock","Availability","Status","Last override"].forEach(label=>cell(hr,text("b",label)));head.append(hr);table.append(head);const body=document.createElement("tbody"),rows=[];for(const p of state.products){const row=document.createElement("tr");const image=document.createElement("img");if(p.imageUrl)image.src=p.imageUrl;image.alt="";cell(row,p.imageUrl?image:null);const detail=document.createElement("div"),meta=p.sku+(p.model?" · model "+p.model:"")+(p.missing?.length?" · missing: "+p.missing.join(", "):"");detail.append(text("b",p.title),document.createElement("br"),text("span",meta,"muted"));cell(row,detail);cell(row,text("span",p.category||""));cell(row,input(p.mrp,"number",value=>save(p,{mrp:value?Number(value):null})));cell(row,input(p.sellingPrice,"number",value=>save(p,{sellingPrice:value?Number(value):null})));cell(row,input(p.stockCount,"number",value=>save(p,{stockCount:value?Number(value):null})));cell(row,select(p.availability,["unknown","in_stock","out_of_stock","preorder","backorder"],value=>save(p,{availability:value})));cell(row,select(p.status,["draft","active","discontinued","spare","not-listed"],value=>save(p,{status:value})));cell(row,text("span",p.override?new Date(p.override.updatedAt).toLocaleString()+" · "+p.override.updatedBy:"—","muted"));body.append(row);rows.push({row,p})}table.append(body);wrap.append(table);function applyFilters(){state.inventoryQuery=query.value;const needle=state.inventoryQuery.trim().toLowerCase();let visible=0;for(const item of rows){const haystack=[item.p.title,item.p.model,item.p.sku,item.p.category].filter(Boolean).join(" ").toLowerCase();const show=(!needle||haystack.includes(needle))&&(state.inventoryCategory==="All categories"||item.p.category===state.inventoryCategory)&&(state.inventoryStatus==="All statuses"||item.p.status===state.inventoryStatus);item.row.hidden=!show;if(show)visible++}count.textContent=visible+" of "+state.products.length+" records"}query.addEventListener("input",applyFilters);applyFilters()}
+async function decide(item,handle){try{await api("/api/review",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({line:item.line,handle})});await load()}catch(error){alert(error.message)}}
+function renderReview(){const wrap=$("review");wrap.replaceChildren();if(!state.review.length){wrap.append(text("p","No weak suggestions await review.","muted"));return}const table=document.createElement("table"),head=document.createElement("thead"),hr=document.createElement("tr");["Stock line","Candidate","Evidence","Decision",""].forEach(label=>cell(hr,text("b",label)));head.append(hr);table.append(head);const body=document.createElement("tbody");for(const item of state.review){const row=document.createElement("tr");cell(row,text("b",item.line));const choices=item.candidates?.length?item.candidates:[{handle:item.handle,title:item.title,score:item.score}];const chooser=select(item.decision!=="pending"&&item.decision!=="rejected"?item.decision:item.handle,choices.map(c=>c.handle),()=>{});for(let i=0;i<choices.length;i++)chooser.options[i].textContent=choices[i].title+" ("+choices[i].score+")";cell(row,chooser);cell(row,text("span",item.reason+" · margin "+item.margin,"muted"));cell(row,text("span",item.decision,item.decision==="pending"?"pill warn":"pill ok"));const actions=document.createElement("div"),accept=text("button","Use selected","primary"),reject=text("button","Not a match");accept.addEventListener("click",()=>decide(item,chooser.value));reject.addEventListener("click",()=>decide(item,null));actions.append(accept," ",reject);cell(row,actions);body.append(row)}table.append(body);wrap.append(table)}
+function render(){const active=state.products.filter(p=>p.status==="active").length,draft=state.products.filter(p=>p.status==="draft").length,pending=state.review.filter(r=>r.decision==="pending").length;$("summary").textContent=state.products.length+" catalogue records · "+active+" active · "+draft+" draft · "+pending+" stock lines awaiting match review";renderInventory();renderReview()}
+async function load(){try{const [products,review]=await Promise.all([api("/api/products").then(r=>r.json()),api("/api/review").then(r=>r.json())]);state.products=products;state.review=review;render()}catch(error){if(/unauthorised/i.test(error.message)){state.token="";sessionStorage.removeItem("galvio-admin");showAuth()}else alert(error.message)}}
+async function task(path){const log=$("log");log.hidden=false;log.textContent="";$("sync").disabled=$("apply").disabled=true;try{const response=await api(path,{method:"POST",headers:{"content-type":"application/json"},body:"{}"});const reader=response.body.getReader(),decoder=new TextDecoder();let buffer="",success=false;for(;;){const result=await reader.read();if(result.done)break;buffer+=decoder.decode(result.value,{stream:true});const lines=buffer.split("\n");buffer=lines.pop();for(const line of lines){if(!line)continue;const message=JSON.parse(line);if(message.step)log.textContent+="\n▸ "+message.step+"\n";if(message.log)log.textContent+="  "+message.log+"\n";if(message.error)log.textContent+="  ✗ "+message.error+"\n";if(message.done){success=message.ok;log.textContent+="\n"+(message.ok?"Completed. Changes are local until you build and deploy.":"Stopped without reporting success.")+"\n"}log.scrollTop=log.scrollHeight}}if(success)await load()}catch(error){log.textContent+="\n✗ "+error.message+"\n"}finally{$("sync").disabled=$("apply").disabled=false}}
+for(const button of document.querySelectorAll("[data-tab]")){button.addEventListener("click",()=>{state.tab=button.dataset.tab;for(const other of document.querySelectorAll("[data-tab]"))other.setAttribute("aria-selected",String(other===button));$("inventory").hidden=state.tab!=="inventory";$("review").hidden=state.tab!=="review"})}$("unlock").addEventListener("click",()=>setToken($("tokenInput").value.trim()));$("sync").addEventListener("click",()=>task("/api/sync"));$("apply").addEventListener("click",()=>{if(confirm("Apply reviewed matches and inventory overrides to the local catalogue? This does not deploy the website."))task("/api/apply")});const fragment=location.hash.slice(1);state.token=fragment||sessionStorage.getItem("galvio-admin")||"";showAuth();
 </script></body></html>`;

@@ -1,0 +1,45 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-9015132",
+  "sku": "GAL-ST-9015132",
+  "brand": "Voltas",
+  "model": "9015132",
+  "status": "active",
+  "internalCode": "Voltas Stablizer VA 5130-130V-300V",
+  "title": "Stabilizer VA5130 - 130V-300V - 5 KVA",
+  "description": "Model No.: 9015132 / VA5130 - 130V-300V - 5 KVA Transformer Type: Torodial Core Applicable For: 2 TR",
+  "category": "Stabiliser",
+  "mrp": 6290,
+  "sellingPrice": 4594,
+  "availability": "unknown",
+  "condition": "new",
+  "highlights": [],
+  "faqs": [],
+  "images": [
+    {
+      "src": "voltas-9015132",
+      "alt": "Stabilizer VA5130 - 130V-300V - 5 KVA",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-9015132-2",
+      "alt": "Stabilizer VA5130 - 130V-300V - 5 KVA",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-9015132-3",
+      "alt": "Stabilizer VA5130 - 130V-300V - 5 KVA",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-9015132-4",
+      "alt": "Stabilizer VA5130 - 130V-300V - 5 KVA",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

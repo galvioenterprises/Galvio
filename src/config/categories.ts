@@ -49,7 +49,7 @@ export const categories: Category[] = [
     title: "Air Conditioners",
     eyebrow: "Cooling",
     description:
-      "Split and window air conditioners from brands we stock and service directly. Inverter models, copper condensers, and installation handled by our own team.",
+      "Compare listed Voltas split and window air conditioners using the product details supplied for each model. Confirm current availability and installation terms with the showroom.",
     banner: {
       eyebrow: "Beat every summer",
       title: "Cooling That Lasts",
@@ -110,7 +110,7 @@ export const categories: Category[] = [
     title: "Washing Machines",
     eyebrow: "Home appliances",
     description:
-      "Front load, top load and semi-automatic washing machines, with delivery and first-wash demo included across the city.",
+      "Compare front load, top load and semi-automatic washing machines as verified models are added to the online catalogue.",
     banner: {
       eyebrow: "Cleaner every wash",
       title: "Built to Last",
@@ -200,7 +200,7 @@ export const categories: Category[] = [
     title: "Water Heaters",
     eyebrow: "Home appliances",
     description:
-      "Storage and instant water heaters for bathrooms and kitchens, with installation and the wall fixings handled on delivery.",
+      "Compare storage and instant water heaters as verified models are added to the online catalogue. Installation terms are confirmed with the showroom.",
     banner: {
       eyebrow: "Warmer mornings",
       title: "Hot Water, On Time",
@@ -345,42 +345,12 @@ export const categories: Category[] = [
     },
   },
   {
-    slug: "microwaves",
-    name: "Microwave",
-    title: "Microwaves",
-    eyebrow: "Kitchen",
-    description:
-      "Solo, grill and convection microwaves, sized by what you actually cook rather than by the litre figure on the box.",
-    banner: {
-      eyebrow: "Dinner, sooner",
-      title: "Cook, Grill, Bake",
-      subtitle: "One appliance, three jobs.",
-    },
-    buyingGuide: {
-      title: "Solo, grill or convection?",
-      intro:
-        "The type matters far more than the capacity. Solo reheats and defrosts. Grill adds a heating element for browning. Convection adds a fan and bakes properly — it is the only one that replaces an oven, and it is the only one worth paying extra for if you will actually bake.",
-      columns: ["Household", "Recommended"],
-      rows: [
-        ["1 – 2 people, reheating", "Solo, 17 – 20 L"],
-        ["3 – 4 people", "Grill or convection, 20 – 25 L"],
-        ["4 – 6 people, baking", "Convection, 25 – 30 L"],
-        ["Large family, frequent baking", "Convection, 30 L and above"],
-      ],
-      notes: [
-        "Measure the turntable, not the litres. A 25 L cavity with a small turntable will not take the dish you already own.",
-        "Convection needs clearance above and behind for the vents. A microwave built into a tight shelf runs hot and fails early.",
-        "If you only ever reheat, solo is the honest answer and costs a third as much. We will tell you that rather than sell you a convection you will use as a solo.",
-      ],
-    },
-  },
-  {
     slug: "televisions",
     name: "Television",
     title: "Televisions",
     eyebrow: "Entertainment",
     description:
-      "Smart LED and QLED televisions across sizes, with wall mounting and setup handled on delivery.",
+      "Compare smart LED and QLED televisions as verified models are added to the online catalogue. Mounting and setup terms are confirmed separately.",
     banner: {
       eyebrow: "Sharper evenings",
       title: "A Better Picture",
@@ -399,7 +369,7 @@ export const categories: Category[] = [
       ],
       notes: [
         "4K is only visibly better than full HD at 43 inch and above, or when you sit close. Below that, spend the difference on panel quality instead.",
-        "Wall mounting and setup are handled on delivery. Tell us the wall type — a plasterboard wall needs different fixings from brick.",
+        "If you need wall mounting, confirm the arrangement before purchase and tell the showroom the wall type — plasterboard needs different fixings from brick.",
       ],
     },
   },

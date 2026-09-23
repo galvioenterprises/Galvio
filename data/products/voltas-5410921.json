@@ -1,0 +1,57 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-5410921",
+  "sku": "GAL-VC-5410921",
+  "brand": "Voltas",
+  "model": "5410921",
+  "status": "active",
+  "internalCode": "VOLTAS VC GT 320 SD P METALLIC FGLS",
+  "title": "Voltas Visi Cooler (VC320)",
+  "description": "These Energy efficient single door Visi cooler is designed to showcase stores items attractively and encourage impulse buying leading to increased sales. It uses Eco Friendly Refrigerant for optimal cooling and are ideal for storing Juices, Food, Beverages & Dairy Products.",
+  "category": "Visi Cooler",
+  "mrp": 57500,
+  "sellingPrice": 38550,
+  "availability": "unknown",
+  "condition": "new",
+  "highlights": [],
+  "faqs": [],
+  "images": [
+    {
+      "src": "voltas-5410921",
+      "alt": "Voltas Visi Cooler (VC320)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-5410921-2",
+      "alt": "Voltas Visi Cooler (VC320)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-5410921-3",
+      "alt": "Voltas Visi Cooler (VC320)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-5410921-4",
+      "alt": "Voltas Visi Cooler (VC320)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-5410921-5",
+      "alt": "Voltas Visi Cooler (VC320)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-5410921-6",
+      "alt": "Voltas Visi Cooler (VC320)",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

@@ -9,11 +9,11 @@ import { generalEnquiryLink } from "@/lib/whatsapp";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Container } from "@/components/container";
 import { ProductBrowser } from "@/components/product-browser";
-import { ArrowRightIcon, WhatsAppIcon } from "@/components/icons";
+import { ArrowRightIcon, MailIcon, WhatsAppIcon } from "@/components/icons";
 
 export const metadata: Metadata = {
   title: "All Products",
-  description: `Every ${business.primaryBrand} appliance ${site.name} stocks, in one list — air conditioners, refrigerators and more, with prices, specifications and availability.`,
+  description: `Browse listed ${business.primaryBrand} appliances with manufacturer-supplied product details and published prices. Confirm current showroom availability before purchase.`,
   alternates: { canonical: "/products/" },
 };
 
@@ -60,9 +60,9 @@ export default function ProductsPage() {
           All Products
         </h1>
         <p className="mt-5 max-w-[60ch] text-[0.9375rem] leading-[1.65] text-text-muted">
-          Everything we stock, sold direct from the distributor. Prices include
-          GST, and installation is handled by our own team. Filter by category,
-          capacity or budget — or ask us and we will narrow it for you.
+          Browse manufacturer-backed listings with published prices and supplied
+          specifications. Availability, the final quote and installation terms
+          are confirmed by the showroom before purchase.
         </p>
 
         <div className="mt-[52px]">
@@ -75,9 +75,9 @@ export default function ProductsPage() {
               Not listed online yet
             </h2>
             <p className="mt-2 max-w-[60ch] text-[0.9375rem] leading-relaxed text-text-muted">
-              We supply these too — they are simply not in the online catalogue
-              yet. Each page has our sizing guide, and we can quote from current
-              distributor stock today.
+              These categories are part of the planned range but do not have a
+              verified online listing yet. Ask the showroom to check current
+              models and availability.
             </p>
 
             <ul className="mt-6 flex flex-wrap gap-2.5">
@@ -98,7 +98,11 @@ export default function ProductsPage() {
               href={generalEnquiryLink()}
               className="mt-7 inline-flex h-11 items-center gap-2 rounded-xl bg-accent px-5 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
             >
-              <WhatsAppIcon className="size-4" />
+              {site.contact.whatsapp ? (
+                <WhatsAppIcon className="size-4" />
+              ) : (
+                <MailIcon className="size-4" />
+              )}
               Ask about anything not listed
             </a>
           </section>

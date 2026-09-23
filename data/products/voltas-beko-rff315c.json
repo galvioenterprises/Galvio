@@ -40,14 +40,9 @@
   "faqs": [],
   "specs": {},
   "missing": [
-    "gtin",
-    "hsn",
     "mrp",
     "selling_price",
-    "gst_rate",
     "availability",
-    "installation_included",
-    "warranty_months",
     "images"
   ]
 }

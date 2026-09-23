@@ -16,7 +16,7 @@ import {
 
 export const metadata: Metadata = {
   title: "Contact Us",
-  description: `Talk to ${site.name} about a product, an order, a warranty claim or a bulk enquiry. WhatsApp, phone, email, or visit the showroom.`,
+  description: `Email ${site.name} about a product, an order, a warranty question or a bulk enquiry. Other contact details appear only after they are confirmed.`,
   alternates: { canonical: "/contact/" },
 };
 
@@ -61,18 +61,23 @@ export default function ContactPage() {
           >
             <div>
               <span className="flex size-11 items-center justify-center rounded-xl bg-accent text-white">
-                <WhatsAppIcon className="size-5" />
+                {site.contact.whatsapp ? (
+                  <WhatsAppIcon className="size-5" />
+                ) : (
+                  <MailIcon className="size-5" />
+                )}
               </span>
               <p className="mt-4 text-[0.9375rem] font-semibold text-white">
-                WhatsApp
+                {site.contact.whatsapp ? "WhatsApp" : "Email enquiry"}
               </p>
               <p className="mt-1.5 text-[0.8125rem] leading-relaxed text-text-invert-muted">
-                The fastest way to reach us. Send a photo of the model or the
-                space and we will come back with options.
+                {site.contact.whatsapp
+                  ? "Send a photo of the model or the space and we will come back with options."
+                  : "The WhatsApp number is not configured yet. Email your model or requirement instead."}
               </p>
             </div>
             <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-white">
-              Start a chat
+              {site.contact.whatsapp ? "Start a chat" : "Prepare an email"}
               <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
             </span>
           </a>
@@ -91,16 +96,20 @@ export default function ContactPage() {
               </a>
             ) : (
               <p className="mt-1.5 text-[0.8125rem] text-text-muted">
-                Phone number coming shortly — WhatsApp reaches us in the meantime.
+                Phone number coming shortly — use email in the meantime.
               </p>
             )}
             <ul className="mt-4 space-y-1 text-[0.8125rem] text-text-muted">
-              {business.hours.map((slot) => (
-                <li key={slot.days} className="flex justify-between gap-3">
-                  <span>{slot.days}</span>
-                  <span className="text-text">{slot.time}</span>
-                </li>
-              ))}
+              {business.hours.length > 0 ? (
+                business.hours.map((slot) => (
+                  <li key={slot.days} className="flex justify-between gap-3">
+                    <span>{slot.days}</span>
+                    <span className="text-text">{slot.time}</span>
+                  </li>
+                ))
+              ) : (
+                <li>Opening hours have not been published yet.</li>
+              )}
             </ul>
           </div>
 

@@ -1,0 +1,47 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-4810373",
+  "sku": "GAL-CO-4810373",
+  "brand": "Voltas",
+  "model": "4810373",
+  "status": "active",
+  "internalCode": "Voltas Air Cooler Epicool 90",
+  "title": "Voltas Desert Air Cooler Epicool 90",
+  "description": "90 Litre Desert Cooler with Honeycomb cooling pads for long-lasting cooling",
+  "category": "Air Cooler",
+  "subCategory": "Desert",
+  "mrp": 19890,
+  "sellingPrice": 13390,
+  "availability": "unknown",
+  "condition": "new",
+  "capacity": "90L",
+  "highlights": [],
+  "faqs": [],
+  "images": [
+    {
+      "src": "voltas-4810373",
+      "alt": "Voltas Desert Air Cooler Epicool 90",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-4810373-2",
+      "alt": "Voltas Desert Air Cooler Epicool 90",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-4810373-3",
+      "alt": "Voltas Desert Air Cooler Epicool 90",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-4810373-4",
+      "alt": "Voltas Desert Air Cooler Epicool 90",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

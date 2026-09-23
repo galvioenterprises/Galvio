@@ -12,16 +12,18 @@ production, which removes runtime infrastructure as a class of failure
 ahead of the Diwali season.
 
 ```
+source CSV batches + dealer overrides ──► compose ──► validated products.csv
+                                                              │
 GitHub ──► next build (output: "export") ──► out/ ──► Cloudflare static assets
-                                                            │
-                                        bulk RFQ form ──► Cloudflare Worker + Turnstile
 ```
 
-Product data is entered in a spreadsheet, exported to `data/products.csv`
-and compiled by `pnpm import:products` into per-product JSON, validated
-against the Zod schema in `src/lib/product-schema.ts`. The schema mirrors
-the Google Merchant Center product feed so the same records can drive a feed
-in Phase 2 without remodelling. See [data/README.md](data/README.md).
+Product facts are kept in source-scoped CSV batches; dealer-owned price,
+stock, availability and publication decisions live in a separate override
+file. `pnpm compose:products` creates `data/products.csv`, and the importer
+validates it before generating per-product JSON. See
+[data/README.md](data/README.md). A future direct RFQ endpoint requires a
+Cloudflare Worker and Turnstile; the current bulk form prepares an email and
+does not claim that backend already exists.
 
 `tenantId` is present in the data model so a second distributor can be
 onboarded later. Multi-tenancy is **not** implemented and should not be.
@@ -68,6 +70,9 @@ that compiles and then throws.
 | `/products/` | Every product in one grid, category demoted to a filter |
 | `/products/[category]/` | Listing page: filters, sort, grid and list views, pagination |
 | `/product/[slug]/` | Product detail: gallery, sticky section nav, overview, specs, warranty, delivery, FAQs |
+| `/offers/` | Discounted manufacturer listings, with availability confirmed separately |
+| `/cart/` | A local enquiry list; it does not place or pay for an order |
+| `/bulk-orders/` | Static bulk-enquiry form that prepares email/WhatsApp copy |
 | `/about/` | Who we are, and why a single-brand distributorship |
 | `/contact/` | WhatsApp, phone, email, showroom, and what to say in the first message |
 | `/stores/` | Showroom details and hours, carrying the `Store` markup Google cross-checks |
@@ -146,7 +151,7 @@ Google listings and rich results.
 |---|---|
 | Home | `Organization` (upgrading to `Store` once the address is filled in), `WebSite` |
 | Listing | `BreadcrumbList`, `ItemList` |
-| Product | `BreadcrumbList`, `Product` with a full `Offer` (GTIN, schema.org availability and condition), `FAQPage` when the product has FAQs |
+| Product | `BreadcrumbList`, `Product` and `Offer`; optional GTIN, availability and rating fields are emitted only when real, plus `FAQPage` when supplied |
 
 `WebSite` is what Google reads to decide the site name shown above a
 result; without it the name is guessed from the title tag, which is
@@ -164,24 +169,27 @@ scrolls past.
 
 ### Deliberate differences from the Figma frames
 
-The design was drawn for a full storefront. Phase 1 has no cart, no
-accounts and no checkout, so rather than render controls that do nothing:
+The design was drawn for a full storefront. Phase 1 has a browser-local
+enquiry cart but no accounts, payment or order backend:
 
-- **Add to cart** is an **Enquire** button that opens WhatsApp with the
-  product, SKU and price already in the message.
-- The header's **cart and account icons** are replaced by a single
-  WhatsApp action.
+- Products confirmed `in_stock` can be collected in the cart. Products with
+  `unknown` or unavailable inventory show **Enquire** and are never presented
+  as immediately purchasable.
+- The header carries search, the enquiry cart, a contact action and a mobile
+  menu. No account icon is rendered because accounts do not exist.
 - The card's **wishlist heart and compare toggle** are omitted; both need
   persisted per-visitor state that does not exist yet.
 - The **"Only 2 left"** badge renders only when a product has a real
   `stock_count`, and otherwise gives its slot to out-of-stock, pre-order
   and backorder states.
-- **Star ratings** render only when a product has a real rating.
+- **Star ratings** remain absent. Catalogue imports reject review aggregates;
+  a verified customer-review system must own them later.
 - Navigation items whose pages are not built yet render as plain text
   rather than links, so nothing in the header 404s. Flip `ready` in
   `src/config/nav.ts` as each page lands. Category links everywhere are
   built from categories that actually have products, never from config.
-- **Buy now** is not rendered — there is nothing to buy through yet.
+- **Buy now** routes to a direct enquiry only when inventory is confirmed; it
+  does not complete a transaction on the static site.
 - Product cards reserve height for the title, the chip row and the
   strikethrough price whether or not each is present. Titles run to one
   or two lines and discounts come and go, and without reserved height the
@@ -200,13 +208,11 @@ accounts and no checkout, so rather than render controls that do nothing:
 
 ### Not built: the commerce flow
 
-The Figma `Final` page also contains **Add to cart, Checkout, Payment,
-Order Confirmation, Track Order** and **My Orders**. None of them are
-built. Each needs some combination of cart state, customer accounts, a
-payment gateway and an order database, and this site is a static export
-with no server. A checkout that renders but cannot take an order is worse
-than no checkout, and a payment form that cannot take a payment should
-never be deployed at all. These are Phase 2, after the season.
+The Figma file also contains **Checkout, Payment, Order Confirmation, Track
+Order** and **My Orders**. They are not built. Each needs some combination of
+identity, a payment gateway and an order database, and this site is a static
+export with no server. Decorative shells would mislead customers. These are
+Phase 2; the current cart ends in a human-confirmed enquiry.
 
 ### Layout and spacing
 
@@ -216,22 +222,11 @@ sizing the column to a 1440px laptop is what made the first pass read as
 cramped. Everything shares that one component, so the page cannot drift
 into three slightly different gutters.
 
-Landing page spacing is measured against the frame rather than eyeballed
-from a screenshot. Load the site at a 1920 viewport and read the values
-off the DOM (`getBoundingClientRect`) — at that width CSS pixels and
-design pixels are the same thing, so the numbers compare directly:
-
-**Landing page** (frame 118:3):
-
-| Landmark | Figma | Built |
-|---|---|---|
-| Header height | 64 | 64 |
-| H1 top / font size | 182 / 50 | 177 / 50 |
-| Hero dark ends | 698 | 698 |
-| Category strip top | 661 | 662 |
-| Strip height | 155 | 155 |
-| Strip overlap into hero | 36 | 36 |
-| Strip side gutter | 41 | 40 |
+The current landing source is frame **347:146**. The older `118:3` landmark
+table was removed because it described a different, shorter page. Re-measure
+the final build at the 1920px source viewport after the promo, buying-assistant
+and popular-search sections settle; record only values captured from that
+current frame and the final DOM.
 
 **Product listing** (frame 132:2405). Note the content column is 1560
 here, not the landing page's 1240 — the listing carries a filter rail

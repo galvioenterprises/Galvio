@@ -155,33 +155,37 @@ export function WarrantyAndSupport({ product }: { product: Product }) {
 export function DeliveryAndInstallation({ product }: { product: Product }) {
   return (
     <section id="delivery" className="scroll-mt-20 pt-12">
-      <SectionHeading>Delivery &amp; Installation</SectionHeading>
+      <SectionHeading>
+        Delivery{product.installationIncluded !== undefined ? " & Installation" : ""}
+      </SectionHeading>
 
-      <div className="mt-5 grid gap-4 lg:grid-cols-3">
+      <div className={`mt-5 grid gap-4 ${product.installationIncluded !== undefined ? "lg:grid-cols-3" : "lg:grid-cols-2"}`}>
         <div className="rounded-card border border-line bg-surface p-6">
           <span className="flex size-9 items-center justify-center rounded-lg bg-accent/8 text-accent">
             <TruckIcon className="size-[18px]" />
           </span>
           <p className="mt-3 text-sm font-medium">Delivery</p>
           <p className="mt-1.5 text-xs leading-relaxed text-text-muted">
-            Delivered from our own stock. We confirm the date with you directly
-            rather than leaving you to track a courier.
+            Delivery coverage, charges and the date are confirmed by the
+            showroom before an order is accepted.
           </p>
         </div>
 
-        <div className="rounded-card border border-line bg-surface p-6">
-          <span className="flex size-9 items-center justify-center rounded-lg bg-accent/8 text-accent">
-            <WrenchIcon className="size-[18px]" />
-          </span>
-          <p className="mt-3 text-sm font-medium">
-            Installation {product.installationIncluded ? "included" : "available"}
-          </p>
-          <p className="mt-1.5 text-xs leading-relaxed text-text-muted">
-            {product.installationIncluded
-              ? "Standard installation is included in the price and handled by our own team."
-              : "Installation is arranged through the brand's authorised network and quoted separately."}
-          </p>
-        </div>
+        {product.installationIncluded !== undefined && (
+          <div className="rounded-card border border-line bg-surface p-6">
+            <span className="flex size-9 items-center justify-center rounded-lg bg-accent/8 text-accent">
+              <WrenchIcon className="size-[18px]" />
+            </span>
+            <p className="mt-3 text-sm font-medium">
+              Installation {product.installationIncluded ? "included" : "not included"}
+            </p>
+            <p className="mt-1.5 text-xs leading-relaxed text-text-muted">
+              {product.installationIncluded
+                ? "Standard installation is included for this product. Confirm the covered work before purchase."
+                : "Installation is not included in the listed price. Ask the showroom about available options."}
+            </p>
+          </div>
+        )}
 
         <div className="rounded-card border border-line bg-surface p-6">
           <p className="text-sm font-medium">Check your area</p>

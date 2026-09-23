@@ -13,7 +13,7 @@
  * diff rather than a silent difference.
  */
 
-import { writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, renameSync } from "node:fs";
 import { resolve } from "node:path";
 
 const ENDPOINT = "https://www.voltas.com/collections/all/products.json";
@@ -39,7 +39,58 @@ type ShopifyProduct = {
   variants: ShopifyVariant[];
 };
 
+type CatalogueProduct = {
+  handle: string;
+  title: string;
+  vendor: string;
+  productType: string;
+  description: string;
+  images: ShopifyImage[];
+  variants: {
+    sku: string | null;
+    price: number;
+    mrp: number | null;
+    barcode: string | null;
+    grams: number;
+  }[];
+};
+
+function catalogueProduct(product: ShopifyProduct): CatalogueProduct {
+  return {
+    handle: product.handle,
+    title: product.title,
+    vendor: product.vendor,
+    productType: product.product_type,
+    // Tags and the full HTML body are dropped: the body is marketing
+    // copy we rewrite anyway, and keeping it bloats the diff on every
+    // sync for no benefit.
+    description: product.body_html
+      .replace(/<[^>]+>/g, " ")
+      .replace(/&nbsp;/g, " ")
+      .replace(/\s+/g, " ")
+      .trim(),
+    // Voltas sometimes uses a 500 x 500 transparent product cut-out as the
+    // featured image, followed by larger feature panels. Keep that official
+    // hero and every later gallery image that meets the catalogue minimum.
+    images: product.images
+      .filter((image) => image.width >= 500 && image.height >= 500)
+      .map((image) => ({
+        src: image.src.split("?")[0],
+        width: image.width,
+        height: image.height,
+      })),
+    variants: product.variants.map((variant) => ({
+      sku: variant.sku,
+      price: Number(variant.price),
+      mrp: variant.compare_at_price ? Number(variant.compare_at_price) : null,
+      barcode: variant.barcode,
+      grams: variant.grams,
+    })),
+  };
+}
+
 async function main() {
+  const imagesOnly = process.argv.includes("--images-only");
   const products: ShopifyProduct[] = [];
 
   for (let page = 1; page <= 10; page++) {
@@ -59,40 +110,26 @@ async function main() {
     await new Promise((r) => setTimeout(r, 1000));
   }
 
-  mkdirSync(resolve("data/sources"), { recursive: true });
-  writeFileSync(
-    OUT,
-    JSON.stringify(
-      products.map((p) => ({
-        handle: p.handle,
-        title: p.title,
-        vendor: p.vendor,
-        productType: p.product_type,
-        // Tags and the full HTML body are dropped: the body is marketing
-        // copy we rewrite anyway, and keeping it bloats the diff on every
-        // sync for no benefit.
-        description: p.body_html
-          .replace(/<[^>]+>/g, " ")
-          .replace(/&nbsp;/g, " ")
-          .replace(/\s+/g, " ")
-          .trim(),
-        images: p.images
-          .filter((i) => i.width >= 800)
-          .map((i) => ({ src: i.src.split("?")[0], width: i.width, height: i.height })),
-        variants: p.variants.map((v) => ({
-          sku: v.sku,
-          price: Number(v.price),
-          mrp: v.compare_at_price ? Number(v.compare_at_price) : null,
-          barcode: v.barcode,
-          grams: v.grams,
-        })),
-      })),
-      null,
-      2,
-    ) + "\n",
-  );
+  const fetched = products.map(catalogueProduct);
+  let output = fetched;
 
-  console.log(`\n${products.length} products -> ${OUT}`);
+  if (imagesOnly) {
+    const existing = JSON.parse(readFileSync(OUT, "utf8")) as CatalogueProduct[];
+    const fetchedByHandle = new Map(fetched.map((product) => [product.handle, product]));
+    output = existing.map((product) => {
+      const current = fetchedByHandle.get(product.handle);
+      return current ? { ...product, images: current.images } : product;
+    });
+  }
+
+  mkdirSync(resolve("data/sources"), { recursive: true });
+  const temporary = `${OUT}.${process.pid}.tmp`;
+  writeFileSync(temporary, `${JSON.stringify(output, null, 2)}\n`);
+  renameSync(temporary, OUT);
+
+  console.log(
+    `\n${products.length} products fetched; ${imagesOnly ? "images refreshed in" : "snapshot written to"} ${OUT}`,
+  );
 }
 
 main();

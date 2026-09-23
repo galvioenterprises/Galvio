@@ -11,9 +11,13 @@ import { formatPrice } from "./format";
 
 function link(message: string): string {
   const number = site.contact.whatsapp;
-  // Until the real number is configured, send the customer to the contact
-  // page rather than to a broken wa.me URL.
-  if (!number) return "/contact";
+  // Until the real number is configured, preserve the enquiry text in an
+  // email rather than looping the Contact page back to itself.
+  if (!number) {
+    return site.contact.email
+      ? `mailto:${site.contact.email}?subject=${encodeURIComponent("Product enquiry")}&body=${encodeURIComponent(message)}`
+      : "/contact/";
+  }
   return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
 }
 

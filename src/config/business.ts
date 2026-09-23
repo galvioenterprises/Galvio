@@ -4,21 +4,21 @@
  * Kept here so a policy page, the About page and the structured data can
  * never disagree with each other. Everything marked TODO is a real number
  * the business has to decide before launch — the pages read fine with the
- * defaults, but the defaults are conservative guesses, not commitments.
+ * UI must hide unconfirmed values rather than render placeholders as facts.
  */
 export const business = {
-  /** TODO: confirm. Shown on About and in the local listing. */
-  foundedYear: 2014,
+  /** TODO: confirm. Hidden until supplied by the business. */
+  foundedYear: null as number | null,
 
   /** The brand this distributorship is built around. */
   primaryBrand: "Voltas",
 
-  /** TODO: confirm with the accountant before launch. */
-  returnWindowDays: 7,
+  /** TODO: confirm with the business before publishing a return window. */
+  returnWindowDays: null as number | null,
 
-  /** TODO: confirm. Used on the delivery policy and product pages. */
-  deliveryDaysMin: 2,
-  deliveryDaysMax: 4,
+  /** TODO: confirm before publishing delivery timelines. */
+  deliveryDaysMin: null as number | null,
+  deliveryDaysMax: null as number | null,
 
   /** TODO: fill in from the GST registration. */
   gstin: "",
@@ -26,8 +26,6 @@ export const business = {
   /** Shown on the policy pages so a customer can see how current they are. */
   policiesUpdated: "September 2026",
 
-  hours: [
-    { days: "Monday – Saturday", time: "10:00 am – 8:00 pm" },
-    { days: "Sunday", time: "11:00 am – 6:00 pm" },
-  ],
+  /** TODO: fill from the showroom's confirmed public hours. */
+  hours: [] as { days: string; time: string }[],
 } as const;

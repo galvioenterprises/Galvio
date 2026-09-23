@@ -1,4 +1,3 @@
-import { business } from "./business";
 import { site } from "./site";
 
 /**
@@ -44,34 +43,30 @@ export const policies: Policy[] = [
     blocks: [
       {
         type: "text",
-        body: `We sell as a distributor, not a marketplace. Stock is held by us and delivered by our own team or by a carrier we appoint, which is why we can give you a date rather than a tracking number and a hope.`,
+        body: `This website is a catalogue for direct enquiries. Current stock, the delivery method, timing and any charges are confirmed with you in writing before an order is accepted.`,
       },
       { type: "heading", body: "Delivery timelines" },
       {
         type: "text",
-        body: `For addresses within our regular service area, delivery is normally ${business.deliveryDaysMin}–${business.deliveryDaysMax} business days from the day the order is confirmed. Large appliances and made-to-order variants can take longer; we will tell you the expected date before you commit, not after.`,
+        body: `The delivery timeline depends on confirmed showroom stock, the product and the destination. We will give you the expected date before you commit to an order.`,
       },
       {
         type: "text",
-        body: `Delivery outside the regular service area can usually be arranged and may carry a charge. Ask us with your pincode and we will confirm both the timeline and the cost in writing before anything is dispatched.`,
+        body: `Share the delivery pincode with the showroom. We will confirm whether delivery can be arranged, along with the timeline and any charge, before an order is accepted.`,
       },
       { type: "heading", body: "On the day" },
       {
-        type: "list",
-        items: [
-          "Someone aged 18 or over must be present to receive and sign for the appliance.",
-          "Please check the packaging for visible damage before signing. Note any damage on the delivery sheet — this is what lets us claim against the carrier on your behalf.",
-          "Access is your responsibility: stairs, lifts, doorway widths and parking. Tell us in advance if any of these are difficult so we can send the right number of people.",
-        ],
+        type: "text",
+        body: `Before dispatch, confirm who will receive the appliance and tell us about stairs, lift limits, doorway widths or restricted access. Inspect the packaging on arrival and record visible damage before installation.`,
       },
       { type: "heading", body: "Installation" },
       {
         type: "text",
-        body: `Where a product page says installation is included, standard installation within our service area is covered in the price and carried out by our own team or the brand's authorised engineer. Standard installation does not include electrical work, civil work, core drilling beyond the standard allowance, copper piping beyond the standard length, stands, stabilisers or any material not supplied with the appliance. Anything extra is quoted to you before work starts.`,
+        body: `Where a product page says installation is included, the written quote will state the covered work and who will carry it out. Electrical work, civil work, extra piping, stands, stabilisers and other materials are included only when the quote says so.`,
       },
       {
         type: "text",
-        body: `Where installation is not included, we will still coordinate it through the brand's authorised network so your warranty is not affected.`,
+        body: `Where installation is not listed as included, ask us to confirm the available arrangement and charges before purchase.`,
       },
       { type: "heading", body: "If something goes wrong" },
       { type: "text", body: contactLine },
@@ -86,36 +81,32 @@ export const policies: Policy[] = [
     blocks: [
       {
         type: "text",
-        body: `Large appliances are not returned in the way small goods are. In almost every case a fault is resolved by the manufacturer's warranty service, which repairs or replaces the unit at no cost to you. This policy explains the cases where we step in instead.`,
+        body: `Return, replacement and refund terms depend on the product, its condition, the final invoice, manufacturer policy and applicable consumer law. Ask us to confirm the terms that apply before purchase.`,
       },
       { type: "heading", body: "Damaged or wrong on arrival" },
       {
         type: "text",
-        body: `If an appliance arrives visibly damaged, or is not the model you ordered, tell us within 48 hours of delivery and we will replace it or refund it in full. Please do not install or use the appliance in this situation, and keep the original packaging — both make the claim straightforward.`,
+        body: `If an appliance arrives visibly damaged or is not the model on your invoice, contact us promptly. Do not install or use it, and retain the packaging and delivery evidence while the available remedy is confirmed.`,
       },
       { type: "heading", body: "Faulty on first use" },
       {
         type: "text",
-        body: `If the appliance is faulty within ${business.returnWindowDays} days of delivery and the fault is confirmed by the brand's authorised engineer, you may choose a replacement of the same model or a full refund.`,
+        body: `If an appliance is faulty on first use, contact us promptly. The remedy depends on the manufacturer's inspection, the terms confirmed on your invoice and your rights under applicable consumer law.`,
       },
       { type: "heading", body: "Change of mind" },
       {
         type: "text",
-        body: `We can accept a change-of-mind return within ${business.returnWindowDays} days provided the appliance is unused, uninstalled, and in its original packaging with all accessories and documentation. A collection charge may apply, and we will tell you what it is before collecting.`,
+        body: `Change-of-mind returns are not assumed by this catalogue. Ask for the applicable terms before purchase; any accepted return must be unused, uninstalled and complete with its original packaging, accessories and documentation.`,
       },
-      { type: "heading", body: "What cannot be returned" },
+      { type: "heading", body: "Eligibility" },
       {
-        type: "list",
-        items: [
-          "Appliances that have been installed, used, or modified, except where the fault is confirmed by the brand's engineer.",
-          "Damage caused after delivery, including damage from incorrect voltage, water ingress, or installation by someone other than an authorised engineer.",
-          "Products purchased as clearance, display or as-is stock, where that was stated at the time of sale.",
-        ],
+        type: "text",
+        body: `Eligibility is assessed against the condition of the appliance, the terms stated before purchase, manufacturer policy and applicable consumer law. This catalogue does not add exclusions that are not stated in those sources.`,
       },
       { type: "heading", body: "Refunds" },
       {
         type: "text",
-        body: `Approved refunds are made to the original payment method. Bank transfers usually settle within 5–7 business days once we have confirmed the return; card and UPI refunds depend on your bank's own timelines.`,
+        body: `Where a refund is approved, the method and expected processing time will be confirmed in writing. Bank or payment-provider processing can add time after it is issued.`,
       },
       { type: "heading", body: "How to start a return" },
       {
@@ -132,32 +123,27 @@ export const policies: Policy[] = [
     blocks: [
       {
         type: "text",
-        body: `Every appliance we sell carries the manufacturer's own warranty, registered in your name. We are an authorised distributor, which means the warranty you get is the full factory warranty — not a shop guarantee, and not a third-party plan.`,
+        body: `Where a manufacturer warranty applies, its duration and terms are those stated in the manufacturer documentation and the final invoice. No warranty period is inferred from a similar model.`,
       },
       { type: "heading", body: "What is covered" },
       {
         type: "text",
-        body: `The warranty period is printed on each product page and on your invoice. It covers manufacturing defects. Sealed components such as compressors usually carry a much longer separate period; where that applies, the product page states it.`,
+        body: `A warranty period is shown on a product page only when the supplied product data states it. Confirm the applicable coverage on the final invoice and manufacturer documentation before purchase.`,
       },
       { type: "heading", body: "What is not covered" },
       {
-        type: "list",
-        items: [
-          "Damage from misuse, accident, voltage fluctuation, or water and pest ingress.",
-          "Installation or repair carried out by anyone other than an authorised engineer.",
-          "Consumables and cosmetic parts subject to normal wear.",
-          "Appliances whose serial number has been removed or altered.",
-        ],
+        type: "text",
+        body: `Exclusions vary by product and manufacturer. Refer to the warranty document for the exact model rather than assuming exclusions from another appliance or listing.`,
       },
       { type: "heading", body: "How to claim" },
       {
         type: "text",
-        body: `You can go directly to the brand's service line, or contact us and we will raise and follow the claim for you. We generally recommend the second: we deal with the service network regularly, and a distributor chasing a claim tends to move faster than an individual customer does.`,
+        body: `The manufacturer documentation explains how to open a claim. You may also contact the showroom with your invoice and product details so we can confirm what assistance is available.`,
       },
       { type: "heading", body: "Keep your invoice" },
       {
         type: "text",
-        body: `The invoice is the proof of purchase date. Keep the digital copy we send you — it is all the service network needs.`,
+        body: `The invoice is evidence of the purchase date. Keep it with the manufacturer documentation and serial-number details required by the applicable claim process.`,
       },
     ],
   },
@@ -176,23 +162,23 @@ export const policies: Policy[] = [
         type: "list",
         items: [
           "What you tell us directly when you message, call or visit — your name, phone number, delivery address and what you are looking for.",
-          "Anonymous usage statistics, so we can see which products people look at and which pages are not working. This is aggregate traffic data, not a profile of you.",
+          "Cart choices saved in your browser. They stay on the device until you choose to include them in an enquiry.",
         ],
       },
       { type: "heading", body: "What we do with it" },
       {
         type: "text",
-        body: `We use it to answer your enquiry, to deliver and install what you order, to raise warranty claims on your behalf, and to keep the tax records the law requires us to keep. That is the whole list.`,
+        body: `We use information you send to answer the enquiry and, if you place an order, for the purposes confirmed with you at that time, such as quoting, invoicing or arranging fulfilment.`,
       },
       { type: "heading", body: "What we do not do" },
       {
         type: "text",
-        body: `We do not sell your personal information, and we do not share it for anyone else's marketing. We share it only where it is necessary to complete your order — with the brand for warranty registration and service, and with the delivery team bringing your appliance.`,
+        body: `We do not sell your personal information or share it for another business's marketing. Any operational sharing needed for an order is explained as part of the confirmed order process.`,
       },
       { type: "heading", body: "Messaging" },
       {
         type: "text",
-        body: `When you contact us on WhatsApp, that conversation is carried by WhatsApp and governed by their privacy terms as well as ours. If you would rather not use it, call or email us instead.`,
+        body: `When you contact us on WhatsApp, that conversation is carried by WhatsApp and governed by its terms as well as ours. You can use email instead.`,
       },
       { type: "heading", body: "Your choices" },
       {
@@ -219,7 +205,7 @@ export const policies: Policy[] = [
       { type: "heading", body: "Prices and availability" },
       {
         type: "text",
-        body: `Prices are in Indian Rupees and include GST at the rate shown on the product page. We keep prices and stock current, but manufacturer price revisions and stock movements happen, and a listing can be out of date between updates. Where a price or availability has changed, we will tell you before confirming the order and you are free to walk away.`,
+        body: `Prices are shown in Indian Rupees. Manufacturer revisions and showroom stock movements can make a listing out of date between updates. We confirm the final price, tax treatment and availability before accepting an order, and you are free to walk away if they have changed.`,
       },
       {
         type: "text",
@@ -235,15 +221,10 @@ export const policies: Policy[] = [
         type: "text",
         body: `These are covered by our Delivery & Installation, Returns & Refunds and Warranty policies, which form part of these terms.`,
       },
-      { type: "heading", body: "Liability" },
+      { type: "heading", body: "Final order terms" },
       {
         type: "text",
-        body: `Our responsibility is limited to the value of the goods supplied. We are not liable for indirect losses, and nothing in these terms limits any right you have under Indian consumer law.`,
-      },
-      { type: "heading", body: "Governing law" },
-      {
-        type: "text",
-        body: `These terms are governed by the laws of India, and the courts at our registered place of business have jurisdiction.`,
+        body: `Any additional commercial or legal terms are provided for review before an order is accepted. This catalogue does not invent a term that has not been confirmed by the business.`,
       },
     ],
   },

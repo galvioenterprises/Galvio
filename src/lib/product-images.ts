@@ -4,6 +4,7 @@ export type ProductImageManifestEntry = {
   width: number;
   height: number;
   widths: number[];
+  processorVersion?: number;
 };
 
 type ProductImageManifest = Record<string, ProductImageManifestEntry>;

@@ -11,7 +11,7 @@ import { ArrowRightIcon, BadgeIcon, ShieldCheckIcon, WrenchIcon } from "@/compon
 
 export const metadata: Metadata = {
   title: `About ${site.name}`,
-  description: `${site.name} is an authorised ${business.primaryBrand} distributor selling direct to customers — no marketplace middleman, full factory warranty, installation by our own team.`,
+  description: `${site.name} is an authorised ${business.primaryBrand} distributor serving retail and bulk customers from a physical showroom.`,
   alternates: { canonical: "/about/" },
 };
 
@@ -19,7 +19,7 @@ const PILLARS = [
   {
     Icon: BadgeIcon,
     title: "Authorised distributor",
-    body: `We buy from ${business.primaryBrand} and sell to you. There is no marketplace seller in between, which is why the warranty you get is the full factory warranty registered in your name.`,
+    body: `We list ${business.primaryBrand} products for direct showroom enquiries. Warranty and installation terms are confirmed model by model before purchase.`,
   },
   {
     Icon: ShieldCheckIcon,
@@ -28,8 +28,8 @@ const PILLARS = [
   },
   {
     Icon: WrenchIcon,
-    title: "We install what we sell",
-    body: "Delivery and standard installation are handled by our own team or the brand's authorised engineer, so nobody can blame anybody else when something needs fixing.",
+    title: "A physical showroom",
+    body: "You can compare listed models with a real person and confirm price, availability, delivery and installation terms before placing an order.",
   },
 ];
 
@@ -57,10 +57,9 @@ export default function AboutPage() {
               something goes wrong, the customer becomes the project manager.
             </p>
             <p>
-              We are built the other way round. We hold the stock, we quote the
-              price, we deliver it, we install it, and we raise the warranty
-              claim if one is ever needed. One number to call, and it is a number
-              that belongs to the people who sold you the appliance.
+              We are built around direct showroom enquiries. We publish the
+              product details we can verify, then confirm stock, the final quote,
+              delivery and any installation terms before an order is placed.
             </p>
 
             <h2>Why only {business.primaryBrand}</h2>
@@ -68,8 +67,8 @@ export default function AboutPage() {
               Carrying every brand sounds like more choice. In practice it means
               a shop that knows none of them well, cannot hold real stock depth,
               and has no leverage with any service network. We went the other
-              way: one brand, the full range, genuine stock depth, and a service
-              relationship that actually gets calls answered.
+              way: focus on the Voltas range, keep the catalogue source-backed,
+              and give customers a direct showroom contact for the final checks.
             </p>
             <p>
               That also means we can be honest about fit. A 1.5 ton unit in a
@@ -79,10 +78,10 @@ export default function AboutPage() {
 
             <h2>Retail and bulk</h2>
             <p>
-              Alongside walk-in and home delivery, we supply in volume — builder
-              handovers, office fit-outs, hotels and institutional orders. Bulk
-              pricing is quoted per project rather than taken off a list, and
-              delivery is scheduled around your site rather than ours.
+              Alongside retail enquiries, we accept project requirements for
+              builder handovers, office fit-outs, hotels and institutional
+              orders. Bulk pricing, stock and delivery timing are confirmed per
+              project rather than inferred from the online catalogue.
             </p>
 
             <h2>Where we are</h2>
@@ -109,10 +108,12 @@ export default function AboutPage() {
                   <dt className="text-text-muted">Products listed</dt>
                   <dd className="font-medium">{productCount}</dd>
                 </div>
-                <div className="flex justify-between gap-4">
-                  <dt className="text-text-muted">Serving since</dt>
-                  <dd className="font-medium">{business.foundedYear}</dd>
-                </div>
+                {business.foundedYear !== null && (
+                  <div className="flex justify-between gap-4">
+                    <dt className="text-text-muted">Serving since</dt>
+                    <dd className="font-medium">{business.foundedYear}</dd>
+                  </div>
+                )}
               </dl>
 
               <Link

@@ -21,18 +21,18 @@ export const heroSlides: HeroSlide[] = [
   {
     eyebrow: "Premium electronics. Trusted brands.",
     title: "Upgrade to Better Living",
-    body: "Explore Voltas ACs, refrigerators, washing machines, air coolers and more — unbeatable prices, reliable service, complete peace of mind.",
-    image: "/images/hero-placeholder.svg",
+    body: "Explore listed Voltas air conditioners, air coolers and more, with published prices and available product details in one place.",
+    image: "voltas-4504051-cutout",
     primary: { label: "Explore Products", href: "/products/" },
     secondary: { label: "View Offers", href: "/offers/" },
   },
   {
-    eyebrow: "Authorised distributor",
-    title: "Bought Direct, Not Resold",
-    body: "Genuine stock with the full factory warranty registered in your name, delivered and installed by our own team — not handed to a courier.",
-    image: "voltas-side-by-side-cutout",
-    primary: { label: "Browse the catalogue", href: "/products/" },
-    secondary: { label: "Talk to us", href: "/contact/" },
+    eyebrow: "Current Voltas catalogue",
+    title: "Compare Before You Visit",
+    body: "Review listed models, prices and supplied specifications, then contact the showroom to confirm current availability.",
+    image: "voltas-4810348-2-cutout",
+    primary: { label: "Explore Air Coolers", href: "/products/air-coolers/" },
+    secondary: { label: "Contact the showroom", href: "/contact/" },
   },
 ];
 
@@ -41,22 +41,22 @@ export const heroTrust: { icon: FigmaIconName; title: string; subtitle: string }
   [
     {
       icon: "trust-genuine-light",
-      title: "Genuine Voltas Products",
-      subtitle: "Authorised & trusted",
+      title: "Authorised Distributor",
+      subtitle: "Voltas & Voltas Beko",
     },
     {
       icon: "offers-discount",
-      title: "Competitive Prices",
-      subtitle: "Best value, always",
+      title: "Published Prices",
+      subtitle: "Visible on every listing",
     },
     {
       icon: "trust-delivery-light",
-      title: "Reliable Delivery",
-      subtitle: "Handled by our own team",
+      title: "Physical Showroom",
+      subtitle: "Visit before you buy",
     },
     {
       icon: "service-tools",
-      title: "Installation & Support",
-      subtitle: "Hassle-free experience",
+      title: "Availability Checks",
+      subtitle: "Confirm directly with us",
     },
   ];

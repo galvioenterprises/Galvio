@@ -1,0 +1,41 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-4810390",
+  "sku": "GAL-CO-4810390",
+  "brand": "Voltas",
+  "model": "4810390",
+  "status": "active",
+  "internalCode": "Voltas Air Cooler Wind 54 WW",
+  "title": "Voltas Window Air Cooler Wind 54 WW",
+  "description": "45 Litre Voltas Window Air Cooler with Wood Wool cooling pads for long-lasting cooling",
+  "category": "Air Cooler",
+  "subCategory": "Personal",
+  "mrp": 10890,
+  "sellingPrice": 7590,
+  "availability": "unknown",
+  "condition": "new",
+  "capacity": "45L",
+  "highlights": [],
+  "faqs": [],
+  "images": [
+    {
+      "src": "voltas-4810390",
+      "alt": "Voltas Window Air Cooler Wind 54 WW",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-4810390-2",
+      "alt": "Voltas Window Air Cooler Wind 54 WW",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-4810390-3",
+      "alt": "Voltas Window Air Cooler Wind 54 WW",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

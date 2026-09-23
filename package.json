@@ -16,6 +16,7 @@
     "sync:voltas": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/fetch-voltas.mts",
     "match:voltas": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/match-voltas.mts",
     "bridge:voltas": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/bridge-voltas.mts",
+    "compose:products": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/compose-products.mts",
     "sync:images": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/sync-images.mts",
     "admin": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/admin-server.mts"
   },

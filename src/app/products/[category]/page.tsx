@@ -45,7 +45,7 @@ export async function generateMetadata({
 
   const description = stocked
     ? category.description
-    : `${category.description} Not listed online yet — ask us and we will quote from current distributor stock.`;
+    : `${category.description} Not listed online yet — ask the showroom to check current models, pricing and availability.`;
 
   return {
     title,
@@ -177,9 +177,9 @@ export default async function CategoryPage({ params }: { params: Promise<Params>
                 {category.title} are arriving shortly
               </h2>
               <p className="mx-auto mt-3 max-w-md text-[0.9375rem] leading-relaxed text-text-muted">
-                This range is not listed online yet, but we can quote from
-                current distributor stock today. Tell us the room and the
-                budget and we will come back with two or three options.
+                This range does not have a verified online listing yet. Tell us
+                what you need and the showroom can check current models,
+                pricing and availability.
               </p>
               <div className="mt-7 flex flex-wrap justify-center gap-3">
                 <a
@@ -193,7 +193,7 @@ export default async function CategoryPage({ params }: { params: Promise<Params>
                   href="/products/"
                   className="inline-flex h-11 items-center gap-2 rounded-xl border border-line px-6 text-sm font-medium transition-colors hover:border-line-strong"
                 >
-                  See what is in stock
+                  See listed products
                 </Link>
               </div>
             </div>

@@ -1,0 +1,59 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-4810331",
+  "sku": "GAL-CO-4810331",
+  "brand": "Voltas",
+  "model": "4810331",
+  "status": "active",
+  "internalCode": "Voltas Air Cooler Grand 72",
+  "title": "Voltas Desert Air Cooler Grand 72",
+  "description": "72 Litre Desert Cooler with Honeycomb cooling pads for long-lasting cooling",
+  "category": "Air Cooler",
+  "subCategory": "Desert",
+  "mrp": 18190,
+  "sellingPrice": 12290,
+  "availability": "unknown",
+  "condition": "new",
+  "capacity": "72L",
+  "highlights": [],
+  "faqs": [],
+  "images": [
+    {
+      "src": "voltas-4810331",
+      "alt": "Voltas Desert Air Cooler Grand 72",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-4810331-2",
+      "alt": "Voltas Desert Air Cooler Grand 72",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-4810331-3",
+      "alt": "Voltas Desert Air Cooler Grand 72",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-4810331-4",
+      "alt": "Voltas Desert Air Cooler Grand 72",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-4810331-5",
+      "alt": "Voltas Desert Air Cooler Grand 72",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-4810331-6",
+      "alt": "Voltas Desert Air Cooler Grand 72",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

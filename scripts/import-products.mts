@@ -131,13 +131,15 @@ function faqsOf(row: Row) {
   return records(row.faqs, 2).map(([question, answer]) => ({ question, answer }));
 }
 
-/** Only emit a rating when both halves are present. A star with no
- *  review count, or a count with no star, is worse than nothing. */
+/** Review aggregates are not part of supplier data. Reject them here so a
+ *  plausible-looking number can never reach Product structured data. */
 function ratingOf(row: Row) {
   const ratingValue = num(row, "rating_value");
   const ratingCount = num(row, "rating_count");
-  if (ratingValue === undefined || ratingCount === undefined) return undefined;
-  return { value: ratingValue, count: ratingCount };
+  if (ratingValue !== undefined || ratingCount !== undefined) {
+    throw new Error("rating_value and rating_count must always be blank");
+  }
+  return undefined;
 }
 
 function candidateOf(row: Row): Record<string, unknown> {

@@ -3,12 +3,13 @@ import { site } from "@/config/site";
 import { primaryNav } from "@/config/nav";
 import { getAllCategories } from "@/lib/catalog";
 import { generalEnquiryLink } from "@/lib/whatsapp";
-import { WhatsAppIcon } from "./icons";
+import { MailIcon, WhatsAppIcon } from "./icons";
 import { Container } from "./container";
 import { Logo } from "./logo";
 import { PrimaryNav } from "./primary-nav";
 import { SiteSearch } from "./site-search";
 import { CartButton } from "./cart-button";
+import { MobileNav } from "./mobile-nav";
 
 /**
  * The Figma header carries an account icon and a cart badge. Phase 1 has
@@ -24,15 +25,15 @@ export function SiteHeader() {
   }));
 
   return (
-    <header className="bg-ink text-text-invert">
-      <Container className="flex h-16 items-center gap-8">
+    <header className="relative z-40 bg-ink text-text-invert">
+      <Container className="flex h-16 items-center gap-3 lg:gap-8">
         <Link href="/" className="shrink-0" aria-label={`${site.shortName} home`}>
           <Logo variant="light" className="h-6" />
         </Link>
 
         <PrimaryNav items={primaryNav} categories={categories} />
 
-        <div className="ml-auto flex items-center gap-3">
+        <div className="ml-auto flex items-center gap-1 sm:gap-2 lg:gap-3">
           <SiteSearch />
           <CartButton />
 
@@ -40,9 +41,15 @@ export function SiteHeader() {
             href={generalEnquiryLink()}
             className="inline-flex h-10 items-center gap-2 rounded-lg bg-accent px-4 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
           >
-            <WhatsAppIcon className="size-4" />
+            {site.contact.whatsapp ? (
+              <WhatsAppIcon className="size-4" />
+            ) : (
+              <MailIcon className="size-4" />
+            )}
             <span className="hidden sm:inline">Talk to us</span>
           </a>
+
+          <MobileNav items={primaryNav} categories={categories} />
         </div>
       </Container>
     </header>

@@ -42,7 +42,14 @@ export function ProductImage({
   const entry = getProductImageManifestEntry(src);
 
   if (!entry) {
-    // Placeholder art, or a base name with no generated variants yet.
+    if (!src.startsWith("/")) {
+      throw new Error(
+        `Product image "${src}" is missing from public/images/products/manifest.json. ` +
+          "Run pnpm build:images after adding the source photograph.",
+      );
+    }
+    // Literal assets such as an SVG already live under public/ and do not
+    // participate in the responsive image manifest.
     return (
       <img
         src={resolveProductImagePath(src)}

@@ -18,7 +18,7 @@ import {
 
 export const metadata: Metadata = {
   title: "Our Store",
-  description: `Visit the ${site.name} showroom to see ${business.primaryBrand} appliances running before you buy. Address, opening hours and directions.`,
+  description: `Find the ${site.name} showroom contact details and confirm a visit to discuss listed ${business.primaryBrand} appliances.`,
   alternates: { canonical: "/stores/" },
 };
 
@@ -55,7 +55,9 @@ export default function StoresPage() {
           postalCode,
           addressCountry: country,
         },
-        openingHours: business.hours.map((slot) => `${slot.days} ${slot.time}`),
+        ...(business.hours.length > 0
+          ? { openingHours: business.hours.map((slot) => `${slot.days} ${slot.time}`) }
+          : {}),
         ...(site.social.googleBusinessProfile
           ? { sameAs: [site.social.googleBusinessProfile] }
           : {}),
@@ -97,12 +99,16 @@ export default function StoresPage() {
             <dl className="mt-8 border-t border-line pt-6">
               <dt className="text-sm font-semibold">Opening hours</dt>
               <dd className="mt-3 space-y-2 text-sm">
-                {business.hours.map((slot) => (
-                  <div key={slot.days} className="flex justify-between gap-4">
-                    <span className="text-text-muted">{slot.days}</span>
-                    <span className="font-medium">{slot.time}</span>
-                  </div>
-                ))}
+                {business.hours.length > 0 ? (
+                  business.hours.map((slot) => (
+                    <div key={slot.days} className="flex justify-between gap-4">
+                      <span className="text-text-muted">{slot.days}</span>
+                      <span className="font-medium">{slot.time}</span>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-text-muted">Contact the showroom to confirm today&apos;s hours.</p>
+                )}
               </dd>
             </dl>
 
@@ -161,9 +167,9 @@ export default function StoresPage() {
                 Service and warranty
               </p>
               <p className="mt-2 text-[0.8125rem] leading-relaxed text-text-muted">
-                Bought from us and something is not right? Bring the invoice
-                number to the counter, or message us — we raise the claim with
-                the brand and follow it for you.
+                Bought from us and something is not right? Keep the invoice and
+                manufacturer documents, then contact the showroom so we can
+                confirm the support route available for that model.
               </p>
               <Link
                 href="/policies/warranty/"

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { PhoneIcon, WhatsAppIcon } from "../icons";
+import { MailIcon, PhoneIcon, WhatsAppIcon } from "../icons";
 
 /**
  * Mobile buy bar.
@@ -97,7 +97,11 @@ export function StickyBuyBar({
             tabIndex={visible ? 0 : -1}
             className="inline-flex h-11 shrink-0 items-center gap-2 rounded-xl bg-accent px-5 text-sm font-medium text-white"
           >
-            <WhatsAppIcon className="size-4" />
+            {enquiryHref.startsWith("https://wa.me/") ? (
+              <WhatsAppIcon className="size-4" />
+            ) : (
+              <MailIcon className="size-4" />
+            )}
             Enquire
           </a>
         </div>

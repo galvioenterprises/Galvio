@@ -54,7 +54,7 @@ export function highlightsFor(product: Product): Highlight[] {
   if (product.installationIncluded) {
     derived.push({
       title: "Installation Included",
-      subtitle: "Fitted by our own team",
+      subtitle: "Listed in the supplied terms",
       icon: "wrench",
     });
   }

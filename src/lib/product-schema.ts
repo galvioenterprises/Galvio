@@ -5,12 +5,13 @@ import { z } from "zod";
  *
  * The field set is deliberately shaped after the Google Merchant Center
  * product feed so the same JSON can drive the site today and a feed
- * later without remodelling. Fields Merchant Center treats as required
- * (gtin, brand, price, availability, condition) are required here too,
- * which forces the data to be collected correctly at source.
+ * later without remodelling. Manufacturer identifiers remain optional for
+ * storefront publication because an absent identifier is safer than a guessed
+ * one; feed eligibility is validated separately.
  */
 
 export const availabilitySchema = z.enum([
+  "unknown",
   "in_stock",
   "out_of_stock",
   "preorder",
@@ -124,8 +125,6 @@ const productObjectSchema = z.object({
   /** The parent is included too, so every selectable finish has a SKU. */
   variants: z.array(productVariantSchema).optional(),
 
-  /** GTIN-8/12/13/14. Mandatory: without it the product cannot be
-   *  matched to Google's catalogue and loses free-listing eligibility. */
   /** From the carton barcode. Optional: it is needed for a Google
    *  Merchant feed, not for a page to be worth publishing, and holding
    *  the whole catalogue back for it helps nobody. */
@@ -146,7 +145,8 @@ const productObjectSchema = z.object({
    *  Drives the first filter group on the listing page. */
   subCategory: z.string().min(1).optional(),
 
-  /** Rupees, inclusive of GST, matching what is printed on the box. */
+  /** Rupee amounts exactly as supplied by the source. Tax treatment is kept
+   *  separate and must not be inferred when `gstRate` is absent. */
   mrp: z.number().positive(),
   sellingPrice: z.number().positive(),
   gstRate: z.number().min(0).max(28).optional(),
@@ -187,7 +187,18 @@ export const productSchema = productObjectSchema
   .refine((p) => p.sellingPrice <= p.mrp, {
     message: "sellingPrice cannot exceed mrp",
     path: ["sellingPrice"],
-  });
+  })
+  .refine((p) => !(p.availability === "in_stock" && p.stockCount === 0), {
+    message: "in_stock products cannot have stockCount 0",
+    path: ["stockCount"],
+  })
+  .refine(
+    (p) => !(p.availability === "out_of_stock" && (p.stockCount ?? 0) > 0),
+    {
+      message: "out_of_stock products cannot have a positive stockCount",
+      path: ["stockCount"],
+    },
+  );
 
 /** Supplier material often establishes identity before price, tax, stock and
  *  warranty arrive. Retaining that work is safe only while it stays draft. */
