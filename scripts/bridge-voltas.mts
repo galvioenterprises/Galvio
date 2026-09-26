@@ -127,6 +127,21 @@ function decodeHtml(value: string): string {
     .replace(/&deg;/g, "°");
 }
 
+function sentenceSafeExcerpt(value: string, maximum = 900): string {
+  if (value.length <= maximum) return value;
+
+  const prefix = value.slice(0, maximum + 1);
+  const boundaries = [...prefix.matchAll(/[.!?](?=\s|$)/g)];
+  const lastBoundary = boundaries.at(-1)?.index;
+
+  // Product prose normally contains several complete sentences before the
+  // limit. If it does not, retain the source instead of manufacturing a full
+  // stop or publishing a clipped fragment.
+  return lastBoundary !== undefined && lastBoundary >= 200
+    ? prefix.slice(0, lastBoundary + 1).trim()
+    : value;
+}
+
 function descriptionOf(raw: string): string {
   let value = decodeHtml(raw).replace(/<[^>]+>/g, " ");
   const refund = /Refund will be credited within 14 working days/i.exec(value);
@@ -140,12 +155,13 @@ function descriptionOf(raw: string): string {
   }
 
   value = value.split(/View Product Catalogue|Brand Name\s*:|Country of Origin\s*:|Manufacturers?\s*\/\s*Importers?\s*:|Cancellation Refund Policy/i)[0];
-  return value
+  const normalized = value
     .replace(/\s+([,.;:!?])/g, "$1")
     .replace(/([,.;:!?])(?=[A-Za-z])/g, "$1 ")
     .replace(/\s+/g, " ")
-    .trim()
-    .slice(0, 900);
+    .trim();
+
+  return sentenceSafeExcerpt(normalized);
 }
 
 function capacityOf(category: string, title: string, description: string): string {
@@ -165,6 +181,11 @@ function capacityOf(category: string, title: string, description: string): strin
     return value ? `${value}L` : "";
   }
   return "";
+}
+
+/** "Inverter" in words, or Voltas's model suffix such as "183INV". */
+function isInverter(title: string): boolean {
+  return /inverter|\d+\s*INV/i.test(title);
 }
 
 function starOf(title: string): string {
@@ -192,6 +213,26 @@ function cleanTitle(title: string): string {
     .replace(/\s*,\s*Voltas Beko\s*$/i, "")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+/** "…Refrigerator (RDC215D/S0RFR0M0000GO, Fressia Ruby)…" -> "RDC215D". */
+function modelCodeOf(title: string): string {
+  return /\(\s*([A-Z]{2,4}\d{3}[A-Z]?)\s*\//.exec(title)?.[1] ?? "";
+}
+
+/** The finish named inside the brackets, e.g. "Fressia Ruby". */
+function colourOf(title: string): string {
+  const inner = /\(([^)]*)\)/.exec(title)?.[1] ?? "";
+  const parts = inner.split(",").map((part) => part.trim());
+  const colour = parts[1] && !/with|star|inverter|drawer|freeze|humid/i.test(parts[1]) ? parts[1] : "";
+  // One spelling per finish, so the colour filter does not list "Inox steel"
+  // and "Inox Steel" separately.
+  return colour.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+/** A model-level title for a colour group: the brackets keep only the code. */
+function groupTitle(title: string): string {
+  return title.replace(/\(([^)]*)\)/, (_, inner: string) => `(${inner.split(/[/,]/)[0].trim()})`);
 }
 
 function manufacturerPhotos(product: Product): Product["images"] {
@@ -350,7 +391,7 @@ function main() {
       capacityOf(category, title, description),
       "",
       starOf(title),
-      /inverter/i.test(title) ? "true" : "",
+      isInverter(title) ? "true" : "",
       "",
       "",
       "",
@@ -359,13 +400,102 @@ function main() {
     ].join(","));
   }
 
+  // Additions: voltas.com products the business asked for that are not on
+  // the distributor price list (data/sources/voltas-additions.json). Colour
+  // versions of one model are grouped: the cheapest becomes the listed
+  // product and the others are folded into it as colour variants.
+  const additionsPath = resolve("data/sources/voltas-additions.json");
+  let added = 0;
+  if (existsSync(additionsPath)) {
+    const additions = JSON.parse(readFileSync(additionsPath, "utf8")) as { handles: string[]; maxImages?: number };
+    const alreadyIn = new Set(selected.keys());
+    const groups = new Map<string, Product[]>();
+    for (const handle of additions.handles) {
+      if (alreadyIn.has(handle)) continue;
+      const product = byHandle.get(handle);
+      if (!product) throw new Error(`voltas-additions.json lists unknown handle "${handle}"`);
+      const code = modelCodeOf(product.title);
+      const key = `${code}|${/inverter/i.test(product.title) ? "inv" : ""}|${/6-in-1/i.test(product.title) ? "6in1" : ""}`;
+      groups.set(key, [...(groups.get(key) ?? []), product]);
+    }
+    for (const members of groups.values()) {
+      members.sort((a, b) => (a.variants[0]?.price ?? 0) - (b.variants[0]?.price ?? 0));
+      const parent = members[0];
+      const parentCategory = CATEGORY[parent.productType] ?? "";
+      const parentIdentity = parentCategory ? stableKey(parentCategory, parent) : undefined;
+      if (!parentIdentity) {
+        missingIdentity.push(`addition -> ${parent.title}`);
+        continue;
+      }
+      const photos = manufacturerPhotos(parent).slice(0, additions.maxImages ?? 8);
+      if (photos.length > 0) {
+        images.push({ assetKey: parentIdentity.assetKey, urls: photos.map((photo) => photo.src) });
+      }
+      const imageFiles = photos.length > 0 ? imageAssetKeys(parentIdentity.assetKey, photos.length).join("|") : "";
+      for (const product of members) {
+        const category = CATEGORY[product.productType] ?? "";
+        const identity = stableKey(category, product);
+        if (!identity) {
+          missingIdentity.push(`addition -> ${product.title}`);
+          continue;
+        }
+        const variant = product.variants[0];
+        const full = cleanTitle(product.title);
+        const title = product === parent ? groupTitle(full) : full;
+        const description = descriptionOf(product.description);
+        const barcode = variant?.barcode?.replace(/\D/g, "") ?? "";
+        rows.push([
+          identity.sku,
+          csv(`voltas.com: ${product.handle}`),
+          "active",
+          "Voltas Beko",
+          "",
+          csv(
+            (modelCodeOf(product.title) || identity.article) +
+              (/6-in-1/i.test(product.title) ? " 6-in-1" : ""),
+          ),
+          product === parent ? "" : parentIdentity.sku,
+          /^(?:\d{8}|\d{12,14})$/.test(barcode) ? barcode : "",
+          "",
+          csv(title),
+          csv(description),
+          category,
+          SUB_CATEGORY[product.productType] ?? "",
+          variant?.mrp ?? "",
+          variant?.price ?? "",
+          "",
+          "unknown",
+          "",
+          "new",
+          "",
+          "",
+          "",
+          variant && variant.grams > 0 ? (variant.grams / 1000).toFixed(1) : "",
+          "",
+          "",
+          "",
+          capacityOf(category, full, description),
+          csv(colourOf(product.title)),
+          starOf(full),
+          isInverter(full) ? "true" : "",
+          "",
+          "",
+          "",
+          "",
+          imageFiles,
+        ].join(","));
+        added++;
+      }
+    }
+  }
+
   atomicText(output, `${HEADER}\n${rows.join("\n")}\n`);
   atomicText(
     resolve("data/sources/voltas-images.json"),
     `${JSON.stringify(images, null, 2)}\n`,
   );
 
-  console.log(`${rows.length} unique reviewed rows -> ${output}`);
+  console.log(`${rows.length} unique reviewed rows -> ${output} (${added} from voltas-additions.json)`);
   console.log(`${duplicates} duplicate stock aliases folded into canonical products`);
   console.log(`${rejected} unmatched or unreviewed stock lines left out`);
   console.log(`${images.length} products have manufacturer photography`);

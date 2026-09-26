@@ -1,0 +1,73 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-beko-rdc240a",
+  "sku": "GAL-RF-1100976",
+  "brand": "Voltas Beko",
+  "model": "RDC240A",
+  "status": "active",
+  "internalCode": "voltas.com: 208-l-5-star-direct-cool-single-door-refrigerator-rdc240a-w0bbrtm0b00go-bonita-blue-with-fresh-box-technology-quick-frezze-chiller-zone-and-base-drawer-voltas-beko-a-tata-product",
+  "title": "208 L 5 Star Direct Cool Single Door Refrigerator (RDC240A)",
+  "description": "The Voltas Beko 208 L 5‑Star Direct Cool Single Door Refrigerator features Fresh Box Technology to keep produce crisp, along with Quick Freeze and a dedicated Chiller Zone for faster, efficient cooling. Its Base Drawer adds convenient extra storage, while adjustable toughened glass shelves offer flexible organization. Designed for high energy efficiency in a vibrant Bonita Blue finish",
+  "category": "Refrigerator",
+  "subCategory": "Single Door",
+  "mrp": 30690,
+  "sellingPrice": 20390,
+  "availability": "unknown",
+  "condition": "new",
+  "capacity": "208L",
+  "color": "Bonita Blue",
+  "starRating": 5,
+  "highlights": [],
+  "faqs": [],
+  "images": [
+    {
+      "src": "voltas-1100976",
+      "alt": "208 L 5 Star Direct Cool Single Door Refrigerator (RDC240A)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100976-2",
+      "alt": "208 L 5 Star Direct Cool Single Door Refrigerator (RDC240A)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100976-3",
+      "alt": "208 L 5 Star Direct Cool Single Door Refrigerator (RDC240A)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100976-4",
+      "alt": "208 L 5 Star Direct Cool Single Door Refrigerator (RDC240A)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100976-5",
+      "alt": "208 L 5 Star Direct Cool Single Door Refrigerator (RDC240A)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100976-6",
+      "alt": "208 L 5 Star Direct Cool Single Door Refrigerator (RDC240A)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100976-7",
+      "alt": "208 L 5 Star Direct Cool Single Door Refrigerator (RDC240A)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100976-8",
+      "alt": "208 L 5 Star Direct Cool Single Door Refrigerator (RDC240A)",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

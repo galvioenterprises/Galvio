@@ -1,0 +1,74 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-beko-rff334d-6-in-1",
+  "sku": "GAL-RF-1101177",
+  "brand": "Voltas Beko",
+  "model": "RFF334D 6-in-1",
+  "status": "active",
+  "internalCode": "voltas.com: 283-l-2-star-6-in-1-adjustable-frost-free-inverter-double-door-refrigerator-rff334d-wpv100rxbd-wooden-black-voltas-beko-a-tata-product",
+  "title": "283 L 2 Star 6-in-1 Adjustable Frost Free Inverter Double-Door Refrigerator (RFF334D)",
+  "description": "The Voltas Beko 283 L 2‑Star 6‑in‑1 Adjustable Frost Free Inverter Double‑Door Refrigerator offers versatile 6‑in‑1 cooling modes, efficient inverter performance, and flexible storage in a premium Wooden Black finish Model No.: 1101177 / RFF334D / WPV100RXBD Product Color: Wooden Black Energy Rating: 2 Star Gross Volume (L): 283 Fresh Box Quick Freeze Crisper Humidity Controller Flexlift Door Shelf Adjustable Toughened Glass Shelves Stabilizer Free Operation Egg Tray Ice Tray Made in India",
+  "category": "Refrigerator",
+  "subCategory": "Double Door",
+  "mrp": 47590,
+  "sellingPrice": 31050,
+  "availability": "unknown",
+  "condition": "new",
+  "capacity": "283L",
+  "color": "Wooden Black",
+  "starRating": 2,
+  "inverter": true,
+  "highlights": [],
+  "faqs": [],
+  "images": [
+    {
+      "src": "voltas-1101177",
+      "alt": "283 L 2 Star 6-in-1 Adjustable Frost Free Inverter Double-Door Refrigerator (RFF334D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101177-2",
+      "alt": "283 L 2 Star 6-in-1 Adjustable Frost Free Inverter Double-Door Refrigerator (RFF334D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101177-3",
+      "alt": "283 L 2 Star 6-in-1 Adjustable Frost Free Inverter Double-Door Refrigerator (RFF334D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101177-4",
+      "alt": "283 L 2 Star 6-in-1 Adjustable Frost Free Inverter Double-Door Refrigerator (RFF334D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101177-5",
+      "alt": "283 L 2 Star 6-in-1 Adjustable Frost Free Inverter Double-Door Refrigerator (RFF334D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101177-6",
+      "alt": "283 L 2 Star 6-in-1 Adjustable Frost Free Inverter Double-Door Refrigerator (RFF334D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101177-7",
+      "alt": "283 L 2 Star 6-in-1 Adjustable Frost Free Inverter Double-Door Refrigerator (RFF334D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101177-8",
+      "alt": "283 L 2 Star 6-in-1 Adjustable Frost Free Inverter Double-Door Refrigerator (RFF334D)",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

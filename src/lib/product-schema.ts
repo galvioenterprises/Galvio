@@ -1,3 +1,4 @@
+import { BADGE_IDS } from "../config/badges.ts";
 import { z } from "zod";
 
 /**
@@ -173,6 +174,9 @@ const productObjectSchema = z.object({
   /** Compressors are warranted far longer than the appliance and are a
    *  real purchase driver, so they get their own field and their own card. */
   compressorWarrantyMonths: z.number().int().nonnegative().optional(),
+
+  /** Merchandising badges set by the distributor; see src/config/badges.ts. */
+  badges: z.array(z.enum(BADGE_IDS)).optional(),
 
   highlights: z.array(highlightSchema).default([]),
   faqs: z.array(faqSchema).default([]),

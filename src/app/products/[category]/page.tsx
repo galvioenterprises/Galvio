@@ -45,7 +45,7 @@ export async function generateMetadata({
 
   const description = stocked
     ? category.description
-    : `${category.description} Not listed online yet — ask the showroom to check current models, pricing and availability.`;
+    : `${category.description} Not listed online yet — contact us to check current models, pricing and availability with the distributor.`;
 
   return {
     title,
@@ -76,7 +76,7 @@ function PromoBanner({
   image?: string;
 }) {
   return (
-    <div className="relative flex h-[196px] flex-col justify-center overflow-hidden rounded-2xl bg-ink px-8 py-5 text-text-invert">
+    <div className="relative flex h-[132px] flex-col justify-center overflow-hidden rounded-2xl bg-ink px-5 py-4 text-text-invert sm:h-[196px] sm:px-8 sm:py-5">
       {image && (
         <div
           aria-hidden
@@ -102,14 +102,14 @@ function PromoBanner({
       />
 
       <p className="eyebrow relative text-text-invert-muted">{eyebrow}</p>
-      <p className="relative mt-2 max-w-[14ch] text-[1.625rem] font-semibold leading-[1.12] text-white">
+      <p className="relative mt-1.5 max-w-[14ch] text-xl font-semibold leading-[1.12] text-white sm:mt-2 sm:text-[1.625rem]">
         {title}
       </p>
-      <p className="relative mt-1.5 text-[0.8125rem] text-text-invert-muted">{subtitle}</p>
+      <p className="relative mt-1 line-clamp-1 text-xs text-text-invert-muted sm:mt-1.5 sm:text-[0.8125rem]">{subtitle}</p>
 
       <a
         href="#products"
-        className="relative mt-4 inline-flex h-9 w-fit items-center gap-2 rounded-full border border-white/25 px-4 text-xs font-medium text-white transition-colors hover:border-white/50"
+        className="relative mt-2 inline-flex h-11 w-fit items-center gap-2 rounded-full border border-white/25 px-4 text-xs font-medium text-white transition-colors hover:border-white/50 sm:mt-4"
       >
         Explore products
         <ArrowRightIcon className="size-3.5" />
@@ -153,22 +153,30 @@ export default async function CategoryPage({ params }: { params: Promise<Params>
         trail={[{ label: "Home", href: "/" }, { label: category.title }]}
       />
 
-      <Container size="listing" className="pb-20 pt-8">
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_832px] lg:items-start">
+      <Container size="listing" className="pb-20 pt-5 sm:pt-8">
+        <div className="grid gap-5 sm:gap-8 lg:grid-cols-[minmax(0,1fr)_832px] lg:items-start lg:gap-10">
           <div className="lg:pt-1">
             <p className="eyebrow text-text-muted">{category.eyebrow}</p>
-            <h1 className="mt-1.5 text-[2.25rem] font-semibold leading-[1.1] tracking-[-0.02em] sm:text-[2.5rem]">
+            <h1 className="mt-1.5 text-[1.875rem] font-semibold leading-[1.1] tracking-[-0.02em] sm:text-[2.5rem]">
               {category.title}
             </h1>
-            <p className="mt-5 max-w-[46ch] text-[0.9375rem] leading-[1.65] text-text-muted">
+            <p className="mt-3 line-clamp-2 max-w-[46ch] text-sm leading-[1.55] text-text-muted sm:mt-5 sm:line-clamp-none sm:text-[0.9375rem] sm:leading-[1.65]">
               {category.description}
             </p>
+            {category.slug === "air-conditioners" && (
+              <Link
+                href="/ac-size-calculator/"
+                className="mt-3 inline-flex min-h-11 items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-4 py-2 text-sm font-medium text-accent hover:bg-accent/10 sm:mt-4"
+              >
+                Not sure of the size? Use the AC size calculator →
+              </Link>
+            )}
           </div>
 
           <PromoBanner {...category.banner} image={category.bannerImage} />
         </div>
 
-        <div id="products" className="mt-[52px] scroll-mt-8">
+        <div id="products" className="mt-7 scroll-mt-24 sm:mt-[52px]">
           {products.length > 0 ? (
             <ProductBrowser products={products} />
           ) : (
@@ -178,8 +186,8 @@ export default async function CategoryPage({ params }: { params: Promise<Params>
               </h2>
               <p className="mx-auto mt-3 max-w-md text-[0.9375rem] leading-relaxed text-text-muted">
                 This range does not have a verified online listing yet. Tell us
-                what you need and the showroom can check current models,
-                pricing and availability.
+                what you need and we can check current models, pricing and
+                availability with the distributor.
               </p>
               <div className="mt-7 flex flex-wrap justify-center gap-3">
                 <a

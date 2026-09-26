@@ -17,7 +17,7 @@ export const site = {
   url: "https://galvioenterprises.com",
 
   description:
-    "Authorised distributor of home and commercial electronics. Retail and bulk supply.",
+    "Genuine Voltas and Voltas Beko appliances, supplied through an authorised distributor, with retail and bulk supply, Cash on Delivery, and pan-India shipping.",
 
   locale: "en_IN",
   currency: "INR",
@@ -25,9 +25,10 @@ export const site = {
 
   /** TODO: replace with the live business numbers before launch. */
   contact: {
-    phone: "",
+    /** Calls for queries, complaints, enquiries and sales. */
+    phone: "+91 94129 60885",
     /** E.164 without the leading "+", e.g. 919876543210. */
-    whatsapp: "",
+    whatsapp: "919412960885",
     email: "galvioenterprises@gmail.com",
   },
 
@@ -46,12 +47,9 @@ export const site = {
   },
 
   /**
-   * Pincodes the showroom delivers and installs to.
-   *
-   * The Figma product page has a "check availability in your area" box.
-   * Phase 1 has no logistics API, so the check runs against this list in
-   * the browser — a real answer from real data, rather than a box that
-   * says yes to everything. Add pincodes as the delivery area grows.
+   * Explicitly verified delivery pincodes, if a destination-level list is
+   * supplied. Nationwide operation is configured separately in business.ts;
+   * Phase 1 still asks the distributor to confirm each destination.
    */
   serviceablePincodes: [] as string[],
 } as const;

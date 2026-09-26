@@ -10,13 +10,12 @@ import { ArrowRightIcon } from "@/components/icons";
 
 export const metadata: Metadata = {
   title: "Offers",
-  description: `Compare published catalogue prices with MRP at ${site.name}. Final price, tax treatment and availability are confirmed by the showroom.`,
+  description: `Shop ${site.name} catalogue offers with savings against MRP, Cash on Delivery and distributor-managed shipping across India.`,
   alternates: { canonical: "/offers/" },
 };
 
 /**
- * Products whose published catalogue price is below MRP, largest difference
- * first. The page never represents that source price as a Galvio promotion.
+ * Products whose current website price is below MRP, largest difference first.
  *
  * Derived rather than curated. An offers page maintained by hand is one
  * that is wrong within a fortnight, and a wrong price is worse than no
@@ -39,13 +38,12 @@ export default function OffersPage() {
       <Container size="listing" className="pb-20 pt-8">
         <p className="eyebrow text-offer">Offers</p>
         <h1 className="mt-1.5 text-[2.25rem] font-semibold leading-[1.1] tracking-[-0.02em] sm:text-[2.5rem]">
-          {best > 0 ? `Listed up to ${best}% below MRP` : "Published prices"}
+          {best > 0 ? `Save up to ${best}% off MRP` : "Current prices"}
         </h1>
         <p className="mt-5 max-w-[60ch] text-[0.9375rem] leading-[1.65] text-text-muted">
-          These comparisons use the published catalogue price and MRP supplied
-          for each model. They are not proof of current showroom stock or a
-          final Galvio quote; confirm price, tax treatment and availability
-          before purchase.
+          Savings are calculated from the current website price and supplied
+          MRP for each model. Add a product to your COD cart; the distributor
+          confirms stock and delivery details before dispatch.
         </p>
 
         {deals.length === 0 ? (
@@ -62,7 +60,7 @@ export default function OffersPage() {
         ) : (
           <>
             <p className="mt-10 text-sm font-medium">
-              {deals.length} {deals.length === 1 ? "product" : "products"} listed below MRP
+              {deals.length} {deals.length === 1 ? "product" : "products"} currently below MRP
             </p>
             <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 2xl:gap-8">
               {deals.map((product) => (

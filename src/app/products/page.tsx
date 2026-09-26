@@ -13,7 +13,7 @@ import { ArrowRightIcon, MailIcon, WhatsAppIcon } from "@/components/icons";
 
 export const metadata: Metadata = {
   title: "All Products",
-  description: `Browse listed ${business.primaryBrand} appliances with manufacturer-supplied product details and published prices. Confirm current showroom availability before purchase.`,
+  description: `Shop listed ${business.primaryBrand} appliances with Cash on Delivery and distributor-managed shipping across India. Stock is confirmed before dispatch.`,
   alternates: { canonical: "/products/" },
 };
 
@@ -60,12 +60,12 @@ export default function ProductsPage() {
           All Products
         </h1>
         <p className="mt-5 max-w-[60ch] text-[0.9375rem] leading-[1.65] text-text-muted">
-          Browse manufacturer-backed listings with published prices and supplied
-          specifications. Availability, the final quote and installation terms
-          are confirmed by the showroom before purchase.
+          Compare manufacturer-backed listings, current website prices and
+          supplied specifications. Add products to your COD cart; the
+          distributor confirms stock and delivery details before dispatch.
         </p>
 
-        <div className="mt-[52px]">
+        <div className="mt-8 sm:mt-[52px]">
           <ProductBrowser products={products} />
         </div>
 
@@ -76,8 +76,8 @@ export default function ProductsPage() {
             </h2>
             <p className="mt-2 max-w-[60ch] text-[0.9375rem] leading-relaxed text-text-muted">
               These categories are part of the planned range but do not have a
-              verified online listing yet. Ask the showroom to check current
-              models and availability.
+              verified online listing yet. Contact us to check current models
+              and availability with the distributor.
             </p>
 
             <ul className="mt-6 flex flex-wrap gap-2.5">

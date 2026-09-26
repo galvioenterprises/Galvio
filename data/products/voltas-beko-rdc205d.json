@@ -1,0 +1,73 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-beko-rdc205d",
+  "sku": "GAL-RF-1100836",
+  "brand": "Voltas Beko",
+  "model": "RDC205D",
+  "status": "active",
+  "internalCode": "voltas.com: 173-l-2-star-direct-cool-refrigerator-appliance-rdc205d-s0pwr0m0000go-peony-wine-voltas-beko-a-tata-product",
+  "title": "173 L 2 Star Direct cool Refrigerator Appliance (RDC205D)",
+  "description": "Voltas Beko 2-Star Direct Cool Refrigerator offers Fresh Box Technology for enhanced freshness and adjustable toughened glass shelves for flexible storage. Designed for efficient cooling, smart organization, and everyday convenience in compact spaces.",
+  "category": "Refrigerator",
+  "subCategory": "Single Door",
+  "mrp": 23990,
+  "sellingPrice": 14250,
+  "availability": "unknown",
+  "condition": "new",
+  "capacity": "173L",
+  "color": "Peony Wine",
+  "starRating": 2,
+  "highlights": [],
+  "faqs": [],
+  "images": [
+    {
+      "src": "voltas-1100836",
+      "alt": "173 L 2 Star Direct cool Refrigerator Appliance (RDC205D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100836-2",
+      "alt": "173 L 2 Star Direct cool Refrigerator Appliance (RDC205D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100836-3",
+      "alt": "173 L 2 Star Direct cool Refrigerator Appliance (RDC205D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100836-4",
+      "alt": "173 L 2 Star Direct cool Refrigerator Appliance (RDC205D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100836-5",
+      "alt": "173 L 2 Star Direct cool Refrigerator Appliance (RDC205D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100836-6",
+      "alt": "173 L 2 Star Direct cool Refrigerator Appliance (RDC205D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100836-7",
+      "alt": "173 L 2 Star Direct cool Refrigerator Appliance (RDC205D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100836-8",
+      "alt": "173 L 2 Star Direct cool Refrigerator Appliance (RDC205D)",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

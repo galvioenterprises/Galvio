@@ -7,7 +7,7 @@
   "status": "active",
   "internalCode": "Voltas 1.5T SAC 183 INV Vertis Zephyr Gold",
   "title": "Voltas Split Air Conditioner, 1.5 Ton, 3 Star - 183INV Vertis Zephyr Gold",
-  "description": "Meet the Voltas Vertis Zephyr Gold 1.5 Ton 3 Star Inverter Split Room AC engineered for smart, quiet, and even cooling. With 6 Step Adjustable Mode, it gives you precise control over cooling capacity, matching real‑time room load and occupancy to save energy without compromising comfort. When you need quick relief, Turbo Cooling delivers a fast temperature pull‑down, while Ice Wash Technology helps keep the indoor unit coil cleaner for fresher airflow and sustained performance over time. Built for Indian summers, High Ambient Cooling keeps performance steady even at 52°C. The energy‑efficient inverter compressor modulates speed for consistent temperatures and lower noise, supporting savings with its 3 Star rating. Enjoy uniform comfort with 4‑Way Swing, and unwind with Super Silent Mode for low‑noise operation. With a handy Filter Clean Indicator for easy maintenance, Vertis Zephyr Gold",
+  "description": "Meet the Voltas Vertis Zephyr Gold 1.5 Ton 3 Star Inverter Split Room AC engineered for smart, quiet, and even cooling. With 6 Step Adjustable Mode, it gives you precise control over cooling capacity, matching real‑time room load and occupancy to save energy without compromising comfort. When you need quick relief, Turbo Cooling delivers a fast temperature pull‑down, while Ice Wash Technology helps keep the indoor unit coil cleaner for fresher airflow and sustained performance over time. Built for Indian summers, High Ambient Cooling keeps performance steady even at 52°C. The energy‑efficient inverter compressor modulates speed for consistent temperatures and lower noise, supporting savings with its 3 Star rating. Enjoy uniform comfort with 4‑Way Swing, and unwind with Super Silent Mode for low‑noise operation.",
   "category": "Air Conditioner",
   "subCategory": "Split AC",
   "mrp": 64990,
@@ -16,6 +16,7 @@
   "condition": "new",
   "capacity": "1.5 Ton",
   "starRating": 3,
+  "inverter": true,
   "highlights": [],
   "faqs": [],
   "images": [

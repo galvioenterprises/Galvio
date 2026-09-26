@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "pnpm build:images && pnpm build:index && ALLOW_SAMPLE_DATA=1 next dev",
+    "dev": "pnpm build:images && pnpm build:index && node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/dev.mts",
     "build": "pnpm build:images && pnpm build:index && next build",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit",
-    "preview": "wrangler dev",
+    "typecheck": "tsc --noEmit && tsc -p worker/tsconfig.json",
+    "test:worker": "node --test tests/worker-hardening.test.mjs",
+    "preview": "wrangler d1 migrations apply galvio --local && wrangler dev",
+    "db:migrate": "wrangler d1 migrations apply galvio --remote",
     "deploy": "pnpm build && wrangler deploy",
     "import:products": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/import-products.mts",
     "build:preview": "pnpm build:images && pnpm build:index && ALLOW_SAMPLE_DATA=1 next build",
@@ -18,6 +20,7 @@
     "bridge:voltas": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/bridge-voltas.mts",
     "compose:products": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/compose-products.mts",
     "sync:images": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/sync-images.mts",
+    "cut:hero-ac": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/cut-hero-ac.mts",
     "admin": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/admin-server.mts"
   },
   "dependencies": {

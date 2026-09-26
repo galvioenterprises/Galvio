@@ -1713,5 +1713,630 @@
     "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/Wind-54ww-3.jpg",
     "sha256": "60b6a7fd879f10ab4e4c1d9651e2c488f003fe71a8cfe108fd34c83d511a9934",
     "file": "assets/products/voltas-4810390/3.jpg"
+  },
+  "voltas-1100836/1": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1100836_RDC205DS0PWR0M0000GO_1_2.jpg",
+    "sha256": "187770cb4196593650b0855692c6dc925572d41ba0ddeda3df4cdfca0389bbbc",
+    "file": "assets/products/voltas-1100836/1.jpg"
+  },
+  "voltas-1100836/2": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1100836_RDC205DS0PWR0M0000GO_2_2.jpg",
+    "sha256": "ea9248483bd54b590ef066467fd7baf2f7af4fd85fa1546882dab8b38cf40dc0",
+    "file": "assets/products/voltas-1100836/2.jpg"
+  },
+  "voltas-1100836/3": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1100836_RDC205DS0PWR0M0000GO_3_2.jpg",
+    "sha256": "72481e5b8e5d95d7d42ed5d4c00ebf3db459e9b756f4e9275f4636d2d0e35a7d",
+    "file": "assets/products/voltas-1100836/3.jpg"
+  },
+  "voltas-1100836/4": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1100836_RDC205DS0PWR0M0000GO_4_2.jpg",
+    "sha256": "d4d3ea2829ecf8c8800232ea329659c8ea8cd951b960243f10d85880f038493e",
+    "file": "assets/products/voltas-1100836/4.jpg"
+  },
+  "voltas-1100836/5": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1100836_RDC205DS0PWR0M0000GO_6_2.jpg",
+    "sha256": "4edaf4bb30366d304d64dba11e3e437f2b89ee2366dc03a2167059ee649b7934",
+    "file": "assets/products/voltas-1100836/5.jpg"
+  },
+  "voltas-1100836/6": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1100836_RDC205DS0PWR0M0000GO_7_2.jpg",
+    "sha256": "da3bbc635145c6d09148fa731321e4c5caa4fc8fbd3ebffb054cb96c0acf5e5b",
+    "file": "assets/products/voltas-1100836/6.jpg"
+  },
+  "voltas-1100836/7": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1100836_RDC205DS0PWR0M0000GO_8_2.jpg",
+    "sha256": "2c7d81d130ca4fe3f93f0ab055a734886e196e9ac1ce35a17f7700fec514d4f1",
+    "file": "assets/products/voltas-1100836/7.jpg"
+  },
+  "voltas-1100836/8": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1100836_RDC205DS0PWR0M0000GO_9_2.jpg",
+    "sha256": "5e5da65238d8668a0c769ed07ea3151a830072e366c6998702716731a54a57d7",
+    "file": "assets/products/voltas-1100836/8.jpg"
+  },
+  "voltas-1100964/1": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGXY38JFYWEHR3_0.jpg",
+    "sha256": "6d4a6390323d63f2e6c5d3b095e0c090e7727970059f60b14fbcf5544561a88c",
+    "file": "assets/products/voltas-1100964/1.jpg"
+  },
+  "voltas-1100964/2": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGXY38JFYWEHR3_1.jpg",
+    "sha256": "1428b9df57f890705901999e12526e60914eeadfeb01f9f610679f4ef7f0abcd",
+    "file": "assets/products/voltas-1100964/2.jpg"
+  },
+  "voltas-1100964/3": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGXY38JFYWEHR3_2.jpg",
+    "sha256": "fe29b7ce9155b9177aaa38b6d62ce344fdb40a3fdfda3fc77fcab5bd077a1ffa",
+    "file": "assets/products/voltas-1100964/3.jpg"
+  },
+  "voltas-1100964/4": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGXY38JFYWEHR3_3.jpg",
+    "sha256": "be082731ca2244555ae030a0d9b0d8cfa1d43a3ac2b8fc4521fdb91321ab2887",
+    "file": "assets/products/voltas-1100964/4.jpg"
+  },
+  "voltas-1100964/5": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGXY38JFYWEHR3_4.jpg",
+    "sha256": "088475ebc3c14cf2f396ff911a4380537766ecf9f62a5ef60b7e0aa08d059f62",
+    "file": "assets/products/voltas-1100964/5.jpg"
+  },
+  "voltas-1100964/6": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGXY38JFYWEHR3_5.jpg",
+    "sha256": "0d4a821d91bcaf6066f1f21dca5a85ad9d31adc43b15fe9312a75badafccd571",
+    "file": "assets/products/voltas-1100964/6.jpg"
+  },
+  "voltas-1100964/7": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGXY38JFYWEHR3_6.jpg",
+    "sha256": "afa73462bfbdac43cdd1659894c2e9aa6750098ecf1eb99aea4218b9b0fab3a8",
+    "file": "assets/products/voltas-1100964/7.jpg"
+  },
+  "voltas-1100964/8": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGXY38JFYWEHR3_7.jpg",
+    "sha256": "9654a000590562ce541cc430457bf19a570129b6bdf340bd932b25473f1d6008",
+    "file": "assets/products/voltas-1100964/8.jpg"
+  },
+  "voltas-1100969/1": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1100969-1.jpg",
+    "sha256": "84e9a5decfc640997e0f5b636b0d08b6e232e96ccc93dabd95dad1d7357112e4",
+    "file": "assets/products/voltas-1100969/1.jpg"
+  },
+  "voltas-1100969/2": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1100969-2.jpg",
+    "sha256": "38da47442df1af171774ee77b70d7bb96036d6cc4b320933193a90354b056f5e",
+    "file": "assets/products/voltas-1100969/2.jpg"
+  },
+  "voltas-1100969/3": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1100969-3.jpg",
+    "sha256": "66f40a002d0366cca383acf1180c1d9ed8a80404c6f7e32e97deb8cfa5b583c2",
+    "file": "assets/products/voltas-1100969/3.jpg"
+  },
+  "voltas-1100969/4": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1100969-4.jpg",
+    "sha256": "d6bdbc4518a1a076ae6561848dbb3c761deb0ec1c28d421658ab616d4ac0726d",
+    "file": "assets/products/voltas-1100969/4.jpg"
+  },
+  "voltas-1101042/1": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1101042-1.jpg",
+    "sha256": "775902d909e0b5c69e54888592a26ccc25de1d2916f9ade06999a2a7e1974b5c",
+    "file": "assets/products/voltas-1101042/1.jpg"
+  },
+  "voltas-1101042/2": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1101042-3.jpg",
+    "sha256": "11b400a5d167968f7648956fcebfb4b6689c4b100a691b90aa13f056d25c5451",
+    "file": "assets/products/voltas-1101042/2.jpg"
+  },
+  "voltas-1101042/3": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1101042-2.jpg",
+    "sha256": "8bc1f510adbbd37addf6475f7a5e7fc84d750fd8f875ab854eb51fb9780c062b",
+    "file": "assets/products/voltas-1101042/3.jpg"
+  },
+  "voltas-1101042/4": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1101042-4.jpg",
+    "sha256": "ecfece5db961efa584bd713a23447de7a91c8ce660e398338e4a536712c7415f",
+    "file": "assets/products/voltas-1101042/4.jpg"
+  },
+  "voltas-1101042/5": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1101042-5.jpg",
+    "sha256": "ef1b1f5c2566deaad554ea43f6e12aa07f698014140144acf5e9336a25c9287d",
+    "file": "assets/products/voltas-1101042/5.jpg"
+  },
+  "voltas-1101043/1": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1101043-1.jpg",
+    "sha256": "775902d909e0b5c69e54888592a26ccc25de1d2916f9ade06999a2a7e1974b5c",
+    "file": "assets/products/voltas-1101043/1.jpg"
+  },
+  "voltas-1101043/2": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1101043-3.jpg",
+    "sha256": "11b400a5d167968f7648956fcebfb4b6689c4b100a691b90aa13f056d25c5451",
+    "file": "assets/products/voltas-1101043/2.jpg"
+  },
+  "voltas-1101043/3": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1101043-2.jpg",
+    "sha256": "8bc1f510adbbd37addf6475f7a5e7fc84d750fd8f875ab854eb51fb9780c062b",
+    "file": "assets/products/voltas-1101043/3.jpg"
+  },
+  "voltas-1101043/4": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1101043-4.jpg",
+    "sha256": "ecfece5db961efa584bd713a23447de7a91c8ce660e398338e4a536712c7415f",
+    "file": "assets/products/voltas-1101043/4.jpg"
+  },
+  "voltas-1101043/5": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1101043-5.jpg",
+    "sha256": "ef1b1f5c2566deaad554ea43f6e12aa07f698014140144acf5e9336a25c9287d",
+    "file": "assets/products/voltas-1101043/5.jpg"
+  },
+  "voltas-1100975/1": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1100975_RDC240CW0BWR0M0B00GO_1_1.jpg",
+    "sha256": "054b01747af0da8bfefe9c7cb90f6742f4b03958bea9a1484435aff0ad763824",
+    "file": "assets/products/voltas-1100975/1.jpg"
+  },
+  "voltas-1100975/2": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1100975_RDC240CW0BWR0M0B00GO_1_2.jpg",
+    "sha256": "fd56fc6605da54a33de9b1d37147c8599d58b02b9379ab64e5bd98731bf321b8",
+    "file": "assets/products/voltas-1100975/2.jpg"
+  },
+  "voltas-1100975/3": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1100975_RDC240CW0BWR0M0B00GO_1_3.jpg",
+    "sha256": "24ebae9fe0ddfc03235439c108412546ec02767dd1393eb93209fc4561b2ef54",
+    "file": "assets/products/voltas-1100975/3.jpg"
+  },
+  "voltas-1100975/4": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1100975_RDC240CW0BWR0M0B00GO_1_4.jpg",
+    "sha256": "bec4a927091e20264e63ab0e8c4d82676d0976179fa7846b5a181829808142b4",
+    "file": "assets/products/voltas-1100975/4.jpg"
+  },
+  "voltas-1100975/5": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1100975_RDC240CW0BWR0M0B00GO_1_5.jpg",
+    "sha256": "d9b2157b78722e3e0145ebcdcda02c24066964b3c75662dbf4b3e40ab0231bfa",
+    "file": "assets/products/voltas-1100975/5.jpg"
+  },
+  "voltas-1100975/6": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1100975_RDC240CW0BWR0M0B00GO_1_6.jpg",
+    "sha256": "468055bf9358bd0feff65aaf25a0f8abdbb8d2440a19a6e9d7a5ec0ae009a68a",
+    "file": "assets/products/voltas-1100975/6.jpg"
+  },
+  "voltas-1100975/7": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1100975_RDC240CW0BWR0M0B00GO_1_7.jpg",
+    "sha256": "b69beb6c03b5446f8373b752b1af01e0fa395fe080519a185827c555ef31305f",
+    "file": "assets/products/voltas-1100975/7.jpg"
+  },
+  "voltas-1100975/8": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1100975_RDC240CW0BWR0M0B00GO_1_8.jpg",
+    "sha256": "adc93187769f4e7394dff8baa547423db30a8ac0a61385f820e14a616f1a7134",
+    "file": "assets/products/voltas-1100975/8.jpg"
+  },
+  "voltas-1100976/1": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1100976_RDC240AW0BBRTM0B00GO_1.jpg",
+    "sha256": "d9f2728e4db4d5648b7b6c6f8d3d7bd2462756db23c51a9b3fe195b89c603695",
+    "file": "assets/products/voltas-1100976/1.jpg"
+  },
+  "voltas-1100976/2": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1100976_RDC240AW0BBRTM0B00GO_2.jpg",
+    "sha256": "ea851e61a1297e440789f768043e8c018475aad0a5b3122d019c6e6aec189e10",
+    "file": "assets/products/voltas-1100976/2.jpg"
+  },
+  "voltas-1100976/3": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1100976_RDC240AW0BBRTM0B00GO_3.jpg",
+    "sha256": "90c71645294c011b819c9ac9dbe8632bdabb96d9ca1af396c976cfe27bfdb996",
+    "file": "assets/products/voltas-1100976/3.jpg"
+  },
+  "voltas-1100976/4": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1100976_RDC240AW0BBRTM0B00GO_4.jpg",
+    "sha256": "a503baa6b3794ed2d003ded80e4ccf3144b4468c042a8a326b986e7bbdf43e9d",
+    "file": "assets/products/voltas-1100976/4.jpg"
+  },
+  "voltas-1100976/5": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1100976_RDC240AW0BBRTM0B00GO_5.jpg",
+    "sha256": "c909700b3a8a4b698f99cf60fa2ab48f39eb97af587566cefc75db5dc60a5d60",
+    "file": "assets/products/voltas-1100976/5.jpg"
+  },
+  "voltas-1100976/6": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1100976_RDC240AW0BBRTM0B00GO_6_2.jpg",
+    "sha256": "a193e9a7d42bce1265fc44e4a75320860e2db533b9b3917666a5a872f08a8eab",
+    "file": "assets/products/voltas-1100976/6.jpg"
+  },
+  "voltas-1100976/7": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1100976_RDC240AW0BBRTM0B00GO_6.jpg",
+    "sha256": "a193e9a7d42bce1265fc44e4a75320860e2db533b9b3917666a5a872f08a8eab",
+    "file": "assets/products/voltas-1100976/7.jpg"
+  },
+  "voltas-1100976/8": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1100976_RDC240AW0BBRTM0B00GO_9.jpg",
+    "sha256": "7686c230071d0962cb0d3d13463f17e70aa1114fda913c19a630769eaa78dfe6",
+    "file": "assets/products/voltas-1100976/8.jpg"
+  },
+  "voltas-1100828/1": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGZBZ4UQCZMZ9A_0.jpg",
+    "sha256": "922881fa77be2076185f6dcb9a4adc5beb262a56638350ef0b2b13d11d66d20c",
+    "file": "assets/products/voltas-1100828/1.jpg"
+  },
+  "voltas-1100828/2": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGZBZ4UQCZMZ9A_1.jpg",
+    "sha256": "9bbc6b64e8be8014a7fb32a14ce71281c0ce80535fac92c51842d84848fbf5b2",
+    "file": "assets/products/voltas-1100828/2.jpg"
+  },
+  "voltas-1100828/3": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGZBZ4UQCZMZ9A_2.jpg",
+    "sha256": "c5894288ea3e3b3f9f4110c15d07d4c776493fb42e6657eb5634101ad9f9632d",
+    "file": "assets/products/voltas-1100828/3.jpg"
+  },
+  "voltas-1100828/4": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGZBZ4UQCZMZ9A_3.jpg",
+    "sha256": "ccd355b91c325c5bfbb7d0544ceb6ec0f3f12907705183e8e9c76512c51976c8",
+    "file": "assets/products/voltas-1100828/4.jpg"
+  },
+  "voltas-1100828/5": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGZBZ4UQCZMZ9A_4.jpg",
+    "sha256": "841f4781603100a0a930444dd9a5af8022162570b1897aab0f1c95987556deb2",
+    "file": "assets/products/voltas-1100828/5.jpg"
+  },
+  "voltas-1100828/6": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGZBZ4UQCZMZ9A_5.jpg",
+    "sha256": "b6c61645e9cfb91a0ffaa316910c5ccc34deeaf0f2c3de34c51ee6741df2254e",
+    "file": "assets/products/voltas-1100828/6.jpg"
+  },
+  "voltas-1100828/7": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGZBZ4UQCZMZ9A_6.jpg",
+    "sha256": "a76e12878339035f55bdddea687685deba78e876908796f46e417785663c5bfb",
+    "file": "assets/products/voltas-1100828/7.jpg"
+  },
+  "voltas-1100907/1": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1_74b494ea-2d33-4b3e-a393-929df9543d9b.jpg",
+    "sha256": "e46c501e8dbc89c5cc93b36fea129b22eb4f927f419a766e64f0a8020b9b9069",
+    "file": "assets/products/voltas-1100907/1.jpg"
+  },
+  "voltas-1100907/2": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_1d7169d9-c21b-46fa-bd03-4cae08c1a8e4.jpg",
+    "sha256": "aa9822fde23ac35266597a0415189cf6dca6684d010ffe387b9371ed8912860e",
+    "file": "assets/products/voltas-1100907/2.jpg"
+  },
+  "voltas-1100907/3": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_e0d9855a-d48e-4575-bc16-3e6398e93a27.jpg",
+    "sha256": "11544bf9f0113481bf5810b3a0a42e7e4d669d3ee5ed1daf2533546d62090cbb",
+    "file": "assets/products/voltas-1100907/3.jpg"
+  },
+  "voltas-1100907/4": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/4_74bb0578-0ee2-419b-ad12-0b032264c3ea.jpg",
+    "sha256": "10be145456e3ad8219e634a7ebc89e85133690da32fc49f1edf5852831c4daff",
+    "file": "assets/products/voltas-1100907/4.jpg"
+  },
+  "voltas-1100907/5": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/5_f1ff64e8-87ab-4e37-9f9a-14554002ce49.jpg",
+    "sha256": "beb1f6a1756d91cd12d6af2fcebe97b9376f44a1e21f2fba1130354a4fa19606",
+    "file": "assets/products/voltas-1100907/5.jpg"
+  },
+  "voltas-1100907/6": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/6_70408446-74c3-44d8-a568-5a00d0215106.jpg",
+    "sha256": "689cbf4689dbff28463574c66948ffa96a4cbd2770bfe0aaad277e134fa1913b",
+    "file": "assets/products/voltas-1100907/6.jpg"
+  },
+  "voltas-1100907/7": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/7_21700c7f-757a-454c-bfbb-b53df4280aaa.jpg",
+    "sha256": "a0ad53cb22fa61488fe318d510bdfdc6b2abbbb5593307908376df4253907743",
+    "file": "assets/products/voltas-1100907/7.jpg"
+  },
+  "voltas-1100907/8": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/8_312bf5a8-67ed-4e76-8d12-29b6084288b1.jpg",
+    "sha256": "218450f2f37ddd52d0c431349f251ef06875178c80663b434985442e395556c1",
+    "file": "assets/products/voltas-1100907/8.jpg"
+  },
+  "voltas-1100986/1": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGXY38ERBJQNRK_0.jpg",
+    "sha256": "127f7ea9414dda13ae7c342a2c0f7134ea47570aed55f5830227a072fe2b703f",
+    "file": "assets/products/voltas-1100986/1.jpg"
+  },
+  "voltas-1100986/2": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGXY38ERBJQNRK_1.jpg",
+    "sha256": "b1d1daeb73b2832d7fff0303c45030a39661d4b885339ab357ec29bc58ce7329",
+    "file": "assets/products/voltas-1100986/2.jpg"
+  },
+  "voltas-1100986/3": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGXY38ERBJQNRK_2.jpg",
+    "sha256": "016646494fb0ba6df44dc3f71be44323cb41a57a74e123d9011153964961d18b",
+    "file": "assets/products/voltas-1100986/3.jpg"
+  },
+  "voltas-1100986/4": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGXY38ERBJQNRK_3.jpg",
+    "sha256": "47c1588bdce83257f19eb7e0d24435c64ad3e2575c70e5eda2c1ab64fb6ce19e",
+    "file": "assets/products/voltas-1100986/4.jpg"
+  },
+  "voltas-1100986/5": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGXY38ERBJQNRK_4.jpg",
+    "sha256": "cac30ae7dde256025dde7df7510322812c37bb9d20a8710bfa03fb6ced1eb22a",
+    "file": "assets/products/voltas-1100986/5.jpg"
+  },
+  "voltas-1100986/6": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGXY38ERBJQNRK_5.jpg",
+    "sha256": "81c92f7cbedddbf22f365a081403c6c7a49b01439553114af534be422ccb20a9",
+    "file": "assets/products/voltas-1100986/6.jpg"
+  },
+  "voltas-1100986/7": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGXY38ERBJQNRK_6.jpg",
+    "sha256": "8ddbffde6d719b0408eeb2127f841496c37e28fd6264d9b4d49c4c794d813adf",
+    "file": "assets/products/voltas-1100986/7.jpg"
+  },
+  "voltas-1100986/8": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGXY38ERBJQNRK_7.jpg",
+    "sha256": "163284d1e32642374ee24fe51236776848e0b3506346c6ccbb5ec2fdf4424cb4",
+    "file": "assets/products/voltas-1100986/8.jpg"
+  },
+  "voltas-1101372/1": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRHFFFHHECZHZUP_0.jpg",
+    "sha256": "0722907f95a5f1487a1b0191482ba50240f30c3865dd28d3a5af9144837e5bbb",
+    "file": "assets/products/voltas-1101372/1.jpg"
+  },
+  "voltas-1101372/2": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRHFFFHHECZHZUP_1.jpg",
+    "sha256": "ad8d72e6fcecf8c02e00d28b22796424da1208003817f18655b30e84998ea27c",
+    "file": "assets/products/voltas-1101372/2.jpg"
+  },
+  "voltas-1101372/3": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRHFFFHHECZHZUP_2.jpg",
+    "sha256": "761d10df278bf039a4f2f63957934832266d4c146445523828494dfeff91a4f2",
+    "file": "assets/products/voltas-1101372/3.jpg"
+  },
+  "voltas-1101372/4": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRHFFFHHECZHZUP_3.jpg",
+    "sha256": "9e2a69e765c6c796d37b99c91e0b030248751f26db85c3f28d2df8878e708e01",
+    "file": "assets/products/voltas-1101372/4.jpg"
+  },
+  "voltas-1101372/5": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRHFFFHHECZHZUP_4.jpg",
+    "sha256": "9ff24175a0ccfa3d16af6f9e2cad35e1441734864a1794c7309344864519b7d3",
+    "file": "assets/products/voltas-1101372/5.jpg"
+  },
+  "voltas-1101372/6": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRHFFFHHECZHZUP_6.jpg",
+    "sha256": "08d63a5d719cb7debfd2286a2bb09919320706cf991a5b12f16bc3c9c71ef0f3",
+    "file": "assets/products/voltas-1101372/6.jpg"
+  },
+  "voltas-1101372/7": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRHFFFHHECZHZUP_7.jpg",
+    "sha256": "4973cf2c6bf6b02b8494c86b3c627b8c66ce2f18d547543c790371a3cd16a404",
+    "file": "assets/products/voltas-1101372/7.jpg"
+  },
+  "voltas-1101372/8": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRHFFFHHECZHZUP_8.jpg",
+    "sha256": "6c06f0a28cb4afad8fbc59b76b6eadc689d7150c82ddb7b50e3595e7f45a988a",
+    "file": "assets/products/voltas-1101372/8.jpg"
+  },
+  "voltas-1100830/1": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGZBZ4Y8HXFTWX_0.jpg",
+    "sha256": "aa8e221f1095b6b009349653dae482757e50465196a24c66cbc440650af3d284",
+    "file": "assets/products/voltas-1100830/1.jpg"
+  },
+  "voltas-1100830/2": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGZBZ4Y8HXFTWX_1.jpg",
+    "sha256": "2ef7e4b8ee0636cddcafd6050b5e4017da8c5dbe3ae51ba7d899ae599b47a406",
+    "file": "assets/products/voltas-1100830/2.jpg"
+  },
+  "voltas-1100830/3": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGZBZ4Y8HXFTWX_2.jpg",
+    "sha256": "3451a044521db808061cc3f7aa2765fa5aede8ad0db5b026b94ef5546504aead",
+    "file": "assets/products/voltas-1100830/3.jpg"
+  },
+  "voltas-1100830/4": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGZBZ4Y8HXFTWX_3.jpg",
+    "sha256": "6b76aee5e3c21bc4a1c7198162320fa6dbfad2f0e5a35d8c42141de5fb038865",
+    "file": "assets/products/voltas-1100830/4.jpg"
+  },
+  "voltas-1100830/5": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGZBZ4Y8HXFTWX_4.jpg",
+    "sha256": "1aafe0faaf882e5fd327c1d9240b691284c32a86d4af4f43006500ea9b1d43fe",
+    "file": "assets/products/voltas-1100830/5.jpg"
+  },
+  "voltas-1100830/6": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGZBZ4Y8HXFTWX_5.jpg",
+    "sha256": "17c3850be278c1a3a276f558a6412b277b5731051272545d1dc30705616fadaa",
+    "file": "assets/products/voltas-1100830/6.jpg"
+  },
+  "voltas-1100830/7": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGZBZ4Y8HXFTWX_6.jpg",
+    "sha256": "e890d6d711921a4f38c10af118a4f3c320ec0c6d6c87eecd9536ef3360980db2",
+    "file": "assets/products/voltas-1100830/7.jpg"
+  },
+  "voltas-1100830/8": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGZBZ4Y8HXFTWX_7.jpg",
+    "sha256": "ff183fc8f69873ac67b31c2f2f3c68799c95f236d626b0cac1c29673c8e3d8a1",
+    "file": "assets/products/voltas-1100830/8.jpg"
+  },
+  "voltas-1100831/1": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGZBZ4AYGPW9NG_0.jpg",
+    "sha256": "e46c501e8dbc89c5cc93b36fea129b22eb4f927f419a766e64f0a8020b9b9069",
+    "file": "assets/products/voltas-1100831/1.jpg"
+  },
+  "voltas-1100831/2": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGZBZ4AYGPW9NG_1.jpg",
+    "sha256": "eb27993b754dcfb940a79bbb05c4cd2044f42d5f9bfd67a6410f5e0e6b8c43e3",
+    "file": "assets/products/voltas-1100831/2.jpg"
+  },
+  "voltas-1100831/3": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGZBZ4AYGPW9NG_2.jpg",
+    "sha256": "e152b883f4a3d888ff42d25eca5280221ed1173fddaffcfa864a1ece2b5f318a",
+    "file": "assets/products/voltas-1100831/3.jpg"
+  },
+  "voltas-1100831/4": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGZBZ4AYGPW9NG_3.jpg",
+    "sha256": "49cc697f9266ef71eaee576c99b10f64f7f78c0c71a01938749a0418de459790",
+    "file": "assets/products/voltas-1100831/4.jpg"
+  },
+  "voltas-1100831/5": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGZBZ4AYGPW9NG_4.jpg",
+    "sha256": "de37e691e19fc2904f8c301aece6edceca2540efdb73490e05a831add29e52bd",
+    "file": "assets/products/voltas-1100831/5.jpg"
+  },
+  "voltas-1100831/6": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGZBZ4AYGPW9NG_5.jpg",
+    "sha256": "fd55c7d501c86a91021acc272afe421b6e144090d1c330a1287c22f8dc6839c2",
+    "file": "assets/products/voltas-1100831/6.jpg"
+  },
+  "voltas-1100831/7": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGZBZ4AYGPW9NG_6.jpg",
+    "sha256": "6706b10684c9310e45a352bf82bc13fcfdb9fbdb2455edf4ff0e5b22c8b6c260",
+    "file": "assets/products/voltas-1100831/7.jpg"
+  },
+  "voltas-1100831/8": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRGZBZ4AYGPW9NG_7.jpg",
+    "sha256": "be001859a3b8acf91dc44b4ddb2fd2b75ec19d331dfdb6ed84f3356dd1c82050",
+    "file": "assets/products/voltas-1100831/8.jpg"
+  },
+  "voltas-1101177/1": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/1_bd433bef-e431-4583-b6d5-873735546609.jpg",
+    "sha256": "af5a8157645de0dcb481440968be1ea13ca7d10762707a14a86fbed0b84c4a07",
+    "file": "assets/products/voltas-1101177/1.jpg"
+  },
+  "voltas-1101177/2": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/2_8d3d75a1-4a16-4e10-bf45-3505e89317fd.jpg",
+    "sha256": "419893e40891c7705adec101ce2b1c825e5db4d944a7b2037fba6cf80333bc29",
+    "file": "assets/products/voltas-1101177/2.jpg"
+  },
+  "voltas-1101177/3": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/3_212e61bc-134c-4b3c-9e8d-1357b0cb9749.jpg",
+    "sha256": "6c06f0a28cb4afad8fbc59b76b6eadc689d7150c82ddb7b50e3595e7f45a988a",
+    "file": "assets/products/voltas-1101177/3.jpg"
+  },
+  "voltas-1101177/4": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/4_e3b57c5c-05ba-4ed1-abc7-e91ebb40530b.jpg",
+    "sha256": "10f150dadc364d0905fc663f23e223b393403c1563d2b757b957ba658ac2e887",
+    "file": "assets/products/voltas-1101177/4.jpg"
+  },
+  "voltas-1101177/5": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/5_3e82e260-422d-40f8-8a84-ed28589e0d1b.jpg",
+    "sha256": "7412302f3bf3e26faa06f388e15132c8b4a78203272214c3d0f092ad3309f6d9",
+    "file": "assets/products/voltas-1101177/5.jpg"
+  },
+  "voltas-1101177/6": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/6_b7bc2b8e-9b2d-4d1d-bfeb-ac9b17af6f58.jpg",
+    "sha256": "406e7a7d48409b78680792f55de716fe2c73fe5286d791407a5aca28bfdd8dc9",
+    "file": "assets/products/voltas-1101177/6.jpg"
+  },
+  "voltas-1101177/7": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/7_2b7ed567-6d82-4259-8046-c7b847d31ca9.jpg",
+    "sha256": "8ded968b6a34f40eeda3df063151f739fb8a9b733cbcc9c387ed702a889371c5",
+    "file": "assets/products/voltas-1101177/7.jpg"
+  },
+  "voltas-1101177/8": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/8_77eae32a-10ed-45ed-be8b-fb00fd70014a.jpg",
+    "sha256": "98139736b737bfa1654764eee0755e3cbc857332a234da9fffe66b37294c09e4",
+    "file": "assets/products/voltas-1101177/8.jpg"
+  },
+  "voltas-1101176/1": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/B0FCMKR7X1_0.jpg",
+    "sha256": "1ad61bf5b059ce1b87632c2d328a1166c21b1c182c031a110955f59892f84588",
+    "file": "assets/products/voltas-1101176/1.jpg"
+  },
+  "voltas-1101176/2": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/B0FCMKR7X1_1.jpg",
+    "sha256": "ef5c98dc0f540ff52029ddf9a34600899d13e664c0fbefc4d0630adfc8e83ede",
+    "file": "assets/products/voltas-1101176/2.jpg"
+  },
+  "voltas-1101176/3": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/B0FCMKR7X1_2.jpg",
+    "sha256": "6c06f0a28cb4afad8fbc59b76b6eadc689d7150c82ddb7b50e3595e7f45a988a",
+    "file": "assets/products/voltas-1101176/3.jpg"
+  },
+  "voltas-1101176/4": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/B0FCMKR7X1_3.jpg",
+    "sha256": "5fadc79ad66f802c4bfd02f5c95ef9feb2241a2e0cdb00ee5ef60afda7dd2f79",
+    "file": "assets/products/voltas-1101176/4.jpg"
+  },
+  "voltas-1101176/5": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/B0FCMKR7X1_4.jpg",
+    "sha256": "9c8e064d9a1198d0dd32168662b0964ba9be5c2de2111d0d8087a63c847aeb8b",
+    "file": "assets/products/voltas-1101176/5.jpg"
+  },
+  "voltas-1101176/6": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/B0FCMKR7X1_5.jpg",
+    "sha256": "45234d3270efae39e898718c3445f0e6c87929f9c55c4d64d10c08a6e42a8812",
+    "file": "assets/products/voltas-1101176/6.jpg"
+  },
+  "voltas-1101176/7": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/B0FCMKR7X1_6.jpg",
+    "sha256": "098651124513cdbad8331b14d7040107f5a2d53f9c09db80c73bcedcfd3d41e0",
+    "file": "assets/products/voltas-1101176/7.jpg"
+  },
+  "voltas-1101176/8": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/B0FCMKR7X1_7.jpg",
+    "sha256": "fa392d6fdb944de6bbbdb9c5d44f67d9a89dabf330d9f96f561650a5c838d77d",
+    "file": "assets/products/voltas-1101176/8.jpg"
+  },
+  "voltas-1101019/1": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRH5Q2UVEJ6B8QX_0.jpg",
+    "sha256": "4dabf6882ccd3fc1d30efdeef62729a49d8aad0b101bc863efb39af72114ca39",
+    "file": "assets/products/voltas-1101019/1.jpg"
+  },
+  "voltas-1101019/2": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRH5Q2UVEJ6B8QX_1.jpg",
+    "sha256": "32daebfbbfa331b214aac727c4aedefde86b5b5dc77fe95e25dab97f93a93bfc",
+    "file": "assets/products/voltas-1101019/2.jpg"
+  },
+  "voltas-1101019/3": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRH5Q2UVEJ6B8QX_2.jpg",
+    "sha256": "a267afc7645121db277ca12d5cca6f9d30d184a89f5c6fd6e635ab5c4c1710e0",
+    "file": "assets/products/voltas-1101019/3.jpg"
+  },
+  "voltas-1101019/4": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRH5Q2UVEJ6B8QX_3.jpg",
+    "sha256": "4e7ed88b62e2731d46711e948e266608b9fe2f075cec31cfc87a6256e2c2bb13",
+    "file": "assets/products/voltas-1101019/4.jpg"
+  },
+  "voltas-1101019/5": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRH5Q2UVEJ6B8QX_4.jpg",
+    "sha256": "cd766ee2f279fc4818717097c59be084b432a54d4702945759a33c26307e3dd6",
+    "file": "assets/products/voltas-1101019/5.jpg"
+  },
+  "voltas-1101019/6": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRH5Q2UVEJ6B8QX_5.jpg",
+    "sha256": "0075c4487b4f5f05f50ac01199420980c105d6454553dd1440cc4ee75174307c",
+    "file": "assets/products/voltas-1101019/6.jpg"
+  },
+  "voltas-1101019/7": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRH5Q2UVEJ6B8QX_6.jpg",
+    "sha256": "fbe86369f9e7af2e17678f34be2c17f0d4d0714b2759ca1cfec9c60e6dcfc4b9",
+    "file": "assets/products/voltas-1101019/7.jpg"
+  },
+  "voltas-1101019/8": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRH5Q2UVEJ6B8QX_7.jpg",
+    "sha256": "1307a7ec2ae7451390f288c059e7d7aad3cff61968f24486c8d355df080730bc",
+    "file": "assets/products/voltas-1101019/8.jpg"
+  },
+  "voltas-1101020/1": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRH5Q2UZHATK8GV_0.jpg",
+    "sha256": "6ff356f2ed0b91b8caf3ad23c7d87b39619d383fffdb2baf018857183926502e",
+    "file": "assets/products/voltas-1101020/1.jpg"
+  },
+  "voltas-1101020/2": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRH5Q2UZHATK8GV_1.jpg",
+    "sha256": "ca7968ce493d58e34a8bf674924eca5fdb807a1f7a42a5d71a3dcd55944ec13d",
+    "file": "assets/products/voltas-1101020/2.jpg"
+  },
+  "voltas-1101020/3": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRH5Q2UZHATK8GV_2.jpg",
+    "sha256": "e8ae6f788e6386b1be2c133d88a2b01063b1eda7b2496dc99cd97a118ac06bd2",
+    "file": "assets/products/voltas-1101020/3.jpg"
+  },
+  "voltas-1101020/4": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRH5Q2UZHATK8GV_3.jpg",
+    "sha256": "6629ff39d23d59e8daa92482b079c6dc3acbf6f0088e1daab67927f3f87eb4e5",
+    "file": "assets/products/voltas-1101020/4.jpg"
+  },
+  "voltas-1101020/5": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRH5Q2UZHATK8GV_4.jpg",
+    "sha256": "eb9f44ff3708b435ae27ba4e678d2062287c81882b8bd0f7e96b8f79e9ded190",
+    "file": "assets/products/voltas-1101020/5.jpg"
+  },
+  "voltas-1101020/6": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRH5Q2UZHATK8GV_5.jpg",
+    "sha256": "5ba3db46d7d1a1ef4aef0d9d7e3e07630bc8cede4a3bed3bbb6376a48cbebd5b",
+    "file": "assets/products/voltas-1101020/6.jpg"
+  },
+  "voltas-1101020/7": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRH5Q2UZHATK8GV_6.jpg",
+    "sha256": "211662dc63bffd808ef7a22a13a632a0554b87385336c60b11d6f9f87399236d",
+    "file": "assets/products/voltas-1101020/7.jpg"
+  },
+  "voltas-1101020/8": {
+    "url": "https://cdn.shopify.com/s/files/1/0578/6845/2026/files/RFRH5Q2UZHATK8GV_7.jpg",
+    "sha256": "f2100180aad2019ef84f7cc3ec7681d600a4d3949180e796fcc759da43f2560b",
+    "file": "assets/products/voltas-1101020/8.jpg"
   }
 }

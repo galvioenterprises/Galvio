@@ -56,7 +56,7 @@ export function SiteFooter() {
                 {site.contact.phone && (
                   <li className="flex gap-2.5">
                     <PhoneIcon className="mt-0.5 size-4 shrink-0" />
-                    <a href={`tel:${site.contact.phone}`} className="hover:text-white">
+                    <a href={`tel:${site.contact.phone.replace(/\s/g, "")}`} className="hover:text-white">
                       {site.contact.phone}
                     </a>
                   </li>

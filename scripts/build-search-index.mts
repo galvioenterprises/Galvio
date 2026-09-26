@@ -17,6 +17,22 @@ import { categories } from "../src/config/categories.ts";
 
 const PRODUCTS_DIR = resolve("data/products");
 const OUT = resolve("public/search-index.json");
+/** The Worker prices orders from this, never from what the browser sends. */
+const CATALOGUE_OUT = resolve("worker/catalogue.generated.json");
+
+type CatalogueEntry = {
+  slug: string;
+  sku: string;
+  title: string;
+  price: number;
+  mrp: number | null;
+  availability: string;
+  stockCount: number | null;
+  image: string;
+  category: string;
+  subCategory: string | null;
+  inverter: boolean | null;
+};
 
 type Entry = {
   slug: string;
@@ -25,6 +41,8 @@ type Entry = {
   category: string;
   categorySlug: string;
   price: number;
+  mrp: number;
+  availability: string;
   image: string;
   /** Everything searchable, lowercased once here so the browser does not
    *  redo it on every keystroke. */
@@ -33,6 +51,8 @@ type Entry = {
 
 function main() {
   const files = readdirSync(PRODUCTS_DIR).filter((f) => f.endsWith(".json"));
+
+  const catalogue: Record<string, CatalogueEntry> = {};
 
   const entries: Entry[] = files.flatMap((file) => {
     const raw: unknown = JSON.parse(
@@ -48,6 +68,20 @@ function main() {
 
     const category = categories.find((c) => c.name === product.category);
 
+    catalogue[product.slug] = {
+      slug: product.slug,
+      sku: product.sku,
+      title: product.title,
+      price: product.sellingPrice,
+      mrp: product.mrp ?? null,
+      availability: product.availability,
+      stockCount: product.stockCount ?? null,
+      image: product.images[0].src,
+      category: product.category,
+      subCategory: product.subCategory ?? null,
+      inverter: product.inverter ?? null,
+    };
+
     return [
       {
         slug: product.slug,
@@ -56,6 +90,8 @@ function main() {
         category: category?.title ?? product.category,
         categorySlug: category?.slug ?? "",
         price: product.sellingPrice,
+        mrp: product.mrp,
+        availability: product.availability,
         image: product.images[0].src,
         haystack: [
           product.title,
@@ -79,6 +115,7 @@ function main() {
   entries.sort((a, b) => a.title.localeCompare(b.title));
   writeFileSync(OUT, JSON.stringify(entries));
   console.log(`search index: ${entries.length} products -> ${OUT}`);
+  writeFileSync(CATALOGUE_OUT, `${JSON.stringify(catalogue)}\n`);
 }
 
 main();

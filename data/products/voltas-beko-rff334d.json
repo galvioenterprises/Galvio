@@ -1,0 +1,74 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-beko-rff334d",
+  "sku": "GAL-RF-1101176",
+  "brand": "Voltas Beko",
+  "model": "RFF334D",
+  "status": "active",
+  "internalCode": "voltas.com: 283-l-2-star-frost-free-inverter-double-door-refrigerator-rff334d-wpv100rxid-brushed-silver-with-neofrost-dual-cooling-technology-voltas-beko-a-tata-product",
+  "title": "283 L 2 Star Frost Free Inverter Double-Door Refrigerator (RFF334D)",
+  "description": "The Voltas Beko 283 L 2‑Star Frost Free Inverter Double‑Door Refrigerator features NeoFrost Dual Cooling Technology for faster, balanced cooling and lasting freshness. Its inverter compressor ensures efficient performance, while adjustable toughened glass shelves offer flexible storage. Finished in elegant Brushed Silver, it brings smart cooling and reliability to modern homes Model No.: 1101176 / RFF334D / WPV100RXID Product Color: Brushed Silver Energy Rating: 2 Star Gross Volume (L): 283 Frost Free Inverter Double-Door Refrigerator NeoFrost Dual Cooling Technology Egg Tray Ice Tray Made in India",
+  "category": "Refrigerator",
+  "subCategory": "Double Door",
+  "mrp": 46990,
+  "sellingPrice": 31050,
+  "availability": "unknown",
+  "condition": "new",
+  "capacity": "283L",
+  "color": "Brushed Silver",
+  "starRating": 2,
+  "inverter": true,
+  "highlights": [],
+  "faqs": [],
+  "images": [
+    {
+      "src": "voltas-1101176",
+      "alt": "283 L 2 Star Frost Free Inverter Double-Door Refrigerator (RFF334D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101176-2",
+      "alt": "283 L 2 Star Frost Free Inverter Double-Door Refrigerator (RFF334D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101176-3",
+      "alt": "283 L 2 Star Frost Free Inverter Double-Door Refrigerator (RFF334D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101176-4",
+      "alt": "283 L 2 Star Frost Free Inverter Double-Door Refrigerator (RFF334D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101176-5",
+      "alt": "283 L 2 Star Frost Free Inverter Double-Door Refrigerator (RFF334D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101176-6",
+      "alt": "283 L 2 Star Frost Free Inverter Double-Door Refrigerator (RFF334D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101176-7",
+      "alt": "283 L 2 Star Frost Free Inverter Double-Door Refrigerator (RFF334D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101176-8",
+      "alt": "283 L 2 Star Frost Free Inverter Double-Door Refrigerator (RFF334D)",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

@@ -148,6 +148,7 @@ function candidateOf(row: Row): Record<string, unknown> {
   const title = value(row, "title");
   const category = value(row, "category");
   const status = statusSchema.parse(value(row, "status") ?? "active");
+  const stockCount = num(row, "stock_count");
 
   if (category && !CATEGORY_NAMES.has(category)) {
     throw new Error(
@@ -203,12 +204,18 @@ function candidateOf(row: Row): Record<string, unknown> {
     mrp: num(row, "mrp"),
     sellingPrice: num(row, "selling_price"),
     gstRate: num(row, "gst_rate"),
-    availability: value(row, "availability"),
-    stockCount: num(row, "stock_count"),
+    // Availability is dealer-owned. Preserve the supplied state; only a real
+    // stock count may fill it in. Blank availability plus blank stock remains
+    // absent (and therefore a draft), never silently becomes "in stock".
+    availability:
+      value(row, "availability") ??
+      (stockCount === 0 ? "out_of_stock" : stockCount !== undefined ? "in_stock" : undefined),
+    stockCount,
     condition: value(row, "condition"),
     installationIncluded: bool(row, "installation_included"),
     warrantyMonths: num(row, "warranty_months"),
     compressorWarrantyMonths: num(row, "compressor_warranty_months"),
+    badges: badgesOf(row),
     highlights: highlightsOf(row),
     faqs: faqsOf(row),
     weightKg: num(row, "weight_kg"),
@@ -270,6 +277,7 @@ const REPORT_FIELD_ORDER = [
   "star_rating",
   "inverter",
   "rating",
+  "badges",
   "highlights",
   "faqs",
   "images",
@@ -281,6 +289,15 @@ function missingFrom(error: z.ZodError): string[] {
     return CSV_FIELD_BY_PRODUCT_FIELD[field] ?? field;
   });
   return [...new Set(fields)];
+}
+
+/** "bestseller|hot-deal" -> ["bestseller", "hot-deal"]; absent when empty. */
+function badgesOf(row: Row): string[] | undefined {
+  const badges = (row.badges ?? "")
+    .split(/[|,]/)
+    .map((badge) => badge.trim().toLowerCase())
+    .filter(Boolean);
+  return badges.length ? badges : undefined;
 }
 
 function parseRow(row: Row, line: number): ImportedRow {

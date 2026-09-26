@@ -57,6 +57,23 @@ function main() {
   }
 
   if (!header) throw new Error("no catalogue sources were loaded");
+
+  // A later source supersedes an earlier one for the same brand and model:
+  // a Voltas Beko fridge now sourced from voltas.com (priced, photographed)
+  // replaces its unpriced draft from the distributor PDF.
+  const identity = (row: Row) => `${row.brand?.trim().toLowerCase()}|${row.model?.trim().toLowerCase()}`;
+  const lastSourceFor = new Map<string, string>();
+  for (const { row, source } of rows.values()) {
+    if (row.model?.trim()) lastSourceFor.set(identity(row), source);
+  }
+  let superseded = 0;
+  for (const [sku, { row, source }] of rows) {
+    const latest = row.model?.trim() ? lastSourceFor.get(identity(row)) : undefined;
+    if (latest && SOURCES.indexOf(latest) > SOURCES.indexOf(source)) {
+      rows.delete(sku);
+      superseded++;
+    }
+  }
   const overrides: Record<string, Override> = existsSync(OVERRIDES)
     ? JSON.parse(readFileSync(OVERRIDES, "utf8"))
     : {};
@@ -68,6 +85,13 @@ function main() {
     }
   }
 
+  // An override can add a column the sources do not have yet (badges).
+  for (const override of Object.values(overrides)) {
+    for (const field of Object.keys(override.values)) {
+      if (!header.includes(field)) header.push(field);
+    }
+  }
+
   const outputRows = [...rows.values()]
     .map(({ row }) => header!.map((field) => quote(row[field] ?? "")).join(","));
   const temporary = `${output}.${process.pid}.tmp`;
@@ -75,6 +99,7 @@ function main() {
   renameSync(temporary, output);
   console.log(`${outputRows.length} rows composed -> ${output}`);
   console.log(`${Object.keys(overrides).length} dealer override(s) applied`);
+  if (superseded) console.log(`${superseded} earlier-source row(s) superseded by a later source for the same model`);
 }
 
 main();

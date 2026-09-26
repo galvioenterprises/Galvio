@@ -1,161 +1,243 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { heroSlides } from "@/config/hero";
 import { Container } from "../container";
 import { ProductImage } from "../product-image";
-import { ArrowRightIcon, ChevronLeftIcon, ChevronRightIcon, TagIcon } from "../icons";
+import { ArrowRightIcon, CheckIcon } from "../icons";
 
-const AUTOPLAY_MS = 7000;
+const AUTOPLAY_MS = 6500;
+
+export type HeroStats = Record<string, { count: number }>;
 
 /**
- * Hero carousel.
+ * The landing carousel.
  *
- * Measured against frame 347:146 at a 1920 viewport: the hero runs from
- * the header at 64 to the trust band at 621, the eyebrow sits at 189 and
- * the headline at 228 on a 54px line.
- *
- * Autoplay stops on hover, on focus, and for anyone who has asked for
- * reduced motion — a carousel that keeps moving while you are reading it
- * is worse than one that does not move at all.
+ * Each slide has its own dark colour field with a spotlight behind the
+ * product. Navigation is a row of small dots plus swipe; autoplay pauses
+ * on hover, focus, and for anyone who prefers reduced motion.
  */
-export function Hero() {
+export function Hero({ stats }: { stats: HeroStats }) {
   const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const region = useRef<HTMLDivElement>(null);
-
+  const [userPaused, setUserPaused] = useState(false);
+  const [hoverPaused, setHoverPaused] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+  const [announcement, setAnnouncement] = useState("");
+  const [touchX, setTouchX] = useState<number | null>(null);
   const count = heroSlides.length;
-  const go = useCallback((next: number) => setIndex((next + count) % count), [count]);
+  const slide = heroSlides[index];
+  const paused = userPaused || hoverPaused || reducedMotion;
+
+  const go = useCallback(
+    (next: number) => {
+      const nextIndex = (next + count) % count;
+      setIndex(nextIndex);
+      setAnnouncement(`Slide ${nextIndex + 1} of ${count}: ${heroSlides[nextIndex].tab}`);
+    },
+    [count],
+  );
 
   useEffect(() => {
-    if (paused || count < 2) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- read once after mount
+    setReducedMotion(query.matches);
+    const onChange = () => setReducedMotion(query.matches);
+    query.addEventListener("change", onChange);
+    return () => query.removeEventListener("change", onChange);
+  }, []);
 
-    const timer = window.setInterval(() => setIndex((i) => (i + 1) % count), AUTOPLAY_MS);
-    return () => window.clearInterval(timer);
-  }, [paused, count]);
-
-  const slide = heroSlides[index];
+  useEffect(() => {
+    if (paused) return;
+    const timer = window.setTimeout(() => setIndex((i) => (i + 1) % count), AUTOPLAY_MS);
+    return () => window.clearTimeout(timer);
+  }, [index, paused, count]);
 
   return (
     <section
-      ref={region}
       aria-roledescription="carousel"
-      aria-label="Featured"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocusCapture={() => setPaused(true)}
-      onBlurCapture={() => setPaused(false)}
-      className="relative overflow-hidden bg-hero text-text-invert"
+      aria-label="Featured categories"
+      onMouseEnter={() => setHoverPaused(true)}
+      onMouseLeave={() => setHoverPaused(false)}
+      onFocusCapture={() => setHoverPaused(true)}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setHoverPaused(false);
+      }}
+      onTouchStart={(e) => setTouchX(e.touches[0].clientX)}
+      onTouchEnd={(e) => {
+        if (touchX === null) return;
+        const dx = e.changedTouches[0].clientX - touchX;
+        if (Math.abs(dx) > 50) go(index + (dx < 0 ? 1 : -1));
+        setTouchX(null);
+      }}
+      className="relative isolate overflow-hidden text-white"
     >
-      {/* Blue spill behind the product, which is what lifts the frame's
-          background off black on the right-hand side. */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-y-0 right-0 w-[62%] bg-[radial-gradient(ellipse_at_58%_45%,var(--color-hero-glow)_0%,transparent_62%)] opacity-70"
-      />
+      <p className="sr-only" aria-live="polite" aria-atomic="true">
+        {announcement}
+      </p>
 
-      <div
-        aria-hidden
-        className="pointer-events-none absolute right-0 top-0 hidden h-[86%] w-[52%] items-center justify-center lg:flex"
-      >
-        <ProductImage
-          src={slide.image}
-          alt=""
-          sizes="720px"
-          priority
-          className="max-h-full w-auto max-w-none scale-125 object-contain"
-        />
-      </div>
+      <div className="relative h-[760px] sm:h-[700px] lg:h-[580px]">
+        {heroSlides.map((item, slideIndex) => {
+          const active = slideIndex === index;
+          const stat = stats[item.category];
+          const at = item.title.indexOf(item.highlight);
+          const before = at >= 0 ? item.title.slice(0, at) : item.title;
+          const after = at >= 0 ? item.title.slice(at + item.highlight.length) : "";
+          const enter = `transition-[transform,opacity] duration-700 ${active ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`;
+          const delay = (ms: number) => ({ transitionDelay: active ? `${ms}ms` : "0ms" });
+          const Title = slideIndex === 0 ? "h1" : "p";
+          return (
+            <div
+              key={item.tab}
+              aria-hidden={!active}
+              aria-roledescription="slide"
+              aria-label={`${slideIndex + 1} of ${count}: ${item.tab}`}
+              className={`absolute inset-0 transition-opacity duration-700 motion-reduce:transition-none ${
+                active ? "z-[1] opacity-100" : "pointer-events-none opacity-0"
+              }`}
+              style={{
+                background: `radial-gradient(55% 75% at 70% 50%, ${item.theme.spot}55 0%, transparent 70%), linear-gradient(120deg, ${item.theme.from} 0%, ${item.theme.to} 100%)`,
+              }}
+            >
+              <Container className="grid h-full content-start gap-2 pt-10 sm:pt-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:content-center lg:items-center lg:gap-8 lg:pt-0">
+                <div className="relative z-10 max-w-[540px]">
+                  <p
+                    className={`inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-medium backdrop-blur ${enter}`}
+                    style={{ color: item.theme.accent, ...delay(100) }}
+                  >
+                    <span aria-hidden className="size-1.5 rounded-full" style={{ background: item.theme.accent }} />
+                    {item.eyebrow}
+                  </p>
 
-      <Container className="relative pb-[4.5rem] pt-16 lg:pb-36 lg:pt-[7.8rem]">
-        <div
-          aria-live="polite"
-          aria-atomic="true"
-          className="grid items-center gap-12 lg:grid-cols-2"
-        >
-          <div>
-            <p className="eyebrow flex items-center gap-2 text-accent">
-              <span aria-hidden className="size-1.5 rounded-full bg-accent" />
-              {slide.eyebrow}
-            </p>
+                  <Title
+                    className={`mt-5 text-[2.25rem] font-semibold leading-[1.04] tracking-[-0.035em] sm:text-[3rem] lg:text-[3.5rem] ${enter}`}
+                    style={delay(200)}
+                  >
+                    {before}
+                    <span
+                      className="bg-clip-text text-transparent"
+                      style={{ backgroundImage: `linear-gradient(90deg, ${item.theme.gradFrom}, ${item.theme.gradTo})` }}
+                    >
+                      {item.highlight}
+                    </span>
+                    {after}
+                  </Title>
 
-            <h1 className="mt-6 text-[2.25rem] font-semibold leading-[1.08] tracking-[-0.02em] sm:text-[2.75rem] lg:text-[3.125rem]">
-              {slide.title}
-            </h1>
+                  <p className={`mt-4 max-w-[46ch] text-[0.9375rem] leading-7 text-white/70 sm:text-base ${enter}`} style={delay(300)}>
+                    {item.body}
+                  </p>
 
-            <p className="mt-6 max-w-[44ch] text-base leading-[1.7] text-text-invert-muted">
-              {slide.body}
-            </p>
+                  <ul className={`mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm text-white/85 ${enter}`} style={delay(400)}>
+                    {item.chips.map((chip) => (
+                      <li key={chip} className="flex items-center gap-2">
+                        <span
+                          className="flex size-5 items-center justify-center rounded-full"
+                          style={{ background: `${item.theme.accent}26`, color: item.theme.accent }}
+                        >
+                          <CheckIcon className="size-3" />
+                        </span>
+                        {chip}
+                      </li>
+                    ))}
+                  </ul>
 
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link
-                href={slide.primary.href}
-                className="inline-flex h-14 items-center gap-2.5 rounded-xl bg-accent px-7 text-[0.9375rem] font-medium text-white transition-colors hover:bg-accent-hover"
-              >
-                {slide.primary.label}
-                <ArrowRightIcon className="size-[18px]" />
-              </Link>
-              <Link
-                href={slide.secondary.href}
-                className="inline-flex h-14 items-center gap-2.5 rounded-xl border border-white/15 bg-white/[0.04] px-7 text-[0.9375rem] font-medium text-white transition-colors hover:border-white/30"
-              >
-                {slide.secondary.label}
-                <TagIcon className="size-[18px]" />
-              </Link>
+                  <div className={`mt-8 flex flex-wrap items-center gap-3 ${enter}`} style={delay(500)}>
+                    <Link
+                      href={item.primary.href}
+                      tabIndex={active ? 0 : -1}
+                      className="group inline-flex h-12 items-center gap-2.5 rounded-full bg-white px-7 text-sm font-semibold text-ink transition-transform hover:-translate-y-0.5"
+                      style={{ boxShadow: `0 12px 36px -10px ${item.theme.accent}` }}
+                    >
+                      {item.primary.label}
+                      <ArrowRightIcon className="size-[18px] transition-transform group-hover:translate-x-0.5" />
+                    </Link>
+                    <Link
+                      href={item.secondary.href}
+                      tabIndex={active ? 0 : -1}
+                      className="inline-flex h-12 items-center rounded-full border border-white/25 px-6 text-sm font-semibold text-white transition-colors hover:border-white/50 hover:bg-white/10"
+                    >
+                      {item.secondary.label}
+                    </Link>
+                    {stat && (
+                      <p className="ml-1 text-sm opacity-70">
+                        Explore <strong className="text-base font-semibold opacity-100">{stat.count}</strong>{" "}
+                        {stat.count === 1 ? "model" : "models"}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                <div className="relative flex h-[320px] min-w-0 items-center justify-center sm:h-[360px] lg:h-[520px]">
+                  {/* Spotlight and floor */}
+                  <span
+                    aria-hidden
+                    className="absolute left-1/2 top-1/2 size-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl sm:size-[380px] lg:size-[480px]"
+                    style={{ background: `${item.theme.spot}55` }}
+                  />
+                  <span aria-hidden className="absolute bottom-[5%] left-1/2 h-10 w-[60%] -translate-x-1/2 rounded-[50%] bg-black/60 blur-2xl" />
+                  <div className="relative flex h-[92%] w-full items-center justify-center [&>picture]:contents">
+                    <ProductImage
+                      src={item.image}
+                      alt=""
+                      sizes="(min-width: 1304px) 720px, (min-width: 1024px) 55vw, 92vw"
+                      priority={slideIndex === 0}
+                      className={`max-h-full max-w-full object-contain drop-shadow-[0_30px_40px_rgba(0,0,0,0.5)] transition-transform duration-1000 ease-[cubic-bezier(.22,1,.36,1)] ${
+                        active ? "translate-x-0 scale-100" : "translate-x-8 scale-[0.97]"
+                      }`}
+                    />
+                  </div>
+                </div>
+              </Container>
             </div>
-          </div>
+          );
+        })}
 
-          {/* The product sits behind the copy on large screens; on small
-              ones it returns to the flow so it is not simply lost. */}
-          <div className="relative h-72 overflow-hidden lg:hidden">
-            <ProductImage
-              src={slide.image}
-              alt=""
-              sizes="100vw"
-              priority
-              className="absolute left-1/2 top-1/2 w-full max-w-sm -translate-x-1/2 -translate-y-1/2 scale-125 object-contain"
-            />
-          </div>
-        </div>
-      </Container>
-
-      {count > 1 && (
-        <>
-          <button
-            type="button"
-            onClick={() => go(index - 1)}
-            aria-label="Previous slide"
-            className="absolute left-4 top-1/2 z-10 hidden size-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-white/[0.06] text-white backdrop-blur transition-colors hover:bg-white/15 lg:flex"
-          >
-            <ChevronLeftIcon className="size-5" />
-          </button>
-          <button
-            type="button"
-            onClick={() => go(index + 1)}
-            aria-label="Next slide"
-            className="absolute right-4 top-1/2 z-10 hidden size-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-white/[0.06] text-white backdrop-blur transition-colors hover:bg-white/15 lg:flex"
-          >
-            <ChevronRightIcon className="size-5" />
-          </button>
-
-          <div className="absolute inset-x-0 bottom-6 z-10 flex justify-center gap-2">
-            {heroSlides.map((s, i) => (
+        {/* Dots, and a pause control for anyone who needs the slide to stay. */}
+        <div className="absolute inset-x-0 bottom-6 z-10 flex items-center justify-center gap-3">
+          <div className="flex items-center gap-1">
+            {heroSlides.map((item, i) => (
               <button
-                key={s.title}
+                key={item.tab}
                 type="button"
                 onClick={() => go(i)}
-                aria-label={`Go to slide ${i + 1}: ${s.title}`}
+                aria-label={`Show ${item.tab}`}
                 aria-current={i === index}
-                className={`h-2 rounded-full transition-all ${
-                  i === index ? "w-6 bg-accent" : "w-2 bg-white/30 hover:bg-white/50"
-                }`}
-              />
+                className="flex h-8 items-center justify-center px-1"
+              >
+                <span
+                  aria-hidden
+                  className="block h-1.5 rounded-full transition-[width,background-color] duration-500"
+                  style={{
+                    width: i === index ? 28 : 8,
+                    background: i === index ? slide.theme.accent : "rgba(255,255,255,0.35)",
+                  }}
+                />
+              </button>
             ))}
           </div>
-        </>
-      )}
+          <button
+            type="button"
+            onClick={() =>
+              setUserPaused((current) => {
+                setAnnouncement(current ? "Carousel resumed" : "Carousel paused");
+                return !current;
+              })
+            }
+            aria-pressed={userPaused}
+            aria-label={userPaused ? "Resume carousel" : "Pause carousel"}
+            className="flex size-8 items-center justify-center rounded-full text-white/60 transition-colors hover:text-white"
+          >
+            {userPaused ? (
+              <span aria-hidden className="ml-0.5 block size-0 border-y-[5px] border-l-[8px] border-y-transparent border-l-current" />
+            ) : (
+              <span aria-hidden className="flex gap-[3px]">
+                <span className="block h-2.5 w-[3px] rounded-sm bg-current" />
+                <span className="block h-2.5 w-[3px] rounded-sm bg-current" />
+              </span>
+            )}
+          </button>
+        </div>
+      </div>
     </section>
   );
 }

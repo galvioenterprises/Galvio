@@ -1,0 +1,73 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-beko-rff280d",
+  "sku": "GAL-RF-1101372",
+  "brand": "Voltas Beko",
+  "model": "RFF280D",
+  "status": "active",
+  "internalCode": "voltas.com: 243-l-2-star-double-door-refrigerator-rff280d-wpv100rmbo-moonlight-blue-voltas-beko-a-tata-product",
+  "title": "243 L 2 Star Double Door Refrigerator (RFF280D)",
+  "description": "The Voltas Beko 243 L 2‑Star Double Door Refrigerator offers reliable cooling with adjustable toughened glass shelves, Fresh Box‑style organization, and a modern Moonlight Blue finish — a smart blend of performance and style Model No.: 1101372 / RFF280D / WPV100RMBO Product Color: Moonlight Blue Energy Rating: 2 Star Gross Volume (L): 243 Fresh Box Quick Freeze Crisper Humidity Controller Flexlift Door Shelf Adjustable Toughened Glass Shelves Stabilizer Free Operation Egg Tray Ice Tray Made in India",
+  "category": "Refrigerator",
+  "subCategory": "Double Door",
+  "mrp": 38490,
+  "sellingPrice": 25750,
+  "availability": "unknown",
+  "condition": "new",
+  "capacity": "243L",
+  "color": "Moonlight Blue",
+  "starRating": 2,
+  "highlights": [],
+  "faqs": [],
+  "images": [
+    {
+      "src": "voltas-1101372",
+      "alt": "243 L 2 Star Double Door Refrigerator (RFF280D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101372-2",
+      "alt": "243 L 2 Star Double Door Refrigerator (RFF280D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101372-3",
+      "alt": "243 L 2 Star Double Door Refrigerator (RFF280D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101372-4",
+      "alt": "243 L 2 Star Double Door Refrigerator (RFF280D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101372-5",
+      "alt": "243 L 2 Star Double Door Refrigerator (RFF280D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101372-6",
+      "alt": "243 L 2 Star Double Door Refrigerator (RFF280D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101372-7",
+      "alt": "243 L 2 Star Double Door Refrigerator (RFF280D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101372-8",
+      "alt": "243 L 2 Star Double Door Refrigerator (RFF280D)",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

@@ -1,8 +1,14 @@
+import Link from "next/link";
 import type { Product } from "@/lib/product-schema";
+import { business } from "@/config/business";
+import { formatPrice } from "@/lib/format";
 import { formatMonths, highlightsFor } from "@/lib/highlights";
 import {
+  BadgeIcon,
+  CheckIcon,
   BoltIcon,
   BoxIcon,
+  CreditCardIcon,
   GaugeIcon,
   LeafIcon,
   ShieldCheckIcon,
@@ -67,15 +73,29 @@ export function Overview({ product }: { product: Product }) {
           )}
         </div>
 
-        <div className="relative flex min-h-[220px] flex-col justify-end overflow-hidden rounded-card bg-ink p-7 text-text-invert">
+        <div className="relative min-h-[220px] overflow-hidden rounded-card bg-ink p-7 text-text-invert">
           <div
             aria-hidden
             className="absolute -right-12 -top-12 size-56 rounded-full bg-white/[0.05] blur-2xl"
           />
-          <p className="relative max-w-[16ch] text-2xl font-semibold leading-tight text-white">
-            Designed for a Better Tomorrow
+          <p className="relative eyebrow text-[#8eb2ff]">Order with confidence</p>
+          <p className="relative mt-3 text-xl font-semibold leading-tight text-white">
+            Supplied through an authorised distributor
           </p>
-          <span aria-hidden className="relative mt-4 block h-0.5 w-10 bg-accent" />
+          <ul className="relative mt-6 space-y-3 text-xs text-text-invert-muted">
+            {[
+              { Icon: BadgeIcon, label: "Genuine manufacturer product" },
+              { Icon: TruckIcon, label: "Distributor-managed pan-India delivery" },
+              { Icon: CreditCardIcon, label: "Cash on Delivery available" },
+            ].map(({ Icon, label }) => (
+              <li key={label} className="flex items-center gap-3">
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-white/[0.08] text-[#8eb2ff]">
+                  <Icon className="size-4" />
+                </span>
+                {label}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
@@ -153,48 +173,99 @@ export function WarrantyAndSupport({ product }: { product: Product }) {
 }
 
 export function DeliveryAndInstallation({ product }: { product: Product }) {
+  const isAc = product.category === "Air Conditioner";
   return (
     <section id="delivery" className="scroll-mt-20 pt-12">
-      <SectionHeading>
-        Delivery{product.installationIncluded !== undefined ? " & Installation" : ""}
-      </SectionHeading>
+      <SectionHeading>Delivery{isAc || product.installationIncluded !== undefined ? " & Installation" : ""}</SectionHeading>
 
-      <div className={`mt-5 grid gap-4 ${product.installationIncluded !== undefined ? "lg:grid-cols-3" : "lg:grid-cols-2"}`}>
+      <div className="mt-5 grid gap-4 lg:grid-cols-2">
         <div className="rounded-card border border-line bg-surface p-6">
           <span className="flex size-9 items-center justify-center rounded-lg bg-accent/8 text-accent">
             <TruckIcon className="size-[18px]" />
           </span>
           <p className="mt-3 text-sm font-medium">Delivery</p>
           <p className="mt-1.5 text-xs leading-relaxed text-text-muted">
-            Delivery coverage, charges and the date are confirmed by the
-            showroom before an order is accepted.
+            Delivered across India by the distributor. We call to confirm stock and the delivery date before dispatch.
           </p>
+          <div className="mt-4">
+            <PincodeCheck />
+          </div>
         </div>
 
-        {product.installationIncluded !== undefined && (
+        {!isAc && product.installationIncluded !== undefined && (
           <div className="rounded-card border border-line bg-surface p-6">
             <span className="flex size-9 items-center justify-center rounded-lg bg-accent/8 text-accent">
               <WrenchIcon className="size-[18px]" />
             </span>
-            <p className="mt-3 text-sm font-medium">
-              Installation {product.installationIncluded ? "included" : "not included"}
-            </p>
+            <p className="mt-3 text-sm font-medium">Installation {product.installationIncluded ? "included" : "not included"}</p>
             <p className="mt-1.5 text-xs leading-relaxed text-text-muted">
               {product.installationIncluded
-                ? "Standard installation is included for this product. Confirm the covered work before purchase."
-                : "Installation is not included in the listed price. Ask the showroom about available options."}
+                ? "Standard installation is included for this product."
+                : "Installation is not included in the listed price. Contact support about available options."}
             </p>
           </div>
         )}
 
-        <div className="rounded-card border border-line bg-surface p-6">
-          <p className="text-sm font-medium">Check your area</p>
-          <p className="mb-3 mt-1.5 text-xs text-text-muted">
-            See whether we deliver to your pincode.
-          </p>
-          <PincodeCheck />
-        </div>
+        {isAc && <AcInstallation />}
       </div>
     </section>
+  );
+}
+
+/**
+ * What AC installation covers and what costs extra, in Voltas's terms,
+ * before the customer asks. Croma and Voltas publish this; leaving it out
+ * is one of the commonest reasons AC carts are abandoned.
+ */
+function AcInstallation() {
+  const { standardCharge, includes, extras } = business.installation;
+  return (
+    <div className="rounded-card border border-line bg-surface p-6 lg:row-span-2">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <span className="flex size-9 items-center justify-center rounded-lg bg-accent/8 text-accent">
+            <WrenchIcon className="size-[18px]" />
+          </span>
+          <p className="mt-3 text-sm font-medium">Installation by Voltas-authorised technicians</p>
+        </div>
+        <span className="shrink-0 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
+          {standardCharge === null ? "Charge confirmed on call" : standardCharge === 0 ? "Standard installation free" : `Standard ${formatPrice(standardCharge)}`}
+        </span>
+      </div>
+      <p className="mt-1.5 text-xs leading-relaxed text-text-muted">
+        We book installation for the day of delivery or the next working day. The technician tells you about any extra work and
+        its charge before starting; nothing extra is done without your OK.
+      </p>
+      <div className="mt-4 grid gap-4 sm:grid-cols-2">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wide text-emerald-700">Standard installation includes</p>
+          <ul className="mt-2 space-y-1.5 text-xs text-text">
+            {includes.map((item) => (
+              <li key={item} className="flex gap-2">
+                <CheckIcon className="mt-0.5 size-3.5 shrink-0 text-emerald-600" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">May cost extra</p>
+          <ul className="mt-2 space-y-1.5 text-xs text-text-muted">
+            {extras.map((item) => (
+              <li key={item} className="flex gap-2">
+                <span aria-hidden className="mt-1.5 size-1 shrink-0 rounded-full bg-text-faint" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <p className="mt-4 text-xs text-text-muted">
+        Not sure which size you need?{" "}
+        <Link href="/ac-size-calculator/" className="font-medium text-accent hover:underline">
+          Use the AC size calculator
+        </Link>
+      </p>
+    </div>
   );
 }

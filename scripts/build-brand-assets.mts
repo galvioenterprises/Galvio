@@ -68,7 +68,7 @@ async function main() {
       <text x="90" y="400" font-family="system-ui, -apple-system, sans-serif"
             font-size="52" font-weight="600" fill="#ffffff">Upgrade to Better Living</text>
       <text x="90" y="452" font-family="system-ui, -apple-system, sans-serif"
-            font-size="26" fill="#a3aab8">Authorised Voltas distributor · Air conditioners,</text>
+            font-size="26" fill="#a3aab8">Genuine Voltas appliances · Air conditioners,</text>
       <text x="90" y="490" font-family="system-ui, -apple-system, sans-serif"
             font-size="26" fill="#a3aab8">refrigerators and home appliances, direct.</text>
       <text x="90" y="566" font-family="system-ui, -apple-system, sans-serif"

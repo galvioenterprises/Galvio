@@ -1,74 +1,71 @@
-# Product image sizing design QA
+# Storefront refinement design QA
 
 ## Evidence
 
-- Baseline: the user-supplied 1920 x 1200 Galvio product-page screenshot. It
-  shows the official AC photograph rendered small inside both its original
-  square canvas and a padded grey gallery panel.
-- Final desktop product page: `/tmp/galvio-product-after.png` at 1920 x 1200.
-- Final desktop catalogue: `/tmp/galvio-listing-after.png` at 1920 x 1200.
-- Final mobile product page: `/tmp/galvio-product-mobile-final-2.png` at
-  390 x 844.
-- Tall-product regression check: `/tmp/galvio-tall-desktop-final.png` at
-  1920 x 1200.
-- Cross-category processed-image contact sheet:
-  `/tmp/galvio-primary-contact.png`.
-- All captures use device scale factor 1 and the first product image selected.
-  Retina readiness was checked against the generated `srcset` manifest rather
-  than inferred from those screenshots.
+Baseline captures:
+
+- `/tmp/galvio-current-01-home-desktop.png`
+- `/tmp/galvio-current-02-product-desktop.png`
+- `/tmp/galvio-current-03-about-desktop.png`
+- `/tmp/galvio-current-04-bulk-orders-desktop.png`
+- `/tmp/galvio-current-05-contact-desktop.png`
+- `/tmp/galvio-current-06-home-mobile.png`
+
+Final captures:
+
+- `/tmp/galvio-final-home.png`
+- `/tmp/galvio-final-home-tall.png`
+- `/tmp/galvio-final-product.png`
+- `/tmp/galvio-final-about.png`
+- `/tmp/galvio-final-bulk.png`
+- `/tmp/galvio-final-contact.png`
+- `/tmp/galvio-final-mobile-home.png`
+- `/tmp/galvio-final-mobile-home-tall.png`
+- `/tmp/galvio-final-mobile-product.png`
+- `/tmp/galvio-final-mobile-product-tall.png`
 
 ## Comparison
 
-The baseline gave the gallery only about 300 px of useful width, then placed a
-1200 x 1200 manufacturer canvas inside a padded grey box. The product occupied
-only a narrow band within that source canvas, so increasing the CSS box alone
-would not solve the visible-size problem.
+The original home page had a visually detached hero image, a dense header and
+generic trust copy. The revised page uses a contained manufacturer product
+cutout, smooth cross-fades with an explicit pause control, a four-item factual
+trust band, eight deal cards and clearer COD and nationwide-delivery messaging.
+The desktop primary navigation is now Products, Bulk Orders, About Us and
+Support; search and cart remain, while Offers stays discoverable from campaign
+content and the footer.
 
-The final desktop page uses the wider catalogue container, keeps the delivery
-panel from compressing the gallery below the 2xl breakpoint, removes the nested
-grey image panel, and provides a responsive 460-540 px gallery stage. On the
-checked AC, the official product now spans roughly 620 px horizontally while
-remaining fully contained and uncropped. The tall visi-cooler uses the same
-stage vertically without distortion.
+The original product page had a small image stage, an awkward published-price
+sentence and flat section links. The final page retains the complete official
+multi-image gallery, enlarges the product stage, uses sale price, struck MRP,
+percentage saving and rupee saving as one retail hierarchy, provides a clear
+Add to cart and COD-request path, and places Overview, Specifications and
+Delivery in a bordered segmented control. Unknown stock remains visibly
+subject to distributor confirmation.
 
-Catalogue cards now use a 224-272 px responsive image stage instead of 160 px.
-The main catalogue stops at three columns, while wider promotional sections
-stop at four, so product imagery remains legible instead of being reduced to a
-small object inside a narrow card.
+About, Bulk Orders and Support now use structured page heroes, scannable
+operating information and clearer next actions. Blank phone, WhatsApp, address
+and opening-hours values are not rendered as fake contact details. The store
+route is removed from public navigation and the sitemap until a verified public
+address exists.
 
-## Image fidelity
+## Responsive, interaction and content checks
 
-- Source assets remain unchanged in `assets/products/`.
-- Only the first manufacturer shot receives display preprocessing. The image
-  builder trims an outer border matching the corner pixel and retains a 24 px
-  safety margin. This handles both white JPEG canvases and transparent PNG
-  canvases without removing internal white appliance pixels.
-- Secondary gallery panels retain the manufacturer's full canvas and ordering.
-- The checked 1200 x 1200 AC source becomes a 1142 x 410 display derivative;
-  the checked transparent 500 x 500 AC source becomes 476 x 194. Neither is
-  stretched, reconstructed, or AI-generated.
-- Every gallery derivative retains its natural width up to 1600 px, with AVIF
-  and WebP responsive variants. The manifest records post-trim intrinsic
-  dimensions for primary shots and source dimensions for secondary panels so
-  browser aspect ratios remain correct.
-
-## Responsive and accessibility checks
-
-- At 390 px, the main image fills the available card width, the thumbnail rail
-  remains horizontally scrollable, and title/price content stays within the
-  viewport.
-- Wide AC, window AC, air-cooler, freezer, stabiliser, and tall visi-cooler
-  hero images were visually checked for crop and distortion.
-- All 3,850 files referenced by the 482-entry image manifest were decoded and
-  checked for their declared widths; no file, decode, or dimension error was
-  found. Primary, secondary, and cutout transforms all carry explicit cache
-  processor versions.
-- Existing thumbnail click, previous/next controls, swipe handling, keyboard
-  navigation, selected-state ARIA, and auto-scroll behavior were preserved.
+- No horizontal overflow was found at 390 px on Home, Product, About, Bulk
+  Orders or Support.
+- The featured-category CTA remains on one line and clears its metadata strip.
+- The mobile carousel pause control is compact and does not compete with the
+  product artwork.
+- Eight deal cards render with Add to cart.
+- Product gallery thumbnails, price hierarchy, boxed tabs and supporting-page
+  layouts were checked at desktop and mobile sizes.
+- Add to cart updates the cart count and persisted cart contents.
+- The Products dropdown closes after category navigation.
+- The sample product overview now ends at a complete source sentence; the
+  supplier bridge truncates future descriptions only at sentence boundaries.
 
 ## Findings
 
-No actionable P0, P1, or P2 sizing/fidelity issues remain in the requested
-product-card and product-gallery scope.
+No P0 or P1 issues remain. No material P2 visual blockers remain in the tested
+routes.
 
 final result: passed

@@ -1,0 +1,19 @@
+# Copy to .dev.vars for `pnpm preview`. Never commit .dev.vars.
+DEV_MODE=true
+SITE_URL=http://localhost:8787
+ADMIN_EMAILS=galvioenterprises@gmail.com
+# Shared with `pnpm admin` so the inventory console can show orders.
+ADMIN_API_TOKEN=local-dev-admin-token-change-me-please
+# Local-only value. Generate production independently with `openssl rand -hex 32`
+# and upload it as a deployment secret; never reuse this value.
+CODE_PEPPER=local-dev-only-pepper-change-before-production-0000000000000000
+# Keep Phase 1 transactional-only. Enable after consent, unsubscribe and
+# verified-recipient flows exist for cart and price/stock emails.
+ENGAGEMENT_EMAILS=false
+# Phase 1 is COD only. Keep these empty until online payments are separately
+# approved, configured and tested.
+CASHFREE_ENV=sandbox
+CASHFREE_APP_ID=
+CASHFREE_SECRET_KEY=
+# Leave empty to print emails (including sign-in codes) to the console.
+RESEND_API_KEY=

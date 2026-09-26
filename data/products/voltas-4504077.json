@@ -7,7 +7,7 @@
   "status": "active",
   "internalCode": "Voltas SAC 243INV Vectra Elegant",
   "title": "Voltas Split Air Conditioner, 2 Ton, 3 Star - 243INV Vectra Elegant",
-  "description": "Meet the Voltas Vectra Elegant 2 Ton 3 Star Inverter Split Room AC engineered for smarter, larger‑room cooling. With 5 Step Adjustable Mode, it scales cooling capacity to match real‑time heat load and occupancy, delivering the comfort you need while optimizing energy use. Need rapid relief after stepping indoors? Turbo Cooling drives a quick temperature pull‑down for instant comfort. Built to beat Indian summers, its High Ambient Cooling ensures reliable performance even at 52°C. The energy‑efficient inverter compressor modulates speed for consistent temperatures and reduced noise, helping manage electricity bills with its 3 Star rating. Maintenance stays effortless with the Filter Clean Indicator, prompting timely filter care for fresher air and steady airflow. Ideal for spacious living rooms, master bedrooms, and open‑plan areas, the Vectra Elegant delivers smart comfort, efficiency, a",
+  "description": "Meet the Voltas Vectra Elegant 2 Ton 3 Star Inverter Split Room AC engineered for smarter, larger‑room cooling. With 5 Step Adjustable Mode, it scales cooling capacity to match real‑time heat load and occupancy, delivering the comfort you need while optimizing energy use. Need rapid relief after stepping indoors? Turbo Cooling drives a quick temperature pull‑down for instant comfort. Built to beat Indian summers, its High Ambient Cooling ensures reliable performance even at 52°C. The energy‑efficient inverter compressor modulates speed for consistent temperatures and reduced noise, helping manage electricity bills with its 3 Star rating. Maintenance stays effortless with the Filter Clean Indicator, prompting timely filter care for fresher air and steady airflow.",
   "category": "Air Conditioner",
   "subCategory": "Split AC",
   "mrp": 74990,
@@ -16,6 +16,7 @@
   "condition": "new",
   "capacity": "2 Ton",
   "starRating": 3,
+  "inverter": true,
   "highlights": [],
   "faqs": [],
   "images": [

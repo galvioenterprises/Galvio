@@ -7,7 +7,7 @@
   "status": "active",
   "internalCode": "Voltas 1.5T WAC 185 INV Elite",
   "title": "Voltas Window Air Conditioner, 1.5 Ton, 5 Star - 185INV Elite",
-  "description": "Meet the Voltas Elite 1.5 Ton 5 Star Inverter Window Room AC smart, space‑saving cooling with premium efficiency. Its inverter technology modulates compressor speed for consistent temperatures and quieter operation, helping reduce power consumption along with its 5 Star rating. Built for Indian summers, High Ambient Cooling maintains reliable performance even at 50°C, so you stay comfortable when heat peaks. The window‑fit design makes installation straightforward in apartments and compact rooms without sacrificing performance. Maintenance is effortless with the Filter Clean Indicator, prompting timely care for steady airflow and cooling efficiency. The Anti Dust Filter helps capture dust and fine particles to keep air fresher and protect the coil for sustained performance. Ideal for small to medium rooms, the Voltas Elite combines energy efficiency, dependable cooling, and easy upkeep e",
+  "description": "Meet the Voltas Elite 1.5 Ton 5 Star Inverter Window Room AC smart, space‑saving cooling with premium efficiency. Its inverter technology modulates compressor speed for consistent temperatures and quieter operation, helping reduce power consumption along with its 5 Star rating. Built for Indian summers, High Ambient Cooling maintains reliable performance even at 50°C, so you stay comfortable when heat peaks. The window‑fit design makes installation straightforward in apartments and compact rooms without sacrificing performance. Maintenance is effortless with the Filter Clean Indicator, prompting timely care for steady airflow and cooling efficiency. The Anti Dust Filter helps capture dust and fine particles to keep air fresher and protect the coil for sustained performance.",
   "category": "Air Conditioner",
   "subCategory": "Window AC",
   "mrp": 47990,
@@ -16,6 +16,7 @@
   "condition": "new",
   "capacity": "1.5 Ton",
   "starRating": 5,
+  "inverter": true,
   "highlights": [],
   "faqs": [],
   "images": [

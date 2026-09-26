@@ -1,39 +1,73 @@
 {
   "tenantId": "galvio-001",
   "slug": "voltas-beko-rsb585",
-  "sku": "GAL-RF-001",
+  "sku": "GAL-RF-1101020",
   "brand": "Voltas Beko",
   "model": "RSB585",
-  "status": "draft",
-  "internalCode": "RSB585 / FPV300RXID",
-  "title": "Voltas Beko 521L Side by Side Refrigerator",
-  "description": "This side-by-side refrigerator has a net capacity of 521L and a gross capacity of 563L. It includes 6-in-1 adjustable modes, a ProSmart inverter compressor and Harvest Fresh.",
+  "status": "active",
+  "internalCode": "voltas.com: 563-l-frost-free-side-by-side-refrigerator-with-prosmart-inverter-compressor-rsb585-fpv300rxid-inox-steel-active-fresh-blue-light-voltas-beko-a-tata-product",
+  "title": "563 L Frost Free Side by Side Refrigerator with ProSmart Inverter Compressor (RSB585)",
+  "description": "The Voltas Beko 563 L Frost Free Side‑by‑Side Refrigerator features Active Fresh Blue Light to help preserve nutrients and a ProSmart Inverter Compressor for efficient, reliable cooling. Designed for spacious storage, consistent freshness, and everyday energy efficiency in a premium Inox Steel finish",
   "category": "Refrigerator",
   "subCategory": "Side by Side",
+  "mrp": 94990,
+  "sellingPrice": 65990,
+  "availability": "unknown",
   "condition": "new",
-  "capacity": "521L",
-  "color": "Hairline Silver",
+  "capacity": "563L",
+  "color": "Inox Steel",
   "inverter": true,
-  "highlights": [
+  "highlights": [],
+  "faqs": [],
+  "images": [
     {
-      "title": "6-in-1 Adjustable",
-      "subtitle": "Adjust between modes effortlessly to suit your needs"
+      "src": "voltas-1101020",
+      "alt": "563 L Frost Free Side by Side Refrigerator with ProSmart Inverter Compressor (RSB585)",
+      "width": 1600,
+      "height": 1600
     },
     {
-      "title": "Harvest Fresh",
-      "subtitle": "Keeps fruits and veggies fresh and nutritious longer"
+      "src": "voltas-1101020-2",
+      "alt": "563 L Frost Free Side by Side Refrigerator with ProSmart Inverter Compressor (RSB585)",
+      "width": 1600,
+      "height": 1600
     },
     {
-      "title": "ProSmart Inverter Compressor",
-      "subtitle": "Energy efficient, quiet, and built to last"
+      "src": "voltas-1101020-3",
+      "alt": "563 L Frost Free Side by Side Refrigerator with ProSmart Inverter Compressor (RSB585)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101020-4",
+      "alt": "563 L Frost Free Side by Side Refrigerator with ProSmart Inverter Compressor (RSB585)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101020-5",
+      "alt": "563 L Frost Free Side by Side Refrigerator with ProSmart Inverter Compressor (RSB585)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101020-6",
+      "alt": "563 L Frost Free Side by Side Refrigerator with ProSmart Inverter Compressor (RSB585)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101020-7",
+      "alt": "563 L Frost Free Side by Side Refrigerator with ProSmart Inverter Compressor (RSB585)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101020-8",
+      "alt": "563 L Frost Free Side by Side Refrigerator with ProSmart Inverter Compressor (RSB585)",
+      "width": 1600,
+      "height": 1600
     }
   ],
-  "faqs": [],
-  "specs": {},
-  "missing": [
-    "mrp",
-    "selling_price",
-    "availability",
-    "images"
-  ]
+  "specs": {}
 }

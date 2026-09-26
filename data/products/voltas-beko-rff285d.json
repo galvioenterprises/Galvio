@@ -1,0 +1,85 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-beko-rff285d",
+  "sku": "GAL-RF-1100830",
+  "brand": "Voltas Beko",
+  "model": "RFF285D",
+  "status": "active",
+  "internalCode": "voltas.com: 248-l-2-star-frost-free-double-door-refrigerator-rff285d-w0xir0i0000go-brushed-silver-with-neo-frost-dual-cooling-technology-voltas-beko-a-tata-product",
+  "variants": [
+    {
+      "sku": "GAL-RF-1100830",
+      "internalCode": "voltas.com: 248-l-2-star-frost-free-double-door-refrigerator-rff285d-w0xir0i0000go-brushed-silver-with-neo-frost-dual-cooling-technology-voltas-beko-a-tata-product",
+      "color": "Brushed Silver"
+    },
+    {
+      "sku": "GAL-RF-1100854",
+      "internalCode": "voltas.com: 248-l-2-star-frost-free-double-door-refrigerator-rff285d-w0cwr0i0000go-celin-wine-with-two-separate-cooling-systems-voltas-beko-a-tata-product",
+      "color": "Celin Wine"
+    }
+  ],
+  "title": "248 L 2 Star Frost Free Double Door Refrigerator (RFF285D)",
+  "description": "The Voltas Beko 248 L 2‑Star Frost Free Double Door Refrigerator delivers efficient, balanced cooling with NeoFrost Dual Cooling Technology, offering reliable freshness and flexible storage in a sleek Brushed Silver finish Model No.: 1100830 / RFF285D / W0XIR0I0000GO Product Color: Brushed Silver Energy Rating: 2 Star Gross Volume (L): 248 Reciprocating Compressor No. of Doors: 2 Stabilizer Free Operation Toughened Glass Shelves Neo Frost Dual Cooling",
+  "category": "Refrigerator",
+  "subCategory": "Double Door",
+  "mrp": 39990,
+  "sellingPrice": 28390,
+  "availability": "unknown",
+  "condition": "new",
+  "capacity": "248L",
+  "color": "Brushed Silver",
+  "starRating": 2,
+  "highlights": [],
+  "faqs": [],
+  "images": [
+    {
+      "src": "voltas-1100830",
+      "alt": "248 L 2 Star Frost Free Double Door Refrigerator (RFF285D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100830-2",
+      "alt": "248 L 2 Star Frost Free Double Door Refrigerator (RFF285D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100830-3",
+      "alt": "248 L 2 Star Frost Free Double Door Refrigerator (RFF285D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100830-4",
+      "alt": "248 L 2 Star Frost Free Double Door Refrigerator (RFF285D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100830-5",
+      "alt": "248 L 2 Star Frost Free Double Door Refrigerator (RFF285D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100830-6",
+      "alt": "248 L 2 Star Frost Free Double Door Refrigerator (RFF285D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100830-7",
+      "alt": "248 L 2 Star Frost Free Double Door Refrigerator (RFF285D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100830-8",
+      "alt": "248 L 2 Star Frost Free Double Door Refrigerator (RFF285D)",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

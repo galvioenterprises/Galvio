@@ -60,6 +60,23 @@ body {
   font-family: var(--font-sans);
 }
 
+/* Keep keyboard focus unmistakable even where a component has no custom ring. */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* The small uppercase labels above headings and on product cards. */
 @utility eyebrow {
   font-size: 0.6875rem;
@@ -99,5 +116,50 @@ body {
     border: 2px solid var(--color-surface);
     box-shadow: 0 0 0 1px var(--color-accent);
     cursor: pointer;
+  }
+}
+
+/* Order confirmation: the tick pops in and a few dots burst outwards. */
+@keyframes pop {
+  from {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes burst {
+  0% {
+    transform: translate(0, 0) scale(0.4);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--x), var(--y)) scale(1);
+    opacity: 0.9;
+  }
+}
+
+
+
+/* Add to cart: the tick draws itself and the cart icon nudges. */
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes nudge {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  40% {
+    transform: translateX(3px) rotate(-6deg);
   }
 }

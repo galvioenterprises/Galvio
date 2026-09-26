@@ -75,7 +75,7 @@ export default async function PolicyPage({ params }: { params: Promise<Params> }
 
           <nav
             aria-label="Other policies"
-            className="rounded-2xl border border-line bg-surface p-6 lg:sticky lg:top-8"
+            className="rounded-2xl border border-line bg-surface p-6 lg:sticky lg:top-[5.5rem]"
           >
             <p className="text-sm font-semibold">Other policies</p>
             <ul className="mt-4 space-y-3 text-sm">

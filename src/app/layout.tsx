@@ -3,6 +3,10 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { site } from "@/config/site";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { WhatsAppFloat } from "@/components/whatsapp-float";
+import { CompareBar } from "@/components/compare-bar";
+import { SiteAnalytics } from "@/components/site-analytics";
+import { RuntimeCatalogueProvider } from "@/components/runtime-catalogue";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -53,9 +57,22 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} flex min-h-dvh flex-col antialiased`}
       >
-        <SiteHeader />
-        <main className="flex-1">{children}</main>
-        <SiteFooter />
+        <a
+          href="#main-content"
+          className="fixed left-3 top-3 z-[100] -translate-y-24 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white shadow-lg transition-transform focus:translate-y-0"
+        >
+          Skip to main content
+        </a>
+        <RuntimeCatalogueProvider>
+          <SiteHeader />
+          <main id="main-content" tabIndex={-1} className="flex-1 outline-none">
+            {children}
+          </main>
+          <SiteFooter />
+          <WhatsAppFloat />
+          <CompareBar />
+          <SiteAnalytics />
+        </RuntimeCatalogueProvider>
       </body>
     </html>
   );

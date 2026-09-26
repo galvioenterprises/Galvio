@@ -2,13 +2,65 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "galvio-web",
   "compatibility_date": "2026-09-08",
+  // Production is served only on the canonical custom domain. Keeping both
+  // workers.dev and version URLs disabled prevents an alternate public
+  // hostname from bypassing the path-scoped Cloudflare Access policy.
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [
+    {
+      "pattern": "galvioenterprises.com",
+      "custom_domain": true
+    }
+  ],
 
-  // Static-only deployment: Cloudflare serves the exported `out/`
-  // directory directly. There is no Worker script, so page views do
-  // not consume the Workers request allowance.
+  // These must exist before Wrangler will deploy the production Worker. For
+  // the first deployment, pass them from a secure temporary file with
+  // `wrangler deploy --secrets-file`; after that use `wrangler secret put`.
+  // Never commit their values here.
+  "secrets": {
+    "required": ["ADMIN_EMAILS", "CODE_PEPPER", "RESEND_API_KEY", "ADMIN_API_TOKEN"]
+  },
+
+  // The Worker handles /api/* only. Every other request is served from
+  // the exported `out/` directory without running the Worker, so page
+  // views still do not consume the Workers request allowance.
+  "main": "worker/index.ts",
   "assets": {
     "directory": "./out",
+    "binding": "ASSETS",
     "not_found_handling": "404-page",
-    "html_handling": "auto-trailing-slash"
-  }
+    "html_handling": "auto-trailing-slash",
+    "run_worker_first": ["/api/*"]
+  },
+
+  // Accounts, sessions and orders. Create the production database with
+  // `wrangler d1 create galvio` and paste its id here; local dev
+  // (`pnpm preview`) uses a local SQLite file and ignores the id.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "galvio",
+      "database_id": "844b1999-96ba-478c-b901-cb2f7aac5bce",
+      "migrations_dir": "migrations"
+    }
+  ],
+
+  // Non-secret settings. Secrets (CASHFREE_APP_ID, CASHFREE_SECRET_KEY,
+  // RESEND_API_KEY, ADMIN_EMAILS, CODE_PEPPER, ADMIN_API_TOKEN) are supplied
+  // as deployment secrets, or in .dev.vars for local development.
+  "vars": {
+    "SITE_URL": "https://galvioenterprises.com",
+    "CASHFREE_ENV": "production",
+    "EMAIL_FROM": "Galvio Enterprises <orders@galvioenterprises.com>",
+    "DEV_MODE": "false",
+    // Phase 1 sends transactional order mail only. Enable after adding
+    // explicit consent, email verification and unsubscribe handling.
+    "ENGAGEMENT_EMAILS": "false"
+  },
+
+  // Abandoned-cart reminders and price/stock alerts.
+  "triggers": { "crons": ["*/30 * * * *"] },
+
+  "observability": { "enabled": true }
 }

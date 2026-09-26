@@ -2,184 +2,245 @@
 
 import { useState } from "react";
 import { site } from "@/config/site";
-import { ArrowRightIcon, MailIcon, WhatsAppIcon } from "./icons";
+import { ArrowRightIcon, CheckIcon, MailIcon, WhatsAppIcon } from "./icons";
 
-type FormState = {
+export const BUYER_TYPES = [
+  "Builder or developer",
+  "Office or corporate",
+  "Hotel or hospitality",
+  "Hospital or clinic",
+  "School or institution",
+  "Dealer or reseller",
+  "Other",
+] as const;
+
+const TIMELINES = ["Within 2 weeks", "Within a month", "1–3 months", "Just exploring"];
+
+type Form = {
   name: string;
-  business: string;
   phone: string;
   email: string;
-  pincode: string;
+  organisation: string;
+  buyer: string;
   category: string;
-  quantity: string;
-  requirements: string;
+  requirement: string;
+  location: string;
+  timeline: string;
 };
 
-const EMPTY: FormState = {
+const EMPTY: Form = {
   name: "",
-  business: "",
   phone: "",
   email: "",
-  pincode: "",
+  organisation: "",
+  buyer: "",
   category: "",
-  quantity: "",
-  requirements: "",
+  requirement: "",
+  location: "",
+  timeline: "",
 };
 
-export function BulkEnquiryForm({ categories }: { categories: string[] }) {
-  const [form, setForm] = useState(EMPTY);
+/**
+ * Bulk enquiry.
+ *
+ * There is no server, so the form composes the enquiry and hands it to
+ * WhatsApp when a business number is configured, and to email otherwise.
+ * After sending it says exactly that — the message opened in another app —
+ * rather than claiming a submission the site has no way to confirm.
+ */
+export function BulkEnquiryForm({
+  categories,
+  compact = false,
+}: {
+  categories: string[];
+  compact?: boolean;
+}) {
+  const [form, setForm] = useState<Form>(EMPTY);
+  const [sent, setSent] = useState<null | "whatsapp" | "email">(null);
 
-  function update(field: keyof FormState, value: string) {
-    setForm((current) => ({ ...current, [field]: value }));
-  }
+  const set = (key: keyof Form) => (e: { target: { value: string } }) =>
+    setForm((f) => ({ ...f, [key]: e.target.value }));
 
-  function message() {
-    return [
-      "Bulk product enquiry",
+  const message = () =>
+    [
+      `Bulk enquiry — ${site.name}`,
       "",
       `Name: ${form.name}`,
-      `Business: ${form.business || "Not provided"}`,
-      `Phone: ${form.phone}`,
-      `Email: ${form.email || "Not provided"}`,
-      `Delivery pincode: ${form.pincode}`,
-      `Category: ${form.category}`,
-      `Approximate quantity: ${form.quantity}`,
+      `Phone: +91 ${form.phone}`,
+      form.email ? `Email: ${form.email}` : null,
+      form.organisation ? `Organisation: ${form.organisation}` : null,
+      form.buyer ? `Buyer type: ${form.buyer}` : null,
+      form.category ? `Category: ${form.category}` : null,
+      `Delivery location: ${form.location}`,
+      form.timeline ? `Needed: ${form.timeline}` : null,
       "",
-      "Requirements:",
-      form.requirements,
-    ].join("\n");
+      "Requirement:",
+      form.requirement,
+    ]
+      .filter((l): l is string => l !== null)
+      .join("\n");
+
+  function submit(e: React.FormEvent) {
+    e.preventDefault();
+    const text = message();
+
+    if (site.contact.whatsapp) {
+      window.open(
+        `https://wa.me/${site.contact.whatsapp}?text=${encodeURIComponent(text)}`,
+        "_blank",
+        "noopener",
+      );
+      setSent("whatsapp");
+      return;
+    }
+
+    const subject = encodeURIComponent(
+      `Bulk enquiry — ${form.organisation || form.name}${form.category ? ` · ${form.category}` : ""}`,
+    );
+    window.location.href = `mailto:${site.contact.email}?subject=${subject}&body=${encodeURIComponent(text)}`;
+    setSent("email");
   }
 
-  function submit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const body = encodeURIComponent(message());
-    const subject = encodeURIComponent(`Bulk enquiry — ${form.category}`);
-    window.location.href = `mailto:${site.contact.email}?subject=${subject}&body=${body}`;
-  }
+  const field =
+    "mt-1.5 h-11 w-full rounded-lg border border-line bg-surface px-3 text-sm outline-none transition placeholder:text-text-faint focus:border-accent focus:ring-2 focus:ring-accent/15";
+  const label = "block text-[0.8125rem] font-medium text-text";
 
-  const fieldClass =
-    "mt-2 h-11 w-full rounded-lg border border-line bg-surface px-3 text-sm outline-none transition focus:border-accent";
+  if (sent) {
+    return (
+      <div className="rounded-2xl border border-line bg-surface p-8 text-center shadow-[0_12px_40px_rgba(17,19,24,0.08)]">
+        <span className="mx-auto flex size-12 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
+          <CheckIcon className="size-6" />
+        </span>
+        <p className="mt-4 text-lg font-semibold">Your enquiry is ready to send</p>
+        <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-text-muted">
+          {sent === "whatsapp"
+            ? "It opened in WhatsApp with everything filled in. Press send there and we'll reply with a quote."
+            : "It opened in your email app with everything filled in. Press send there and we'll reply with a quote."}
+        </p>
+        <p className="mt-4 text-xs text-text-faint">
+          Nothing opened? Write to{" "}
+          <a href={`mailto:${site.contact.email}`} className="text-accent hover:underline">
+            {site.contact.email}
+          </a>
+          .
+        </p>
+        <button
+          type="button"
+          onClick={() => setSent(null)}
+          className="mt-5 text-sm font-medium text-accent hover:underline"
+        >
+          Edit the enquiry
+        </button>
+      </div>
+    );
+  }
 
   return (
-    <form onSubmit={submit} className="rounded-2xl border border-line bg-surface p-5 sm:p-7">
-      <div className="grid gap-5 sm:grid-cols-2">
-        <label className="text-sm font-medium">
-          Your name <span className="text-accent">*</span>
-          <input
-            required
-            autoComplete="name"
-            value={form.name}
-            onChange={(event) => update("name", event.target.value)}
-            className={fieldClass}
-          />
+    <form
+      onSubmit={submit}
+      className="rounded-2xl border border-line bg-surface p-6 shadow-[0_12px_40px_rgba(17,19,24,0.08)] sm:p-7"
+    >
+      <p className="text-lg font-semibold tracking-tight">Get a bulk quote</p>
+      <p className="mt-1 text-[0.8125rem] text-text-muted">
+        Takes a minute. We reply with model-wise pricing.
+      </p>
+
+      <div className="mt-5 grid gap-4 sm:grid-cols-2">
+        <label className={label}>
+          Full name
+          <input required autoComplete="name" value={form.name} onChange={set("name")} className={field} />
         </label>
-        <label className="text-sm font-medium">
-          Business or organisation
-          <input
-            autoComplete="organization"
-            value={form.business}
-            onChange={(event) => update("business", event.target.value)}
-            className={fieldClass}
-          />
+        <label className={label}>
+          Mobile number
+          <div className="mt-1.5 flex h-11 overflow-hidden rounded-lg border border-line focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/15">
+            <span className="flex items-center border-r border-line bg-canvas px-3 text-sm text-text-muted">
+              +91
+            </span>
+            <input
+              required
+              inputMode="numeric"
+              autoComplete="tel-national"
+              pattern="[6-9][0-9]{9}"
+              title="A 10-digit Indian mobile number"
+              maxLength={10}
+              value={form.phone}
+              onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value.replace(/\D/g, "") }))}
+              className="min-w-0 flex-1 bg-surface px-3 text-sm outline-none"
+            />
+          </div>
         </label>
-        <label className="text-sm font-medium">
-          Phone <span className="text-accent">*</span>
-          <input
-            required
-            inputMode="tel"
-            autoComplete="tel"
-            value={form.phone}
-            onChange={(event) => update("phone", event.target.value)}
-            className={fieldClass}
-          />
-        </label>
-        <label className="text-sm font-medium">
-          Email
-          <input
-            type="email"
-            autoComplete="email"
-            value={form.email}
-            onChange={(event) => update("email", event.target.value)}
-            className={fieldClass}
-          />
-        </label>
-        <label className="text-sm font-medium">
-          Delivery pincode <span className="text-accent">*</span>
-          <input
-            required
-            inputMode="numeric"
-            pattern="[0-9]{6}"
-            maxLength={6}
-            autoComplete="postal-code"
-            value={form.pincode}
-            onChange={(event) => update("pincode", event.target.value.replace(/\D/g, ""))}
-            className={fieldClass}
-          />
-        </label>
-        <label className="text-sm font-medium">
-          Product category <span className="text-accent">*</span>
-          <select
-            required
-            value={form.category}
-            onChange={(event) => update("category", event.target.value)}
-            className={fieldClass}
-          >
-            <option value="">Select a category</option>
-            {categories.map((category) => (
-              <option key={category}>{category}</option>
+
+        {!compact && (
+          <>
+            <label className={label}>
+              Work email <span className="font-normal text-text-faint">(optional)</span>
+              <input type="email" autoComplete="email" value={form.email} onChange={set("email")} className={field} />
+            </label>
+            <label className={label}>
+              Organisation <span className="font-normal text-text-faint">(optional)</span>
+              <input autoComplete="organization" value={form.organisation} onChange={set("organisation")} className={field} />
+            </label>
+          </>
+        )}
+
+        <label className={label}>
+          You are a
+          <select required value={form.buyer} onChange={set("buyer")} className={field}>
+            <option value="" disabled>
+              Select
+            </option>
+            {BUYER_TYPES.map((b) => (
+              <option key={b}>{b}</option>
             ))}
           </select>
         </label>
-        <label className="text-sm font-medium sm:col-span-2">
-          Approximate quantity <span className="text-accent">*</span>
-          <input
-            required
-            type="number"
-            min={2}
-            step={1}
-            value={form.quantity}
-            onChange={(event) => update("quantity", event.target.value)}
-            className={fieldClass}
-          />
+        <label className={label}>
+          Product category
+          <select value={form.category} onChange={set("category")} className={field}>
+            <option value="">Several / not sure</option>
+            {categories.map((c) => (
+              <option key={c}>{c}</option>
+            ))}
+          </select>
         </label>
-        <label className="text-sm font-medium sm:col-span-2">
-          Models, capacities or other requirements <span className="text-accent">*</span>
+
+        <label className={`${label} sm:col-span-2`}>
+          What do you need?
           <textarea
             required
-            rows={5}
-            value={form.requirements}
-            onChange={(event) => update("requirements", event.target.value)}
-            className="mt-2 w-full rounded-lg border border-line bg-surface px-3 py-3 text-sm outline-none transition focus:border-accent"
-            placeholder="For example: 20 split ACs for guest rooms, 1.5 Ton preferred. Delivery needed in two phases."
+            rows={3}
+            value={form.requirement}
+            onChange={set("requirement")}
+            placeholder="e.g. 24 × 1.5 ton inverter split ACs for a new office, installation included"
+            className={`${field} h-auto resize-y py-2.5 leading-relaxed`}
           />
+        </label>
+
+        <label className={label}>
+          Delivery city or pincode
+          <input required autoComplete="postal-code" value={form.location} onChange={set("location")} className={field} />
+        </label>
+        <label className={label}>
+          Needed by
+          <select value={form.timeline} onChange={set("timeline")} className={field}>
+            <option value="">Select</option>
+            {TIMELINES.map((t) => (
+              <option key={t}>{t}</option>
+            ))}
+          </select>
         </label>
       </div>
 
-      <div className="mt-6 flex flex-wrap items-center gap-3">
-        <button
-          type="submit"
-          className="inline-flex h-11 items-center gap-2 rounded-lg bg-accent px-5 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
-        >
-          <MailIcon className="size-4" />
-          Prepare email enquiry
-          <ArrowRightIcon className="size-4" />
-        </button>
-        {site.contact.whatsapp && (
-          <button
-            type="button"
-            onClick={() => {
-              window.location.href = `https://wa.me/${site.contact.whatsapp}?text=${encodeURIComponent(message())}`;
-            }}
-            className="inline-flex h-11 items-center gap-2 rounded-lg border border-line px-5 text-sm font-medium"
-          >
-            <WhatsAppIcon className="size-4" />
-            Send on WhatsApp
-          </button>
-        )}
-      </div>
-      <p className="mt-4 text-xs leading-relaxed text-text-muted">
-        This opens your email app with the details filled in. The website does
-        not store or transmit the form itself.
+      <button
+        type="submit"
+        className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-accent text-sm font-medium text-white transition-colors hover:bg-accent-hover"
+      >
+        {site.contact.whatsapp ? <WhatsAppIcon className="size-4" /> : <MailIcon className="size-4" />}
+        Request quote
+        <ArrowRightIcon className="size-4" />
+      </button>
+      <p className="mt-3 text-center text-[0.6875rem] text-text-faint">
+        We use these details only to prepare your quote.
       </p>
     </form>
   );

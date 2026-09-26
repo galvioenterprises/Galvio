@@ -11,7 +11,18 @@ import { ProductImage } from "./product-image";
  * below it on mobile. Every image comes from the product record; this component
  * never reaches out to a remote image source at runtime.
  */
-export function ProductGallery({ images }: { images: Product["images"] }) {
+export function ProductGallery({
+  images,
+  primaryScale = 1.08,
+}: {
+  images: Product["images"];
+  /**
+   * Supplier hero images often include generous white canvas. Enlarge only
+   * the first product photograph; feature infographics keep a strict contain
+   * fit so their labels are never cropped.
+   */
+  primaryScale?: number;
+}) {
   const [active, setActive] = useState(0);
   const pointerStartX = useRef<number | null>(null);
   const thumbnailRefs = useRef<Array<HTMLButtonElement | null>>([]);
@@ -122,7 +133,8 @@ export function ProductGallery({ images }: { images: Product["images"] }) {
             alt={image.alt}
             sizes="(min-width: 1536px) 600px, (min-width: 1280px) 640px, (min-width: 1024px) 420px, (min-width: 768px) 560px, calc(100vw - 80px)"
             priority={active === 0}
-            className="max-h-full max-w-full object-contain"
+            className="max-h-full max-w-full object-contain transition-transform duration-300 motion-reduce:transition-none"
+            style={active === 0 ? { transform: `scale(${Math.min(Math.max(primaryScale, 1), 1.2)})` } : undefined}
           />
         </div>
 
@@ -132,7 +144,7 @@ export function ProductGallery({ images }: { images: Product["images"] }) {
               type="button"
               onClick={selectPrevious}
               aria-label="Show previous product image"
-              className="absolute left-3 top-1/2 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-surface/95 text-text shadow-sm transition-[background-color,opacity] hover:bg-white focus-visible:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100"
+              className="absolute left-3 top-1/2 flex size-11 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-surface/95 text-text shadow-sm transition-[background-color,opacity] hover:bg-white focus-visible:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100"
             >
               <ChevronLeftIcon className="size-5" />
             </button>
@@ -140,7 +152,7 @@ export function ProductGallery({ images }: { images: Product["images"] }) {
               type="button"
               onClick={selectNext}
               aria-label="Show next product image"
-              className="absolute right-3 top-1/2 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-surface/95 text-text shadow-sm transition-[background-color,opacity] hover:bg-white focus-visible:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100"
+              className="absolute right-3 top-1/2 flex size-11 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-surface/95 text-text shadow-sm transition-[background-color,opacity] hover:bg-white focus-visible:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100"
             >
               <ChevronRightIcon className="size-5" />
             </button>

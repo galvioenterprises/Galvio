@@ -49,11 +49,11 @@ export const categories: Category[] = [
     title: "Air Conditioners",
     eyebrow: "Cooling",
     description:
-      "Compare listed Voltas split and window air conditioners using the product details supplied for each model. Confirm current availability and installation terms with the showroom.",
+      "Compare listed Voltas split and window air conditioners using the product details supplied for each model. Stock and installation terms are confirmed before dispatch.",
     banner: {
       eyebrow: "Beat every summer",
       title: "Cooling That Lasts",
-      subtitle: "Efficient. Quiet. Installed right.",
+      subtitle: "Compare capacity, rating and supplied features.",
     },
     buyingGuide: {
       title: "Which tonnage for your room?",
@@ -200,11 +200,11 @@ export const categories: Category[] = [
     title: "Water Heaters",
     eyebrow: "Home appliances",
     description:
-      "Compare storage and instant water heaters as verified models are added to the online catalogue. Installation terms are confirmed with the showroom.",
+      "Compare storage and instant water heaters as verified models are added to the online catalogue. Installation terms are confirmed before dispatch.",
     banner: {
       eyebrow: "Warmer mornings",
       title: "Hot Water, On Time",
-      subtitle: "Safe. Efficient. Installed right.",
+      subtitle: "Compare size, type and efficiency.",
     },
     buyingGuide: {
       title: "Storage or instant, and what size?",
@@ -354,7 +354,7 @@ export const categories: Category[] = [
     banner: {
       eyebrow: "Sharper evenings",
       title: "A Better Picture",
-      subtitle: "Mounted and set up for you.",
+      subtitle: "Compare screen size and supplied features.",
     },
     buyingGuide: {
       title: "Which screen size for your room?",
@@ -369,7 +369,7 @@ export const categories: Category[] = [
       ],
       notes: [
         "4K is only visibly better than full HD at 43 inch and above, or when you sit close. Below that, spend the difference on panel quality instead.",
-        "If you need wall mounting, confirm the arrangement before purchase and tell the showroom the wall type — plasterboard needs different fixings from brick.",
+        "If you need wall mounting, confirm the arrangement before purchase and tell support the wall type — plasterboard needs different fixings from brick.",
       ],
     },
   },

@@ -1,0 +1,73 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-beko-rdc260a",
+  "sku": "GAL-RF-1100986",
+  "brand": "Voltas Beko",
+  "model": "RDC260A",
+  "status": "active",
+  "internalCode": "voltas.com: 228-l-5-star-direct-cool-single-door-refrigerator-rdc260a-w0bbrtm0b00go-bonita-blue-with-fresh-box-technology-quick-frezze-chiller-zone-and-base-drawer-voltas-beko-a-tata-product",
+  "title": "228 L 5 Star Direct Cool Single Door Refrigerator (RDC260A)",
+  "description": "Voltas Beko 5-Star Direct Cool Refrigerator offers superior energy efficiency with its 5-star rating. It features Fresh Box Technology for lasting freshness, Quick Freeze for rapid cooling, adjustable toughened glass shelves for flexible storage, and a base drawer for added convenience. Ideal for modern homes seeking performance and style.",
+  "category": "Refrigerator",
+  "subCategory": "Single Door",
+  "mrp": 32090,
+  "sellingPrice": 21650,
+  "availability": "unknown",
+  "condition": "new",
+  "capacity": "228L",
+  "color": "Bonita Blue",
+  "starRating": 5,
+  "highlights": [],
+  "faqs": [],
+  "images": [
+    {
+      "src": "voltas-1100986",
+      "alt": "228 L 5 Star Direct Cool Single Door Refrigerator (RDC260A)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100986-2",
+      "alt": "228 L 5 Star Direct Cool Single Door Refrigerator (RDC260A)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100986-3",
+      "alt": "228 L 5 Star Direct Cool Single Door Refrigerator (RDC260A)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100986-4",
+      "alt": "228 L 5 Star Direct Cool Single Door Refrigerator (RDC260A)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100986-5",
+      "alt": "228 L 5 Star Direct Cool Single Door Refrigerator (RDC260A)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100986-6",
+      "alt": "228 L 5 Star Direct Cool Single Door Refrigerator (RDC260A)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100986-7",
+      "alt": "228 L 5 Star Direct Cool Single Door Refrigerator (RDC260A)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100986-8",
+      "alt": "228 L 5 Star Direct Cool Single Door Refrigerator (RDC260A)",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

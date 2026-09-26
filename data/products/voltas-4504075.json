@@ -7,7 +7,7 @@
   "status": "active",
   "internalCode": "Voltas 1.5T SAC 183 INV Vertis AI Zest Gold",
   "title": "Voltas Split Air Conditioner, 1.5 Ton, 3 Star - 183INV Vertis AI Zest Gold",
-  "description": "Meet the Voltas Vertis AI Zest Gold 1.5 Ton 3 Star Inverter Split Room AC your smarter, intuitive cooling partner. Powered by Smart AI RAC, it learns your usage patterns and adjusts cooling automatically for optimum comfort. With AI Adaptive Cooling, it senses room conditions and sets the ideal temperature without manual input. The Geo‑Fencing feature allows the AC to switch modes or turn on/off based on your proximity, giving you a hands‑free experience every time you arrive or leave home. Control your energy use better with the Energy Manager, and fine‑tune cooling with 6 Step Adjustable Mode, matching real‑time room load for efficiency. When you need instant relief, Turbo Cooling delivers a quick temperature pull‑down. Stay comfortable even during peak summers with High Ambient Cooling up to 52°C. Enjoy smoother airflow with 4‑Way Swing, and maintain a peaceful environment with Super",
+  "description": "Meet the Voltas Vertis AI Zest Gold 1.5 Ton 3 Star Inverter Split Room AC your smarter, intuitive cooling partner. Powered by Smart AI RAC, it learns your usage patterns and adjusts cooling automatically for optimum comfort. With AI Adaptive Cooling, it senses room conditions and sets the ideal temperature without manual input. The Geo‑Fencing feature allows the AC to switch modes or turn on/off based on your proximity, giving you a hands‑free experience every time you arrive or leave home. Control your energy use better with the Energy Manager, and fine‑tune cooling with 6 Step Adjustable Mode, matching real‑time room load for efficiency. When you need instant relief, Turbo Cooling delivers a quick temperature pull‑down. Stay comfortable even during peak summers with High Ambient Cooling up to 52°C.",
   "category": "Air Conditioner",
   "subCategory": "Split AC",
   "mrp": 66990,
@@ -16,6 +16,7 @@
   "condition": "new",
   "capacity": "1.5 Ton",
   "starRating": 3,
+  "inverter": true,
   "highlights": [],
   "faqs": [],
   "images": [

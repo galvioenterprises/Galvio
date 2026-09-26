@@ -3,24 +3,24 @@ import { Container } from "../container";
 
 const PROPS: { icon: FigmaIconName; title: string; subtitle: string }[] = [
   {
-    icon: "offers-discount",
-    title: "Source-backed Listings",
-    subtitle: "Only supplied product details are shown.",
+    icon: "trust-genuine-light",
+    title: "Genuine Products",
+    subtitle: "Supplied through an authorised Voltas distributor.",
   },
   {
-    icon: "exchange",
-    title: "Clear Catalogue Prices",
-    subtitle: "MRP and listed price shown where supplied.",
+    icon: "trust-delivery-light",
+    title: "Pan-India Delivery",
+    subtitle: "Fulfilment is managed by our distributor.",
   },
   {
     icon: "payment-cards",
-    title: "Useful Comparisons",
-    subtitle: "Compare categories and supplied specifications.",
+    title: "Cash on Delivery",
+    subtitle: "Pay when your confirmed order reaches you.",
   },
   {
     icon: "support-headset",
-    title: "Showroom Enquiries",
-    subtitle: "Confirm current stock and next steps directly.",
+    title: "Order Assistance",
+    subtitle: "Help choosing a model and completing your order.",
   },
 ];
 

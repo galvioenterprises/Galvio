@@ -34,6 +34,15 @@ const CUTOUTS = new Set([
   "voltas-4504051",
   "voltas-4810348-2",
   "voltas-side-by-side",
+  // Hero slides: shots on a plain white background.
+  "voltas-5211776-3",
+  "voltas-5410921-6",
+  "voltas-9014092-2",
+  "voltas-4810441-2",
+  // Hero-only shots from voltas.com: Voltas Beko 472 L side-by-side
+  // (doors open) and the GT440 flat glass-top freezer (two glass lids).
+  "voltas-hero-fridge-sbs",
+  "voltas-hero-freezer-glasstop",
 ]);
 
 type Entry = {

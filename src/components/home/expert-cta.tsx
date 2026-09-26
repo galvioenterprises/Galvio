@@ -37,7 +37,7 @@ export function ExpertCta() {
           </a>
           {site.contact.phone && (
             <a
-              href={`tel:${site.contact.phone}`}
+              href={`tel:${site.contact.phone.replace(/\s/g, "")}`}
               className="inline-flex h-12 items-center gap-2 rounded-xl bg-white px-6 text-sm font-medium text-ink"
             >
               <PhoneIcon className="size-4" />

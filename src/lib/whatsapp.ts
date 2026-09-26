@@ -3,16 +3,14 @@ import type { Product } from "./product-schema";
 import { formatPrice } from "./format";
 
 /**
- * WhatsApp is the checkout for Phase 1. Every enquiry link carries enough
- * detail that the person answering can reply without a second round trip:
- * what the customer is looking at, the SKU to check stock against, and
- * the price they were shown.
+ * WhatsApp or email is the Phase 1 handoff. Every link carries enough detail
+ * that the person answering can identify the item, SKU and displayed price.
  */
 
 function link(message: string): string {
   const number = site.contact.whatsapp;
-  // Until the real number is configured, preserve the enquiry text in an
-  // email rather than looping the Contact page back to itself.
+  // Until the real number is configured, preserve the message in an email
+  // rather than looping the Contact page back to itself.
   if (!number) {
     return site.contact.email
       ? `mailto:${site.contact.email}?subject=${encodeURIComponent("Product enquiry")}&body=${encodeURIComponent(message)}`
@@ -29,14 +27,28 @@ export function productEnquiryLink(product: Product): string {
   );
 }
 
-/** "Buy now" goes here. There is no online checkout, so buying happens
- *  the way it already does at the counter — through a person. The message
- *  says so plainly rather than pretending a payment page is coming. */
+export function cartEnquiryLink(
+  items: { title: string; qty: number }[],
+  total: number,
+): string {
+  const visible = items
+    .slice(0, 8)
+    .map((item) => `${item.qty} x ${item.title}`)
+    .join("\n");
+  const remaining = items.length > 8 ? `\n+ ${items.length - 8} more product${items.length - 8 === 1 ? "" : "s"}` : "";
+  return link(
+    `Hi ${site.shortName}, I'd like help arranging this ${formatPrice(total)} order because it is above the online Cash on Delivery limit.\n\n` +
+      `${visible}${remaining}\n\nPlease confirm stock, delivery and the next step.`,
+  );
+}
+
+/** Direct COD order for one product. Stock and delivery are confirmed by
+ *  the distributor before dispatch. */
 export function buyNowLink(product: Product): string {
   return link(
-    `Hi ${site.shortName}, I'd like to buy the ${product.title} ` +
+    `Hi ${site.shortName}, I'd like to place a Cash on Delivery order for the ${product.title} ` +
       `(${product.sku}) at ${formatPrice(product.sellingPrice)}. ` +
-      `Could you confirm availability and the delivery date?`,
+      `Could you confirm stock and delivery details?`,
   );
 }
 

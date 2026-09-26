@@ -14,6 +14,7 @@ type Props = {
   onPriceChange: (range: [number, number]) => void;
   onClear: () => void;
   activeCount: number;
+  showHeader?: boolean;
 };
 
 /** Brand lists get long enough that a search box is faster than scrolling. */
@@ -30,12 +31,12 @@ function Section({
 }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div className="border-t border-line py-4 first:border-t-0">
+    <div className="border-t border-line py-3 first:border-t-0">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="flex w-full items-center justify-between text-left text-sm font-medium"
+        className="flex min-h-11 w-full items-center justify-between text-left text-sm font-medium"
       >
         {title}
         <ChevronDownIcon
@@ -59,7 +60,7 @@ function Checkbox({
   onChange: () => void;
 }) {
   return (
-    <label className="flex cursor-pointer items-center gap-2.5 py-1 text-sm">
+    <label className="flex min-h-11 cursor-pointer items-center gap-2.5 text-sm">
       <input
         type="checkbox"
         checked={checked}
@@ -102,7 +103,7 @@ function FacetSection({
             onChange={(e) => setQuery(e.target.value)}
             placeholder={`Search ${facet.label.toLowerCase()}`}
             aria-label={`Search ${facet.label}`}
-            className="h-8 w-full rounded-lg border border-line bg-surface pl-8 pr-2 text-xs focus:border-accent focus:outline-none"
+            className="h-11 w-full rounded-lg border border-line bg-surface pl-8 pr-2 text-xs focus:border-accent focus:outline-none"
           />
         </div>
       )}
@@ -191,7 +192,7 @@ function PriceSection({
               key={`${from}-${to}`}
               type="button"
               onClick={() => onPriceChange([from, to])}
-              className={`rounded-lg border px-2 py-1.5 text-xs transition-colors ${
+              className={`min-h-11 rounded-lg border px-2 py-1.5 text-xs transition-colors ${
                 active
                   ? "border-accent bg-accent text-white"
                   : "border-line text-text-muted hover:border-line-strong"
@@ -215,20 +216,21 @@ export function ProductFilters({
   onPriceChange,
   onClear,
   activeCount,
+  showHeader = true,
 }: Props) {
   return (
-    <div className="rounded-card border border-line bg-surface px-4 py-2">
-      <div className="flex items-center justify-between border-b border-line py-3">
+    <div className={showHeader ? "rounded-card border border-line bg-surface px-4 py-2" : "bg-surface px-1"}>
+      {showHeader && <div className="flex items-center justify-between border-b border-line py-3">
         <h2 className="text-sm font-semibold">Filters</h2>
         <button
           type="button"
           onClick={onClear}
           disabled={activeCount === 0}
-          className="text-xs font-medium text-accent transition-colors disabled:opacity-40"
+          className="min-h-11 px-2 text-xs font-medium text-accent transition-colors disabled:opacity-40"
         >
           Clear All
         </button>
-      </div>
+      </div>}
 
       {/* The design puts Price Range second, directly under the first
           facet group, because price is the filter most people reach for. */}

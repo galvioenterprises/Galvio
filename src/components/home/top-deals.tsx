@@ -11,9 +11,12 @@ export function TopDeals({ products }: { products: Product[] }) {
     <section id="top-deals" className="scroll-mt-24 pt-20 sm:pt-24">
       <Container size="listing">
       <div className="flex items-end justify-between gap-4">
-        <h2 className="text-[2rem] font-semibold tracking-[-0.02em]">
-          Top Deals of the Season
-        </h2>
+        <div>
+          <p className="eyebrow text-accent">Biggest savings on MRP</p>
+          <h2 className="mt-2 text-[2rem] font-semibold tracking-[-0.02em]">
+            Top Deals of the Season
+          </h2>
+        </div>
         <Link
           href="/offers/"
           className="inline-flex shrink-0 items-center gap-1.5 text-sm font-medium text-accent hover:underline"

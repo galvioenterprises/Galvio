@@ -1,37 +1,36 @@
 # Galvio Enterprises — galvioenterprises.com
 
-Static marketing and catalogue site for an electronics distributor selling
-direct to customers, plus a separate bulk/RFQ funnel.
+Static-first catalogue and COD-ordering site for an electronics distributor
+selling direct to customers, plus a separate bulk/RFQ funnel.
 
 ## Architecture
 
-Phase 1 is deliberately a fully static site. `next build` produces an `out/`
-directory of plain HTML, CSS and JS which Cloudflare serves as static
-assets. There is no application server, no database and no auth in
-production, which removes runtime infrastructure as a class of failure
-ahead of the Diwali season.
+Phase 1 keeps browsing static and isolates dynamic commerce under `/api/*`.
+`next build` produces an `out/` directory of HTML, CSS and JS which
+Cloudflare serves directly. A Cloudflare Worker handles COD orders,
+sessions, customer order state and the protected distributor admin; D1 stores
+only dynamic operational data.
 
 ```
-source CSV batches + dealer overrides ──► compose ──► validated products.csv
-                                                              │
-GitHub ──► next build (output: "export") ──► out/ ──► Cloudflare static assets
+source CSV batches + reviewed baseline ──► validated products.csv ──► out/
+                                                                        │
+Browser ──► Cloudflare ──┬─ static pages/assets ─────────────────────────┘
+                         └─ /api/* ──► Worker ──► D1 orders/runtime inventory
 ```
 
-Product facts are kept in source-scoped CSV batches; dealer-owned price,
-stock, availability and publication decisions live in a separate override
-file. `pnpm compose:products` creates `data/products.csv`, and the importer
-validates it before generating per-product JSON. See
-[data/README.md](data/README.md). A future direct RFQ endpoint requires a
-Cloudflare Worker and Turnstile; the current bulk form prepares an email and
-does not claim that backend already exists.
+Product facts are kept in source-scoped CSV batches. `pnpm compose:products`
+creates `data/products.csv`, and the importer validates it before generating
+per-product JSON. See [data/README.md](data/README.md). Manufacturer facts and
+new SKUs remain reviewable build inputs. After deployment, the distributor
+manages live MRP, selling price, availability and stock count through protected
+D1 runtime overrides; those changes do not rewrite source data.
 
 `tenantId` is present in the data model so a second distributor can be
 onboarded later. Multi-tenancy is **not** implemented and should not be.
 
-Deferred to Phase 2, after Diwali: online checkout, Merchant Center online
-feed, a database, and any server runtime (vinext/OpenNext) — the latter is
-still beta and has no place on a revenue-critical site under a seasonal
-deadline.
+Online payment is deferred. The existing Cashfree path remains dormant behind
+`business.onlinePayments = false`; Phase 1 is COD-only and exposes no payment
+or EMI claims.
 
 ## Stack
 
@@ -40,7 +39,8 @@ deadline.
 - Tailwind CSS v4
 - Zod for product data validation
 - sharp for the build-time image pipeline
-- Cloudflare for DNS, CDN and static asset hosting; Wrangler for deploys
+- Cloudflare for DNS, CDN and static assets; Workers/D1 for COD and admin;
+  Wrangler for migrations, previews and deploys
 
 Use pnpm, never npm. Two lockfiles that disagree is how a build passes
 locally and fails in CI.
@@ -71,7 +71,13 @@ that compiles and then throws.
 | `/products/[category]/` | Listing page: filters, sort, grid and list views, pagination |
 | `/product/[slug]/` | Product detail: gallery, sticky section nav, overview, specs, warranty, delivery, FAQs |
 | `/offers/` | Discounted manufacturer listings, with availability confirmed separately |
-| `/cart/` | A local enquiry list; it does not place or pay for an order |
+| `/cart/` | Cart with COD-order summary and a sticky mobile checkout action |
+| `/checkout/` | Guest-first delivery details and COD order review |
+| `/checkout/complete/` | Order placement acknowledgement with confirmation still pending |
+| `/account/` | Optional sign-in, saved details and customer order history |
+| `/admin/` | Protected distributor orders, runtime inventory, coupons and verified reviews |
+| `/compare/` | Customer comparison using supplied specifications |
+| `/search/` | Search results from the generated static index |
 | `/bulk-orders/` | Static bulk-enquiry form that prepares email/WhatsApp copy |
 | `/about/` | Who we are, and why a single-brand distributorship |
 | `/contact/` | WhatsApp, phone, email, showroom, and what to say in the first message |
@@ -82,13 +88,9 @@ Filtering, sorting and pagination all run client-side over the products
 already embedded in the page. With a catalogue this size that is far
 cheaper than a round trip, and it keeps the site static.
 
-`/products/` is a listing, not an index of category cards. It used to be
-the latter, which made "Products" in the navigation cost a page load to
-show what the dropdown already showed — and half those cards led to
-categories with no stock. The dropdown is the shortcut to one category;
-the page is the whole catalogue. The dropdown carries per-category
-counts, and "Soon" where there is no stock, so nobody spends a click
-discovering an empty shelf.
+`/products/` is a listing, not an index of category cards. The Products
+dropdown links only to sellable categories; future categories do not occupy the
+primary navigation. The page itself is the whole catalogue.
 
 Header search works the same way. `scripts/build-search-index.mts` writes
 `public/search-index.json` (generated, git-ignored, rebuilt by every
@@ -169,50 +171,46 @@ scrolls past.
 
 ### Deliberate differences from the Figma frames
 
-The design was drawn for a full storefront. Phase 1 has a browser-local
-enquiry cart but no accounts, payment or order backend:
+The design was drawn for a full online-payment storefront. Phase 1 instead
+implements a COD order flow with a separate distributor-confirmation step:
 
-- Products confirmed `in_stock` can be collected in the cart. Products with
-  `unknown` or unavailable inventory show **Enquire** and are never presented
-  as immediately purchasable.
-- The header carries search, the enquiry cart, a contact action and a mobile
-  menu. No account icon is rendered because accounts do not exist.
-- The card's **wishlist heart and compare toggle** are omitted; both need
-  persisted per-visitor state that does not exist yet.
+- Products with `unknown` distributor stock may be collected in the cart, but
+  checkout and acknowledgement copy label the first state **Order placed —
+  confirmation pending**, never **Order confirmed**.
+- Guest checkout is the default. Accounts, saved carts, wishlist and comparison
+  are useful optional features, not prerequisites for ordering.
 - The **"Only 2 left"** badge renders only when a product has a real
   `stock_count`, and otherwise gives its slot to out-of-stock, pre-order
   and backorder states.
-- **Star ratings** remain absent. Catalogue imports reject review aggregates;
-  a verified customer-review system must own them later.
-- Navigation items whose pages are not built yet render as plain text
-  rather than links, so nothing in the header 404s. Flip `ready` in
-  `src/config/nav.ts` as each page lands. Category links everywhere are
-  built from categories that actually have products, never from config.
-- **Buy now** routes to a direct enquiry only when inventory is confirmed; it
-  does not complete a transaction on the static site.
+- Catalogue **star ratings** remain absent. Imports reject review aggregates;
+  only the delivered-order review system can create customer ratings.
+- **Buy now** goes directly to the COD order flow. It never bypasses
+  server-side repricing or distributor confirmation.
 - Product cards reserve height for the title, the chip row and the
   strikethrough price whether or not each is present. Titles run to one
   or two lines and discounts come and go, and without reserved height the
   price and the button land at a different height on every card.
-- Trust signals sit **between the price and the button** rather than
-  below both. That gap is where the hesitation actually is.
-- On phones a **sticky bar** carries the price and the enquiry button
+- Trust and fulfilment terms sit close to the price and action, where the
+  customer is making the decision.
+- On phones a **sticky bar** carries the price and purchase action
   once the real button scrolls away. It measures that button on scroll
   rather than observing a 1px sentinel: a box that small does not
   reliably fire IntersectionObserver callbacks, and when it silently
   never fires the bar stays pinned open.
-- The product page's **pincode check** answers from
-  `site.serviceablePincodes`. Until that list is filled in it shows a
-  plain message instead, because a box that approves every pincode is
-  worse than no box: the customer plans around it.
+- Delivery copy uses the approved nationwide/free policy and states that the
+  2–3-day window begins after distributor confirmation. A format-only PIN check
+  must not pretend to be live courier serviceability.
 
-### Not built: the commerce flow
+### Commerce flow
 
-The Figma file also contains **Checkout, Payment, Order Confirmation, Track
-Order** and **My Orders**. They are not built. Each needs some combination of
-identity, a payment gateway and an order database, and this site is a static
-export with no server. Decorative shells would mislead customers. These are
-Phase 2; the current cart ends in a human-confirmed enquiry.
+Checkout, order acknowledgement, customer order history and the protected
+order admin use the Worker/D1 backend. The first order state is deliberately
+labelled **Order placed — confirmation pending** in customer-facing copy; it
+must not say **Order confirmed** until the distributor moves it to `confirmed`.
+
+The online-payment implementation is deliberately not part of the launch flow.
+Do not expose the payment page, Cashfree claims, UPI/cards or EMI copy while
+`business.onlinePayments` is false.
 
 ### Layout and spacing
 
@@ -307,9 +305,11 @@ pnpm build       # static export to out/
 pnpm typecheck   # tsc --noEmit
 pnpm lint        # eslint
 pnpm preview     # serve out/ the way Cloudflare will
+pnpm db:migrate  # apply D1 migrations to the configured production database
 pnpm import:products   # merge data/products.csv into data/products/*.json
 pnpm build:preview     # static export, allowing the SAMPLE- placeholders
 pnpm deploy      # build, then wrangler deploy
+pnpm admin       # local source-sync/match-review console; never expose publicly
 ```
 
 ## Before launch

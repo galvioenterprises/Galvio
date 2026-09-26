@@ -7,7 +7,7 @@
   "status": "active",
   "internalCode": "Voltas SAC 245 INV Vectra Plush",
   "title": "Voltas Split Air Conditioner, 2 Ton, 5 Star - 245INV Vectra Plush",
-  "description": "Meet the Voltas Vectra Plush 2 Ton 5 Star Inverter Split Room AC designed for smarter, leaner cooling. With 5 Step Adjustable Mode, it fine-tunes cooling capacity to match real-time room load and occupancy, cutting energy waste without compromising comfort. Need instant relief? Turbo Cooling drives a quick temperature pull-down for fast comfort. Built to beat Indian summers, its High Ambient Cooling keeps performance reliable even at 52°C. The energy-efficient inverter compressor modulates speed for consistent temperatures and lower noise, helping optimize electricity bills with its 5 Star rating. Maintenance is effortless thanks to the Filter Clean Indicator, reminding you to clean filters for fresher air and steady airflow. Ideal for larger living rooms and spacious bedrooms, Vectra Plush delivers high-capacity comfort with efficient performance—every day, all season. Model No.: 450406",
+  "description": "Meet the Voltas Vectra Plush 2 Ton 5 Star Inverter Split Room AC designed for smarter, leaner cooling. With 5 Step Adjustable Mode, it fine-tunes cooling capacity to match real-time room load and occupancy, cutting energy waste without compromising comfort. Need instant relief? Turbo Cooling drives a quick temperature pull-down for fast comfort. Built to beat Indian summers, its High Ambient Cooling keeps performance reliable even at 52°C. The energy-efficient inverter compressor modulates speed for consistent temperatures and lower noise, helping optimize electricity bills with its 5 Star rating. Maintenance is effortless thanks to the Filter Clean Indicator, reminding you to clean filters for fresher air and steady airflow. Ideal for larger living rooms and spacious bedrooms, Vectra Plush delivers high-capacity comfort with efficient performance—every day, all season.",
   "category": "Air Conditioner",
   "subCategory": "Split AC",
   "mrp": 90990,
@@ -16,6 +16,7 @@
   "condition": "new",
   "capacity": "2 Ton",
   "starRating": 5,
+  "inverter": true,
   "highlights": [],
   "faqs": [],
   "images": [

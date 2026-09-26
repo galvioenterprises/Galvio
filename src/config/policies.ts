@@ -1,4 +1,7 @@
 import { site } from "./site";
+import { business } from "./business";
+
+const EXCHANGE_DAYS = business.exchangeWindowDays;
 
 /**
  * The customer-facing policies.
@@ -6,11 +9,10 @@ import { site } from "./site";
  * Google Merchant Center will not approve an account whose site has no
  * reachable returns, delivery and contact information, so these are
  * launch-blocking rather than nice-to-have. They are written to be
- * conservative and accurate for a distributor selling through enquiry
- * rather than online checkout.
+ * conservative and accurate for the Phase 1 Cash on Delivery workflow.
  *
- * THEY ARE DRAFTS. Have someone in the business read every line before
- * launch — these describe commitments the business has to honour.
+ * The business approved these commercial commitments for launch. Any future
+ * payment or fulfilment change must update this source before its UI ships.
  */
 
 export type PolicyBlock =
@@ -43,16 +45,16 @@ export const policies: Policy[] = [
     blocks: [
       {
         type: "text",
-        body: `This website is a catalogue for direct enquiries. Current stock, the delivery method, timing and any charges are confirmed with you in writing before an order is accepted.`,
+        body: `You can place a Cash on Delivery order online without paying upfront. Its first status is “Order placed — confirmation pending.” The distributor then calls to confirm current stock, the final price, the delivery method and timing before dispatch.`,
       },
       { type: "heading", body: "Delivery timelines" },
       {
         type: "text",
-        body: `The delivery timeline depends on confirmed showroom stock, the product and the destination. We will give you the expected date before you commit to an order.`,
+        body: `Orders are delivered in ${business.deliveryDaysMin}–${business.deliveryDaysMax} days after we confirm them on our call. Some remote pincodes can take longer; if yours does, we tell you on that call.`,
       },
       {
         type: "text",
-        body: `Share the delivery pincode with the showroom. We will confirm whether delivery can be arranged, along with the timeline and any charge, before an order is accepted.`,
+        body: `Delivery is available across India. Delivery is free.`,
       },
       { type: "heading", body: "On the day" },
       {
@@ -74,44 +76,57 @@ export const policies: Policy[] = [
   },
   {
     slug: "returns",
-    title: "Returns & Refunds",
-    metaTitle: "Returns & Refunds Policy",
-    summary:
-      "When a product can be returned or replaced, and how a refund is made.",
+    title: "Returns & Exchange",
+    metaTitle: "Returns & Exchange Policy",
+    summary: `We don't accept returns. A damaged, defective or wrong product can be exchanged within ${EXCHANGE_DAYS} days of delivery.`,
     blocks: [
+      { type: "heading", body: "No returns" },
       {
         type: "text",
-        body: `Return, replacement and refund terms depend on the product, its condition, the final invoice, manufacturer policy and applicable consumer law. Ask us to confirm the terms that apply before purchase.`,
+        body: `We don't accept returns once a product has been delivered, including for a change of mind, and we don't refund delivered orders.`,
       },
-      { type: "heading", body: "Damaged or wrong on arrival" },
+      { type: "heading", body: `Exchange within ${EXCHANGE_DAYS} days` },
       {
         type: "text",
-        body: `If an appliance arrives visibly damaged or is not the model on your invoice, contact us promptly. Do not install or use it, and retain the packaging and delivery evidence while the available remedy is confirmed.`,
+        body: `If a product arrives damaged, is defective, or is not the model on your invoice, tell us within ${EXCHANGE_DAYS} days of delivery. Once the claim is approved, we exchange it for the same model, or a comparable model if that one is unavailable.`,
       },
-      { type: "heading", body: "Faulty on first use" },
+      { type: "heading", body: "Terms and conditions" },
       {
         type: "text",
-        body: `If an appliance is faulty on first use, contact us promptly. The remedy depends on the manufacturer's inspection, the terms confirmed on your invoice and your rights under applicable consumer law.`,
+        body: `An exchange is subject to all of the following:`,
       },
-      { type: "heading", body: "Change of mind" },
       {
-        type: "text",
-        body: `Change-of-mind returns are not assumed by this catalogue. Ask for the applicable terms before purchase; any accepted return must be unused, uninstalled and complete with its original packaging, accessories and documentation.`,
+        type: "list",
+        items: [
+          `The issue is reported within ${EXCHANGE_DAYS} days of the delivery date shown on your invoice.`,
+          `You send your order number or invoice, with photos or a video of the issue. For damage in transit, include photos of the outer packaging.`,
+          `The product is inspected by us or by Voltas's authorised service engineer, who must confirm the damage, defect or wrong model.`,
+          `The product has not been misused, altered, or physically damaged after delivery, and has not been installed or repaired by anyone other than an authorised technician.`,
+          `The product comes back with its original box and packaging where possible, accessories, manuals, remote and invoice.`,
+          `Faults reported after ${EXCHANGE_DAYS} days are handled as a warranty claim with Voltas service, not as an exchange.`,
+          `Installation, protection plans and other services already delivered are not exchangeable.`,
+          `The final decision on an exchange rests with Galvio Enterprises and the distributor, after inspection.`,
+        ],
       },
-      { type: "heading", body: "Eligibility" },
+      { type: "heading", body: "Damaged on arrival" },
       {
         type: "text",
-        body: `Eligibility is assessed against the condition of the appliance, the terms stated before purchase, manufacturer policy and applicable consumer law. This catalogue does not add exclusions that are not stated in those sources.`,
+        body: `If the box looks damaged, note it on the delivery receipt before you sign, and don't install or use the product. Send us photos the same day.`,
       },
-      { type: "heading", body: "Refunds" },
+      { type: "heading", body: "Old appliances" },
       {
         type: "text",
-        body: `Where a refund is approved, the method and expected processing time will be confirmed in writing. Bank or payment-provider processing can add time after it is issued.`,
+        body: `We don't take old appliances in exchange or buy them back.`,
       },
-      { type: "heading", body: "How to start a return" },
+      { type: "heading", body: "Cancellations before dispatch" },
       {
         type: "text",
-        body: `Message or call us with your invoice number and a photograph of the issue. ${contactLine}`,
+        body: `You may ask to cancel before dispatch. Phase 1 orders are Cash on Delivery, so no payment has been collected online. Once an order has been dispatched, the delivery and exchange terms above apply.`,
+      },
+      { type: "heading", body: "How to request an exchange" },
+      {
+        type: "text",
+        body: `Message or call us with your order number and photos of the issue. ${contactLine}`,
       },
     ],
   },
@@ -138,7 +153,7 @@ export const policies: Policy[] = [
       { type: "heading", body: "How to claim" },
       {
         type: "text",
-        body: `The manufacturer documentation explains how to open a claim. You may also contact the showroom with your invoice and product details so we can confirm what assistance is available.`,
+        body: `The manufacturer documentation explains how to open a claim. You may also contact Galvio with your invoice and product details so we can confirm what assistance is available.`,
       },
       { type: "heading", body: "Keep your invoice" },
       {
@@ -155,20 +170,22 @@ export const policies: Policy[] = [
     blocks: [
       {
         type: "text",
-        body: `This website does not ask you to create an account, and it does not take payments. What we collect is limited to what we need in order to answer your enquiry and deliver what you buy.`,
+        body: `You can place a Cash on Delivery order as a guest. An account is optional and helps you track orders across devices. Signing in uses a one-time code; we do not store passwords. We do not collect card, UPI or bank details during the Phase 1 Cash on Delivery checkout.`,
       },
       { type: "heading", body: "What we collect" },
       {
         type: "list",
         items: [
-          "What you tell us directly when you message, call or visit — your name, phone number, delivery address and what you are looking for.",
-          "Cart choices saved in your browser. They stay on the device until you choose to include them in an enquiry.",
+          "Your guest or account details: name, mobile number and email address when you choose to provide one.",
+          "Delivery addresses you save, and the orders you place with us, including confirmation and payment status.",
+          "What you tell us directly when you message, call or visit.",
+          "Cart and saved-for-later choices. Guest carts stay in your browser; signed-in carts may also be saved to your account so they can be recovered and, where permitted, used for a cart reminder.",
         ],
       },
       { type: "heading", body: "What we do with it" },
       {
         type: "text",
-        body: `We use information you send to answer the enquiry and, if you place an order, for the purposes confirmed with you at that time, such as quoting, invoicing or arranging fulfilment.`,
+        body: `We use it to confirm and deliver your orders, send updates using the contact details you provide, answer support messages and meet invoicing and tax obligations. Your delivery address and phone number are shared with the distributor and courier handling your order.`,
       },
       { type: "heading", body: "What we do not do" },
       {
@@ -197,15 +214,15 @@ export const policies: Policy[] = [
         type: "text",
         body: `These terms cover the use of this website and any order placed with ${site.legalName}.`,
       },
-      { type: "heading", body: "This website is a catalogue" },
+      { type: "heading", body: "Ordering and confirmation" },
       {
         type: "text",
-        body: `Listings on this site are an invitation to enquire, not a binding offer. An order exists once we have confirmed it with you directly and issued an invoice. Nothing on this site completes a sale by itself.`,
+        body: `When you place a Cash on Delivery order you receive an order number and see “Order placed — confirmation pending.” If you supplied a valid email address, we also send it there; otherwise updates use your mobile number. The distributor then calls to confirm stock, the final price and delivery date with you before dispatch. If an item cannot be supplied, the order is cancelled and no online payment needs to be refunded.`,
       },
       { type: "heading", body: "Prices and availability" },
       {
         type: "text",
-        body: `Prices are shown in Indian Rupees. Manufacturer revisions and showroom stock movements can make a listing out of date between updates. We confirm the final price, tax treatment and availability before accepting an order, and you are free to walk away if they have changed.`,
+        body: `Prices are shown in Indian Rupees. Manufacturer revisions and distributor stock movements can make a listing out of date between updates. We confirm the final price, tax treatment and availability before accepting an order, and you are free to walk away if they have changed.`,
       },
       {
         type: "text",
@@ -224,7 +241,7 @@ export const policies: Policy[] = [
       { type: "heading", body: "Final order terms" },
       {
         type: "text",
-        body: `Any additional commercial or legal terms are provided for review before an order is accepted. This catalogue does not invent a term that has not been confirmed by the business.`,
+        body: `Any additional commercial or legal terms are provided for review before an order is accepted. The website does not add a term that has not been confirmed by the business.`,
       },
     ],
   },

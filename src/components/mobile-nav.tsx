@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { NavItem } from "@/config/nav";
@@ -27,53 +27,120 @@ export function MobileNav({
   items: NavItem[];
   categories: CategoryLink[];
 }) {
-  const [open, setOpen] = useState(false);
-  const [productsOpen, setProductsOpen] = useState(false);
   const pathname = usePathname();
+  const [openPath, setOpenPath] = useState<string | null>(null);
+  const [productsOpenPath, setProductsOpenPath] = useState<string | null>(null);
+  const open = openPath === pathname;
+  const productsOpen = productsOpenPath === pathname;
   const panelId = useId();
+  const rootRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+
+  function closeMenu() {
+    setOpenPath(null);
+    setProductsOpenPath(null);
+  }
 
   useEffect(() => {
     if (!open) return;
+    const trigger = triggerRef.current;
+    const dialog = dialogRef.current;
+    const inerted: HTMLElement[] = [];
 
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        event.preventDefault();
+        closeMenu();
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const focusable = dialog?.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]):not([tabindex="-1"]), [tabindex]:not([tabindex="-1"])',
+      );
+      if (!focusable?.length) {
+        event.preventDefault();
+        return;
+      }
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     }
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", onKeyDown);
+    // Make every branch outside this menu unavailable to assistive technology
+    // while the modal navigation is open. The trigger stays visible but leaves
+    // the tab order until focus is restored on close.
+    let branch: HTMLElement | null = rootRef.current;
+    while (branch?.parentElement) {
+      for (const sibling of branch.parentElement.children) {
+        if (sibling !== branch && sibling instanceof HTMLElement && !sibling.inert) {
+          sibling.inert = true;
+          inerted.push(sibling);
+        }
+      }
+      branch = branch.parentElement;
+      if (branch === document.body) break;
+    }
+
+    document.addEventListener("keydown", onKeyDown);
+    window.requestAnimationFrame(() => {
+      dialog
+        ?.querySelector<HTMLElement>('a[href], button:not([disabled]):not([tabindex="-1"])')
+        ?.focus();
+    });
     return () => {
       document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("keydown", onKeyDown);
+      for (const element of inerted) element.inert = false;
+      window.requestAnimationFrame(() => trigger?.focus());
     };
   }, [open]);
 
   return (
-    <div className="lg:hidden">
+    <div ref={rootRef} className="lg:hidden">
       <button
+        ref={triggerRef}
         type="button"
+        tabIndex={open ? -1 : undefined}
         aria-expanded={open}
         aria-controls={panelId}
         aria-label={open ? "Close menu" : "Open menu"}
-        onClick={() => setOpen((value) => !value)}
+        onClick={() => {
+          if (open) closeMenu();
+          else setOpenPath(pathname);
+        }}
         className="flex size-10 items-center justify-center rounded-lg text-text-invert-muted transition-colors hover:bg-white/5 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
       >
         <MenuIcon open={open} />
       </button>
 
       {open && (
-        <>
+        <div
+          ref={dialogRef}
+          id={panelId}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Main navigation"
+          className="fixed inset-x-0 bottom-0 top-16 z-40"
+        >
           <button
             type="button"
             tabIndex={-1}
             aria-label="Close menu"
-            onClick={() => setOpen(false)}
-            className="fixed inset-x-0 bottom-0 top-16 z-40 cursor-default bg-black/45"
+            onClick={closeMenu}
+            className="absolute inset-0 cursor-default bg-black/45"
           />
           <nav
-            id={panelId}
             aria-label="Mobile main navigation"
-            className="fixed inset-x-0 top-16 z-50 max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-ink-line bg-ink px-5 pb-8 pt-4 shadow-2xl sm:px-8"
+            className="absolute inset-x-0 top-0 z-10 max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-ink-line bg-ink px-5 pb-8 pt-4 shadow-2xl sm:px-8"
           >
             <ul className="divide-y divide-ink-line">
               {items.map((item) => {
@@ -98,7 +165,7 @@ export function MobileNav({
                     <div className="flex items-center">
                       <Link
                         href={item.href}
-                        onClick={() => setOpen(false)}
+                        onClick={closeMenu}
                         aria-current={active ? "page" : undefined}
                         className={`flex-1 py-4 text-base font-medium ${
                           active
@@ -115,7 +182,9 @@ export function MobileNav({
                           type="button"
                           aria-expanded={productsOpen}
                           aria-label={productsOpen ? "Hide product categories" : "Show product categories"}
-                          onClick={() => setProductsOpen((value) => !value)}
+                          onClick={() =>
+                            setProductsOpenPath(productsOpen ? null : pathname)
+                          }
                           className="flex size-11 items-center justify-center rounded-lg text-text-invert-muted hover:bg-white/5 hover:text-white"
                         >
                           <ChevronDownIcon className={`size-4 transition-transform ${productsOpen ? "rotate-180" : ""}`} />
@@ -125,20 +194,22 @@ export function MobileNav({
 
                     {isProducts && productsOpen && (
                       <ul className="grid gap-1 pb-4 sm:grid-cols-2">
-                        {categories.map((category) => (
+                        {categories
+                          .filter((category) => category.productCount > 0)
+                          .map((category) => (
                           <li key={category.slug}>
                             <Link
                               href={`/products/${category.slug}/`}
-                              onClick={() => setOpen(false)}
-                              className="flex items-center justify-between rounded-lg bg-white/[0.04] px-3 py-2.5 text-sm text-text-invert-muted hover:bg-white/[0.08] hover:text-white"
+                              onClick={closeMenu}
+                              className="flex min-h-11 items-center justify-between rounded-lg bg-white/[0.04] px-3 py-2.5 text-sm text-text-invert-muted hover:bg-white/[0.08] hover:text-white"
                             >
                               {category.title}
                               <span className="text-xs text-text-invert-muted/60">
-                                {category.productCount > 0 ? category.productCount : "Soon"}
+                                {category.productCount}
                               </span>
                             </Link>
                           </li>
-                        ))}
+                          ))}
                       </ul>
                     )}
                   </li>
@@ -146,7 +217,7 @@ export function MobileNav({
               })}
             </ul>
           </nav>
-        </>
+        </div>
       )}
     </div>
   );

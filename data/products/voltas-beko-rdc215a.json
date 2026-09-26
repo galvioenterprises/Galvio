@@ -1,0 +1,77 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-beko-rdc215a",
+  "sku": "GAL-RF-1101043",
+  "brand": "Voltas Beko",
+  "model": "RDC215A",
+  "status": "active",
+  "internalCode": "voltas.com: 183-l-5-star-direct-cool-single-door-refrigerator-with-quick-frezze-rdc215a-w0bbrtm0000go-bonita-blue-fresh-box-technology-voltas-beko-a-tata-product",
+  "variants": [
+    {
+      "sku": "GAL-RF-1101043",
+      "internalCode": "voltas.com: 183-l-5-star-direct-cool-single-door-refrigerator-with-quick-frezze-rdc215a-w0bbrtm0000go-bonita-blue-fresh-box-technology-voltas-beko-a-tata-product",
+      "color": "Bonita Blue"
+    },
+    {
+      "sku": "GAL-RF-1100973",
+      "internalCode": "voltas.com: 183-l-5-star-direct-cool-single-door-refrigerator-rdc215a-w0dgrtm0b00go-dark-grey-with-fresh-box-technology-voltas-beko-a-tata-product",
+      "color": "Dark Grey"
+    },
+    {
+      "sku": "GAL-RF-1100974",
+      "internalCode": "voltas.com: 183-l-5-star-direct-cool-single-door-refrigerator-rdc215a-w0bbrtm0000go-bonita-blue-fresh-box-technology-with-quick-frezze-voltas-beko-a-tata-product",
+      "color": "Bonita Blue"
+    },
+    {
+      "sku": "GAL-RF-1101018",
+      "internalCode": "voltas.com: 183-l-5-star-direct-cool-single-door-refrigerator-rdc215a-w0bwrtm0b00go-bonita-wine-fresh-box-and-quick-freeze-technology-with-base-drawer-voltas-beko-a-tata-product-1",
+      "color": "Bonita Wine"
+    }
+  ],
+  "title": "183 L 5 Star Direct Cool Single Door Refrigerator with Quick Frezze (RDC215A)",
+  "description": "Voltas Beko 5-Star Direct Cool Refrigerator delivers top-tier energy efficiency with its 5-star rating. It features Fresh Box Technology for lasting freshness, Quick Freeze for rapid cooling, and adjustable toughened glass shelves for flexible storage. A perfect blend of performance, style, and smart organization for modern households.",
+  "category": "Refrigerator",
+  "subCategory": "Single Door",
+  "mrp": 30890,
+  "sellingPrice": 17690,
+  "availability": "unknown",
+  "condition": "new",
+  "capacity": "183L",
+  "color": "Bonita Blue",
+  "starRating": 5,
+  "highlights": [],
+  "faqs": [],
+  "images": [
+    {
+      "src": "voltas-1101043",
+      "alt": "183 L 5 Star Direct Cool Single Door Refrigerator with Quick Frezze (RDC215A)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101043-2",
+      "alt": "183 L 5 Star Direct Cool Single Door Refrigerator with Quick Frezze (RDC215A)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101043-3",
+      "alt": "183 L 5 Star Direct Cool Single Door Refrigerator with Quick Frezze (RDC215A)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101043-4",
+      "alt": "183 L 5 Star Direct Cool Single Door Refrigerator with Quick Frezze (RDC215A)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101043-5",
+      "alt": "183 L 5 Star Direct Cool Single Door Refrigerator with Quick Frezze (RDC215A)",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

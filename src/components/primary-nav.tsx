@@ -1,5 +1,6 @@
 "use client";
 
+import { useId, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { NavItem } from "@/config/nav";
@@ -22,6 +23,9 @@ export function PrimaryNav({
   categories: CategoryLink[];
 }) {
   const pathname = usePathname();
+  const menuId = useId();
+  const [productsMenuPath, setProductsMenuPath] = useState<string | null>(null);
+  const productsMenuOpen = productsMenuPath === pathname;
 
   function isActive(href: string) {
     if (href === "/") return pathname === "/";
@@ -50,10 +54,39 @@ export function PrimaryNav({
         const hasMenu = item.label === "Products";
 
         return (
-          <div key={item.label} className="group relative">
+          <div
+            key={item.label}
+            className="relative"
+            onMouseEnter={hasMenu ? () => setProductsMenuPath(pathname) : undefined}
+            onMouseLeave={hasMenu ? () => setProductsMenuPath(null) : undefined}
+            onFocusCapture={hasMenu ? () => setProductsMenuPath(pathname) : undefined}
+            onBlurCapture={
+              hasMenu
+                ? (event) => {
+                    if (!event.currentTarget.contains(event.relatedTarget)) {
+                      setProductsMenuPath(null);
+                    }
+                  }
+                : undefined
+            }
+            onKeyDown={
+              hasMenu
+                ? (event) => {
+                    if (event.key === "Escape") {
+                      setProductsMenuPath(null);
+                      event.currentTarget.querySelector<HTMLAnchorElement>("a")?.focus();
+                    }
+                  }
+                : undefined
+            }
+          >
             <Link
               href={item.href}
+              onClick={hasMenu ? () => setProductsMenuPath(null) : undefined}
               aria-current={active ? "page" : undefined}
+              aria-haspopup={hasMenu ? "true" : undefined}
+              aria-expanded={hasMenu ? productsMenuOpen : undefined}
+              aria-controls={hasMenu ? menuId : undefined}
               className={`flex items-center gap-1 border-b-2 px-3.5 py-[1.15rem] text-[0.9375rem] transition-colors ${
                 active
                   ? "border-accent font-medium text-white"
@@ -67,37 +100,42 @@ export function PrimaryNav({
             </Link>
 
             {hasMenu && (
-              <div className="invisible absolute left-0 top-full z-30 w-72 rounded-xl border border-line bg-surface p-2 opacity-0 shadow-lg transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+              <div
+                id={menuId}
+                aria-hidden={!productsMenuOpen}
+                className={`absolute left-0 top-full z-30 w-72 rounded-xl border border-line bg-surface p-2 shadow-lg transition duration-150 ${
+                  productsMenuOpen
+                    ? "visible translate-y-0 opacity-100"
+                    : "invisible -translate-y-1 opacity-0"
+                }`}
+              >
                 {/* The dropdown is the shortcut to one category; this is
                     the way to the whole catalogue, and it is the same
                     place clicking "Products" goes. */}
                 <Link
                   href="/products/"
+                  onClick={() => setProductsMenuPath(null)}
                   className="mb-1 flex items-center justify-between gap-3 rounded-lg border-b border-line px-3 py-2.5 text-sm font-medium text-text hover:bg-canvas"
                 >
                   All products
                   <ArrowRightIcon className="size-3.5 text-accent" />
                 </Link>
 
-                {categories.map((category) => {
-                  const stocked = category.productCount > 0;
-                  return (
+                {categories
+                  .filter((category) => category.productCount > 0)
+                  .map((category) => (
                     <Link
                       key={category.slug}
                       href={`/products/${category.slug}/`}
-                      className={`flex items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-sm hover:bg-canvas ${
-                        stocked ? "text-text" : "text-text-muted"
-                      }`}
+                      onClick={() => setProductsMenuPath(null)}
+                      className="flex min-h-11 items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-sm text-text hover:bg-canvas"
                     >
                       {category.title}
-                      {/* Says where the stock is, so nobody spends a click
-                          discovering an empty shelf. */}
                       <span className="shrink-0 text-xs text-text-faint">
-                        {stocked ? category.productCount : "Soon"}
+                        {category.productCount}
                       </span>
                     </Link>
-                  );
-                })}
+                  ))}
               </div>
             )}
           </div>

@@ -1,0 +1,105 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-beko-rdc215d",
+  "sku": "GAL-RF-1100964",
+  "brand": "Voltas Beko",
+  "model": "RDC215D",
+  "status": "active",
+  "internalCode": "voltas.com: 183-l-2-star-direct-cool-single-door-refrigerator-rdc215d-s0xir0m0000go-hairline-silver-with-fresh-box-technology-and-chiller-zone-voltas-beko-a-tata-product",
+  "variants": [
+    {
+      "sku": "GAL-RF-1100964",
+      "internalCode": "voltas.com: 183-l-2-star-direct-cool-single-door-refrigerator-rdc215d-s0xir0m0000go-hairline-silver-with-fresh-box-technology-and-chiller-zone-voltas-beko-a-tata-product",
+      "color": "Hairline Silver"
+    },
+    {
+      "sku": "GAL-RF-1100837",
+      "internalCode": "voltas.com: 183-l-2-star-direct-cool-single-door-refrigerator-rdc215d-s0rfr0m0000go-fressia-ruby-voltas-beko-a-tata-product",
+      "color": "Fressia Ruby"
+    },
+    {
+      "sku": "GAL-RF-1100965",
+      "internalCode": "voltas.com: 183-l-2-star-direct-cool-single-door-refrigerator-rdc215d-s0xer0m0000go-hairline-blue-with-fresh-box-technology-and-chiller-zone-voltas-beko-a-tata-product",
+      "color": "Hairline Blue"
+    },
+    {
+      "sku": "GAL-RF-1100966",
+      "internalCode": "voltas.com: 183-l-2-star-direct-cool-single-door-refrigerator-rdc215d-s0wbr0m0000go-stella-blue-with-fresh-box-technology-and-chiller-zone-voltas-beko-a-tata-product",
+      "color": "Stella Blue"
+    },
+    {
+      "sku": "GAL-RF-1100967",
+      "internalCode": "voltas.com: 183-l-2-star-direct-cool-single-door-refrigerator-rdc215d-s0wsr0m0000go-stella-wine-with-fresh-box-technology-and-chiller-zone-voltas-beko-a-tata-product",
+      "color": "Stella Wine"
+    },
+    {
+      "sku": "GAL-RF-1100990",
+      "internalCode": "voltas.com: 183-l-2-star-direct-cool-single-door-refrigerator-rdc215d-s0xwr0m0000go-wine-crisper-humidity-controller-voltas-beko-a-tata-product",
+      "color": "Wine"
+    }
+  ],
+  "title": "183 L 2 Star Direct Cool Single Door Refrigerator (RDC215D)",
+  "description": "The Voltas Beko 183 L 2-Star Direct Cool Single Door Refrigerator features Fresh Box Technology for enhanced produce freshness and a dedicated Chiller Zone for optimal cooling performance. Its adjustable toughened glass shelves offer convenient, flexible storage. Designed for everyday efficiency in a sleek Hairline Silver finish Model No.: 1100964 / RDC215D / S0XIR0M0000GO Product Color: Hairline Silver Gross Volume (L): 183 L 2 Star Energy Rating Crisper Humidity Controller Flexlift™ Door Shelf Chiller Zone Adjustable Toughened Glass Shelves Egg Tray Ice Tray Made in India",
+  "category": "Refrigerator",
+  "subCategory": "Single Door",
+  "mrp": 25190,
+  "sellingPrice": 14150,
+  "availability": "unknown",
+  "condition": "new",
+  "capacity": "183L",
+  "color": "Hairline Silver",
+  "starRating": 2,
+  "highlights": [],
+  "faqs": [],
+  "images": [
+    {
+      "src": "voltas-1100964",
+      "alt": "183 L 2 Star Direct Cool Single Door Refrigerator (RDC215D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100964-2",
+      "alt": "183 L 2 Star Direct Cool Single Door Refrigerator (RDC215D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100964-3",
+      "alt": "183 L 2 Star Direct Cool Single Door Refrigerator (RDC215D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100964-4",
+      "alt": "183 L 2 Star Direct Cool Single Door Refrigerator (RDC215D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100964-5",
+      "alt": "183 L 2 Star Direct Cool Single Door Refrigerator (RDC215D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100964-6",
+      "alt": "183 L 2 Star Direct Cool Single Door Refrigerator (RDC215D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100964-7",
+      "alt": "183 L 2 Star Direct Cool Single Door Refrigerator (RDC215D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100964-8",
+      "alt": "183 L 2 Star Direct Cool Single Door Refrigerator (RDC215D)",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

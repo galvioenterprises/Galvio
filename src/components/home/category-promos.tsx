@@ -6,19 +6,18 @@ import type { HomeCollection } from "./types";
 
 const THEMES = [
   {
-    card: "border-[#cfe8f8] bg-[linear-gradient(120deg,#edf9ff_0%,#d7effa_55%,#c4e5f2_100%)] text-ink",
-    eyebrow: "text-[#056692]",
-    button: "bg-ink text-white hover:bg-ink-soft",
-    wash: "bg-[radial-gradient(circle_at_77%_45%,rgba(255,255,255,0.9),transparent_48%)]",
+    card: "bg-[radial-gradient(70%_90%_at_78%_55%,#1d4ed866_0%,transparent_70%),linear-gradient(125deg,#020817_0%,#0b2552_100%)]",
+    accent: "#93c5fd",
+    tagline: "Stay cool, spend less",
   },
   {
-    card: "border-ink-line bg-[linear-gradient(120deg,#07111f_0%,#0d2234_58%,#153a4d_100%)] text-white",
-    eyebrow: "text-[#63c7f2]",
-    button: "border border-white/25 bg-white/10 text-white hover:bg-white/15",
-    wash: "bg-[radial-gradient(circle_at_80%_42%,rgba(70,167,205,0.28),transparent_50%)]",
+    card: "bg-[radial-gradient(70%_90%_at_78%_55%,#0d948866_0%,transparent_70%),linear-gradient(125deg,#021413_0%,#0b3b3a_100%)]",
+    accent: "#5eead4",
+    tagline: "Big air, small bills",
   },
 ] as const;
 
+/** The two large category banners under the hero. */
 export function CategoryPromos({ collections }: { collections: HomeCollection[] }) {
   if (collections.length === 0) return null;
 
@@ -29,46 +28,47 @@ export function CategoryPromos({ collections }: { collections: HomeCollection[] 
           {collections.slice(0, 2).map((collection, index) => {
             const theme = THEMES[index % THEMES.length];
             return (
-              <article
+              <Link
                 key={collection.slug}
-                className={`relative min-h-[270px] overflow-hidden rounded-2xl border px-7 py-8 sm:min-h-[320px] sm:px-10 sm:py-10 ${theme.card}`}
+                href={`/products/${collection.slug}/`}
+                className={`group relative isolate flex min-h-[340px] overflow-hidden rounded-3xl p-8 text-white shadow-[0_24px_60px_-30px_rgba(2,8,23,0.8)] transition-transform duration-300 hover:-translate-y-1 sm:min-h-[380px] sm:p-10 ${theme.card}`}
               >
-                <div aria-hidden className={`absolute inset-0 ${theme.wash}`} />
-
-                <div className="relative z-10 max-w-[55%] sm:max-w-[52%]">
-                  <p className={`eyebrow ${theme.eyebrow}`}>Voltas catalogue</p>
-                  <h2 className="mt-3 text-[1.75rem] font-semibold leading-[1.08] tracking-[-0.025em] sm:text-[2.25rem]">
-                    Explore {collection.title}
-                  </h2>
-                  <p className="mt-3 text-sm leading-relaxed opacity-70">
-                    {collection.productCount} listed {collection.productCount === 1 ? "model" : "models"}
+                <div className="relative z-10 flex max-w-[52%] flex-col">
+                  <p className="text-xs font-semibold uppercase tracking-[0.14em]" style={{ color: theme.accent }}>
+                    {theme.tagline}
                   </p>
-                  <Link
-                    href={`/products/${collection.slug}/`}
-                    className={`mt-7 inline-flex h-11 items-center gap-2 rounded-full px-5 text-sm font-medium transition-colors ${theme.button}`}
-                  >
-                    Browse category
+                  <h2 className="mt-3 text-[1.875rem] font-semibold leading-[1.05] tracking-[-0.03em] sm:text-[2.5rem]">
+                    {collection.title}
+                  </h2>
+                  <p className="mt-3 text-sm text-white/65">
+                    <strong className="text-white">{collection.productCount}</strong>{" "}
+                    {collection.productCount === 1 ? "model" : "models"} to compare
+                  </p>
+                  {collection.tags.length > 0 && (
+                    <ul className="mt-4 flex flex-wrap gap-2">
+                      {collection.tags.slice(0, 3).map((tag) => (
+                        <li key={tag} className="rounded-full border border-white/15 bg-white/5 px-2.5 py-1 text-xs text-white/80">
+                          {tag}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  <span className="mt-auto inline-flex w-fit items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-ink transition-transform group-hover:translate-x-1">
+                    Shop {collection.title.toLowerCase()}
                     <ArrowRightIcon className="size-4" />
-                  </Link>
+                  </span>
                 </div>
 
-                <div className="pointer-events-none absolute inset-y-3 right-[-7%] flex w-[58%] items-center justify-center sm:right-0 sm:w-[55%]">
+                <span aria-hidden className="absolute bottom-8 right-[8%] h-8 w-[40%] rounded-[50%] bg-black/50 blur-2xl" />
+                <div className="pointer-events-none absolute inset-y-6 right-[3%] flex w-[50%] items-center justify-center [&>picture]:contents">
                   <ProductImage
                     src={collection.image}
                     alt=""
-                    sizes="(min-width: 1024px) 42vw, 55vw"
-                    className="max-h-[260px] w-full scale-[1.15] object-contain drop-shadow-[0_20px_24px_rgba(0,0,0,0.18)] sm:max-h-[300px] sm:scale-125"
+                    sizes="(min-width: 1024px) 34vw, 55vw"
+                    className="max-h-full w-full object-contain drop-shadow-[0_24px_30px_rgba(0,0,0,0.45)] transition-transform duration-500 group-hover:scale-[1.04]"
                   />
                 </div>
-
-                {collection.tags.length > 0 && (
-                  <ul className="absolute inset-x-0 bottom-0 z-10 flex min-h-12 flex-wrap items-center gap-x-5 gap-y-1 border-t border-current/10 bg-white/10 px-7 py-3 text-[0.6875rem] font-medium backdrop-blur-sm sm:px-10">
-                    {collection.tags.slice(0, 3).map((tag) => (
-                      <li key={tag}>{tag}</li>
-                    ))}
-                  </ul>
-                )}
-              </article>
+              </Link>
             );
           })}
         </div>

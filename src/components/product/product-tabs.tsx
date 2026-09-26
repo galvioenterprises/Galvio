@@ -45,18 +45,18 @@ export function ProductTabs({ sections }: { sections: TabSection[] }) {
   return (
     <nav
       aria-label="Product sections"
-      className="sticky top-0 z-20 border-y border-line bg-surface/95 backdrop-blur"
+      className="relative sticky top-[4.75rem] z-20 overflow-hidden rounded-2xl border border-line bg-surface/95 p-1.5 shadow-[0_8px_30px_rgba(17,19,24,0.06)] backdrop-blur after:pointer-events-none after:absolute after:inset-y-0 after:right-0 after:w-8 after:bg-gradient-to-l after:from-surface after:to-transparent sm:after:hidden"
     >
-      <ul className="mx-auto flex max-w-[1304px] gap-1 px-5 sm:px-8 overflow-x-auto">
+      <ul className="flex snap-x gap-1 overflow-x-auto pr-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:pr-0">
         {sections.map((section) => (
-          <li key={section.id}>
+          <li key={section.id} className="shrink-0 snap-start">
             <a
               href={`#${section.id}`}
               aria-current={active === section.id ? "true" : undefined}
-              className={`inline-block whitespace-nowrap border-b-2 px-3 py-3.5 text-sm transition-colors ${
+              className={`inline-flex h-11 items-center whitespace-nowrap rounded-xl px-4 text-sm transition-colors ${
                 active === section.id
-                  ? "border-accent font-medium text-text"
-                  : "border-transparent text-text-muted hover:text-text"
+                  ? "bg-ink font-semibold text-white shadow-sm"
+                  : "text-text-muted hover:bg-canvas hover:text-text"
               }`}
             >
               {section.label}

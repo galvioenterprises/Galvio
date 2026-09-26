@@ -25,7 +25,7 @@ The Google products this project actually needs are:
 | Analytics 4 (GA4) | Retail and bulk funnel measurement | 1 |
 | Business Profile (GBP) | The showroom's map/local listing | 1 |
 | Merchant Center | Free **local** product listings tied to the showroom | 1 |
-| Merchant Center (online feed) | Free online listings, requires checkout | 2 |
+| Merchant Center (online feed) | Free online listings; requires a working COD order-submission flow | 1 |
 | Google Ads | Paid acquisition, Local Inventory Ads | 2 |
 
 ---
@@ -73,7 +73,7 @@ recoverable.
 
 ### 1.3 GST and business documents
 
-Merchant Center, Razorpay (Phase 2) and B2B bulk buyers will all ask for
+Merchant Center, a future payment gateway and B2B bulk buyers will all ask for
 these, and gathering them takes longer than expected:
 
 - GSTIN
@@ -99,6 +99,10 @@ these, and gathering them takes longer than expected:
    anything else.
 6. Set SSL/TLS mode to Full (strict) and enable Always Use HTTPS.
 7. Add a redirect rule sending `www.galvioenterprises.com` to the apex.
+8. Create the production D1 database, replace the placeholder database ID in
+   `wrangler.jsonc`, and apply every migration with `pnpm db:migrate`.
+9. Create a Cloudflare Access application covering `/admin/*` and
+   `/api/admin/*`, restricted to the approved Galvio and distributor emails.
 
 Do not change the nameservers first and configure afterwards.
 
@@ -130,26 +134,69 @@ so those pages are launch-blocking, not nice-to-have.
 
 ### 2.5 WhatsApp Business
 
-Install the WhatsApp Business app on the number that will handle enquiries,
-set the business profile, hours and catalogue-less greeting message. Send me
-the number in E.164 form without the `+` (e.g. `919876543210`) — it goes
-into every product page's enquiry link.
+Install the WhatsApp Business app on the number that will handle retail COD
+requests and support, set the business profile, hours and greeting message.
+Send me the number in E.164 form without the `+` (e.g. `919876543210`). It is a
+public destination, but it must be monitored before it is placed in the order
+flow.
 
-Decide now whether retail and bulk enquiries go to the **same** number. My
-recommendation is separate numbers, because bulk enquiries need a
-salesperson and retail needs speed, and mixing them makes both worse.
+Decide now whether retail COD orders, support and bulk enquiries go to the
+**same** number. My recommendation is separate retail/support and bulk queues,
+because a cart request needs rapid acknowledgement and operational follow-up.
+WhatsApp may be the initial order-intake handoff, but an outgoing pre-filled
+message is not proof that Galvio received or accepted the request.
 
 ### 2.6 Cloudflare Turnstile
 
-Create a Turnstile widget when the direct RFQ Worker is built. The current
-bulk-order page prepares a message in the visitor's email/WhatsApp client and
-has no submission endpoint to protect. The future site key is public; the
-Worker secret must never be pasted into chat or committed.
+The COD Worker has server-side validation and rate limits. Add Turnstile before
+paid acquisition or if abuse appears; add it from the start to any direct RFQ
+submission endpoint. The site key is public, but the Worker secret must never be
+pasted into chat or committed.
 
 ### 2.7 Sentry
 
 Free tier account, a project of type "Next.js". The DSN is public and goes
 in the repo.
+
+### 2.8 COD order operations
+
+The distributor owns inventory and nationwide shipping; Galvio owns the
+website and customer-facing request flow. The secure Worker/D1 request path is
+implemented. Before enabling the final **Place COD Order** action in
+production:
+
+- Configure the production D1 ID, `ADMIN_EMAILS`, `CODE_PEPPER`, `ADMIN_API_TOKEN`,
+  transactional notifications and Cloudflare Access.
+- Add the distributor's login, test that they can update inventory through the
+  hosted admin, and confirm who reconciles failed notifications or duplicate
+  customer contacts.
+- Record the distributor contact who confirms current stock/price and the
+  customer-response SLA.
+- Document the customer fields required for fulfilment, their retention period
+  and who is allowed to access them.
+
+The approved public commercial policy is:
+
+- nationwide delivery;
+- free delivery;
+- delivery in 2–3 days after distributor confirmation;
+- COD up to ₹50,000 per request;
+- seven-day qualifying exchange under the published conditions; and
+- the documented installation inclusions/extras.
+
+Phone, WhatsApp, exact showroom address and verified hours still require real
+business input and must not be guessed.
+
+**Add to cart does not assert stock.** For products whose availability is
+`unknown`, checkout must explain that the order is placed with confirmation
+pending. Only a later distributor confirmation verifies stock, price and
+serviceability. Do not show “Order confirmed” immediately after form submission.
+
+Payment-gateway onboarding and online payment are later work. The dormant
+Cashfree path stays behind `business.onlinePayments = false`. Do not collect
+card or UPI details, display EMI/payment claims, or configure live gateway keys
+until the gateway, webhook verification, settlement owner and refund process
+are approved and tested.
 
 ---
 
@@ -189,6 +236,7 @@ keeps identity-complete but commercially incomplete rows as invisible drafts.
 | Selling price | yes | Rupees, GST inclusive, ≤ MRP |
 | GST rate | no | Percent, only from a verified commercial source |
 | Availability | yes | unknown / in stock / out of stock / preorder / backorder |
+| Stock count | no | Distributor-owned; blank unless confirmed, never derived from Voltas availability |
 | Condition | yes | new / refurbished / used |
 | Installation included | no | true or false, only when stated |
 | Warranty | no | Months, only when stated |
@@ -222,9 +270,11 @@ the AVIF/WebP variants.
 
 ### 3.5 Policy pages
 
-Draft text for: return and refund policy, shipping and delivery policy,
-warranty and installation policy, privacy policy, terms of service. These
-are Merchant Center prerequisites and B2B buyers read them.
+Publish final text for: seven-day qualifying exchange, nationwide free
+delivery, delivery in 2–3 days after confirmation, COD placement/confirmation and
+cancellation, warranty and the approved installation inclusions/extras,
+privacy, and terms of service. The COD cap is ₹50,000. These are Merchant Center
+prerequisites and B2B buyers read them.
 
 ---
 
@@ -235,7 +285,7 @@ key, GBP place ID, the WhatsApp number.
 
 Secret, and only ever entered in the provider's own dashboard or as a
 Cloudflare secret: Turnstile secret key, Cloudflare API tokens, Google
-service-account JSON, Razorpay keys, Figma personal/session tokens, browser
+service-account JSON, payment-gateway keys, Figma personal/session tokens, browser
 cookies, and any bank or GST portal credentials.
 
 ---
@@ -251,11 +301,16 @@ Coming-soon page  ──┘                │    │
 Product data packet ─────────────────┼────┤
 Photography         ─────────────────┤    │
 Figma / brand       ─────────────────┘    │
+Distributor admin identity ──────────┐    │
+D1 + notification configuration ─────┴────┤
                                           │
-                          Merchant Center local listings
+                    COD launch + Merchant Center listings
 ```
 
 The first deploy does not wait for any of the content. Ship the coming-soon
 page to the real domain as soon as the nameservers resolve, so Search
 Console verification and indexing start running in the background while the
-catalogue is still being assembled.
+catalogue is still being assembled. Public COD ordering does wait for the
+production D1/API configuration, protected distributor admin, monitored
+notifications and truthful stock/price operation described above. Online
+payment does not block this release.

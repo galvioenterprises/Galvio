@@ -16,10 +16,15 @@ import {
   WrenchIcon,
 } from "@/components/icons";
 
+const hasPublicStoreAddress = Boolean(
+  site.address.street && site.address.locality,
+);
+
 export const metadata: Metadata = {
   title: "Our Store",
   description: `Find the ${site.name} showroom contact details and confirm a visit to discuss listed ${business.primaryBrand} appliances.`,
   alternates: { canonical: "/stores/" },
+  robots: { index: hasPublicStoreAddress, follow: true },
 };
 
 /**
@@ -70,8 +75,12 @@ export default function StoresPage() {
 
       <PageHeader
         eyebrow="Visit us"
-        title="Come and see it running"
-        intro="Photographs cannot tell you how loud an air conditioner is, or whether a fridge door clears your counter. The showroom can."
+        title={hasAddress ? "Visit the Galvio showroom" : "Showroom details"}
+        intro={
+          hasAddress
+            ? "Plan a visit to discuss product choices, delivery and the next steps with the Galvio team."
+            : "Galvio operates from a physical showroom. Its verified public address and opening hours have not been supplied for this site yet."
+        }
       />
 
       <Container className="pb-24">
@@ -89,28 +98,25 @@ export default function StoresPage() {
                   </p>
                 ) : (
                   <p className="mt-2 text-[0.9375rem] leading-relaxed text-text-muted">
-                    The showroom address goes live here shortly. In the meantime,
-                    message us and we will share the location directly.
+                    Contact Galvio directly if you need to arrange a visit.
                   </p>
                 )}
               </div>
             </div>
 
-            <dl className="mt-8 border-t border-line pt-6">
-              <dt className="text-sm font-semibold">Opening hours</dt>
-              <dd className="mt-3 space-y-2 text-sm">
-                {business.hours.length > 0 ? (
-                  business.hours.map((slot) => (
+            {business.hours.length > 0 && (
+              <dl className="mt-8 border-t border-line pt-6">
+                <dt className="text-sm font-semibold">Opening hours</dt>
+                <dd className="mt-3 space-y-2 text-sm">
+                  {business.hours.map((slot) => (
                     <div key={slot.days} className="flex justify-between gap-4">
                       <span className="text-text-muted">{slot.days}</span>
                       <span className="font-medium">{slot.time}</span>
                     </div>
-                  ))
-                ) : (
-                  <p className="text-text-muted">Contact the showroom to confirm today&apos;s hours.</p>
-                )}
-              </dd>
-            </dl>
+                  ))}
+                </dd>
+              </dl>
+            )}
 
             <div className="mt-8 flex flex-wrap gap-3 border-t border-line pt-6">
               {directionsUrl && (
@@ -128,12 +134,16 @@ export default function StoresPage() {
                 href={generalEnquiryLink()}
                 className="inline-flex h-11 items-center gap-2 rounded-xl border border-line px-5 text-sm font-medium transition-colors hover:border-line-strong"
               >
-                <WhatsAppIcon className="size-4" />
-                Message us
+                {site.contact.whatsapp ? (
+                  <WhatsAppIcon className="size-4" />
+                ) : (
+                  <MailIcon className="size-4" />
+                )}
+                {site.contact.whatsapp ? "Message us" : "Email us"}
               </a>
               {site.contact.phone && (
                 <a
-                  href={`tel:${site.contact.phone}`}
+                  href={`tel:${site.contact.phone.replace(/\s/g, "")}`}
                   className="inline-flex h-11 items-center gap-2 rounded-xl border border-line px-5 text-sm font-medium transition-colors hover:border-line-strong"
                 >
                   <PhoneIcon className="size-4" />
@@ -146,16 +156,13 @@ export default function StoresPage() {
           <div className="space-y-5">
             <div className="rounded-2xl bg-ink p-8 text-text-invert">
               <p className="text-[0.9375rem] font-semibold text-white">
-                What is worth the trip
+                Prepare for a useful visit
               </p>
               <ul className="mt-4 space-y-3.5 text-[0.8125rem] leading-relaxed text-text-invert-muted">
-                <li>Hear how loud an air conditioner is at low and high fan speed.</li>
-                <li>Measure a refrigerator against the tape you brought.</li>
-                <li>
-                  Compare two models side by side instead of across two browser
-                  tabs.
-                </li>
-                <li>Leave with a written quote you can think about.</li>
+                <li>Bring the model names or shortlist you want to discuss.</li>
+                <li>Note the room, doorway or installation-space measurements.</li>
+                <li>Bring the delivery pincode and any access constraints.</li>
+                <li>Confirm stock, delivery and installation terms before ordering.</li>
               </ul>
             </div>
 
@@ -168,7 +175,7 @@ export default function StoresPage() {
               </p>
               <p className="mt-2 text-[0.8125rem] leading-relaxed text-text-muted">
                 Bought from us and something is not right? Keep the invoice and
-                manufacturer documents, then contact the showroom so we can
+                manufacturer documents, then contact Galvio support so we can
                 confirm the support route available for that model.
               </p>
               <Link

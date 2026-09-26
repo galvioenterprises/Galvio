@@ -1,0 +1,67 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-beko-rff265d",
+  "sku": "GAL-RF-1100828",
+  "brand": "Voltas Beko",
+  "model": "RFF265D",
+  "status": "active",
+  "internalCode": "voltas.com: 228-l-2-star-made-in-india-frost-free-double-door-refrigerator-rff265d-w0xir0i0000go-brushed-silver-neo-frost-dual-cooling-technology-voltas-beko-a-tata-product",
+  "title": "228 L 2 Star Made in India Frost Free Double Door Refrigerator (RFF265D)",
+  "description": "The Voltas Beko 228 L 2-Star Frost Free Double Door Refrigerator offers efficient cooling with Neo Frost Dual Cooling Technology, ensuring faster, even cooling in both compartments. Made in India, it features adjustable toughened glass shelves, flexible storage, and a premium brushed silver finish. Reliable, convenient, and designed for everyday freshness",
+  "category": "Refrigerator",
+  "subCategory": "Double Door",
+  "mrp": 35990,
+  "sellingPrice": 25750,
+  "availability": "unknown",
+  "condition": "new",
+  "capacity": "228L",
+  "color": "Brushed Silver",
+  "starRating": 2,
+  "highlights": [],
+  "faqs": [],
+  "images": [
+    {
+      "src": "voltas-1100828",
+      "alt": "228 L 2 Star Made in India Frost Free Double Door Refrigerator (RFF265D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100828-2",
+      "alt": "228 L 2 Star Made in India Frost Free Double Door Refrigerator (RFF265D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100828-3",
+      "alt": "228 L 2 Star Made in India Frost Free Double Door Refrigerator (RFF265D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100828-4",
+      "alt": "228 L 2 Star Made in India Frost Free Double Door Refrigerator (RFF265D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100828-5",
+      "alt": "228 L 2 Star Made in India Frost Free Double Door Refrigerator (RFF265D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100828-6",
+      "alt": "228 L 2 Star Made in India Frost Free Double Door Refrigerator (RFF265D)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100828-7",
+      "alt": "228 L 2 Star Made in India Frost Free Double Door Refrigerator (RFF265D)",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

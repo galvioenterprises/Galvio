@@ -1,0 +1,87 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-beko-rdc215b",
+  "sku": "GAL-RF-1101042",
+  "brand": "Voltas Beko",
+  "model": "RDC215B",
+  "status": "active",
+  "internalCode": "voltas.com: 183-l-4-star-direct-cool-single-door-refrigerator-rdc215b-w0bbr0m0000g-bonita-blue-voltas-beko-a-tata-product",
+  "variants": [
+    {
+      "sku": "GAL-RF-1101042",
+      "internalCode": "voltas.com: 183-l-4-star-direct-cool-single-door-refrigerator-rdc215b-w0bbr0m0000g-bonita-blue-voltas-beko-a-tata-product",
+      "color": "Bonita Blue"
+    },
+    {
+      "sku": "GAL-RF-1100816",
+      "internalCode": "voltas.com: 183-l-4-star-direct-cool-single-door-refrigerator-rdc215b-w0bbr0m0000go-bonita-blue-fresh-box-technology-voltas-beko-a-tata-product",
+      "color": "Dahlia Blue"
+    },
+    {
+      "sku": "GAL-RF-1100849",
+      "internalCode": "voltas.com: 183-l-4-star-direct-cool-refrigerator-with-base-drawer-rdc215b-w0fwe0m0b00go-fairy-flower-wine-refrigerator-with-base-drawer-voltas-beko-a-tata-product",
+      "color": "Fairy Flower Wine"
+    },
+    {
+      "sku": "GAL-RF-1100901",
+      "internalCode": "voltas.com: 183-l-4-star-direct-cool-single-door-refrigerator-rdc215b-w0fbr0m0b00go-fairy-flower-blue-voltas-beko-a-tata-product",
+      "color": "Fairy Flower Blue"
+    },
+    {
+      "sku": "GAL-RF-1100971",
+      "internalCode": "voltas.com: 183-l-4-star-direct-cool-single-door-refrigerator-rdc215b-w0dgr0m0b00go-dark-grey-with-fresh-box-technology-voltas-beko-a-tata-product",
+      "color": "Dark Grey"
+    },
+    {
+      "sku": "GAL-RF-1101017",
+      "internalCode": "voltas.com: 183-l-4-star-direct-cool-single-door-refrigerator-rdc215b-w0bwr0m0b00go-bonita-wine-fresh-box-technology-with-base-drawer-voltas-beko-a-tata-product",
+      "color": "Bonita Wine"
+    }
+  ],
+  "title": "183 L 4 Star Direct Cool Single Door Refrigerator (RDC215B)",
+  "description": "Voltas Beko 4-Star Direct Cool Refrigerator features Fresh Box Technology for enhanced freshness, a crisper humidity controller to maintain optimal moisture levels, and adjustable toughened glass shelves for flexible storage. With a 4-star energy rating, it ensures efficient cooling and reduced power consumption perfect for modern, space-conscious homes.",
+  "category": "Refrigerator",
+  "subCategory": "Single Door",
+  "mrp": 27890,
+  "sellingPrice": 16950,
+  "availability": "unknown",
+  "condition": "new",
+  "capacity": "183L",
+  "color": "Bonita Blue",
+  "starRating": 4,
+  "highlights": [],
+  "faqs": [],
+  "images": [
+    {
+      "src": "voltas-1101042",
+      "alt": "183 L 4 Star Direct Cool Single Door Refrigerator (RDC215B)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101042-2",
+      "alt": "183 L 4 Star Direct Cool Single Door Refrigerator (RDC215B)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101042-3",
+      "alt": "183 L 4 Star Direct Cool Single Door Refrigerator (RDC215B)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101042-4",
+      "alt": "183 L 4 Star Direct Cool Single Door Refrigerator (RDC215B)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101042-5",
+      "alt": "183 L 4 Star Direct Cool Single Door Refrigerator (RDC215B)",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

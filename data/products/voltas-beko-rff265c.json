@@ -1,0 +1,74 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-beko-rff265c",
+  "sku": "GAL-RF-1100907",
+  "brand": "Voltas Beko",
+  "model": "RFF265C",
+  "status": "active",
+  "internalCode": "voltas.com: 228-l-3-star-frost-free-double-door-refrigerator-rff265c-wpxir0i0000go-brushed-silver-with-pro-smart-inverter-compressor-voltas-beko-a-tata-product",
+  "title": "228 L 3 Star Frost Free Double Door Refrigerator (RFF265C)",
+  "description": "The Voltas Beko 228 L 3-Star Frost Free Double Door Refrigerator features a ProSmart Inverter Compressor for efficient, quiet, and long-lasting cooling. It comes with adjustable toughened glass shelves for flexible storage and maintains consistent freshness throughout. Finished in elegant Brushed Silver, it’s designed for reliable performance Model No.: 1100907 / RFF265C/WPXIR0I0000GO Product Color: Brushed Silver Energy Rating: 3 Star Gross Volume (L): 228 Special Feature Inverter Compressor Multi Door Top Mounted Freezer Toughened Glass Frost Free Door Alarm Door Lock",
+  "category": "Refrigerator",
+  "subCategory": "Double Door",
+  "mrp": 39390,
+  "sellingPrice": 27050,
+  "availability": "unknown",
+  "condition": "new",
+  "capacity": "228L",
+  "color": "Brushed Silver",
+  "starRating": 3,
+  "inverter": true,
+  "highlights": [],
+  "faqs": [],
+  "images": [
+    {
+      "src": "voltas-1100907",
+      "alt": "228 L 3 Star Frost Free Double Door Refrigerator (RFF265C)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100907-2",
+      "alt": "228 L 3 Star Frost Free Double Door Refrigerator (RFF265C)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100907-3",
+      "alt": "228 L 3 Star Frost Free Double Door Refrigerator (RFF265C)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100907-4",
+      "alt": "228 L 3 Star Frost Free Double Door Refrigerator (RFF265C)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100907-5",
+      "alt": "228 L 3 Star Frost Free Double Door Refrigerator (RFF265C)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100907-6",
+      "alt": "228 L 3 Star Frost Free Double Door Refrigerator (RFF265C)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100907-7",
+      "alt": "228 L 3 Star Frost Free Double Door Refrigerator (RFF265C)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100907-8",
+      "alt": "228 L 3 Star Frost Free Double Door Refrigerator (RFF265C)",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

@@ -1,0 +1,85 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-beko-rdc240c",
+  "sku": "GAL-RF-1100975",
+  "brand": "Voltas Beko",
+  "model": "RDC240C",
+  "status": "active",
+  "internalCode": "voltas.com: 208-l-3-star-direct-cool-single-door-refrigerator-rdc240c-w0bwr0m0b00go-bonita-wine-with-fresh-box-technology-chiller-zone-and-base-drawer-voltas-beko-a-tata-product",
+  "variants": [
+    {
+      "sku": "GAL-RF-1100975",
+      "internalCode": "voltas.com: 208-l-3-star-direct-cool-single-door-refrigerator-rdc240c-w0bwr0m0b00go-bonita-wine-with-fresh-box-technology-chiller-zone-and-base-drawer-voltas-beko-a-tata-product",
+      "color": "Bonita Wine"
+    },
+    {
+      "sku": "GAL-RF-1101382",
+      "internalCode": "voltas.com: 208-l-3-star-direct-cool-single-door-refrigerator-rdc240c-w0rbr0mhb00go-rainy-blue-voltas-beko-a-tata-product",
+      "color": "Rainy Blue"
+    }
+  ],
+  "title": "208 L 3 Star Direct Cool Single Door Refrigerator (RDC240C)",
+  "description": "The Voltas Beko 208 L 3‑Star Direct Cool Single Door Refrigerator features Fresh Box Technology to keep fruits and vegetables crisp, along with a dedicated Chiller Zone for enhanced cooling. Its Base Drawer adds extra space for storing non‑refrigerated items, while adjustable toughened glass shelves offer flexible storage. Designed for everyday freshness in a stylish Bonita Wine finish",
+  "category": "Refrigerator",
+  "subCategory": "Single Door",
+  "mrp": 29590,
+  "sellingPrice": 18790,
+  "availability": "unknown",
+  "condition": "new",
+  "capacity": "208L",
+  "color": "Bonita Wine",
+  "starRating": 3,
+  "highlights": [],
+  "faqs": [],
+  "images": [
+    {
+      "src": "voltas-1100975",
+      "alt": "208 L 3 Star Direct Cool Single Door Refrigerator (RDC240C)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100975-2",
+      "alt": "208 L 3 Star Direct Cool Single Door Refrigerator (RDC240C)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100975-3",
+      "alt": "208 L 3 Star Direct Cool Single Door Refrigerator (RDC240C)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100975-4",
+      "alt": "208 L 3 Star Direct Cool Single Door Refrigerator (RDC240C)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100975-5",
+      "alt": "208 L 3 Star Direct Cool Single Door Refrigerator (RDC240C)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100975-6",
+      "alt": "208 L 3 Star Direct Cool Single Door Refrigerator (RDC240C)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100975-7",
+      "alt": "208 L 3 Star Direct Cool Single Door Refrigerator (RDC240C)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100975-8",
+      "alt": "208 L 3 Star Direct Cool Single Door Refrigerator (RDC240C)",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

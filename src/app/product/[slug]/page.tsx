@@ -1,29 +1,31 @@
 import type { Metadata } from "next";
+import { BADGE_IDS } from "@/config/badges";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { site } from "@/config/site";
+import { business } from "@/config/business";
 import { categories } from "@/config/categories";
 import {
   getAllProducts,
   getProductBySlug,
   getProductsByCategory,
 } from "@/lib/products";
-import { discountPercent } from "@/lib/pricing";
 import { formatMonths } from "@/lib/highlights";
 import { formatPrice } from "@/lib/format";
 import { serializeJsonLd } from "@/lib/json-ld";
 import { resolveProductImageUrl } from "@/lib/product-images";
-import { buyNowLink, productEnquiryLink } from "@/lib/whatsapp";
-import { AddToCartButton } from "@/components/add-to-cart-button";
 import type { Product } from "@/lib/product-schema";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Container } from "@/components/container";
-import { ProductCard } from "@/components/product-card";
+import { MerchBadge, ProductCard } from "@/components/product-card";
 import { ProductGallery } from "@/components/product-gallery";
 import { ProductTabs, type TabSection } from "@/components/product/product-tabs";
 import { FaqAccordion } from "@/components/product/faq-accordion";
 import { PincodeCheck } from "@/components/product/pincode-check";
-import { StickyBuyBar } from "@/components/product/sticky-buy-bar";
+import { ProductPurchasePanel } from "@/components/product/purchase-panel";
+import { ProductReviews, ReviewBadge } from "@/components/product/product-reviews";
+import { SaveToggle } from "@/components/card-toggles";
+import { RecentlyViewed, RecordView } from "@/components/recently-viewed";
 import {
   DeliveryAndInstallation,
   Overview,
@@ -33,9 +35,9 @@ import {
 } from "@/components/product/product-sections";
 import {
   BadgeIcon,
+  CreditCardIcon,
   PhoneIcon,
   PinIcon,
-  ShieldCheckIcon,
   StarIcon,
   TruckIcon,
 } from "@/components/icons";
@@ -83,14 +85,6 @@ export async function generateMetadata({
     },
   };
 }
-
-const AVAILABILITY_LABEL: Record<Product["availability"], string> = {
-  unknown: "Confirm availability",
-  in_stock: "In stock",
-  out_of_stock: "Out of stock",
-  preorder: "Available to pre-order",
-  backorder: "On backorder",
-};
 
 /** schema.org availability URLs, which is what Google reads — not our
  *  internal snake_case values. */
@@ -149,13 +143,7 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
   if (!product) notFound();
 
   const category = categories.find((c) => c.name === product.category);
-  const off = discountPercent(product);
-  const savings = product.mrp - product.sellingPrice;
   const rows = specRows(product);
-  const inStock = product.availability === "in_stock";
-  const primaryActionHref = inStock
-    ? buyNowLink(product)
-    : productEnquiryLink(product);
   const related = getProductsByCategory(product.category)
     .filter((p) => p.slug !== product.slug)
     .slice(0, 4);
@@ -168,10 +156,11 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
       : []),
     {
       id: "delivery",
-      label: product.installationIncluded !== undefined
+      label: product.installationIncluded !== undefined || product.category === "Air Conditioner"
         ? "Delivery & Installation"
         : "Delivery",
     },
+    { id: "reviews", label: "Reviews" },
     ...(product.faqs.length > 0 ? [{ id: "faqs", label: "FAQs" }] : []),
   ];
 
@@ -247,14 +236,30 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
         <div className="grid gap-6 2xl:grid-cols-[minmax(0,1fr)_319px] 2xl:items-start">
           <div className="rounded-2xl border border-line bg-surface p-5">
             <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_400px]">
-              <ProductGallery images={product.images} />
+              {/* The add-to-cart animation flies the photo from here. */}
+              <div data-cart-source className="min-w-0">
+                <ProductGallery
+                  images={product.images}
+                  primaryScale={product.category === "Air Conditioner" ? 1.18 : 1.08}
+                />
+              </div>
 
               <div className="relative lg:pt-2.5">
-                <p className="eyebrow text-text-muted">{product.brand}</p>
+                <div className="flex flex-wrap items-center gap-2">
+                  <p className="eyebrow text-text-muted">{product.brand}</p>
+                  {BADGE_IDS.filter((id) => product.badges?.includes(id)).map((id) => (
+                    <MerchBadge key={id} id={id} />
+                  ))}
+                </div>
 
-                <h1 className="mt-4 text-[1.75rem] font-semibold leading-[1.2] tracking-[-0.01em]">
-                  {product.title}
-                </h1>
+                <div className="mt-4 flex items-start justify-between gap-3">
+                  <h1 className="text-[1.75rem] font-semibold leading-[1.2] tracking-[-0.01em]">
+                    {product.title}
+                  </h1>
+                  <SaveToggle slug={product.slug} title={product.title} />
+                </div>
+                <ReviewBadge slug={product.slug} />
+                <RecordView slug={product.slug} />
 
                 {product.rating && (
                   <p className="mt-3 flex items-center gap-1.5 text-[0.8125rem] text-text-muted">
@@ -281,52 +286,33 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
                     ))}
                 </ul>
 
-                <div className="mt-4 flex flex-wrap items-baseline gap-2.5">
-                  <p className="text-[1.875rem] font-semibold tracking-tight">
-                    {formatPrice(product.sellingPrice)}
-                  </p>
-                  {off > 0 && (
-                    <s className="text-[0.9375rem] text-text-muted">
-                      {formatPrice(product.mrp)}
-                    </s>
-                  )}
-                </div>
+                <ProductPurchasePanel
+                  product={product}
+                  phone={site.contact.phone || undefined}
+                />
 
-                {off > 0 && (
-                  <p className="mt-1.5 text-[0.8125rem] font-medium text-scarcity-text">
-                    Published price is {formatPrice(savings)} ({off}%) below MRP
-                  </p>
-                )}
-                <p className="mt-1 text-[0.8125rem] text-text-muted">
-                  {product.gstRate ? `Inclusive of ${product.gstRate}% GST. ` : ""}
-                  {AVAILABILITY_LABEL[product.availability]}. Confirm the final
-                  quote with the showroom.
-                </p>
-
-                {/* Trust sits between the price and the button: that gap
-                    is where the hesitation is, and answering it after the
-                    button has scrolled past is too late to matter. */}
+                {/* Trust follows the primary decision instead of pushing it
+                    below the fold. The three points remain immediately visible
+                    to anyone who wants reassurance before continuing. */}
                 <ul className="mt-4 grid gap-2.5 sm:grid-cols-3">
                   {[
                     {
                       Icon: BadgeIcon,
                       title: "Genuine Product",
-                      subtitle: "From an authorised Voltas distributor",
+                      subtitle: "Supplied through an authorised Voltas distributor",
                     },
                     {
                       Icon: TruckIcon,
-                      title: "Delivery",
-                      subtitle: "Confirmed with the showroom before purchase",
+                      title: "Pan-India Delivery",
+                      subtitle: "Managed by the distributor",
                     },
-                    ...(product.installationIncluded !== undefined
-                      ? [{
-                          Icon: ShieldCheckIcon,
-                          title: "Installation",
-                          subtitle: product.installationIncluded
-                            ? "Included for this product"
-                            : "Not included in the listed price",
-                        }]
-                      : []),
+                    {
+                      Icon: CreditCardIcon,
+                      title: "Cash on Delivery",
+                      subtitle: business.onlinePayments
+                        ? "Or pay online by UPI & cards"
+                        : "Pay when your order arrives",
+                    },
                   ].map(({ Icon, title, subtitle }) => (
                     <li key={title} className="rounded-lg bg-canvas p-3.5">
                       <Icon className="size-4 text-text-muted" />
@@ -338,41 +324,17 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
                   ))}
                 </ul>
 
-                <div id="product-cta" className="mt-4 flex flex-wrap gap-3">
-                  <a
-                    href={primaryActionHref}
-                    className="inline-flex h-11 items-center gap-2 rounded-lg bg-accent px-6 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
-                  >
-                    {inStock ? "Buy now" : "Enquire"}
-                  </a>
-                  {inStock && (
-                    <AddToCartButton
-                      slug={product.slug}
-                      title={product.title}
-                      availability={product.availability}
-                      className="inline-flex h-11 items-center gap-2 rounded-lg bg-ink px-6 text-sm font-medium text-white transition-colors hover:bg-ink-soft"
-                    />
-                  )}
-                </div>
-
-                <StickyBuyBar
-                  anchorId="product-cta"
-                  title={product.title}
-                  price={formatPrice(product.sellingPrice)}
-                  enquiryHref={primaryActionHref}
-                  phone={site.contact.phone || undefined}
-                />
               </div>
             </div>
           </div>
 
-          <aside className="rounded-2xl border border-line bg-surface p-5 2xl:sticky 2xl:top-6">
+          <aside className="rounded-2xl border border-line bg-surface p-5 2xl:sticky 2xl:top-[5.5rem]">
             <p className="flex items-center gap-2 text-[0.9375rem] font-semibold">
               <PinIcon className="size-4 text-text-muted" />
               Delivery{product.installationIncluded !== undefined ? " & Installation" : ""}
             </p>
             <p className="mb-4 mt-1.5 text-[0.8125rem] text-text-muted">
-              Check availability in your area
+              Distributor-managed delivery across India
             </p>
 
             <PincodeCheck />
@@ -381,9 +343,9 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
               <li className="flex gap-3">
                 <BadgeIcon className="mt-0.5 size-4 shrink-0 text-text-muted" />
                 <span>
-                  <span className="block font-medium">Bought direct</span>
+                  <span className="block font-medium">Fulfilled by the distributor</span>
                   <span className="text-text-muted">
-                    Authorised distributor, not a marketplace listing
+                    Delivered in {business.deliveryDaysMin}–{business.deliveryDaysMax} days after we confirm your order
                   </span>
                 </span>
               </li>
@@ -391,8 +353,8 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
                 <li className="flex gap-3">
                   <PhoneIcon className="mt-0.5 size-4 shrink-0 text-text-muted" />
                   <span>
-                    <span className="block font-medium">Need help?</span>
-                    <a href={`tel:${site.contact.phone}`} className="text-accent">
+                    <span className="block font-medium">Questions, orders or complaints?</span>
+                    <a href={`tel:${site.contact.phone.replace(/\s/g, "")}`} className="text-accent">
                       Call {site.contact.phone}
                     </a>
                   </span>
@@ -414,6 +376,7 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
             <WarrantyAndSupport product={product} />
           )}
           <DeliveryAndInstallation product={product} />
+          <ProductReviews slug={product.slug} />
 
           {product.faqs.length > 0 && (
             <section id="faqs" className="scroll-mt-20 pt-12">
@@ -448,6 +411,8 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
           </section>
         )}
       </Container>
+
+      <RecentlyViewed exclude={product.slug} />
 
       <script
         type="application/ld+json"

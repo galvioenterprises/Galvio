@@ -4,6 +4,14 @@ import { ProductImage } from "../product-image";
 import { Container } from "../container";
 import type { HomeCollection } from "./types";
 
+/** Soft tints per card, so four white cards do not read as one block. */
+const TINTS = [
+  "from-[#eef4ff] to-[#dbe7ff]",
+  "from-[#ecfbf8] to-[#d3f3ec]",
+  "from-[#fff7ea] to-[#fde9c8]",
+  "from-[#eef7fd] to-[#d6ecfa]",
+] as const;
+
 export function BuyingAssistant({ collections }: { collections: HomeCollection[] }) {
   if (collections.length === 0) return null;
 
@@ -12,15 +20,10 @@ export function BuyingAssistant({ collections }: { collections: HomeCollection[]
       <Container size="listing">
         <div className="flex items-end justify-between gap-5">
           <div>
-            <h2
-              id="buying-assistant-title"
-              className="text-[1.75rem] font-semibold tracking-[-0.025em] sm:text-[2rem]"
-            >
+            <h2 id="buying-assistant-title" className="text-[1.75rem] font-semibold tracking-[-0.025em] sm:text-[2rem]">
               Find the right appliance for your space
             </h2>
-            <p className="mt-1.5 text-sm text-text-muted">
-              Start with a category, then compare the details supplied for each model.
-            </p>
+            <p className="mt-1.5 text-sm text-text-muted">Start with a category, then compare models side by side.</p>
           </div>
           <Link
             href="/products/"
@@ -32,45 +35,34 @@ export function BuyingAssistant({ collections }: { collections: HomeCollection[]
         </div>
 
         <div className="mt-7 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-          {collections.slice(0, 4).map((collection) => (
-            <article
+          {collections.slice(0, 4).map((collection, i) => (
+            <Link
               key={collection.slug}
-              className="group relative min-h-[235px] overflow-hidden rounded-2xl border border-line bg-[linear-gradient(135deg,#edf1f5_0%,#fff_62%)]"
+              href={`/products/${collection.slug}/`}
+              className="group flex flex-col overflow-hidden rounded-3xl border border-line bg-surface transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(17,19,24,0.25)]"
             >
-              <div className="relative z-10 max-w-[66%] p-6">
-                <h3 className="text-lg font-semibold leading-snug tracking-[-0.015em]">
-                  Choosing {collection.title.toLowerCase()}?
-                </h3>
-                <Link
-                  href={`/products/${collection.slug}/`}
-                  className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-xs font-medium text-accent shadow-sm transition-transform group-hover:translate-x-0.5"
-                >
-                  Explore {collection.title}
-                  <ArrowRightIcon className="size-3.5" />
-                </Link>
-              </div>
-
-              <div className="pointer-events-none absolute bottom-8 right-[-8%] top-4 flex w-[58%] items-center justify-center">
+              <div className={`relative flex h-52 items-center justify-center bg-gradient-to-br p-6 ${TINTS[i % TINTS.length]} [&>picture]:contents`}>
                 <ProductImage
                   src={collection.image}
                   alt=""
-                  sizes="(min-width: 1280px) 22vw, (min-width: 640px) 45vw, 70vw"
-                  className="max-h-full w-full object-contain mix-blend-multiply transition-transform duration-300 group-hover:scale-[1.03]"
+                  sizes="(min-width: 1280px) 22vw, (min-width: 640px) 45vw, 90vw"
+                  className="relative max-h-full w-auto max-w-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-[1.06]"
                 />
               </div>
-
-              <ul className="absolute inset-x-0 bottom-0 z-10 flex min-h-10 items-center gap-3 overflow-hidden border-t border-line/80 bg-white/85 px-5 py-2 text-[0.6875rem] font-medium text-accent backdrop-blur-sm">
-                {collection.tags.length > 0 ? (
-                  collection.tags.slice(0, 3).map((tag) => (
-                    <li key={tag} className="shrink-0">
-                      {tag}
-                    </li>
-                  ))
-                ) : (
-                  <li>{collection.productCount} listed models</li>
+              <div className="flex flex-1 flex-col p-5">
+                <h3 className="text-lg font-semibold tracking-[-0.015em]">{collection.title}</h3>
+                <p className="mt-1 text-sm text-text-muted">
+                  {collection.productCount} {collection.productCount === 1 ? "model" : "models"} to compare
+                </p>
+                {collection.tags.length > 0 && (
+                  <p className="mt-2 text-xs text-text-muted">{collection.tags.slice(0, 3).join(" · ")}</p>
                 )}
-              </ul>
-            </article>
+                <span className="mt-auto inline-flex items-center gap-1.5 pt-4 text-sm font-semibold text-accent">
+                  Explore
+                  <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-1" />
+                </span>
+              </div>
+            </Link>
           ))}
         </div>
       </Container>

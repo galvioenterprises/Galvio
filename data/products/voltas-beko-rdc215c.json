@@ -1,0 +1,66 @@
+{
+  "tenantId": "galvio-001",
+  "slug": "voltas-beko-rdc215c",
+  "sku": "GAL-RF-1100969",
+  "brand": "Voltas Beko",
+  "model": "RDC215C",
+  "status": "active",
+  "internalCode": "voltas.com: 183-l-3-star-direct-cool-single-door-refrigerator-rdc215c-s0xir0m0000go-hairline-silver-chiller-zone-with-fresh-box-technology-voltas-beko-a-tata-product",
+  "variants": [
+    {
+      "sku": "GAL-RF-1100969",
+      "internalCode": "voltas.com: 183-l-3-star-direct-cool-single-door-refrigerator-rdc215c-s0xir0m0000go-hairline-silver-chiller-zone-with-fresh-box-technology-voltas-beko-a-tata-product",
+      "color": "Hairline Silver"
+    },
+    {
+      "sku": "GAL-RF-1100826",
+      "internalCode": "voltas.com: 183-l-3-star-direct-cool-single-door-refrigerator-rdc215c-s0bfr0m0000go-fressia-blue-with-fresh-box-technology-voltas-beko-a-tata-product",
+      "color": "Fressia Blue"
+    },
+    {
+      "sku": "GAL-RF-1100899",
+      "internalCode": "voltas.com: 183-l-3-star-direct-cool-single-door-refrigerator-rdc215c-s0wfr0m0000go-fressia-wine-voltas-beko-a-tata-product",
+      "color": "Fressia Wine"
+    }
+  ],
+  "title": "183 L 3 Star Direct Cool Single Door Refrigerator (RDC215C)",
+  "description": "The Voltas Beko 183 L 3‑Star Direct Cool Single Door Refrigerator features Fresh Box Technology to keep fruits and vegetables crisp, along with a dedicated Chiller Zone for optimal cooling performance. Its adjustable toughened glass shelves provide flexible storage. Designed for energy‑efficient freshness in a sleek Hairline Silver finish Model No.: 1100969 / RDC215C/S0XIR0M0000GO Product Color: Hairline Silver Gross Volume (L): 183 L 3 Star Energy Rating Fresh Box Crisper Humidity Controller Flexlift Door Shelf Adjustable Toughened Glass Shelves Stabilizer Free Operation Egg Tray Ice Tray Made in India Technical Specification: Dimension - WxDxH in CM (54.5 x 59.4 x 123) Warranty - 2 Years Comprehensive & 10 Years Compressor",
+  "category": "Refrigerator",
+  "subCategory": "Single Door",
+  "mrp": 26490,
+  "sellingPrice": 15690,
+  "availability": "unknown",
+  "condition": "new",
+  "capacity": "183L",
+  "color": "Hairline Silver",
+  "starRating": 3,
+  "highlights": [],
+  "faqs": [],
+  "images": [
+    {
+      "src": "voltas-1100969",
+      "alt": "183 L 3 Star Direct Cool Single Door Refrigerator (RDC215C)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100969-2",
+      "alt": "183 L 3 Star Direct Cool Single Door Refrigerator (RDC215C)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100969-3",
+      "alt": "183 L 3 Star Direct Cool Single Door Refrigerator (RDC215C)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1100969-4",
+      "alt": "183 L 3 Star Direct Cool Single Door Refrigerator (RDC215C)",
+      "width": 1600,
+      "height": 1600
+    }
+  ],
+  "specs": {}
+}

@@ -7,7 +7,7 @@
   "status": "active",
   "internalCode": "Voltas 1.5T SAC 183 INV Venus Luxe",
   "title": "Voltas Split Air Conditioner, 1.5 Ton, 3 Star - 183INV Venus Luxe",
-  "description": "Meet the Voltas Venus Luxe 1.5 Ton 3 Star Inverter Split Room AC engineered for smarter, wider, and quieter cooling. With 6 Step Adjustable Mode, it lets you fine‑tune cooling capacity to match real‑time room load and occupancy, helping save energy without compromising comfort. The Large Indoor Unit and Long Air Throw deliver powerful, far‑reaching airflow so every corner of the room feels evenly cool. Need instant relief? Turbo Cooling accelerates pull‑down for quick comfort, while Ice Wash Technology helps keep the indoor coil cleaner for fresher air and sustained performance. Built for Indian summers, High Ambient Cooling keeps performance steady even at 55°C. The energy‑efficient inverter compressor modulates speed for stable temperatures and lower noise, supported by a 3 Star rating. Enjoy uniform comfort with 4‑Way Swing and unwind with Super Silent Mode. With a handy Filter Clean",
+  "description": "Meet the Voltas Venus Luxe 1.5 Ton 3 Star Inverter Split Room AC engineered for smarter, wider, and quieter cooling. With 6 Step Adjustable Mode, it lets you fine‑tune cooling capacity to match real‑time room load and occupancy, helping save energy without compromising comfort. The Large Indoor Unit and Long Air Throw deliver powerful, far‑reaching airflow so every corner of the room feels evenly cool. Need instant relief? Turbo Cooling accelerates pull‑down for quick comfort, while Ice Wash Technology helps keep the indoor coil cleaner for fresher air and sustained performance. Built for Indian summers, High Ambient Cooling keeps performance steady even at 55°C. The energy‑efficient inverter compressor modulates speed for stable temperatures and lower noise, supported by a 3 Star rating. Enjoy uniform comfort with 4‑Way Swing and unwind with Super Silent Mode.",
   "category": "Air Conditioner",
   "subCategory": "Split AC",
   "mrp": 67990,
@@ -16,6 +16,7 @@
   "condition": "new",
   "capacity": "1.5 Ton",
   "starRating": 3,
+  "inverter": true,
   "highlights": [],
   "faqs": [],
   "images": [

@@ -16,6 +16,7 @@
   "condition": "new",
   "capacity": "1 Ton",
   "starRating": 3,
+  "inverter": true,
   "highlights": [],
   "faqs": [],
   "images": [

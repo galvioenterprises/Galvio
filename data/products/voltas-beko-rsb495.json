@@ -1,39 +1,73 @@
 {
   "tenantId": "galvio-001",
   "slug": "voltas-beko-rsb495",
-  "sku": "GAL-RF-002",
+  "sku": "GAL-RF-1101019",
   "brand": "Voltas Beko",
   "model": "RSB495",
-  "status": "draft",
-  "internalCode": "RSB495 / FPV300RXID",
-  "title": "Voltas Beko 436L Side by Side Refrigerator",
-  "description": "This side-by-side refrigerator has a net capacity of 436L and a gross capacity of 472L. It includes 6-in-1 adjustable modes, a ProSmart inverter compressor and dual LED illumination.",
+  "status": "active",
+  "internalCode": "voltas.com: 472-l-frost-free-side-by-side-refrigerator-rsb495-fpv300rxid-inox-steel-electronic-temperature-control-and-display-with-prosmart-inverter-compressor-voltas-beko-a-tata-product",
+  "title": "472 L Frost Free Side by Side Refrigerator (RSB495)",
+  "description": "The Voltas Beko 472 L Frost Free Side‑by‑Side Refrigerator features Electronic Temperature Control and Display for precise cooling and a ProSmart Inverter Compressor for efficient, long‑lasting performance. Its spacious design and balanced frost‑free cooling keep food fresher for longer, all in a premium Inox Steel finish",
   "category": "Refrigerator",
   "subCategory": "Side by Side",
+  "mrp": 84990,
+  "sellingPrice": 59390,
+  "availability": "unknown",
   "condition": "new",
-  "capacity": "436L",
-  "color": "Hairline Silver",
+  "capacity": "472L",
+  "color": "Inox Steel",
   "inverter": true,
-  "highlights": [
+  "highlights": [],
+  "faqs": [],
+  "images": [
     {
-      "title": "6-in-1 Adjustable",
-      "subtitle": "Adjust between modes effortlessly to suit your needs"
+      "src": "voltas-1101019",
+      "alt": "472 L Frost Free Side by Side Refrigerator (RSB495)",
+      "width": 1600,
+      "height": 1600
     },
     {
-      "title": "ProSmart Inverter Compressor",
-      "subtitle": "Energy efficient, quiet, and built to last"
+      "src": "voltas-1101019-2",
+      "alt": "472 L Frost Free Side by Side Refrigerator (RSB495)",
+      "width": 1600,
+      "height": 1600
     },
     {
-      "title": "LED Lighting",
-      "subtitle": "Provides better lighting inside the fridge"
+      "src": "voltas-1101019-3",
+      "alt": "472 L Frost Free Side by Side Refrigerator (RSB495)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101019-4",
+      "alt": "472 L Frost Free Side by Side Refrigerator (RSB495)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101019-5",
+      "alt": "472 L Frost Free Side by Side Refrigerator (RSB495)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101019-6",
+      "alt": "472 L Frost Free Side by Side Refrigerator (RSB495)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101019-7",
+      "alt": "472 L Frost Free Side by Side Refrigerator (RSB495)",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "voltas-1101019-8",
+      "alt": "472 L Frost Free Side by Side Refrigerator (RSB495)",
+      "width": 1600,
+      "height": 1600
     }
   ],
-  "faqs": [],
-  "specs": {},
-  "missing": [
-    "mrp",
-    "selling_price",
-    "availability",
-    "images"
-  ]
+  "specs": {}
 }

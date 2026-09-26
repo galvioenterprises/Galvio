@@ -31,12 +31,19 @@ export function ProductImage({
   sizes,
   className = "",
   priority = false,
+  literalWidth = 800,
+  literalHeight = 800,
+  style,
 }: {
   src: string;
   alt: string;
   sizes: string;
   className?: string;
   priority?: boolean;
+  /** Intrinsic dimensions for literal public assets such as placeholder.svg. */
+  literalWidth?: number;
+  literalHeight?: number;
+  style?: React.CSSProperties;
 }) {
   const loading = priority ? undefined : "lazy";
   const entry = getProductImageManifestEntry(src);
@@ -54,9 +61,12 @@ export function ProductImage({
       <img
         src={resolveProductImagePath(src)}
         alt={alt}
+        width={literalWidth}
+        height={literalHeight}
         loading={loading}
         decoding="async"
         className={className}
+        style={style}
       />
     );
   }
@@ -78,6 +88,7 @@ export function ProductImage({
         loading={loading}
         decoding="async"
         className={className}
+        style={style}
       />
     </picture>
   );
