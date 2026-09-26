@@ -16,7 +16,7 @@ jobs:
       group: validate-${{ github.ref }}
       cancel-in-progress: true
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
 
@@ -30,7 +30,30 @@ jobs:
           cache: pnpm
 
       - run: pnpm install --frozen-lockfile
+
+      # Encoding ~5,000 AVIF/WebP files takes 10+ minutes on a runner, so the
+      # output is cached and rebuilt only when a source photo or the image
+      # script changes (exact key, no fallback: a partial match could serve
+      # an outdated photo).
+      - name: Restore generated product images
+        id: images
+        uses: actions/cache/restore@v4
+        with:
+          path: public/images/products
+          key: product-images-${{ hashFiles('assets/products/**', 'scripts/build-images.mts') }}
+      # Checkout stamps every source with the current time, which would make
+      # cached images look older than their sources and re-encode them all.
+      # The exact-key cache guarantees the sources are unchanged.
+      - run: git ls-files -z assets/products | xargs -0 touch -d '2000-01-01T00:00:00Z'
       - run: pnpm build:images && pnpm build:index
+      # Saved straight away, so a later failing check doesn't throw away
+      # the encoding work.
+      - name: Save generated product images
+        if: steps.images.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: public/images/products
+          key: ${{ steps.images.outputs.cache-primary-key }}
       - run: pnpm lint
       - run: pnpm typecheck
       - run: pnpm test:worker
@@ -46,7 +69,7 @@ jobs:
     needs: validate
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 45
     # One deploy at a time; a newer push waits rather than cancelling one
     # that is halfway through.
     concurrency:
@@ -71,6 +94,21 @@ jobs:
           cache: pnpm
 
       - run: pnpm install --frozen-lockfile
+
+      # Encoding ~5,000 AVIF/WebP files takes 10+ minutes on a runner, so the
+      # output is cached and rebuilt only when a source photo or the image
+      # script changes (exact key, no fallback: a partial match could serve
+      # an outdated photo).
+      - name: Restore generated product images
+        id: images
+        uses: actions/cache/restore@v4
+        with:
+          path: public/images/products
+          key: product-images-${{ hashFiles('assets/products/**', 'scripts/build-images.mts') }}
+      # Checkout stamps every source with the current time, which would make
+      # cached images look older than their sources and re-encode them all.
+      # The exact-key cache guarantees the sources are unchanged.
+      - run: git ls-files -z assets/products | xargs -0 touch -d '2000-01-01T00:00:00Z'
       - run: pnpm build
 
       # Additive migrations first, so the new Worker never runs against an
