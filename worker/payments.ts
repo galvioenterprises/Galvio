@@ -15,6 +15,9 @@ import { HttpError, safeEqual } from "./http";
 
 const API_VERSION = "2025-01-01";
 
+/** How long a customer has to finish paying at Cashfree (its minimum is 15). */
+export const PAYMENT_WINDOW_MINUTES = 30;
+
 export type PaymentState = "paid" | "pending" | "failed";
 
 export function onlinePaymentsEnabled(env: Env): boolean {
@@ -88,6 +91,9 @@ export async function createPayment(
         payment_methods: METHOD_FILTER[input.method],
       },
       order_note: `Galvio order ${input.orderId}`,
+      // Unpaid sessions stop accepting payment after 30 minutes, so the
+      // scheduled job can release the stock and coupon they hold.
+      order_expiry_time: new Date(Date.now() + PAYMENT_WINDOW_MINUTES * 60_000).toISOString(),
     }),
   });
   const body = (await response.json().catch(() => ({}))) as {

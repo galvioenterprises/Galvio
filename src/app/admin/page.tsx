@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/container";
 import { AdminView } from "@/components/admin/admin-view";
+import { getModelReport } from "@/lib/inventory-report";
 
 export const metadata: Metadata = {
   title: "Admin",
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 export default function AdminPage() {
   return (
     <Container size="listing" className="pb-24 pt-8">
-      <AdminView />
+      <AdminView models={getModelReport()} />
     </Container>
   );
 }

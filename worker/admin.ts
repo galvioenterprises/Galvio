@@ -202,7 +202,7 @@ export async function adminUpdateOrder(request: Request, env: Env, id: string): 
       ),
       ...auditStatements,
     ]);
-    if (mutationResult.meta.changes !== 1) {
+    if (mutationResult.meta.changes === 0) {
       throw new HttpError(409, "This order changed in another session. Refresh before saving.");
     }
   }
@@ -407,7 +407,7 @@ export async function adminInventory(request: Request, env: Env, slug = ""): Pro
          SELECT ?1, ?2, ?3, ?4, ?5 WHERE changes() = 1`,
       ).bind(slug, actor, JSON.stringify(before), JSON.stringify(after), timestamp),
     ]);
-    if (mutationResult.meta.changes !== 1) {
+    if (mutationResult.meta.changes === 0) {
       throw new HttpError(409, "This product changed in another session. Refresh before saving.");
     }
     const saved = (await loadCatalogueOverrides(env, [slug])).get(slug);
@@ -438,7 +438,7 @@ export async function adminInventory(request: Request, env: Env, slug = ""): Pro
           timestamp,
         ),
       ]);
-      if (mutationResult.meta.changes !== 1) {
+      if (mutationResult.meta.changes === 0) {
         throw new HttpError(409, "This product changed in another session. Refresh before resetting.");
       }
     }

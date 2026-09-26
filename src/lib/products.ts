@@ -80,3 +80,33 @@ export function getProductsByCategory(category: string): Product[] {
 export function getProductBySlug(slug: string): Product | undefined {
   return getAllProducts().find((p) => p.slug === slug);
 }
+
+/** A catalogue record that is not on the storefront yet, for the admin. */
+export type UnpublishedProduct = {
+  slug: string;
+  title: string;
+  model: string;
+  category: string;
+  status: string;
+  missing: string[];
+};
+
+/**
+ * Drafts waiting for details (price, photos) before they can go live. Read
+ * loosely: a draft is allowed to be incomplete, which is why it is a draft.
+ */
+export function getUnpublishedProducts(): UnpublishedProduct[] {
+  return readdirSync(PRODUCTS_DIR)
+    .filter((f) => f.endsWith(".json"))
+    .map((file) => JSON.parse(readFileSync(join(PRODUCTS_DIR, file), "utf8")) as Record<string, unknown>)
+    .filter((p) => p.status === "draft" && !String(p.sku ?? "").startsWith(SAMPLE_SKU_PREFIX))
+    .map((p) => ({
+      slug: String(p.slug ?? ""),
+      title: String(p.title ?? ""),
+      model: String(p.model ?? ""),
+      category: String(p.category ?? ""),
+      status: String(p.status),
+      missing: Array.isArray(p.missing) ? p.missing.map(String) : [],
+    }))
+    .sort((a, b) => a.title.localeCompare(b.title) || a.model.localeCompare(b.model));
+}

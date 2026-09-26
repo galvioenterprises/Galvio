@@ -22,6 +22,7 @@ import {
   retryPayment,
   simulatePayment,
   switchToCod,
+  expireUnpaidOrders,
 } from "./orders";
 import { checkoutMode, onlinePaymentsEnabled, verifyWebhook } from "./payments";
 import { quoteHandler } from "./pricing";
@@ -75,7 +76,7 @@ const routes: Route[] = [
   // Development only: run the 30-minute job now.
   ["POST", /^\/api\/dev\/run-scheduled$/, async (_r, env) => {
     if (!isDev(env)) throw new HttpError(404, "Not found.");
-    await runScheduled(env);
+    await Promise.all([runScheduled(env), retryNotifications(env), expireUnpaidOrders(env)]);
     return json({ ok: true });
   }],
 
@@ -150,8 +151,9 @@ export default {
     }
   },
 
-  // Abandoned-cart reminders and price/stock alerts (see wrangler.jsonc).
+  // Every 30 minutes (wrangler.jsonc): expire unpaid online orders, retry
+  // failed order emails, and (when enabled) reminder emails.
   async scheduled(_controller, env, ctx) {
-    ctx.waitUntil(Promise.all([runScheduled(env), retryNotifications(env)]));
+    ctx.waitUntil(Promise.all([runScheduled(env), retryNotifications(env), expireUnpaidOrders(env)]));
   },
 } satisfies ExportedHandler<Env>;

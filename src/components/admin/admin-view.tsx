@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import type { ModelRow, ModelState } from "@/lib/inventory-report";
 import { api, signOut, useSession, type Order, type OrderStatus } from "@/lib/api";
 import { formatPrice } from "@/lib/format";
 import { Field, Spinner, inputClass, secondaryButtonClass } from "../account/form";
@@ -81,7 +82,7 @@ const NEXT_LABEL: Partial<Record<OrderStatus, string>> = {
   cancelled: "Cancel order",
 };
 
-export function AdminView() {
+export function AdminView({ models }: { models: ModelRow[] }) {
   const session = useSession();
   const [tab, setTab] = useState<"orders" | "inventory" | "coupons" | "reviews">("orders");
 
@@ -132,7 +133,7 @@ export function AdminView() {
         </div>
       </div>
       <div className="mt-6">
-        {tab === "orders" ? <Orders /> : tab === "inventory" ? <Inventory /> : tab === "coupons" ? <Coupons /> : <Reviews />}
+        {tab === "orders" ? <Orders /> : tab === "inventory" ? <Inventory models={models} /> : tab === "coupons" ? <Coupons /> : <Reviews />}
       </div>
     </div>
   );
@@ -490,7 +491,7 @@ const AVAILABILITY_OPTIONS: { value: InventoryAvailability; label: string }[] = 
   { value: "backorder", label: "Back-order" },
 ];
 
-function Inventory() {
+function Inventory({ models }: { models: ModelRow[] }) {
   const [products, setProducts] = useState<InventoryProduct[] | null>(null);
   const [drafts, setDrafts] = useState<Record<string, InventoryValues>>({});
   const [query, setQuery] = useState("");
@@ -584,17 +585,30 @@ function Inventory() {
 
   return (
     <div>
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         {[
           { label: "Products", value: products?.length ?? "—" },
           { label: "Runtime overrides", value: products ? overrideCount : "—" },
           { label: "Out of stock", value: products ? outOfStock : "—" },
-        ].map((item) => (
-          <div key={item.label} className="rounded-2xl border border-line bg-surface p-4">
-            <p className="text-xs text-text-muted">{item.label}</p>
-            <p className="mt-1 text-2xl font-semibold">{item.value}</p>
-          </div>
-        ))}
+          { label: "Not on website", value: models.filter((m) => m.state !== "live").length, href: "#all-models" },
+        ].map((item: { label: string; value: number | string; href?: string }) => {
+          const body = (
+            <>
+              <p className="text-xs text-text-muted">{item.label}</p>
+              <p className="mt-1 text-2xl font-semibold">{item.value}</p>
+              {item.href && <p className="mt-1 text-xs font-medium text-accent">See every model ↓</p>}
+            </>
+          );
+          return item.href ? (
+            <a key={item.label} href={item.href} className="rounded-2xl border border-line bg-surface p-4 hover:border-accent">
+              {body}
+            </a>
+          ) : (
+            <div key={item.label} className="rounded-2xl border border-line bg-surface p-4">
+              {body}
+            </div>
+          );
+        })}
       </div>
 
       <div className="mt-5 rounded-2xl border border-blue-200 bg-blue-50 p-4 text-sm text-blue-900">
@@ -717,7 +731,100 @@ function Inventory() {
           })}
         </ul>
       )}
+
+      {models.length > 0 && <AllModels models={models} />}
     </div>
+  );
+}
+
+const MISSING_LABEL: Record<string, string> = {
+  mrp: "MRP",
+  selling_price: "Selling price",
+  availability: "Stock",
+  images: "Photos",
+};
+
+const STATE_LABEL: Record<ModelState, string> = {
+  live: "On website",
+  draft: "Draft · needs details",
+  unlisted: "Not on website",
+};
+
+const STATE_CLASS: Record<ModelState, string> = {
+  live: "bg-emerald-50 text-emerald-800",
+  draft: "bg-scarcity text-scarcity-text",
+  unlisted: "bg-canvas text-text-muted",
+};
+
+/**
+ * Every model in the distributor's stock list plus catalogue drafts, with
+ * where each stands. Only live products can be edited above: adding a model
+ * to the site needs its price and photos in the catalogue, then a deploy,
+ * because product pages are built ahead of time.
+ */
+function AllModels({ models }: { models: ModelRow[] }) {
+  const [filter, setFilter] = useState<ModelState | "all">("all");
+  const [query, setQuery] = useState("");
+  const needle = query.trim().toLowerCase();
+  const shown = models.filter(
+    (m) =>
+      (filter === "all" || m.state === filter) &&
+      (!needle || [m.line, m.title, m.suggestion].filter(Boolean).join(" ").toLowerCase().includes(needle)),
+  );
+  const count = (state: ModelState) => models.filter((m) => m.state === state).length;
+  return (
+    <section id="all-models" className="mt-10 scroll-mt-24">
+      <h2 className="text-lg font-semibold">Every model ({models.length})</h2>
+      <p className="mt-1 max-w-3xl text-sm text-text-muted">
+        Each line of the distributor&rsquo;s stock list and each catalogue draft, and whether it is on the website. To put a
+        model on the site, send its price and photos; it goes live with the next update.
+      </p>
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        {(["all", "live", "draft", "unlisted"] as const).map((f) => (
+          <button
+            key={f}
+            type="button"
+            aria-pressed={filter === f}
+            onClick={() => setFilter(f)}
+            className={`rounded-full px-3 py-1.5 text-xs font-medium ${filter === f ? "bg-ink text-white" : "bg-surface hover:bg-line"}`}
+          >
+            {f === "all" ? `All (${models.length})` : `${STATE_LABEL[f]} (${count(f)})`}
+          </button>
+        ))}
+        <input
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search model or name"
+          aria-label="Search all models"
+          className={`${inputClass} ml-auto h-9 max-w-xs`}
+        />
+      </div>
+      <ul className="mt-4 divide-y divide-line overflow-hidden rounded-2xl border border-line bg-surface">
+        {shown.map((m, i) => (
+          <li key={`${m.line}-${i}`} className="flex flex-wrap items-start justify-between gap-3 px-4 py-3 text-sm">
+            <div className="min-w-0 flex-1">
+              <p className="font-medium">{m.line}</p>
+              <p className="mt-0.5 text-xs text-text-muted">
+                {m.state === "live" && m.slug ? (
+                  <a href={`/product/${m.slug}/`} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                    {m.title}
+                  </a>
+                ) : m.state === "draft" ? (
+                  `Needs ${(m.missing?.length ? m.missing : ["review"]).map((x) => MISSING_LABEL[x] ?? x).join(", ")}`
+                ) : m.suggestion ? (
+                  `Possible match on voltas.com: ${m.suggestion}`
+                ) : (
+                  "Not found on voltas.com: needs name, price and photos"
+                )}
+              </p>
+            </div>
+            <span className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-medium ${STATE_CLASS[m.state]}`}>{STATE_LABEL[m.state]}</span>
+          </li>
+        ))}
+        {shown.length === 0 && <li className="px-4 py-6 text-center text-sm text-text-muted">No models match.</li>}
+      </ul>
+    </section>
   );
 }
 

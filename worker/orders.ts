@@ -15,6 +15,7 @@ import {
   fetchPaymentDetails,
   fetchPaymentState,
   onlinePaymentsEnabled,
+  PAYMENT_WINDOW_MINUTES,
   simulated,
   type OnlineMethod,
 } from "./payments";
@@ -228,6 +229,10 @@ async function notifyAdmins(env: Env, id: string, heading = "New COD order"): Pr
   );
 }
 
+// D1's meta.changes also counts rows changed by triggers (stock and coupon
+// release on cancellation), so "did the guarded UPDATE apply" is tested as
+// changes > 0, never === 1.
+
 /**
  * Moves an online order from pending_payment to placed, exactly once.
  * Called from the webhook and from the status check on return, which can
@@ -242,7 +247,7 @@ export async function markPaid(env: Env, id: string, actor: string): Promise<voi
   )
     .bind(id, now(), details?.ref ?? "", details?.mode ?? "", details?.at ?? now())
     .run();
-  if (result.meta.changes !== 1) {
+  if (result.meta.changes === 0) {
     // Paid after the customer cancelled: record the money so the order
     // shows up for a refund instead of disappearing.
     const late = await env.DB.prepare(
@@ -251,7 +256,7 @@ export async function markPaid(env: Env, id: string, actor: string): Promise<voi
     )
       .bind(id, now(), details?.ref ?? "")
       .run();
-    if (late.meta.changes === 1) {
+    if (late.meta.changes > 0) {
       await env.DB.prepare(
         `INSERT INTO order_events (order_id, status, note, actor, created_at)
          VALUES (?1, 'cancelled', 'Payment received after cancellation: refund due', ?2, ?3)`,
@@ -474,9 +479,10 @@ export async function createOrder(request: Request, env: Env): Promise<Response>
     });
     return json({ id, next: "pay", payment });
   } catch (error) {
-    // FUTURE ONLINE-PAYMENT LAUNCH: reconcile ambiguous provider timeouts
-    // against Cashfree before failing the attempt, and expire abandoned
-    // pending sessions on a schedule. COD launch never enters this path.
+    // A timeout does not prove Cashfree failed: if it did create the order,
+    // hand the customer that session instead of cancelling.
+    const sessionId = await existingSession(env, id).catch(() => null);
+    if (sessionId) return json({ id, next: "pay", payment: { sessionId, mode: checkoutMode(env) } });
     await env.DB.batch([
       env.DB.prepare(
         `UPDATE orders SET status = 'cancelled', payment_status = 'failed', updated_at = ?2
@@ -572,7 +578,7 @@ export async function switchToCod(request: Request, env: Env, id: string): Promi
   )
     .bind(id, now())
     .run();
-  if (result.meta.changes === 1) {
+  if (result.meta.changes > 0) {
     await env.DB.prepare(
       `INSERT INTO order_events (order_id, status, note, actor, created_at) VALUES (?1, 'placed', 'Switched to Cash on Delivery', 'customer', ?2)`,
     )
@@ -594,7 +600,7 @@ export async function cancelOrder(request: Request, env: Env, id: string): Promi
   )
     .bind(id, now())
     .run();
-  if (result.meta.changes === 1) {
+  if (result.meta.changes > 0) {
     await env.DB.prepare(
       `INSERT INTO order_events (order_id, status, note, actor, created_at) VALUES (?1, 'cancelled', 'Cancelled by customer', ?2, ?3)`,
     )
@@ -616,4 +622,47 @@ export async function simulatePayment(request: Request, env: Env): Promise<Respo
   if (body.outcome === "paid") await markPaid(env, body.id, "simulator");
   else await markPaymentFailed(env, body.id);
   return json({ ok: true });
+}
+
+/**
+ * Scheduled: settles online orders whose payment window has closed.
+ *
+ * Asks Cashfree first, so a payment whose webhook was lost is still
+ * recorded as paid. Anything else is cancelled, and the database triggers
+ * release the stock and coupon the order was holding. A payment that
+ * somehow lands after this is kept and flagged for refund by markPaid.
+ */
+export async function expireUnpaidOrders(env: Env): Promise<void> {
+  // A 15-minute margin past Cashfree's own expiry for in-flight payments.
+  const cutoff = new Date(Date.now() - (PAYMENT_WINDOW_MINUTES + 15) * 60_000).toISOString();
+  const { results } = await env.DB.prepare(
+    `SELECT id FROM orders WHERE status = 'pending_payment' AND created_at < ?1 ORDER BY created_at LIMIT 50`,
+  )
+    .bind(cutoff)
+    .all<{ id: string }>();
+  for (const { id } of results) {
+    try {
+      const state = simulated(env) ? "failed" : await fetchPaymentState(env, id);
+      if (state === "paid") {
+        await markPaid(env, id, "gateway:reconcile");
+        continue;
+      }
+      const result = await env.DB.prepare(
+        `UPDATE orders SET status = 'cancelled', payment_status = 'failed', updated_at = ?2
+          WHERE id = ?1 AND status = 'pending_payment'`,
+      )
+        .bind(id, now())
+        .run();
+      if (result.meta.changes > 0) {
+        await env.DB.prepare(
+          `INSERT INTO order_events (order_id, status, note, actor, created_at)
+           VALUES (?1, 'cancelled', 'Payment not completed in time', 'system', ?2)`,
+        )
+          .bind(id, now())
+          .run();
+      }
+    } catch (error) {
+      console.error(`[orders] expiring ${id} failed`, error);
+    }
+  }
 }

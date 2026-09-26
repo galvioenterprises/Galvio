@@ -18,11 +18,11 @@ export const business = {
   cashOnDelivery: true,
 
   /**
-   * Phase 1 is Cash on Delivery only. Keep the Cashfree implementation in
-   * place, but gate every customer-facing payment path behind this flag until
-   * production credentials, reconciliation and refunds have been signed off.
+   * Online payments through Cashfree. They only switch on once the Worker
+   * has CASHFREE_APP_ID and CASHFREE_SECRET_KEY; without keys the site stays
+   * Cash on Delivery only.
    */
-  onlinePayments: false,
+  onlinePayments: true,
 
   /** Largest order total accepted on Cash on Delivery, in rupees. A refused
    *  doorstep delivery of a large appliance costs freight both ways. */
