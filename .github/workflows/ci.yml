@@ -1,4 +1,4 @@
-name: Validate storefront
+name: Validate and deploy
 
 on:
   pull_request:
@@ -8,12 +8,13 @@ on:
 permissions:
   contents: read
 
-concurrency:
-  group: validate-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
   validate:
+    # Per-job, not per-workflow: a newer push may cancel an older check, but
+    # must never cancel a deploy that is already running.
+    concurrency:
+      group: validate-${{ github.ref }}
+      cancel-in-progress: true
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -37,3 +38,48 @@ jobs:
       - run: pnpm build
       - name: Generated catalogue is committed
         run: git diff --exit-code
+
+  # Runs only after validate passes, and only for pushes to main (never for
+  # pull requests), so a red build can't reach customers.
+  deploy:
+    needs: validate
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    # One deploy at a time; a newer push waits rather than cancelling one
+    # that is halfway through.
+    concurrency:
+      group: deploy-production
+      cancel-in-progress: false
+    environment:
+      name: production
+      url: https://galvioenterprises.com
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.3.4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+
+      # Additive migrations first, so the new Worker never runs against an
+      # older schema. Already-applied migrations are skipped.
+      - name: Apply database migrations
+        run: pnpm exec wrangler d1 migrations apply galvio --remote
+        env:
+          CI: "1"
+
+      # Secrets (Resend, Cashfree, admin) already live in Cloudflare and are
+      # kept across deploys; wrangler refuses to deploy if one is missing.
+      - name: Deploy to Cloudflare
+        run: pnpm exec wrangler deploy
