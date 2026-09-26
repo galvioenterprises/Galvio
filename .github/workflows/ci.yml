@@ -30,6 +30,7 @@ jobs:
           cache: pnpm
 
       - run: pnpm install --frozen-lockfile
+      - run: pnpm build:images && pnpm build:index
       - run: pnpm lint
       - run: pnpm typecheck
       - run: pnpm test:worker
